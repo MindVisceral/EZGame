@@ -86,7 +86,7 @@ func reset_alternator() -> void:
 ## Alters Collider's, FeetCollider's, and FloorCast's heights
 func alter_collider(delta) -> void:
 	#not head_check.is_colliding():
-	#HERE add ^this^, can't allow to uncrouch when under something
+	## HERE add ^this^, can't allow to uncrouch when under something
 	
 	## lerp() the Collider's height towards target number
 	player.Collider.shape.height = lerp(player.Collider.shape.height, self.collider_height, \

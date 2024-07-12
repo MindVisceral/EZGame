@@ -185,6 +185,7 @@ transform = Transform3D(-3.34849e-08, -2.80971e-08, -1, -0.642788, 0.766044, 0, 
 visible = false
 bullet_start_pos_node = NodePath("../../PlayerCamera")
 AnimPlayer = NodePath("../Pistol/ModelHolder/gun1/AnimationPlayer")
+bullet_collision_layer = 2
 
 [node name="PlayerCamera" type="Camera3D" parent="Head/BobbingNode"]
 editor_description = "Main Player camera, typically placed at Head's (0, 0, 0) coordinate

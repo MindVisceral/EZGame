@@ -1,5 +1,5 @@
 extends Firearm
-## ^NOTE: Extends Firearm! Check that scene/script for more information^
+## ^NOTE: Extends Firearm! Check that scene/script for more information if you can't find it here!^
 
 
 ###-------------------------------------------------------------------------###
@@ -7,13 +7,14 @@ extends Firearm
 ###-------------------------------------------------------------------------###
 
 ## The Node from which the bullets originate
-## If the bullets are Rays, this should be the Camera (but only in first person)
+## NOTE: If the bullets are Rays, not projectiles, like in this script, this should be the FP Camera
 @export var bullet_start_pos_node: Node3D
 
-## The point from which a bullet Trace will start
-@onready var bullet_start_point := $ModelHolder/gun1/Armature/Base_bone/Grip1/TraceSpawnPoint
-## We will instantiate this Node to make a line between the gun and the point the gun has shot at
-@onready var bullet_trail_emitter: PackedScene = preload("res://Resources/Entities/Weapons/Bullet_Trail_Emitter.tscn")
+## The point from which a bullet Trail, and only the Trail, will start
+@onready var bullet_start_point: Marker3D = $ModelHolder/gun1/Armature/Base_bone/Grip1/TrailSpawnPoint
+## This Node create a Trail effect, we just instantiate it
+@onready var bullet_trail_emitter: PackedScene = \
+	preload("res://Resources/Entities/Weapons/Bullet_Trail_Emitter.tscn")
 
 
 
@@ -23,9 +24,6 @@ extends Firearm
 
 
 
-
-func _physics_process(delta: float) -> void:
-	pass
 
 
 ## Called by the WeaponManager when this weapon is meant to be wielded/put away by the Player
@@ -39,6 +37,8 @@ func put_weapon_away() -> void:
 ## Called by the WeaponManager when the primary_action or the secondary_action buttons are pressed
 func primary_action() -> void:
 	super.primary_action()
+	
+	## Create a "bullet"
 	cast_bullet_ray()
 #
 func secondary_action() -> void:
@@ -46,10 +46,9 @@ func secondary_action() -> void:
 
 
 
-## #HERE - Could be remade into bullet holes. LATER
+## HERE - Could be made into bullet holes. LATER [?]
 var decal_insta = preload("res://test_decal.tscn")
-
-
+@onready var hit_effect = preload("res://Resources/Entities/Weapons/Effects/Hit_Effect.tscn")
 
 ## Create a Ray in Space, which will act as a bullet for this RayCast-type weapon
 func cast_bullet_ray() -> void:
@@ -69,10 +68,20 @@ func cast_bullet_ray() -> void:
 	var ray_param: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(start_pos, \
 		end_pos, self.bullet_collision_layer)
 	## Cast the Ray itself in space_state, with ray_param as its parameters
-	var result = space_state.intersect_ray(ray_param)
+	var result: Dictionary = space_state.intersect_ray(ray_param)
+	
+	
+	
+	
+	
+	
 	
 	## Check results
-	## #TODO #HERE - do damage calcualtions, then hitting the environment, then not hitting anything
+	## TODO HERE - do damage calcualtions, then hitting the environment, then not hitting anything
+	
+	
+	
+	
 	if result:
 #		print(result)
 		## Test decal to check for collision
@@ -83,24 +92,21 @@ func cast_bullet_ray() -> void:
 	else:
 		print("shot nothing!")
 	
+	
 	## Either way, instantiate a trail
 	var trail = bullet_trail_emitter.instantiate()
 	get_tree().get_root().add_child(trail)
-	
+	## The first parameter is the point at which the Trail will start,
+	## the second one is where the Trail ends
 	if result:
-		#trail.draw_trail(bullet_start_point.global_position, result.position)
 		trail.draw_mesh(bullet_start_point.global_position, result.position)
+		
+		
+		##
+		var hiteffect = hit_effect.instantiate()
+		get_tree().get_root().add_child(hiteffect)
+		hiteffect.draw_effect(result.position, result.normal)
+		
 	else:
-		## This first variable is the trail's global_position and starting position,
-		## the second one is where the trail will end up after some time, if not queue_free()-d earlier
-		#trail.draw_trail(bullet_start_point.global_position, end_pos)
 		trail.draw_mesh(bullet_start_point.global_position, end_pos)
-	
-#	print("Start position: ", trail.start_position)
-#	print("Global position: ", trail.global_position)
-#	print("End position: ", trail.end_position)
-	
-	
-	
-	
 	
