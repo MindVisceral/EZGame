@@ -27,16 +27,23 @@ extends CharacterBody3D
 @export_group("Base movement")
 
 ## Player Gravity Multiplier
-## The higher the number, the faster the Player will fall to the ground and 
+## The higher the number, the faster the Player will fall to the ground and
 ## the shorter the jump will be.
 @export var gravity_multiplier: float = 0.2
 
+## How fast the Player accelerates when falling down
+## The bigger the number, the faster the fall
+## NOTE: This acceleration should only be visible when falling for a long time. Keep this # low.
+@export var air_time_multiplier: float = 0.05
+
+
 ## Player base speed
-## All states use this base variable, instead modify the multiplier
+## All states use this base variable, instead modify the state's multiplier
 ## if you want to change movement speed.
 @export var speed: float = 16
 
 ## Sets control in the air; the lower the number, the less control there is
+## HERE: TO BE DEPRICATED - this doesn't mesh well with ULTRAKILL-like movement
 @export var air_control: float = 0.3
 
 

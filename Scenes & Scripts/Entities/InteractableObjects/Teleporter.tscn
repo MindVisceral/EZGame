@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://c58jul0j3dxoj"]
+
+[node name="Teleporter" type="StaticBody3D"]
+editor_description = "When entered, teleports the Player (or any other Entity) to its connected exit.
+The Teleporter may be set to connect to another Teleporter and vice versa."

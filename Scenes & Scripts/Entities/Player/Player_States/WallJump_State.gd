@@ -33,6 +33,8 @@ func exit() -> void:
 	super.exit()
 	
 	player.in_air = false
+	player.air_time = 0.0
+	
 	player.WallDetection.enabled = false
 
 
@@ -100,9 +102,11 @@ func physics_process(delta) -> BasePlayerState:
 		
 	
 	## Apply gravity (which is the Globals' gravity * multiplier)
-	## No multipier used for now.
 	## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
-	player.velocity.y -= player.gravity * BulletTime.time_scale * delta
+	player.velocity.y -= player.gravity * BulletTime.time_scale * delta \
+						+ (player.gravity * player.air_time)
+	## Increase air_time, thus increasing gravity until the ground is reached.
+	player.air_time += delta * player.air_time_multiplier
 	
 	
 	## Check if the Player is on floor...

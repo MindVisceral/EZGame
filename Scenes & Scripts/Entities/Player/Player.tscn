@@ -36,10 +36,11 @@ height = 3.0
 collision_mask = 6
 input_ray_pickable = false
 script = ExtResource("1_kmike")
-gravity_multiplier = 0.15
-jump_height = 55.0
-stomp_strength = 90.0
-wall_jump_distance = 35.0
+gravity_multiplier = 1.0
+jump_height = 20.0
+stomp_strength = 15.0
+wall_jump_height = 30.0
+wall_jump_distance = 15.0
 
 [node name="Scripts" type="Node" parent="."]
 
