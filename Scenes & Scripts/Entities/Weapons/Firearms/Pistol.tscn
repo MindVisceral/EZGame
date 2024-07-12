@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2fet7sg7ta7s"]
+
+[ext_resource type="PackedScene" uid="uid://dv5fcfhevw1fe" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Firearm_Base.tscn" id="1_opcfm"]
+[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Pistol.gd" id="2_ejjpi"]
+[ext_resource type="PackedScene" uid="uid://bemovxot15qyc" path="res://Scenes & Scripts/Entities/Weapons/Gun/gun1.glb" id="3_hegno"]
+
+[node name="Pistol" instance=ExtResource("1_opcfm")]
+script = ExtResource("2_ejjpi")
+
+[node name="ModelHolder" parent="." index="0"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="gun1" parent="ModelHolder" index="0" instance=ExtResource("3_hegno")]
+
+[node name="TrailSpawnPoint" type="Marker3D" parent="ModelHolder/gun1/Armature/Base_bone/Grip1" index="0"]
+transform = Transform3D(1, 4.9738e-14, -1.98952e-13, 0, 1, -1.22394e-14, 0, 1.95063e-16, 1, -0.857, 0.107156, 1.04812e-10)
+gizmo_extents = 0.05
+
+[editable path="ModelHolder/gun1"]
