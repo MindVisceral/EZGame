@@ -13,7 +13,7 @@ extends Firearm
 ## The point from which a bullet Trace will start
 @onready var bullet_start_point := $ModelHolder/gun1/Armature/Base_bone/Grip1/TraceSpawnPoint
 ## We will instantiate this Node to make a line between the gun and the point the gun has shot at
-@onready var bullet_trail_emmiter: PackedScene = preload("res://Resources/Entities/Weapons/Bullet_Trail_Emmiter.tscn")
+@onready var bullet_trail_emitter: PackedScene = preload("res://Resources/Entities/Weapons/Bullet_Trail_Emitter.tscn")
 
 
 
@@ -84,16 +84,17 @@ func cast_bullet_ray() -> void:
 		print("shot nothing!")
 	
 	## Either way, instantiate a trail
-	var trail = bullet_trail_emmiter.instantiate()
+	var trail = bullet_trail_emitter.instantiate()
 	get_tree().get_root().add_child(trail)
 	
 	if result:
-		trail.draw_trail(bullet_start_point.global_position, result.position)
+		#trail.draw_trail(bullet_start_point.global_position, result.position)
+		trail.draw_mesh(bullet_start_point.global_position, result.position)
 	else:
 		## This first variable is the trail's global_position and starting position,
 		## the second one is where the trail will end up after some time, if not queue_free()-d earlier
-		trail.draw_trail(bullet_start_point.global_position, end_pos)
-	
+		#trail.draw_trail(bullet_start_point.global_position, end_pos)
+		trail.draw_mesh(bullet_start_point.global_position, end_pos)
 	
 #	print("Start position: ", trail.start_position)
 #	print("Global position: ", trail.global_position)
