@@ -116,12 +116,10 @@ editor_description = "Makes the chosen bopped_node - the Head or the Camera:
 Done for better immersion and responsivity"
 script = ExtResource("10_6kxr3")
 bobbing_node = NodePath("../../Head/BobbingNode")
-step_bob_enabled = false
 
 [node name="WeaponBob" type="Node" parent="Scripts" node_paths=PackedStringArray("bobbing_node")]
 script = ExtResource("12_4bkuj")
 bobbing_node = NodePath("../../Head/BobbingNode/Firearms")
-weapon_bob_enabled = false
 
 [node name="UIController" type="Node" parent="Scripts"]
 

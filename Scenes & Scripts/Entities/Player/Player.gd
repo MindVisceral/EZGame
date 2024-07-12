@@ -36,14 +36,6 @@ extends CharacterBody3D
 ## if you want to change movement speed.
 @export var speed: float = 16
 
-#HERE unneccessary
-## Time it takes for the character to reach max speed
-@export var acceleration: float = 8
-
-#HERE unneccessary
-## Time for the character to stop moving
-@export var deceleration: float = 10
-
 ## Sets control in the air; the lower the number, the less control there is
 @export var air_control: float = 0.3
 
@@ -106,8 +98,8 @@ extends CharacterBody3D
 
 @export_group("Fly")
 
-## Speed multiplier when fly mode is actived
-@export var fly_mode_speed_modifier: int= 2
+## Speed multiplier when fly mode is activated
+@export var fly_mode_speed_modifier: int = 2
 
 
 ###-------------------------------------------------------------------------###
@@ -239,93 +231,6 @@ func _physics_process(delta) -> void:
 
 func _process(delta) -> void:
 	States.process(delta)
-
-
-###
-func process_input(delta):
-	#Walking
-	var cam_xform = Camera.get_global_transform()
-	var input_movement_vector = Vector2()
-	
-	if Input.is_action_pressed("movement_forward"):
-		input_movement_vector.y += 1
-	if Input.is_action_pressed("movement_backward"):
-		input_movement_vector.y -= 1
-	if Input.is_action_pressed("movement_left"):
-		input_movement_vector.x -= 1
-	if Input.is_action_pressed("movement_right"):
-		input_movement_vector.x += 1
-	#Still walking...
-#	input_movement_vector = input_movement_vector.normalized()
-	
-#	direction += -cam_xform.basis.z * input_movement_vector.y
-#	direction += cam_xform.basis.x * input_movement_vector.x
-	#
-	
-	#Changing weapons
-	if Input.is_action_just_pressed("weapon1"):
-		current_weapon = 1
-	elif Input.is_action_just_pressed("weapon2"):
-		current_weapon = 2
-	elif Input.is_action_just_pressed("weapon3"):
-		current_weapon = 3
-	#
-	
-	#Shooting
-	if Input.is_action_pressed("primary_fire"):
-		if is_changing_weapons == false:
-			if current_weapon != null:
-				if current_weapon.ammo_in_weapon > 0:
-					pass
-				else:
-					is_reloading = true
-	#
-	
-	#capturing the mouse
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	#
-###
-
-###
-#func process_movement(delta):
-#	direction.y = 0
-#	direction = direction.normalized()
-#
-#	velocity.y += delta * gravity_multiplier
-#
-#	var horizontal_velocity = velocity
-#	horizontal_velocity.y = 0
-#
-#	var target = direction
-#	if is_sprinting:
-#		target *= sprint_speed_multiplier
-#	else:
-#		target *= speed
-#
-#	var accel
-#	if direction.dot(horizontal_velocity) > 0:
-#		if is_sprinting:
-#			accel = acceleration
-#		else:
-#			accel = acceleration
-#	else:
-#		accel = deceleration
-#
-#	horizontal_velocity = horizontal_velocity.lerp(target, accel * delta)
-#	velocity.x = horizontal_velocity.x
-#	velocity.z = horizontal_velocity.z
-#
-#	var snap = Vector3.DOWN if not is_jumping else Vector3.ZERO
-#	set_velocity(velocity)
-#	# TODOConverter3To4 looks that snap in Godot 4 is float, not vector like in Godot 3 - previous value `snap`
-#	set_up_direction(Vector3.UP)
-#	set_floor_stop_on_slope_enabled(true)
-#	set_max_slides(4)
-##	set_floor_max_angle(deg_to_rad(??????????))
-#	move_and_slide()
-#	velocity = velocity
-####
 
 
 ## On ready, apply exported variables like this: 
