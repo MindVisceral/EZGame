@@ -8,6 +8,11 @@ extends Node
 
 @export_group("Exported Variables")
 
+## Should the Enemy handle damage_value (ex. lose health on hit)?
+@export var handle_damage_value: bool = true
+## Should the Enemy handle hit_point (ex. check where on the Hurtbox it has been hit)?
+@export var handle_hit_point: bool = false
+
 
 ###-------------------------------------------------------------------------###
 ##### Regular variables
@@ -28,7 +33,14 @@ func init(enemy: Enemy) -> void:
 
 ## Receive the DamageData Resource and use its values
 func receive_DamageData(damageData: DamageData) -> void:
+	enemy.latest_DamageData = damageData
+	
+	
 	## The Stats Node handles health lowering
-	enemy.stats.lower_health(damageData.damage_value)
-	## 
-	enemy.handle_hit(damageData.hit_point)
+	if handle_damage_value == true:
+		enemy.stats.lower_health(damageData.damage_value)
+	
+	## This is Enemy-specific, so the Enemy must have a Script which can handle this data
+	## If handle_hit_point is true, we assume the Enemy has such a Node as a child
+	if handle_hit_point == true:
+		enemy.handle_hit(damageData.hit_point)

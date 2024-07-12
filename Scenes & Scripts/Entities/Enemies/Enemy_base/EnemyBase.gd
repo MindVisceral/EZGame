@@ -59,9 +59,15 @@ extends CharacterBody3D
 @onready var States: EnemyStateManager = $Scripts/StateManager
 @onready var stats: Stats = $Scripts/Stats
 @onready var Hurt_Handler: HurtHandler = $Scripts/HurtHandler
+@onready var Animation_Handler: AnimationHandler = $Scripts/AnimationHandler
 @onready var Collider: CollisionShape3D = $CollisionShape3D
 @onready var FloorCast: RayCast3D = $FloorCast
 @onready var hurtbox: Area3D = $Hurtbox
+
+
+
+
+var latest_DamageData: DamageData
 
 
 ###-------------------------------------------------------------------------###
@@ -86,6 +92,7 @@ func _ready() -> void:
 	States.init(self)
 	stats.init(self)
 	Hurt_Handler.init(self)
+	Animation_Handler.init(self)
 	
 	## Apply exported variables to the Enemy
 	apply_exported()
@@ -117,6 +124,12 @@ func check_for_floor() -> bool:
 	FloorCast.force_raycast_update()
 #	print(FloorCast.is_colliding())
 	return FloorCast.is_colliding()
+
+
+
+func handle_hit(hit_point: Vector3) -> void:
+	pass
+
 
 
 ## Enemy's current_health has reached 0

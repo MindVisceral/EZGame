@@ -40,10 +40,11 @@ bones/26/rotation = Quaternion(0.0819713, -0.000451291, -0.0164166, 0.996499)
 
 [node name="StateManager" parent="Scripts" index="0" node_paths=PackedStringArray("starting_state", "states")]
 starting_state = NodePath("Idle")
-states = [NodePath("Idle")]
+states = [NodePath("Idle"), NodePath("Hit")]
 
-[node name="Idle" type="Node" parent="Scripts/StateManager" index="0"]
+[node name="Idle" type="Node" parent="Scripts/StateManager" index="0" node_paths=PackedStringArray("states")]
 script = ExtResource("4_7qq6o")
+states = [NodePath("../Hit")]
 
 [node name="Hit" type="Node" parent="Scripts/StateManager" index="1"]
 script = ExtResource("5_qn7rw")
@@ -51,6 +52,9 @@ script = ExtResource("5_qn7rw")
 [node name="Stats" parent="Scripts" index="1"]
 default_health = 50.0
 max_health = 1000.0
+
+[node name="HurtHandler" parent="Scripts" index="2"]
+handle_hit_point = true
 
 [node name="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.778073, 0)

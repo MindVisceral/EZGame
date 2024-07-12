@@ -106,31 +106,13 @@ shadow_opacity = 0.75
 
 [node name="Player" parent="." instance=ExtResource("6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6061, 0.0052982, 6.00207)
-MOUSE_SENSITIVITY = 0.05
-mouse_scroll_value = 0
-MOUSE_SENSITIVITY_SCROLL_WHEEL = 0.12
-camera_FOV = 90
-first_person = true
-speed = 16.0
-acceleration = 8.0
-deceleration = 10.0
-air_control = 0.3
-step_lengthen = 0.7
-default_height = 1.6
-crouch_height = 0.9
-default_width = 0.45
-default_head_height = 1.4
-crouch_head_height = 0.7
-default_feet_height = 0.2
-crouch_feet_height = 0.6
-default_FloorCast_height = 0.0
-crouch_FloorCast_height = 0.4
-crouch_speed = 12
-jump_height = 25.0
-stomp_strength = 50.0
-fly_mode_speed_modifier = 2
-MAX_HEALTH = 150
-health = 100
 
 [node name="Yellow Puppet" parent="." instance=ExtResource("4_23xl4")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+gravity_multiplier = 0.2
+speed = 16.0
+acceleration = 8.0
+deceleration = 10.0
+default_height = 1.6
+default_width = 0.45
+jump_height = 25.0
