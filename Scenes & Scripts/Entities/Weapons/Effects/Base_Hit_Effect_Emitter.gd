@@ -1,7 +1,8 @@
 ## We want the particles_colour variable to work in-Editor
 @tool
 extends Node3D
-## NOTE: This Node is queue_free()-d by the AnimationPlayer when the Trail animation is finished
+## NOTE: This Node is queue_free()-d by the AnimationPlayer when
+## the Hit Effect animation is finished
 
 
 ## This GPUParticles3D Node is all that this HitEffect really is

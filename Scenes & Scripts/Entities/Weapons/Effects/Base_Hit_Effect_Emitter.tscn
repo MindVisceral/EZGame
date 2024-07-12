@@ -79,6 +79,7 @@ particles_colour = Color(0.792157, 0.698039, 0, 0.72549)
 
 [node name="Particles" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_yp13h")
+emitting = false
 amount = 15
 lifetime = 3.0
 one_shot = true
