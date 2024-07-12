@@ -143,6 +143,8 @@ class_name Player
 
 ## Flags
 var is_dead: bool = false
+## HeadBop script needs this variable to enable Jump bob
+var jumped: bool = false
 var is_reloading: bool = false
 var is_changing_weapons: bool = false
 var current_weapon = null
@@ -152,10 +154,10 @@ var current_weapon = null
 var direction: Vector3 = Vector3()
 
 ## Current counter used to calculate next step.
-var step_cycle: float = 0
+#var step_cycle: float = 0
 
 ## Maximum value for _step_cycle to compute a step.
-var next_step: float = 0
+#var next_step: float = 0
 
 ###-------------------------------------------------------------------------###
 

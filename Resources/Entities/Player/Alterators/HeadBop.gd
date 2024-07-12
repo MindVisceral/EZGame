@@ -24,7 +24,7 @@ class_name HeadBop
 
 ## Dictates how fast the bobbing_node moves on the Y axis in comparison to the X axis
 ## If the number is low, the vertical movement is slower, and vice versa
-## Keep at about 2 - the movement (seems) equal then
+## Keep at about 2 - the movement seems to be equal then
 @export var vertical_horizontal_ratio: float = 2
 
 
@@ -37,18 +37,25 @@ class_name HeadBop
 @export var timed_bob_curve: TimedBobCurve
 
 
+## Note: Done with an Input.get_vector()
 @export_group("Movement Tilt (Quake Like)")
 
-## Done with an Input.get_vector(); 
-## As the Player moves horizontally, tilt them the way they're going;
+## As the Player moves horizontally, tilt them the way they're moving;
 ## E.g.: moving forwards - tilt down; moving right - tilt to the right
 @export var movement_tilt_enabled: bool = true
+
+## Enable tilting forwards and backwards
+@export var movement_tilt_pitch: bool = true
+
+## Enable tilting left and right
+@export var movement_tilt_roll: bool = true
 
 ## Speed at which the bobbing_node tilts
 @export var speed_rotation: float= 4.0
 
 ## Maxium angle we will tilt the bobbing_node to
-@export var angle_limit_for_tilt: float = 0.1
+@export_range(0.01, 0.15, 0.01) var angle_limit_for_tilt: float = 0.05
+## ^^0.01 is almost imperceivable, 0.05 is very subtle, 0.1 is clearly visible^^
 
 
 
@@ -71,7 +78,7 @@ var cycle_position_y: float = 0
 ### is added to a counter
 ### Ignore that mumbo-jumbo above. Bigger number == each step takes long to get to the next step
 var step_interval: float = 6.0 * 2
-## HERE - Fix ^this^
+## HERE - Test ^this^, maybe there's a better value
 
 
 func _ready():
@@ -81,7 +88,7 @@ func _ready():
 	original_rotation = bobbing_node.rotation
 
 
-## Applies step headbob and movement tilt
+## Applies step and jump headbob, and movement tilt
 func head_bob_process(horizontal_velocity: Vector3, is_on_floor: bool, _delta: float):
 	
 	## Fucking bastard
@@ -103,26 +110,37 @@ func head_bob_process(horizontal_velocity: Vector3, is_on_floor: bool, _delta: f
 		if is_on_floor:
 			new_position += headpos
 		
-	##
+	## 
 	if timed_bob_curve:
 		timed_bob_curve.y -= timed_bob_curve.offset
 	
-	## If movement tile is enabled...
+	## If movement tilt is enabled...
 	if movement_tilt_enabled:
-		## We add this tilt to the rotation
-		new_rotation += _movement_tilt(input_dir.x, input_dir.y, _delta)
+		## ...we add this tilt to the rotation.
+		#
+		## We multiply the input_dir by these tilt booleans;
+		## If roll/pitch is true, its respective input_dir is multiplied by 1,
+		## so the value doesn't change, and therefore we allow for tilting;
+		## If roll/pitch is false, its respective input_dir is multiplied by 0,
+		## so the value becomes a 0 and tilting doesn't happen;
+		#
+		## "roll" is tilting left/right, "pitch" is tilting forwards/backwards
+		new_rotation += _movement_tilt(input_dir.x * float(movement_tilt_roll), \
+			input_dir.y * float(movement_tilt_pitch), _delta)
+	
 	
 	bobbing_node.position = new_position
 	bobbing_node.rotation = new_rotation
 
 
-## Apply headbob jump
-func do_bob_jump():
+## Apply jump headbob - applied by the Jump state
+func do_jump_bob():
 	if timed_bob_curve:
 		timed_bob_curve.do_bob_cycle()
 
 
 ## Resets head bob step cycles
+## Used when we do a jump bob
 func reset_cycles():
 	cycle_position_x = 0
 	cycle_position_y = 0
@@ -141,6 +159,7 @@ func _do_head_bob(speed: float, delta: float) -> Vector3:
 	var x_pos = (bob_curve.sample(cycle_position_x) * curve_multiplier.x * bob_range.x)
 	var y_pos = (bob_curve.sample(cycle_position_y) * curve_multiplier.y * bob_range.y)
 	
+	## No idea how the following lines work, but they just do
 	var tick_speed = (speed * delta) / step_interval
 	cycle_position_x += tick_speed
 	cycle_position_y += tick_speed * vertical_horizontal_ratio

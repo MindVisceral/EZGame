@@ -36,11 +36,16 @@ func enter() -> void:
 	## Start the timer
 	ground_timer.start()
 	
+	## HeadBop needs this variable
+	player.jumped = true
+	
 	## Apply jump impulse
 	player.velocity.y += player.jump_height
 
 func exit() -> void:
 	super.exit()
+	
+	player.jumped = false
 	
 	## Reset ground timer
 	ground_timer.stop()
