@@ -42,25 +42,23 @@ import/blender/enabled.web=true
 [importer_defaults]
 
 texture={
-"compress/bptc_ldr": 0,
-"compress/hdr_mode": 0,
+"compress/channel_pack": 0,
+"compress/hdr_compression": 1,
+"compress/high_quality": false,
 "compress/lossy_quality": 0.7,
-"compress/mode": 2,
+"compress/mode": 0,
 "compress/normal_map": 2,
-"detect_3d": false,
-"flags/anisotropic": false,
-"flags/filter": false,
-"flags/mipmaps": true,
-"flags/repeat": true,
-"flags/srgb": 1,
-"process/HDR_as_SRGB": false,
+"detect_3d/compress_to": 0,
+"mipmaps/generate": false,
+"mipmaps/limit": -1,
 "process/fix_alpha_border": true,
-"process/invert_color": false,
+"process/hdr_as_srgb": false,
+"process/hdr_clamp_exposure": false,
 "process/normal_map_invert_y": false,
 "process/premult_alpha": false,
-"size_limit": 0,
-"stream": false,
-"svg/scale": 1.0
+"process/size_limit": 0,
+"roughness/mode": 0,
+"roughness/src_normal": ""
 }
 wav={
 "compress/mode": 0,

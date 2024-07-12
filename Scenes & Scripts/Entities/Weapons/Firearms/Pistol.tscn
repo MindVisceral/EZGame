@@ -1,24 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2fet7sg7ta7s"]
+[gd_scene load_steps=4 format=3 uid="uid://b2fet7sg7ta7s"]
 
 [ext_resource type="PackedScene" uid="uid://bn7y4wu56lcq0" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Firearm_Hitscan.tscn" id="1_k8jy2"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Pistol.gd" id="2_ejjpi"]
-[ext_resource type="PackedScene" uid="uid://bfset8kv0qt4r" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Bullet_Trail_Emitter.tscn" id="3_0jhpk"]
 [ext_resource type="PackedScene" uid="uid://bemovxot15qyc" path="res://Scenes & Scripts/Entities/Weapons/Gun/gun1.glb" id="3_hegno"]
-[ext_resource type="PackedScene" uid="uid://0clng625rshm" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Hit_Effect_Emitter.tscn" id="4_bjy0f"]
-[ext_resource type="PackedScene" uid="uid://dmfqn2l3j8aoy" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Bullet_Hole_Decal.tscn" id="5_4ltvt"]
 
 [node name="Pistol" node_paths=PackedStringArray("bullet_start_point", "AnimPlayer") instance=ExtResource("1_k8jy2")]
 editor_description = ""
 script = ExtResource("2_ejjpi")
 bullet_start_point = NodePath("ModelHolder/gun1/Armature/Base_bone/Grip1/TrailSpawnPoint")
-bullet_trail_emitter = ExtResource("3_0jhpk")
-hit_effect_emitter = ExtResource("4_bjy0f")
-bullet_hole_decal = ExtResource("5_4ltvt")
 AnimPlayer = NodePath("ModelHolder/gun1/AnimationPlayer")
-firing_mode = 0
 shot_cooldown = 1.6
-default_damage = 1.0
-max_distance = 10000.0
 
 [node name="gun1" parent="ModelHolder" index="0" instance=ExtResource("3_hegno")]
 
