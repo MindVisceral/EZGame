@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://lhlklylca50m"]
+[gd_scene load_steps=17 format=3 uid="uid://lhlklylca50m"]
 
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player.gd" id="1_kmike"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/State_Manager.gd" id="2_c5aqi"]
@@ -13,6 +13,11 @@
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Alterators/HeadBop.gd" id="10_6kxr3"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Alterators/WeaponBob.gd" id="12_4bkuj"]
 [ext_resource type="PackedScene" uid="uid://b2fet7sg7ta7s" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Pistol.tscn" id="12_nnnx6"]
+
+[sub_resource type="Curve" id="Curve_l27pf"]
+min_value = -1.0
+_data = [Vector2(0, 0), 0.0, 6.0, 0, 0, Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), -6.0, -6.0, 0, 0, Vector2(0.75, -1), 0.0, 0.0, 0, 0, Vector2(1, 0), 6.0, 0.0, 0, 0]
+point_count = 5
 
 [sub_resource type="CapsuleShape3D" id="15"]
 radius = 0.45
@@ -116,7 +121,7 @@ editor_description = "Makes the chosen bopped_node - the Head or the Camera:
 Done for better immersion and responsivity"
 script = ExtResource("10_6kxr3")
 bobbing_node = NodePath("../../Head/BobbingNode")
-step_bob_enabled = false
+bob_curve = SubResource("Curve_l27pf")
 
 [node name="WeaponBob" type="Node" parent="Scripts" node_paths=PackedStringArray("bobbing_node")]
 script = ExtResource("12_4bkuj")

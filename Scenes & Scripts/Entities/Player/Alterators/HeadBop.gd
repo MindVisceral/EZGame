@@ -18,17 +18,6 @@ var original_position: Vector3
 ## Store original rotation of bobbing_node, because we will be editing this value
 var original_rotation: Vector3
 
-## Actual cycle x of step headbob
-var cycle_position_x: float = 0
-## Actual cycle y of step headbob
-var cycle_position_y: float = 0
-
-### Value to be added to compute a step, each frame that the character is walking this value 
-### is added to a counter
-### Ignore that mumbo-jumbo above. Bigger number == each step takes longer to get to the next step
-var step_interval: float = 6.0 * 2
-## HERE - Test ^this^, maybe there's a better value
-
 
 ###-------------------------------------------------------------------------###
 ##### Exported variables
@@ -47,45 +36,49 @@ var step_interval: float = 6.0 * 2
 ## Enables headbob when walking (on each "step", we calculate that in this script)
 @export var step_bob_enabled: bool = true
 
-## Maximum range (deviation?) value of headbob
-@export var bob_range: Vector2 = Vector2(0.07, 0.07)
-
-## Curve that makes the bob happen; value is to be kept between -1 and 1
-## Positive value translates to going up and to the right of original_position, and vice versa
-@export var bob_curve: Curve
-
-## Bigger number, bigger oscillations up/down and right/left
-@export var curve_multiplier: Vector2 = Vector2(2,2)
-
-## Dictates how fast the bobbing_node moves on the Y axis in comparison to the X axis
-## If the number is low, the vertical movement is slower, and vice versa
-## Keep at about 2 - the movement seems to be equal then
-@export var vertical_horizontal_ratio: float = 2
+## How fast the bob lerps between positions;
+## how fast it returns to original_position from new_pos
+@export var bob_multiplier: float = 12.0
 
 
-@export_group("Jump Bob")
+## X-axis bobbing is based on a sine wave
+@export_subgroup("Left-Right weapon bob")
 
-## Enables bob for jumps made
-@export var jump_bob_enabled: bool = true
+## Enables WeaponBob on the X axis (moving from left to right and back)
+@export var X_axis_bob_enabled: bool = true
 
-## Resource that stores information from bob lerp jump
-#@export var timed_bob_curve: TimedBobCurve
+## Makes bobbing_node move faster between extremes; bigger number = faster bobbing
+@export var x_bob_frequency: float = 0.01
+## Makes bobbing_node go further away from original_position; bigger number = wider sine
+@export var x_bob_amplitude: float = 0.1
+
+
+## Y-axis bobbing is based on a sine wave
+@export_subgroup("Up-Down weapon bob")
+
+@export var Y_axis_bob_enabled: bool = true
+
+## Makes bobbing_node move faster between extremes; bigger number = faster bobbing
+@export var y_bob_frequency: float = 0.02
+## Makes bobbing_node go further away from original_position; bigger number = wider sine
+@export var y_bob_amplitude: float = 0.1
 
 
 ## NOTE: Done with an Input.get_vector()
 @export_group("Movement Tilt (Quake Like)")
+
+## Speed at which the bobbing_node tilts
+@export var rotation_speed: float =  4.0
 
 ## As the Player moves horizontally, tilt them the way they're moving;
 ## E.g.: moving forwards - tilt down; moving right - tilt to the right
 @export var movement_tilt_enabled: bool = true
 
 ## Enable tilting forwards and backwards
-@export var movement_tilt_pitch: bool = true
+@export var movement_tilt_pitch: bool = false
 ## Enable tilting left and right
 @export var movement_tilt_roll: bool = true
 
-## Speed at which the bobbing_node tilts
-@export var speed_rotation: float= 4.0
 
 ## Maxium angle we will tilt the bobbing_node to
 @export_range(0.01, 0.15, 0.01) var angle_limit_for_tilt: float = 0.05
@@ -112,90 +105,87 @@ func _ready():
 ###-------------------------------------------------------------------------###
 
 ## Applies step and jump headbob, and movement tilt
-func _physics_process(delta: float) -> void:
-	## The direction of Player movement based on Input
-	var input_dir: Vector2 = Input.get_vector("input_forwards", "input_backwards", \
-		"input_left", "input_right",)
+func _process(delta: float) -> void:
 	
-	## Reset the new_position, we will calculate it soon
-	var new_position = original_position
-	var new_rotation = original_rotation
-	
-	
-	## If bobbing on steps is enabled...
+	## If bobbing is enabled...
 	if step_bob_enabled == true:
-		## This type of headbob is only applied if the Player is walking
-		if player.in_air == false:
-			## Calculate a new position for the bobbing_node
-			new_position += do_head_bob(delta)
-		
-	## If a bob on jump is enabled...
-	if jump_bob_enabled:
-		## This type of headbob is only applied if the Player is in the air
-		if player.in_air == true:
-			if player.velocity.y > 0:
-				## The bobbing_node is moved down when going up
-				pass ## HERE - do this part
-			
-		
+		## Calculate a new position for the bobbing_node,
+		## and tween the bobbing_node's position towards that point
+		var tween = get_tree().create_tween()
+		tween.tween_property(bobbing_node, "position", do_head_bob(delta), bob_multiplier * delta)
+	
 	
 	## If movement tilt is enabled...
 	if movement_tilt_enabled == true:
-		## ...we add this tilt to the rotation.
-		#
-		## We multiply the input_dir by these two tilt booleans;
-		## "roll" is tilting left/right, "pitch" is tilting forwards/backwards
-		#
-		## If roll/pitch is true, its respective input_dir is multiplied by 1,
-		## so the value doesn't change, and therefore tilting does happen;
-		## If roll/pitch is false, its respective input_dir is multiplied by 0,
-		## so the value becomes 0, and tilting doesn't happen;
-		new_rotation += movement_tilt(input_dir.x * float(movement_tilt_pitch), \
-			input_dir.y * float(movement_tilt_roll), delta)
-	
-	
-	## Bobbing calculations are done, apply new_position to the bobbing_node
-	## NOTE: Every frame, we reset bobbing_node's pos and rot to original_pos/rot,
-	## then we calculate new_position/rotation, and instantly apply those values to bobbing_node;
-	## it's only an illusion of moving and rotating
-	bobbing_node.position = new_position
-	bobbing_node.rotation = new_rotation
+		## Calculate a new rotation for the bobbing_node,
+		## and tween the bobbing_node's rotation towards that value
+		var tween = get_tree().create_tween()
+		tween.tween_property(bobbing_node, "rotation", movement_tilt(delta), rotation_speed * delta)
 
 
 ## Takes X and Z of input_dir (the horizontal direction the Player is moving in),
 ## and returns on which axis the bobbing_node should be tilted
-func movement_tilt(x, z, delta) -> Vector3:
+func movement_tilt(delta: float) -> Vector3:
+	
+	## The rotation towards which the bobbing_node's rotation will be tweened
+	var new_rot: Vector3 = original_rotation
+	
+	## The direction of Player movement based on Input
+	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
+	 "input_forwards", "input_backwards")
+	
+	
+	## We multiply the input_dir (if there's movement) by tilt pitch and roll booleans;
+	## "roll" is tilting left/right, "pitch" is tilting forwards/backwards
+	#
 	## 0.0, because we're ignoring the Y axis. That would be head *turning*
-	var target_tilt = Vector3(x * angle_limit_for_tilt, 0.0, -z * angle_limit_for_tilt)
-	return lerp(bobbing_node.rotation, target_tilt, speed_rotation * delta)
+	## 
+	new_rot = Vector3( \
+	input_dir.y * float(movement_tilt_pitch) * angle_limit_for_tilt, \
+	0.0, \
+	-input_dir.x * float(movement_tilt_roll) * angle_limit_for_tilt)
+	
+	
+	return new_rot
 
 
-## Move bobbing_node on the X and Y axes when the Player is moving
+## Move bobbing_node on the X, Y and Z axes depending on Player Input or velocity
 func do_head_bob(delta: float) -> Vector3:
-	## As the name says, get Player's velocity Vector, but without the Y axis
-	## We use it to get tick_speed
-	var horizontal_velocity = Vector3(player.velocity.x, 0, player.velocity.z)
 	
-	## Calculate the bobbing_node's new position as we move through the curve
-	var x_pos = (bob_curve.sample(cycle_position_x) * curve_multiplier.x * bob_range.x)
-	var y_pos = (bob_curve.sample(cycle_position_y) * curve_multiplier.y * bob_range.y)
+	## NOTE: This is made the same as original_position at first, because if bobbing on an axis
+	## NOTE: was disabled or broken, the Head would go to 0 on that axis!
+	## The position towards which the bobbing_node's position will be lerped
+	var new_pos: Vector3 = original_position
 	
-	## Used to move the cycle_position_x along the bob_curve
-	var tick_speed = (horizontal_velocity.length() * delta) / step_interval
-	## Actually move cycle_positions along the bob_curve
-	cycle_position_x += tick_speed
-	cycle_position_y += tick_speed * vertical_horizontal_ratio
+	## Get IF the Player is moving based on Input.
+	## Could be done with many Input.is_button_pressed()-s, but this is cleaner.
+	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
+	 "input_forwards", "input_backwards")
 	
-	## When the end of the curve is reached, reset cycle_position
-	if(cycle_position_x > 1):
-		cycle_position_x -= 1
-	if(cycle_position_y > 1):
-		cycle_position_y -= 1
+	## HeadBob on the X axis only works when the Player is pressing horizontal Input buttons...
+	if input_dir != Vector2.ZERO:
+		## NOTE: !player.in_air ensures that this only happens when the Player is NOT in the air
+		
+		## If bobbing on X axis is enabled...
+		if X_axis_bob_enabled == true:
+			## Make the bobbing_node move left and right
+			new_pos.x = original_position.x + (sin(Time.get_ticks_msec() \
+								* x_bob_frequency) * x_bob_amplitude * int(!player.in_air))
+		
+		## If bobbing on Y axis is enabled...
+		if Y_axis_bob_enabled == true:
+			## Make the bobbing_node move up and down
+			new_pos.y = original_position.y + (sin(Time.get_ticks_msec() \
+						* y_bob_frequency) * y_bob_amplitude * int(!player.in_air))
 	
 	
-	return Vector3(x_pos, y_pos, 0)
+	### NOTE: This happens no matter if the Player is on the ground or in the air
+	### If bobbing on Z axis is enabled...
+	#if Z_axis_bob_enabled == true:
+		### NOTE: player.velocity.z could be input_dir.y, but there seems to be not much difference
+		### Make the bobbing_node move fowards or backwards
+		#new_pos.z = original_position.z + (player.velocity.z * Z_bob_length)
+	
+	
+	return new_pos
 
-## Reset headbob step cycles
-func reset_head_bob_cycles(): ## HERE - not used
-	cycle_position_x = 0
-	cycle_position_y = 0

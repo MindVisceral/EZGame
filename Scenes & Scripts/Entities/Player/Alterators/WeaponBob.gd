@@ -62,7 +62,7 @@ var step_interval: float = 6.0 * 2
 @export var Z_bob_length: float = 0.001
 
 
-##
+## Y-axis bobbing is based on a sine wave
 @export_subgroup("Up-Down weapon bob")
 
 @export var Y_axis_bob_enabled: bool = true
