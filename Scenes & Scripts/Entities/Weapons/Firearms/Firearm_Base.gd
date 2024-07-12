@@ -1,16 +1,26 @@
 extends Marker3D
-class_name Firearm
+class_name FirearmBase
+## ^NOTE: This is the Base Firearm Node! ALL the other weapons and weapon classes depend on it!^
+## NOTE: This is a WIELDABLE weapon only meant to be handled by the Player!
+## NOTE: Enemies get their own weapons, and 'pickupable' weapons are another thing entirely.
 
 
 ###-------------------------------------------------------------------------###
 ##### Onready variables
 ###-------------------------------------------------------------------------###
 
-## Needed in all the weapons
+## All weapons need to know the Player
 var player: Player
+
+## Attempting to fire the Firearm before the last shot is done (and this Timer is up) does nothing.
+@export var ShotCooldownTimer: Timer
+
+## HERE: Unnecessary?
+#
 ## This node is created automaticaly when a Model is imported,
-## if the model file has animations attached to it 
+## if the model file has animations attached to it. We just need a reference to it with this.
 @export var AnimPlayer: AnimationPlayer
+
 
 ###-------------------------------------------------------------------------###
 ##### Variable storage
@@ -18,29 +28,87 @@ var player: Player
 
 @export_group("Weapon parameters")
 
-##
+## Firing mode - whether the primary action button can be held or not.
+## Setting this to Single-shot forces the Player to click between each shot,
+## and setting this to Automatic allows the Player to hold the firing button.
+@export_enum("Single-shot", "Automatic") var firing_mode: int = 0
+
+## Time the weapon waits before the next individual shot can be fired, measured in seconds.
+## Attempting to fire before this time is up doesn't do anything.
+@export_range(0.01, 3.0, 0.01) var shot_cooldown: float = 0.15
+
+## Default damage done by the Firearm
 @export_range(0, 20, 0.25) var default_damage: float = 1
-## The maximum distance the bullets may travel away from their starting point
-## (Used both for bullets that are Rays and Projectiles, but those must be destroyed manually)
+
+## The maximum distance (in meters) the bullets may travel away from their starting point
+## (Used both for Hitscans and Projectiles, but Projectiles must be destroyed manually)
 @export var max_distance: float = 10000
+
 ## Layer on which the bullet is; should be the Hitbox layer
-#@export_flags_3d_physics var bullet_collision_layer ## HERE - seems unneccessary
-## Layers which the bullet can see, and therefore damage; should be the Hurtbox layer
-## (and in a RayCast weapon, also the Environment; this way hit effects work)
+#@export_flags_3d_physics var bullet_collision_layer ## HERE - seems unneccessary ## HERE: Why?
+## Layers which the bullet can see, and therefore damage;
+## should be the Hurtbox and Environment layers - to damage Entities and for effects to work.
 @export_flags_3d_physics var bullet_collision_mask
 
 
-## Called by the WeaponManager when this weapon is meant to be wielded/put away by the Player
+## Whether or not the primary fire button is held down. Used for Automatic firing_mode weapons.
+var primary_fire_is_held: bool = false
+
+
+###-------------------------------------------------------------------------###
+##### Firearm functions
+###-------------------------------------------------------------------------###
+
+func _ready() -> void:
+	## Set ShotCooldownTimer's wait_time.
+	ShotCooldownTimer.wait_time = shot_cooldown
+
+## This code is ran only when a corresponding Event is found
+func input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("primary_action"):
+		## Primary fire button is considered to be held down, unless it's released.
+		primary_fire_is_held = true
+		## If the weapon is ready to fire...
+		if ShotCooldownTimer.is_stopped():
+			primary_action()
+			ShotCooldownTimer.start()
+	
+	## Primary fire button has been released.
+	if Input.is_action_just_released("primary_action"):
+		primary_fire_is_held = false
+	
+	if Input.is_action_just_pressed("secondary_action"):
+		secondary_action()
+
+## Only used for Autmoatic firing_mode weapons
+func _physics_process(delta: float) -> void:
+	## Having the firing_mode set to Automatic requires this code to run in _physics_process()
+	if firing_mode == 1:
+			## If the weapon is ready to fire...
+			if ShotCooldownTimer.is_stopped():
+				## If the primary firing button is held down, fire away.
+				if primary_fire_is_held == true:
+					primary_action()
+					ShotCooldownTimer.start()
+
+
+
+
+
+
+## Called by the WeaponManager when this weapon is meant to be wielded by the Player
 func wield_weapon() -> void:
 	self.visible = true
 #
+## Called by the WeaponManager when this weapon is meant to be put away by the Player
 func put_weapon_away() -> void:
 	self.visible = false
 
 
-## Called by the WeaponManager when the primary_action or the secondary_action buttons are pressed
+## Called by the WeaponManager when the primary_action button is pressed
 func primary_action() -> void:
 	pass
 #
+## Called by the WeaponManager when the secondary_action button is pressed
 func secondary_action() -> void:
 	pass

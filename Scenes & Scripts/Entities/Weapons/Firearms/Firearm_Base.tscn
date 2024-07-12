@@ -2,8 +2,23 @@
 
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Firearm_Base.gd" id="1_10xiy"]
 
-[node name="FirearmBase" type="Marker3D"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+[node name="FirearmBase" type="Marker3D" node_paths=PackedStringArray("ShotCooldownTimer")]
+editor_description = "This is the Base Firearm Node! ALL the other weapons and weapon classes depend on it!
+This is a WIELDABLE weapon only meant to be handled by the Player.
+Enemies get their own weapons, and 'pickupable' weapons, ones taht you can pick up from the ground, are another thing entirely.
+
+This Node is rotated by -90 degrees on the Y axis so the weapon model always points at the negative Z axis!
+(NOTE: This might only be an issue because of the way the gun1 model was made?)"
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_10xiy")
+ShotCooldownTimer = NodePath("ShotCooldownTimer")
+bullet_collision_mask = 17
 
 [node name="ModelHolder" type="Node3D" parent="."]
+
+[node name="ShotCooldownTimer" type="Timer" parent="."]
+editor_description = "This Timer forces the weapon to wait a set amount of time before the next shot can be fired.
+Attempting to fire before this Timer is up doesn't do anything.
+
+NOTE: wait_time is set to the shot_cooldown variable"
+one_shot = true

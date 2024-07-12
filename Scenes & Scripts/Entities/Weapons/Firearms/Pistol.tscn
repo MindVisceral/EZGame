@@ -1,17 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2fet7sg7ta7s"]
 
-[ext_resource type="PackedScene" uid="uid://dv5fcfhevw1fe" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Firearm_Base.tscn" id="1_opcfm"]
+[ext_resource type="PackedScene" uid="uid://bn7y4wu56lcq0" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Firearm_Hitscan.tscn" id="1_k8jy2"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Pistol.gd" id="2_ejjpi"]
 [ext_resource type="PackedScene" uid="uid://bemovxot15qyc" path="res://Scenes & Scripts/Entities/Weapons/Gun/gun1.glb" id="3_hegno"]
 
-[node name="Pistol" node_paths=PackedStringArray("bullet_start_point", "AnimPlayer") instance=ExtResource("1_opcfm")]
+[node name="Pistol" node_paths=PackedStringArray("bullet_start_point", "AnimPlayer") instance=ExtResource("1_k8jy2")]
+editor_description = ""
 script = ExtResource("2_ejjpi")
 bullet_start_point = NodePath("ModelHolder/gun1/Armature/Base_bone/Grip1/TrailSpawnPoint")
 AnimPlayer = NodePath("ModelHolder/gun1/AnimationPlayer")
-bullet_collision_mask = 17
-
-[node name="ModelHolder" parent="." index="0"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+shot_cooldown = 1.6
 
 [node name="gun1" parent="ModelHolder" index="0" instance=ExtResource("3_hegno")]
 

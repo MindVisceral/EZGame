@@ -26,7 +26,7 @@ var weapons: Array = [null]
 var current_weapon_slot = 0
 ## This holds a direct reference to the weapon that is currently wielded
 ## through weapons[current_weapon_slot]
-var current_weapon: Firearm
+var current_weapon: FirearmBase
 
 
 ###-------------------------------------------------------------------------###
@@ -62,10 +62,13 @@ func physics_process(delta: float) -> void:
 ## This code is ran only when a corresponding Event is found
 func input(event: InputEvent) -> void:
 	
-	if Input.is_action_just_pressed("primary_action"):
-		call_weapon_primary_action()
-	if Input.is_action_just_pressed("secondary_action"):
-		call_weapon_secondary_action()
+	if current_weapon:
+		current_weapon.input(event)
+	
+	#if Input.is_action_just_pressed("primary_action"):
+		#call_weapon_primary_action()
+	#if Input.is_action_just_pressed("secondary_action"):
+		#call_weapon_secondary_action()
 	
 	## NOTE: Buttons 1-through-N correspond to a weapon's spot in the 'weapons' Array
 	if Input.is_action_just_pressed("Spot1"):
