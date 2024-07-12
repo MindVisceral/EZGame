@@ -2,7 +2,7 @@ extends Node
 
 ## Default time_scale
 var default_time_scale: float = 1.0
-## Current time_scale
+## Current time_scale, set in _ready
 var time_scale: float
 ## Minimum and maximum time_scale limits
 var lower_limit: float = 0.35
@@ -22,8 +22,8 @@ func _physics_process(delta: float) -> void:
 	## If the Player wants to be put into BulletTime mode...
 	if Input.is_action_just_pressed("input_bullet_time"):
 		
-		## If time_scale is ~= default_time_scale time, we tween to bullet time time
-		if is_equal_approx(time_scale, default_time_scale):
+		## If time_scale is about equal to default_time_scale time, we tween to bullet time time
+		if time_scale >= (default_time_scale - 0.05):
 			##
 			bullet_time_tween = get_tree().create_tween()
 			bullet_time_tween.tween_property(self, "time_scale", lower_limit, time_until_limit)

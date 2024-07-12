@@ -121,8 +121,10 @@ func _process(delta: float) -> void:
 	if step_bob_enabled == true:
 		## Calculate a new position for the bobbing_node,
 		## and tween the bobbing_node's position towards that point
-		var tween = get_tree().create_tween()
-		tween.tween_property(bobbing_node, "position", do_head_bob(delta), bob_multiplier * delta)
+		## NOTE: BulletTime.time_scale multiplication happens in the do_head_bob() function
+		var bob_tween = get_tree().create_tween()
+		bob_tween.tween_property(bobbing_node, "position", do_head_bob(delta), \
+										bob_multiplier * delta)
 	
 	## If air bobbing is enabled...
 	if air_bob_enabled == true:
@@ -132,8 +134,9 @@ func _process(delta: float) -> void:
 	if movement_tilt_enabled == true:
 		## Calculate a new rotation for the bobbing_node,
 		## and tween the bobbing_node's rotation towards that value
-		var tween = get_tree().create_tween()
-		tween.tween_property(bobbing_node, "rotation", movement_tilt(delta), rotation_speed * delta)
+		var tilt_tween = get_tree().create_tween()
+		tilt_tween.tween_property(bobbing_node, "rotation", movement_tilt(delta), \
+										rotation_speed * BulletTime.time_scale * delta)
 
 
 ## Takes X and Z of input_dir (the horizontal direction the Player is moving in),
@@ -182,13 +185,13 @@ func do_head_bob(delta: float) -> Vector3:
 		## If bobbing on X axis is enabled...
 		if X_axis_bob_enabled == true:
 			## Make the bobbing_node move left and right
-			new_pos.x = original_position.x + (sin(Time.get_ticks_msec() \
+			new_pos.x = original_position.x + (sin(Time.get_ticks_msec() * BulletTime.time_scale \
 								* x_bob_frequency) * x_bob_amplitude * int(!player.in_air))
 		
 		## If bobbing on Y axis is enabled...
 		if Y_axis_bob_enabled == true:
 			## Make the bobbing_node move up and down
-			new_pos.y = original_position.y + (sin(Time.get_ticks_msec() \
+			new_pos.y = original_position.y + (sin(Time.get_ticks_msec() * BulletTime.time_scale \
 						* y_bob_frequency) * y_bob_amplitude * int(!player.in_air))
 	
 	

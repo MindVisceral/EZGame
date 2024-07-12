@@ -34,7 +34,6 @@ var step_interval: float = 6.0 * 2
 
 ## Enables WeaponBob in general
 @export var weapon_bob_enabled: bool = true
-
 ## How fast the bob lerps between positions; how fast it returns to original_position from new_pos
 @export var bob_multiplier: float = 12
 ## HERE - similiar to step_interval?
@@ -47,9 +46,9 @@ var step_interval: float = 6.0 * 2
 @export var X_axis_bob_enabled: bool = true
 
 ## Makes bobbing_node move faster between extremes; bigger number = faster bobbing
-@export var x_bob_frequency: float = 0.01
+@export var X_bob_frequency: float = 0.01
 ## Makes bobbing_node go further away from original_position; bigger number = wider sine
-@export var x_bob_amplitude: float = 0.1
+@export var X_bob_amplitude: float = 0.1
 
 
 ## Z-axis bobbing simply moves the bobbing_node on the Z axis
@@ -59,7 +58,7 @@ var step_interval: float = 6.0 * 2
 @export var Z_axis_bob_enabled: bool = true
 
 ## This length limits how far forwards/backwards the bobbing_node may move
-@export var Z_bob_length: float = 0.001
+@export var Z_bob_length: float = 0.01
 
 
 ## Y-axis bobbing is based on a sine wave
@@ -67,8 +66,24 @@ var step_interval: float = 6.0 * 2
 
 @export var Y_axis_bob_enabled: bool = true
 
-## This heighht limits how far up/down the bobbing_node may move
+## This height limits how far up/down the bobbing_node may move
 @export var Y_bob_height: float = 0.003
+
+
+@export_group("Breath Bob")
+
+## Enables Breathing Bobbing in general
+@export var breath_enabled: bool = true
+## How fast the bob lerps between positions; how fast it returns to original_position from new_pos
+@export var breath_multiplier: float = 10
+
+## Makes bobbing_node move faster between extremes; bigger number = faster breathing
+@export var breath_frequency: float = 0.005
+## Makes bobbing_node go further away from original_position; bigger number = wider sine
+@export var breath_amplitude: float = 0.003
+
+
+
 
 
 
@@ -96,12 +111,21 @@ func _process(delta: float) -> void:
 	if weapon_bob_enabled == true:
 		## Calculate a new position for the bobbing_node,
 		## and tween the bobbing_node's position towards that point
-		var tween = get_tree().create_tween()
-		tween.tween_property(bobbing_node, "position", do_weapon_bob(delta), bob_multiplier * delta)
+		var bob_tween = get_tree().create_tween()
+		bob_tween.tween_property(bobbing_node, "position", do_weapon_bob(), \
+										bob_multiplier * BulletTime.time_scale * delta)
+	
+	## If breathing is enabled...
+	if breath_enabled == true:
+		## Calculate a new position for the bobbing_node,
+		## and tween the bobbing_node's position towards that point
+		var breath_tween = get_tree().create_tween()
+		breath_tween.tween_property(bobbing_node, "position", do_breathing(), \
+										breath_multiplier * BulletTime.time_scale * delta)
 
 
 ## Move bobbing_node on the X, Y and Z axes depending on Player Input or velocity
-func do_weapon_bob(delta: float) -> Vector3:
+func do_weapon_bob() -> Vector3:
 	
 	## NOTE: This is made the same as original_position at first, because if bobbing on an axis
 	## NOTE: was disabled or broken, the weapon would go to 0 on that axis!
@@ -119,15 +143,16 @@ func do_weapon_bob(delta: float) -> Vector3:
 		## If bobbing on X axis is enabled...
 		if X_axis_bob_enabled == true:
 			## Make the bobbing_node move left and right
-			new_pos.x = original_position.x + (sin(Time.get_ticks_msec() \
-								* x_bob_frequency) * x_bob_amplitude * int(!player.in_air))
+			new_pos.x = original_position.x + \
+				## we take 
+				(input_dir.length() * \
+				sin(Time.get_ticks_msec() * X_bob_frequency) * X_bob_amplitude * int(!player.in_air))
 	
 	## NOTE: This happens no matter if the Player is on the ground or in the air
 	## If bobbing on Z axis is enabled...
 	if Z_axis_bob_enabled == true:
-		## NOTE: player.velocity.z could be input_dir.y, but there seems to be not much difference
 		## Make the bobbing_node move fowards or backwards
-		new_pos.z = original_position.z + (player.velocity.z * Z_bob_length)
+		new_pos.z = original_position.z + (input_dir.y * Z_bob_length)
 	
 	## NOTE: player.in_air ensures that this only happens when the Player IS in the air
 	## If bobbing on Y axis is enabled...
@@ -136,4 +161,20 @@ func do_weapon_bob(delta: float) -> Vector3:
 		new_pos.y = original_position.y + (player.velocity.y * Y_bob_height * int(player.in_air))
 	
 	
+	return new_pos
+
+
+## Move bobbing_node on the Y axis to simulate breathing
+func do_breathing() -> Vector3:
+	
+	## NOTE: This is made the same as original_position at first, because if something was broken,
+	## the weapon would go to 0 on the Y axis!
+	## The position towards which the bobbing_node's position will be lerped
+	var new_pos: Vector3 = original_position
+	
+	## Make the bobbing_node move up and down slightly
+	new_pos.y = original_position.y + \
+		(sin(Time.get_ticks_msec() * breath_frequency) * breath_amplitude)
+	
+	## We only edited the Y axis, but returning a Vector3 is much simpler and less buggy
 	return new_pos
