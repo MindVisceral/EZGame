@@ -35,19 +35,14 @@ gravity_multiplier = 0.05
 
 [node name="Scripts" type="Node" parent="."]
 
-[node name="StateManager" type="Node" parent="Scripts" node_paths=PackedStringArray("starting_state", "idle_state", "walk_state", "crouch_state", "jump_state", "fall_state", "stomp_state")]
+[node name="StateManager" type="Node" parent="Scripts" node_paths=PackedStringArray("starting_state", "states")]
 editor_description = "Manages Player states;
 Stores the starting (default) State; the state that the Player is spawned in
 Stores all the States, in case the current_state has to be changed by a Node/script that isn't the StateManager
 Can change the current_state on behest of an individual State"
 script = ExtResource("2_c5aqi")
 starting_state = NodePath("Idle")
-idle_state = NodePath("Idle")
-walk_state = NodePath("Walk")
-crouch_state = NodePath("Crouch")
-jump_state = NodePath("Jump")
-fall_state = NodePath("Fall")
-stomp_state = NodePath("Stomp")
+states = [NodePath("Idle"), NodePath("Walk"), NodePath("Crouch"), NodePath("Jump"), NodePath("Fall"), NodePath("Stomp")]
 
 [node name="Idle" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("walk_state", "crouch_state", "jump_state", "fall_state")]
 script = ExtResource("3_f5lbm")
@@ -133,7 +128,7 @@ movement_tilt_pitch = false
 
 [node name="WeaponBob" type="Node" parent="Scripts" node_paths=PackedStringArray("bobbing_node")]
 script = ExtResource("12_4bkuj")
-bobbing_node = NodePath("../../Firearms")
+bobbing_node = NodePath("../../Head/BobbingNode/Firearms")
 
 [node name="UIController" type="Node" parent="Scripts"]
 
@@ -150,6 +145,7 @@ one_shot = true
 editor_description = "Main body Collider for the Player
 Its height can be changed through the HeightAlternator"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+visible = false
 shape = SubResource("15")
 
 [node name="FeetCollider" type="CollisionShape3D" parent="."]
@@ -157,11 +153,13 @@ editor_description = "\"Feet\" collider for the Player
 Its height can be changed through the HeightAlternator
 The regualar Collider makes the Player fall off edges, and this collider prevents that"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+visible = false
 shape = SubResource("CylinderShape3D_hata5")
 
 [node name="FloorCast" type="RayCast3D" parent="."]
 editor_description = "A short RayCast3D placed at the very bottom of the Collider
 Activated for a single frame with check_for_floor() in the Player script"
+visible = false
 enabled = false
 target_position = Vector3(0, -0.25, 0)
 collision_mask = 2
@@ -174,6 +172,7 @@ editor_description = "Holds the Camera as its child
 Change it's Y position (height) through the HeightAlternator to make the camera move along with it,
 for example when crouching"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+gizmo_extents = 0.1
 
 [node name="BobbingNode" type="Node3D" parent="Head"]
 editor_description = "This node is bobbed by the HeadBob script instead of the Head node
@@ -189,23 +188,19 @@ fov = 90.0
 editor_description = "Marks the position of the Camera's third person view
 Janky and not very developed. Could be expanded upon"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
-
-[node name="FirearmRemote" type="RemoteTransform3D" parent="Head/BobbingNode"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.193442, -0.241313, -0.064748)
-remote_path = NodePath("../../../Firearms")
-
-[node name="Firearms" type="Marker3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.193442, 1.15869, -0.064748)
-
-[node name="Pistol" parent="Firearms" node_paths=PackedStringArray("bullet_start_pos_node") instance=ExtResource("12_nnnx6")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 visible = false
-bullet_start_pos_node = NodePath("../../Head/BobbingNode/PlayerCamera")
+
+[node name="Firearms" type="Marker3D" parent="Head/BobbingNode"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.315, -0.264, -0.106)
+
+[node name="Pistol" parent="Head/BobbingNode/Firearms" node_paths=PackedStringArray("bullet_start_pos_node") instance=ExtResource("12_nnnx6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+bullet_start_pos_node = NodePath("../../PlayerCamera")
 bullet_collision_layer = 2
 
-[node name="Pistol2" parent="Firearms" node_paths=PackedStringArray("bullet_start_pos_node", "AnimPlayer") instance=ExtResource("12_nnnx6")]
+[node name="Pistol2" parent="Head/BobbingNode/Firearms" node_paths=PackedStringArray("bullet_start_pos_node", "AnimPlayer") instance=ExtResource("12_nnnx6")]
 transform = Transform3D(-3.34849e-08, -2.80971e-08, -1, -0.642788, 0.766044, 0, 0.766044, 0.642788, -4.37114e-08, 0, 0, 0)
 visible = false
-bullet_start_pos_node = NodePath("../../Head/BobbingNode/PlayerCamera")
+bullet_start_pos_node = NodePath("../../PlayerCamera")
 AnimPlayer = NodePath("../Pistol/ModelHolder/gun1/AnimationPlayer")
 bullet_collision_layer = 2

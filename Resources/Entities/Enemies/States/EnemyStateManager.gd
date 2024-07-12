@@ -1,19 +1,19 @@
 extends Node
 
-## The State in which the Player will start
-@export var starting_state: BasePlayerState
-## All the possible states of the Player
-@export var states: Array[BasePlayerState] = []
+## The State in which the Enemy will start
+@export var starting_state: BaseEnemyState
+## All the possible states of the Enemy
+@export var states: Array[BaseEnemyState] = []
 ## Holds current state
-var current_state: BasePlayerState
+var current_state: BaseEnemyState
 
 
-## The States need a reference to the Player to access its functions and variables
-func init(player: Player) -> void:
-	#Get each state and give it a reference to the Player and the StateManager, so that their
+## The States need a reference to the enemy to access its functions and variables
+func init(enemy: Enemy) -> void:
+	#Get each state and give it a reference to the enemy and the StateManager, so that their
 	#functions and variables can be accesses directly.
 	for state in states:
-		state.player = player
+		state.enemy = enemy
 		state.state_manager = self
 	
 	#The state is set to the default state
@@ -21,14 +21,15 @@ func init(player: Player) -> void:
 
 
 ## State-changing function. Self-explainatory.
-func change_state(new_state: BasePlayerState) -> void:
+func change_state(new_state: BaseEnemyState) -> void:
+	print("NEW ENEMY STATE: ", new_state)
 	if current_state:
 		current_state.exit()
 	
 #	print("State now: ", current_state, "   State change: ", new_state)
 	
 	## Register what the current_state is, to add that to the new_state
-	var previous_state: BasePlayerState = current_state
+	var previous_state: BaseEnemyState = current_state
 	
 	## Switch to new_state
 	current_state = new_state
@@ -37,19 +38,12 @@ func change_state(new_state: BasePlayerState) -> void:
 	current_state.enter()
 
 
-## The Player calls these functions, the state changes are handled as needed by States themselves
+## The enemy calls these functions, the state changes are handled as needed by States themselves
 ##
 func physics_process(delta: float) -> void:
-#	print(current_state)
-#	if current_state.get("speed_multiplier"):
-#		print(current_state.speed_multiplier)
+	#print("CURRENT ENEMY STATE: ", current_state)
 	
 	var new_state = current_state.physics_process(delta)
-	if new_state:
-		change_state(new_state)
-#
-func input(event: InputEvent) -> void:
-	var new_state = current_state.input(event)
 	if new_state:
 		change_state(new_state)
 #

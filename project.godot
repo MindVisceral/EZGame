@@ -119,6 +119,7 @@ secondary_action={
 
 3d_physics/layer_1="Player"
 3d_physics/layer_2="Environment"
+3d_physics/layer_3="Enemy"
 
 [physics]
 
@@ -128,5 +129,6 @@ common/physics_interpolation=true
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method.mobile="forward_plus"
 environment/defaults/default_environment="res://default_env.tres"
 quality/filters/msaa=3

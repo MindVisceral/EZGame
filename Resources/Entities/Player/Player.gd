@@ -129,9 +129,9 @@ class_name Player
 @onready var FeetCollider: CollisionShape3D = $FeetCollider
 @onready var FloorCast: RayCast3D = $FloorCast
 @onready var Head: Marker3D = $Head
-#@onready var Firearms: Marker3D = $Head/BobbingNode/Firearms
+@onready var Firearms: Marker3D = $Head/BobbingNode/Firearms
 #@onready var Firearms: Marker3D = $Head/Firearms
-@onready var Firearms: Marker3D = $Firearms
+#@onready var Firearms: Marker3D = $Firearms
 @onready var Camera: Camera3D = $Head/BobbingNode/PlayerCamera
 @onready var TPMarker: Marker3D = $Head/BobbingNode/TPMarker
 
