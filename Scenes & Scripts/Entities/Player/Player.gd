@@ -32,7 +32,8 @@ extends CharacterBody3D
 @export var gravity_multiplier: float = 1.0
 
 ## The maximum speed the Player may reach when falling
-@export var falling_speed_limit: float = 50.0
+## Negative, because the Player's velocity.y is negative when falling.
+@export_range(-100, 0, 0.1) var falling_speed_limit: float = -50.0
 
 ## Player base speed
 ## All states use this base variable, instead modify the state's multiplier
@@ -71,9 +72,8 @@ extends CharacterBody3D
 
 @export_group("Stomp")
 
-## Stomp impulse in units. Applied once on enter()
-## Should be around the same as falling_speed_limit
-@export var stomp_strength: float = 15.0
+## Stomp speed in meters per second - it's always constant. Applied once on enter()
+@export_range(-100, 0, 0.1) var stomp_speed: float = -50.0
 
 ## The maximum height the Player may jump when performing a stomp jump
 ## 230 meters is the limit, but setting this to (96.5 - jump_height) grants that desired height

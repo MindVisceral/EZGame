@@ -101,11 +101,11 @@ func physics_process(delta) -> BasePlayerState:
 	
 	
 	## Apply gravity (which is the Globals' gravity * multiplier)
-	## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
+	## NOTE: Without BulletTime.time_scale, falling is inconsistent when BulletTime is activated
 	player.velocity.y -= player.gravity * BulletTime.time_scale * delta
-	#player.velocity.y = minf(player.velocity.y, -player.falling_speed_limit)
-	player.velocity.y = clampf(player.velocity.y, -player.falling_speed_limit, INF)
-	
+	## Clamp the velocity to be falling_speed_limit at most.
+	## NOTE: maxf is used because velocity.y is negative when falling
+	player.velocity.y = maxf(player.velocity.y, player.falling_speed_limit)
 	
 	
 	## Check if the Player has reached the ground already

@@ -19,7 +19,7 @@ extends BasePlayerState
 
 
 ## We store the vertical value of the global position of the Player
-## at the time the Stomp state is entered. This is used to make stomp jumps higher.
+## at the time the Stomp state is entered. This is used to make stomp-boosted jumps higher.
 var stomp_start_vertical_point: float
 
 
@@ -36,7 +36,7 @@ func enter() -> void:
 	## Reset velocity, otherwise the momentum would persist
 	player.velocity = Vector3.ZERO
 	## Apply stomp impulse
-	player.velocity.y -= player.stomp_strength * player.gravity * BulletTime.time_scale
+	player.velocity.y = player.stomp_speed
 
 func exit() -> void:
 	super.exit()
@@ -85,7 +85,13 @@ func physics_process(delta) -> BasePlayerState:
 	
 	
 	## Apply gravity (which is the Globals' gravity * multiplier)
+	## NOTE: Might be unnecessary since stomp_speed (and velocity.y) is always const in Stomp state
 	player.velocity.y -= player.gravity * BulletTime.time_scale * delta
+	## Clamp the velocity to be stomp_speed at most.
+	## NOTE: maxf is used because velocity.y is negative when falling. So is stomp_speed.
+	player.velocity.y = maxf(player.velocity.y, player.stomp_speed)
+	
+	print(player.velocity.y)
 	
 	## Increase air_time - this is used to influence camera shake strength.
 	player.air_time += delta
