@@ -131,7 +131,7 @@ process_material = SubResource("ParticleProcessMaterial_txoe6")
 draw_pass_1 = SubResource("CapsuleMesh_fxrhx")
 
 [node name="Light" type="OmniLight3D" parent="Particles"]
-light_color = Color(0.556863, 0.709804, 1, 1)
+light_color = Color(0.698039, 0.568627, 1, 1)
 light_energy = 4.4
 light_indirect_energy = 3.0
 light_volumetric_fog_energy = 6.0

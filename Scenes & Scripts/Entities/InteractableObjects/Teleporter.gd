@@ -11,7 +11,13 @@ extends StaticBody3D
 		teleport_target = value
 		if Engine.is_editor_hint():
 			update_configuration_warnings()
-@export var effects_colour: Color = Color("b291ff")
+
+@export var effects_colour: Color = Color("b291ff"):
+	get:
+		return effects_colour
+	set(value):
+		effects_colour = value
+		update_colours()
 
 @onready var particles: GPUParticles3D = $Particles
 @onready var light: OmniLight3D = $Particles/Light
@@ -21,9 +27,7 @@ extends StaticBody3D
 
 
 func _ready() -> void:
-	## Change the Teleporter's effects' colors
-	particles.process_material.color = effects_colour
-	light.light_color = effects_colour
+	update_colours()
 
 ## When something enters a teleporter...
 func _teleport_area_entered(thing: Node3D) -> void:
@@ -43,6 +47,11 @@ func _teleport_area_entered(thing: Node3D) -> void:
 				
 				thing.global_position = teleport_target.global_position
 
+
+## Change the Teleporter's effects' colors
+func update_colours() -> void:
+	particles.process_material.color = effects_colour
+	light.light_color = effects_colour
 
 
 func _get_configuration_warnings() -> PackedStringArray:
