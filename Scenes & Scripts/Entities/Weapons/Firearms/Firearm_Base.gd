@@ -18,13 +18,15 @@ var player: Player
 
 @export_group("Weapon parameters")
 
+##
+@export_range(0, 20, 0.25) var default_damage: float = 1
 ## The maximum distance the bullets may travel away from their starting point
 ## (Used both for bullets that are Rays and Projectiles, but those must be destroyed manually)
 @export var max_distance: float = 10000
 ## Layer on which the bullet is; should be the Hitbox layer
-@export_flags_3d_physics var bullet_collision_layer
-## Layers which the bullet can see; should be the Hurtbox layer
-## (in a RayCast weapon, also the Environment)
+#@export_flags_3d_physics var bullet_collision_layer ## HERE - seems unneccessary
+## Layers which the bullet can see, and therefore damage; should be the Hurtbox layer
+## (and in a RayCast weapon, also the Environment; this way hit effects work)
 @export_flags_3d_physics var bullet_collision_mask
 
 

@@ -90,6 +90,25 @@ func cast_bullet_ray() -> void:
 	## The "Bullet" hit something. We need hit info to instantiate the Trail and the Hit Effect
 	if result:
 		
+		## If the Ray-hit Node is a Hurtbox, we can pass weapon-specific damage values to it!
+		if result.collider is Hurtbox:
+			## Create a new DamageData Resource, which the Hurtbox will interpret
+			## and pass on to the Enemy
+			var damageData = DamageData.new()
+			
+			## We give this Resource some data of this weapon
+			damageData.damage_value = default_damage
+			
+			## With DamageData's data assigned,
+			## we pass this Resource on to the result.collider's Hurtbox
+			result.collider.pass_DamageData(damageData)
+		
+		
+		
+		
+		
+		
+		
 		## Instantiate a test decal
 		var decal = decal_insta.instantiate()
 		get_tree().get_root().add_child(decal)

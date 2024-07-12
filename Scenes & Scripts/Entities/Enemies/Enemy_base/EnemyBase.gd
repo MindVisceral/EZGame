@@ -57,8 +57,10 @@ extends CharacterBody3D
 @export var model: Node3D   ## A Node with a Skeleton3D, a Mesh, and an AnimationPlayer
 @export var AnimPlayer: AnimationPlayer
 @onready var States: Node = $Scripts/StateManager
+@onready var stats: Node = $Scripts/Stats
 @onready var Collider: CollisionShape3D = $CollisionShape3D
 @onready var FloorCast: RayCast3D = $FloorCast
+@onready var hurtbox: Area3D = $Hurtbox
 
 
 
@@ -87,8 +89,9 @@ var direction: Vector3 = Vector3()
 
 func _ready() -> void:
 	
-	## Passes a reference of the Enemy class to the states so that it can be used by them
+	## Passes a reference of the Enemy Node to the states so that it can be used by them
 	States.init(self)
+	stats.init(self)
 	
 	## Apply exported variables to the Enemy
 	apply_exported()
@@ -108,6 +111,7 @@ func _physics_process(delta) -> void:
 func _process(delta) -> void:
 	States.process(delta)
 
+
 ## On ready, apply exported variables like this: 
 func apply_exported() -> void:
 	
@@ -119,3 +123,10 @@ func check_for_floor() -> bool:
 	FloorCast.force_raycast_update()
 #	print(FloorCast.is_colliding())
 	return FloorCast.is_colliding()
+
+
+## Enemy's current_health has reached 0
+func death() -> void:
+	
+	print(self, " is dead!")
+	queue_free()

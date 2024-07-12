@@ -7,7 +7,6 @@
 [node name="Pistol" node_paths=PackedStringArray("AnimPlayer") instance=ExtResource("1_opcfm")]
 script = ExtResource("2_ejjpi")
 AnimPlayer = NodePath("ModelHolder/gun1/AnimationPlayer")
-bullet_collision_layer = 8
 bullet_collision_mask = 18
 
 [node name="ModelHolder" parent="." index="0"]

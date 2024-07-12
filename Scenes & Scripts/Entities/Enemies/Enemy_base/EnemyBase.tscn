@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfl36ykvecfd4"]
+[gd_scene load_steps=5 format=3 uid="uid://bfl36ykvecfd4"]
 
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Enemies/Enemy_base/EnemyBase.gd" id="1_mglqm"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Enemies/States/EnemyStateManager.gd" id="2_ofog0"]
+[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Enemies/Enemy_base/Stats.gd" id="3_0kcgh"]
 [ext_resource type="PackedScene" uid="uid://yj1henetlw1f" path="res://Scenes & Scripts/Entities/Entity Elements/Hurtbox.tscn" id="3_bl2ki"]
 
 [node name="BaseEnemy" type="CharacterBody3D"]
@@ -16,6 +17,11 @@ Stores all the States, in case the current_state has to be changed by a Node/scr
 Can change the current_state on behest of an individual State"
 script = ExtResource("2_ofog0")
 
+[node name="Stats" type="Node" parent="Scripts"]
+editor_description = "Manages Enemy stats (including health);"
+script = ExtResource("3_0kcgh")
+default_health = 5.0
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 
 [node name="FloorCast" type="RayCast3D" parent="."]
@@ -28,4 +34,5 @@ hit_from_inside = true
 debug_shape_custom_color = Color(1, 1, 1, 1)
 debug_shape_thickness = 5
 
-[node name="Hurtbox" parent="." instance=ExtResource("3_bl2ki")]
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("DamageDataReceiver") instance=ExtResource("3_bl2ki")]
+DamageDataReceiver = NodePath("../Scripts/Stats")
