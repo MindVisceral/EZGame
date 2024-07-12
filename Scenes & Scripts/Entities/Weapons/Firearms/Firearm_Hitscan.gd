@@ -137,7 +137,7 @@ func cast_bullet_ray() -> void:
 		
 		## Option 2: The "bullet" hit a part of the Environment. But we only assume that it did,
 		## because there was not Hurtbox.
-		## This necessitates the regular hit effect and an Environment decal
+		## This necessitates the regular hit effect and an Environment decal 
 		elif result.collider:
 		
 			## Instantiate a decal...
