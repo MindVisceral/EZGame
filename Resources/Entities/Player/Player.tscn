@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://lhlklylca50m"]
+[gd_scene load_steps=13 format=3 uid="uid://lhlklylca50m"]
 
 [ext_resource type="Script" path="res://Resources/Entities/Player/Player.gd" id="1_kmike"]
 [ext_resource type="Script" path="res://Resources/Entities/Player/Player_States/State_Manager.gd" id="2_c5aqi"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Resources/Entities/Player/Player_States/Stomp_State.gd" id="8_fl03g"]
 [ext_resource type="Script" path="res://Resources/Entities/Player/Alterators/HeightAlterator.gd" id="8_rgs2k"]
 [ext_resource type="Script" path="res://Resources/Entities/Player/Player_States/Fall_State.gd" id="8_xbf4w"]
+[ext_resource type="Script" path="res://Resources/Entities/Player/Alterators/InputBuffer.gd" id="9_l15vx"]
 
 [sub_resource type="CapsuleShape3D" id="15"]
 radius = 0.45
@@ -85,6 +86,13 @@ script = ExtResource("8_fl03g")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 jump_state = NodePath("../Jump")
+
+[node name="InputBuffer" type="Node" parent="Scripts"]
+editor_description = "Takes care of Input buffering, like:
+-jump immediately after landing if the jump button is pressed a little too early
+-coyote time
+-"
+script = ExtResource("9_l15vx")
 
 [node name="HeightAlterator" type="Node" parent="Scripts"]
 editor_description = "Alters the height of:

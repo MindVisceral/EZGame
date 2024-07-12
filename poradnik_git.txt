@@ -1,9 +1,13 @@
+Do this after every session. Add more stuff once you figure this out.
+
+
+
 CMD - locate this folder (cd E:\Pliki\Games\Easy_FPS)
-go to :E
+go to  with (E:)
 
 git init   #initialize git
 
-git commit -a   #commit changes
-### In there, I to insert a message, ESC to stop, type :wq to quit
+git commit -a   #commit changes locally
+### In there, I to insert a message, ESC to stop typing, type :wq to quit
 
 git push   #push changes to master (on GitHub, stupid)
