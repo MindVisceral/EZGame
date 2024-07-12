@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Enemies/Enemy_base/AnimationHandler.gd" id="5_t7vsf"]
 
 [node name="BaseEnemy" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_mglqm")
 
 [node name="Scripts" type="Node" parent="."]

@@ -20,6 +20,7 @@ config/icon="res://icon.png"
 
 Globals="*res://Scenes & Scripts/Autoloads/Globals.gd"
 BulletTime="*res://Scenes & Scripts/Autoloads/BulletTime.gd"
+ScreenShake="*res://Scenes & Scripts/Autoloads/ScreenShake.gd"
 
 [editor_plugins]
 
@@ -131,8 +132,8 @@ input_bullet_time={
 
 [layer_names]
 
-3d_physics/layer_1="Player"
-3d_physics/layer_2="Environment"
+3d_physics/layer_1="Environment"
+3d_physics/layer_2="Player"
 3d_physics/layer_3="Enemy"
 3d_physics/layer_4="Hitbox"
 3d_physics/layer_5="Hurtbox"

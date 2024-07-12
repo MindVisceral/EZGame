@@ -38,34 +38,10 @@ collision_layer = 2
 collision_mask = 7
 input_ray_pickable = false
 script = ExtResource("1_kmike")
-MOUSE_SENSITIVITY = null
-mouse_scroll_value = null
-MOUSE_SENSITIVITY_SCROLL_WHEEL = null
-camera_FOV = null
-first_person = null
 gravity_multiplier = 1.0
-air_time_multiplier = null
-speed = null
-air_control = null
-step_lengthen = null
-default_height = null
-crouch_height = null
-default_width = null
-default_head_height = null
-crouch_head_height = null
-default_feet_height = null
-crouch_feet_height = null
-default_FloorCast_height = null
-crouch_FloorCast_height = null
-crouch_speed = null
-jump_height = null
-stomp_strength = 4.0
-wall_jump_height = null
-wall_jump_distance = null
+stomp_strength = 15.0
+wall_jump_height = 14.0
 wall_sliding_deceleration = 0.6
-fly_mode_speed_modifier = null
-MAX_HEALTH = null
-health = null
 
 [node name="Scripts" type="Node" parent="."]
 
@@ -283,10 +259,9 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 
 visible = false
 bullet_start_pos_node = NodePath("../../PlayerCamera")
 
-[node name="Pistol2" parent="Head/BobbingNode/Firearms" node_paths=PackedStringArray("bullet_start_pos_node") instance=ExtResource("12_nnnx6")]
+[node name="Pistol2" parent="Head/BobbingNode/Firearms" instance=ExtResource("12_nnnx6")]
 transform = Transform3D(-0.766044, -0.642788, 8.74228e-08, -0.642788, 0.766044, 0, -6.69697e-08, -5.61943e-08, -1, 0, 0, 0)
 visible = false
-bullet_start_pos_node = NodePath("../../PlayerCamera")
 
 [node name="GPUParticlesAttractorVectorField3D" type="GPUParticlesAttractorVectorField3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00488281, 0.808258, 0)

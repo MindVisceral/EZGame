@@ -8,7 +8,7 @@
 script = ExtResource("2_ejjpi")
 bullet_start_point = NodePath("ModelHolder/gun1/Armature/Base_bone/Grip1/TrailSpawnPoint")
 AnimPlayer = NodePath("ModelHolder/gun1/AnimationPlayer")
-bullet_collision_mask = 18
+bullet_collision_mask = 17
 
 [node name="ModelHolder" parent="." index="0"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

@@ -112,8 +112,7 @@ _data = {
 [node name="Teleporter" type="StaticBody3D"]
 editor_description = "When entered, teleports the Player (or any other Entity) to its connected exit.
 The Teleporter may be set to connect to another Teleporter, in which case the second Teleporter has it's cooldown activated so that the Player doesn't get stuck in a loop, teleporting between the two Teleporters indefinitely."
-collision_layer = 2
-collision_mask = 5
+collision_mask = 6
 script = ExtResource("1_7qitw")
 
 [node name="Teleporter" parent="." instance=ExtResource("2_ibd7n")]
@@ -144,7 +143,7 @@ omni_attenuation = 0.85
 [node name="TeleportArea3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 collision_layer = 64
-collision_mask = 5
+collision_mask = 6
 monitorable = false
 
 [node name="AreaCollider" type="CollisionShape3D" parent="TeleportArea3D"]

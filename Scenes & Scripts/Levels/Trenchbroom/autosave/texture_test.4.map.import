@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://b4gifyvgs53ys"
+path="res://.godot/imported/texture_test.4.map-201c98b2a58dbb940ab4ed9285bf24e5.tres"
+
+[deps]
+
+source_file="res://Scenes & Scripts/Levels/Trenchbroom/autosave/texture_test.4.map"
+dest_files=["res://.godot/imported/texture_test.4.map-201c98b2a58dbb940ab4ed9285bf24e5.tres"]
+
+[params]
+

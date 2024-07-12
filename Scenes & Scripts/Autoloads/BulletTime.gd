@@ -3,7 +3,7 @@ extends Node
 ## Default time_scale
 var default_time_scale: float = 1.0
 ## Current time_scale, set in _ready
-var time_scale: float
+var time_scale: float = 1.0
 ## Minimum and maximum time_scale limits
 var lower_limit: float = 0.35
 var upper_limit: float = 2.0

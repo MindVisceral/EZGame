@@ -21,6 +21,7 @@ func enter() -> void:
 
 func exit() -> void:
 	super.exit()
+	ScreenShake.add_trauma(20)
 	
 	player.in_air = false
 	player.WallDetection.enabled = false

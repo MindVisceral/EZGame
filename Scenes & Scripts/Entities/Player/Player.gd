@@ -108,16 +108,12 @@ extends CharacterBody3D
 
 ## The vertical height of the jump from the wall
 ## NOTE: This is !added! to the Player's Y velocity
-@export var wall_jump_height: float = 55
+@export var wall_jump_height: float = 14
 
 ## The horizontal power of the jump away from the wall
 ## NOTE: This is !multiplied! by the wall's normal,
 ## NOTE: which is fine because the normal is always either 0 or 1
-@export var wall_jump_distance: float = 45
-
-## How much horizontal Player Input contributes to the jump distance (in %, between .8 and 1.25)
-## The lower the value, the less control the Player has over the wall jump
-@export_range(0.8, 4.0, 0.01) var walljump_input_contribution = 2.5
+@export var wall_jump_distance: float = 17
 
 ## When the Player is on a wall, they fall down slower
 ## The lower the number, the slower they fall down.
@@ -258,6 +254,9 @@ func _unhandled_input(event: InputEvent) -> void:
 ###
 func _physics_process(delta) -> void:
 	
+	if Input.parse_input_event(InputEventMouseMotion):
+		print("movement")
+	
 	if !is_dead:
 #		process_input(delta)
 		process_view_input(delta)
@@ -297,8 +296,8 @@ func apply_exported() -> void:
 
 ###
 func process_view_input(delta):
-	#if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
-		#return
+	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+		return
 	
 	pass
 ###

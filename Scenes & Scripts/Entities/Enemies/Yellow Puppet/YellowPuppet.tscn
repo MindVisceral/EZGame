@@ -15,8 +15,6 @@ radius = 0.468507
 height = 1.52785
 
 [node name="Yellow Puppet" node_paths=PackedStringArray("model", "AnimPlayer") instance=ExtResource("1_tm6i6")]
-collision_layer = 4
-collision_mask = 3
 script = ExtResource("1_wx6pj")
 model = NodePath("yellow_puppet")
 AnimPlayer = NodePath("yellow_puppet/AnimationPlayer")

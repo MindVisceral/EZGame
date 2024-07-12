@@ -96,13 +96,9 @@ func physics_process(delta) -> BasePlayerState:
 	## Otherwise, keep the momentum
 	if player.direction.x != 0 and player.direction.z != 0:
 		player.velocity.x = lerp(player.velocity.x, \
-			(player.direction.x * player.speed * speed_multiplier)  \
-			* (player.walljump_input_contribution), \
-			temp_accel * delta)
+			(player.direction.x * player.speed * speed_multiplier), temp_accel * delta)
 		player.velocity.z = lerp(player.velocity.z, \
-			(player.direction.z * player.speed * speed_multiplier)  \
-			* (player.walljump_input_contribution), \
-			temp_accel * delta)
+			(player.direction.z * player.speed * speed_multiplier), temp_accel * delta)
 		
 	
 	## Apply gravity (which is the Globals' gravity * multiplier)
