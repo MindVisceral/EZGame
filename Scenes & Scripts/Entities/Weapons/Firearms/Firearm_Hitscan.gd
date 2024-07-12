@@ -27,6 +27,9 @@ class_name FirearmHitscan
 @export var hit_effect_emitter: PackedScene = \
 	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Hit_Effect_Emitter.tscn")
 
+## 
+@export var bullet_hole_decal: PackedScene = \
+	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Bullet_Hole_Decal.tscn")
 
 
 ###-------------------------------------------------------------------------###
@@ -41,9 +44,6 @@ class_name FirearmHitscan
 
 ## NOTE: The following functions are repeated from the FirearmBase class!
 
-#func input(event: InputEvent) -> void:
-	#super.input(event)
-
 ## Called by the WeaponManager when this weapon is meant to be wielded by the Player
 func wield_weapon() -> void:
 	super.wield_weapon()
@@ -52,26 +52,21 @@ func wield_weapon() -> void:
 func put_weapon_away() -> void:
 	super.put_weapon_away()
 
-## Called by the WeaponManager when the primary_action button is pressed
+
+## Called when the primary_action button is pressed
 func primary_action() -> void:
 	super.primary_action()
 	
 	## Primary action fires a RayCast "bullet"
 	cast_bullet_ray()
 #
-## Called by the WeaponManager when the secondary_action button is pressed
+## Called when the secondary_action button is pressed
 func secondary_action() -> void:
 	super.secondary_action()
 
 
 
-
-
-## HERE - Could be made into bullet holes. LATER [?]
-var decal_insta = preload("res://test_decal.tscn")
-
-
-## Create a Ray in Space, which will act as a bullet for this RayCast-type weapon
+## Create a Ray in Space, which will act as a bullet for Hitscan weapons
 func cast_bullet_ray() -> void:
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
 	
@@ -81,31 +76,39 @@ func cast_bullet_ray() -> void:
 	var start_pos: Vector3 = bullet_start_pos_node.global_transform.origin
 	## End pos of the Ray; start_pos extended towards where the Player is looking,
 	## multiplied by FirearmBase @export-ed max_distance variable
-	var end_pos: Vector3 = start_pos - bullet_start_pos_node.global_transform.basis.z * self.max_distance
+	var end_pos: Vector3 = start_pos - \
+		(bullet_start_pos_node.global_transform.basis.z * self.max_distance)
 	#
-	## bullet_collision_mask is @export-ed from the Firearm script; change it in the editor
-	## the RayCast only detects objects on this variable
+	## NOTE: bullet_collision_mask is @exported from the FirearmBase class; change it in the editor.
+	## That makes this RayCast only detects objects on the same layers as this variable.
 	
 	## Set the above Ray parameters
 	var ray_param: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(start_pos, \
 		end_pos, bullet_collision_mask)
-	## We want it to detect HurtBoxes (which are Areas) too, not just bodies
+	## We want it to detect HurtBoxes (which are Areas) too, not just bodies (like the Environment)
 	ray_param.collide_with_areas = true
-	## Finally, cast the Ray itself in space_state, with ray_param as its parameters
+	## Finally, cast the Ray in space_state, with ray_param as its parameters
 	var result: Dictionary = space_state.intersect_ray(ray_param)
 	
 	
-	## Now we check results of this cast Ray
+	## Now we check results of this Ray we just cast.
 	## TODO HERE - do damage calcualtions, then hitting the environment, then not hitting anything
 	
-	## Instantiate a Trail, no matter if the "bullet" hit anything or not. We will check that later.
+	## Instantiate a Trail, no matter if the bullet (RayCast) hit anything or not;
+	## we will check if it did later.
 	var trail = bullet_trail_emitter.instantiate()
 	get_tree().get_root().add_child(trail)
 	
 	
-	## Option 1: The "bullet" hit something.
-	## We need hit info to make the Trail and the Hit Effect work.
+	## Options 1 & 2: The "bullet" hit something and returned a result.
+	## NOTE: We need hit info to make the Trail and the Hit Effect work.
 	if result:
+		
+		## Option 1: The "bullet" hit an Entity.
+		## This necessitates a special, Entity-specific hit effect!
+		
+		
+		
 		## If the Ray-hit Node is a Hurtbox, we can pass weapon-specific damage values to it!
 		if result.collider is Hurtbox:
 			## Create a new DamageData Resource, which the Hurtbox will interpret
@@ -124,13 +127,16 @@ func cast_bullet_ray() -> void:
 		
 		
 		
-		
+		## Option 2: The "bullet" hit a part of the Environment.
+		## This necessitates the regular hit effect and an Environment decal.
 		
 		## Instantiate a test decal...
-		var decal = decal_insta.instantiate()
+		var decal = bullet_hole_decal.instantiate()
 		get_tree().get_root().add_child(decal)
-		## ...and put it where it should be
-		decal.position = result.position
+		## The first parameter is the point at which the Decal is drawn,
+		## the second one is the result's normal;
+		## we use it to make the Decak face away from the hit object
+		decal.draw_decal(result.position, result.normal)
 		
 		## Instantiate a Hit Effect
 		var hit_effect = hit_effect_emitter.instantiate()
@@ -144,8 +150,11 @@ func cast_bullet_ray() -> void:
 		## the second one is where the Trail ends
 		trail.draw_mesh(bullet_start_point.global_position, result.position)
 		
-	## The Bullet hasn't hit anything. We only instantiate the Trail
+	
+	## Option 3: The "bullet" has not hit anything. 
+	## In this case we only instantiate the Trail. No need for any hit effects.
 	else:
-		## The second parameter is just a Vector3 somewhere way off in the distance
-		## to create an illusion that the bullet goes on beyond where the Player can see
+		## Since the Ray returned no results, the second parameter is just
+		## a Vector3 somewhere way off in the distance.
+		## This creates an illusion that the bullet went on beyond the Player's sight
 		trail.draw_mesh(bullet_start_point.global_position, end_pos)

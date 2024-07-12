@@ -1,4 +1,4 @@
-[gd_scene load_steps=148 format=3 uid="uid://bg2u2fljqhcdk"]
+[gd_scene load_steps=150 format=3 uid="uid://bg2u2fljqhcdk"]
 
 [ext_resource type="Script" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1_hxp6x"]
 [ext_resource type="Material" uid="uid://o0b4tbh6yup4" path="res://addons/character-controller/example/main/materials/rock.tres" id="2_2haa3"]
@@ -508,6 +508,15 @@ autowrap_mode = 3
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_y7qvd"]
 size = Vector2(6, 5)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mcr4r"]
+radius = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_nqlgo"]
+radius = 1.0
+height = 2.0
+radial_segments = 32
+rings = 16
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pw200"]
 resource_local_to_scene = true
@@ -1048,6 +1057,16 @@ text_albedo = Color(0, 0, 0, 1)
 [node name="Background" type="MeshInstance3D" parent="Map_elements/IdealCubes"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.5, -2.935)
 mesh = SubResource("PlaneMesh_y7qvd")
+
+[node name="Ball" type="StaticBody3D" parent="Map_elements"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1.5, -13)
+collision_mask = 6
+
+[node name="Collider" type="CollisionShape3D" parent="Map_elements/Ball"]
+shape = SubResource("SphereShape3D_mcr4r")
+
+[node name="Mesh" type="MeshInstance3D" parent="Map_elements/Ball"]
+mesh = SubResource("SphereMesh_nqlgo")
 
 [node name="TEXT" type="Node3D" parent="Map_elements"]
 

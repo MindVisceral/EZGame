@@ -17,7 +17,7 @@ var player: Player
 
 ## HERE: Unnecessary?
 #
-## This node is created automaticaly when a Model is imported,
+## This node is created Automaticaly when a Model is imported,
 ## if the model file has animations attached to it. We just need a reference to it with this.
 @export var AnimPlayer: AnimationPlayer
 
@@ -29,8 +29,8 @@ var player: Player
 @export_group("Weapon parameters")
 
 ## Firing mode - whether the primary action button can be held or not.
-## Setting this to Single-shot forces the Player to click between each shot,
-## and setting this to Automatic allows the Player to hold the firing button.
+## Setting this to "Single-shot" forces the Player to click between each shot,
+## and setting this to "Automatic" allows the Player to hold the firing button.
 @export_enum("Single-shot", "Automatic") var firing_mode: int = 0
 
 ## Time the weapon waits before the next individual shot can be fired, measured in seconds.
@@ -41,7 +41,7 @@ var player: Player
 @export_range(0, 20, 0.25) var default_damage: float = 1
 
 ## The maximum distance (in meters) the bullets may travel away from their starting point
-## (Used both for Hitscans and Projectiles, but Projectiles must be destroyed manually)
+## (Used both for Hitscans and Projectiles, but Projectiles must be freed manually)
 @export var max_distance: float = 10000
 
 ## Layer on which the bullet is; should be the Hitbox layer
@@ -51,7 +51,8 @@ var player: Player
 @export_flags_3d_physics var bullet_collision_mask
 
 
-## Whether or not the primary fire button is held down. Used for Automatic firing_mode weapons.
+## Whether or not the primary fire button is held down. Used for "Automatic" firing_mode weapons.
+## Check _physics_process() for usage.
 var primary_fire_is_held: bool = false
 
 
@@ -65,24 +66,31 @@ func _ready() -> void:
 
 ## This code is ran only when a corresponding Event is found
 func input(event: InputEvent) -> void:
+	## primary_action input check
 	if Input.is_action_just_pressed("primary_action"):
-		## Primary fire button is considered to be held down, unless it's released.
+		## Primary fire button is considered to be held down now.
+		## NOTE: This is only used for "Automatic" firing_mode weapons
 		primary_fire_is_held = true
-		## If the weapon is ready to fire...
-		if ShotCooldownTimer.is_stopped():
-			primary_action()
-			ShotCooldownTimer.start()
+		
+		## This is a check for "Single-shot" firing_mode weapons
+		if firing_mode == 0:
+			## If the weapon is ready to fire...
+			if ShotCooldownTimer.is_stopped():
+				primary_action()
+				ShotCooldownTimer.start()
 	
 	## Primary fire button has been released.
+	## NOTE: This is only used for "Automatic" firing_mode weapons
 	if Input.is_action_just_released("primary_action"):
 		primary_fire_is_held = false
 	
+	## secondary_action input check
 	if Input.is_action_just_pressed("secondary_action"):
 		secondary_action()
 
-## Only used for Autmoatic firing_mode weapons
+## Only used for "Automatic" firing_mode weapons
 func _physics_process(delta: float) -> void:
-	## Having the firing_mode set to Automatic requires this code to run in _physics_process()
+	## Having the firing_mode set to "Automatic" requires this code to run in _physics_process()
 	if firing_mode == 1:
 			## If the weapon is ready to fire...
 			if ShotCooldownTimer.is_stopped():
@@ -90,10 +98,6 @@ func _physics_process(delta: float) -> void:
 				if primary_fire_is_held == true:
 					primary_action()
 					ShotCooldownTimer.start()
-
-
-
-
 
 
 ## Called by the WeaponManager when this weapon is meant to be wielded by the Player
@@ -105,10 +109,10 @@ func put_weapon_away() -> void:
 	self.visible = false
 
 
-## Called by the WeaponManager when the primary_action button is pressed
+## Called when the primary_action button is pressed
 func primary_action() -> void:
 	pass
 #
-## Called by the WeaponManager when the secondary_action button is pressed
+## Called when the secondary_action button is pressed
 func secondary_action() -> void:
 	pass

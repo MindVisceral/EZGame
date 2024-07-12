@@ -18,20 +18,19 @@ class_name FirearmsPistols
 
 ## NOTE: The following functions are repeated from the FirearmBase and FirearmHitscan classes!
 
-#func input(event: InputEvent) -> void:
-	#super.input(event)
-
-## Called by the WeaponManager when this weapon is meant to be wielded/put away by the Player
+## Called by the WeaponManager when this weapon is meant to be wielded by the Player
 func wield_weapon() -> void:
 	super.wield_weapon()
 #
+## Called by the WeaponManager when this weapon is meant to be put away by the Player
 func put_weapon_away() -> void:
 	super.put_weapon_away()
 
 
-## Called by the WeaponManager when the primary_action or the secondary_action buttons are pressed
+## Called when the primary_action button is pressed
 func primary_action() -> void:
 	super.primary_action()
 #
+## Called when the secondary_action button is pressed
 func secondary_action() -> void:
 	super.secondary_action()
