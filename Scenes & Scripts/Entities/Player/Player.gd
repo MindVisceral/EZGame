@@ -29,16 +29,15 @@ extends CharacterBody3D
 ## Player Gravity Multiplier
 ## The higher the number, the faster the Player will fall to the ground and
 ## the shorter the jump will be.
-@export var gravity_multiplier: float = 0.2
+@export var gravity_multiplier: float = 1.0
 
-## How fast the Player accelerates when falling down
-## The bigger the number, the faster the fall
-## NOTE: This acceleration should only be visible when falling for a long time. Keep this # low
-@export var air_time_multiplier: float = 0.05
+## This number is added to the Player's falling speed every second
+## The bigger this number, the faster the fall (but it is limited by falling_speed_limit!)
+## NOTE: This acceleration should be barely noticable. Keep it below 0.1 or so. 0.02 is best
+@export var air_time_multiplier: float = 0.02
 
 ## The maximum speed the Player may reach when falling; In practise, limits air_time
-## Should be about the same as stomp_strength
-@export var falling_speed_limit: float = 15.0
+@export var falling_speed_limit: float = 2.0
 
 ## Player base speed
 ## All states use this base variable, instead modify the state's multiplier
@@ -72,7 +71,7 @@ extends CharacterBody3D
 @export_group("Jump")
 
 ## Jump impulse height in units. Applied once on enter()
-@export var jump_height: float = 14.0
+@export var jump_height: float = 17.5
 
 
 @export_group("Stomp")
@@ -355,10 +354,12 @@ func is_moving_at_wall(process_input: bool = true, dot_product_value: float = 0.
 		## Now we calculate the dot product between Player velocity and the wall's normal
 		var dot_product: float = temp_velocity.dot(wall_normal_vector2)
 		
+		print("DOT: ", dot_product)
 		
 		## If the dot_product is over the arbitrary value of dot_product_value (0.11 by default),
 		## we consider the Player to be rubbing against the wall. We return true.
-		if abs(dot_product) >= dot_product_value:
+		## NOTE: The dot_product is negative when the Player is up against a wall, hence the "-"
+		if dot_product <= -dot_product_value:
 			return true
 	## Otherwise, (in both cases,) we return false.
 	return false

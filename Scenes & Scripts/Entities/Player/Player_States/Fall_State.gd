@@ -63,6 +63,8 @@ func input(event: InputEvent) -> BasePlayerState:
 	
 	return null
 
+
+
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
 func physics_process(delta) -> BasePlayerState:
 	
@@ -101,11 +103,10 @@ func physics_process(delta) -> BasePlayerState:
 	
 	## Apply gravity (which is the Globals' gravity * multiplier)
 	## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
-	player.velocity.y -= player.gravity * BulletTime.time_scale * delta \
-						+ (player.gravity * player.air_time)
+	player.velocity.y -= (player.gravity * BulletTime.time_scale * delta) + (player.air_time)
 	## Increase air_time, thus increasing gravity until the ground is reached.
 	player.air_time += delta * player.air_time_multiplier
-	## We limit this value to falling_speed_limit, so the falling speed doesn't increase to infinity
+	## We limit this value up to falling_speed_limit, so the falling speed doesn't go to infinity
 	player.air_time = minf(player.air_time, player.falling_speed_limit)
 	
 	
