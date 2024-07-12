@@ -16,7 +16,7 @@ func draw_effect(pos: Vector3, normal: Vector3) -> void:
 	## Put the effect at the right global_position where the bullet hit
 	self.global_position = pos
 	
-	## Make the Particles explode in the same direction as the hit object's Normals
+	## Make the Particles emit in the same direction as the hit object's Normals
 	Particles.process_material.direction = normal
 
 ## This Node is queue_free()-d when the Particles are done
