@@ -2,12 +2,12 @@ extends BasePlayerState
 
 @export_group("Movement")
 #
-## Time for the character to reach full speed
-@export var acceleration: float = 8
-## Time for the character to stop walking
-@export var deceleration: float = 10
-## Speed to be multiplied when active the ability
-@export var speed_multiplier: float = 1
+## Time for the Player to reach full speed
+@export var acceleration: float = 8.0
+## Time for the Player to stop in place
+@export var deceleration: float = 10.0
+## Speed while in this state
+@export var speed_multiplier: float = 1.0
 
 
 @export_group("States")

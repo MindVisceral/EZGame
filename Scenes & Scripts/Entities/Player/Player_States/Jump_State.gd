@@ -2,18 +2,12 @@ extends BasePlayerState
 
 @export_group("Movement")
 #
-## Time for the character to reach full speed
-@export var acceleration: float = 8
-## Time for the character to stop in place
-@export var deceleration: float = 10
-## If this is true, speed_multiplier from the previous state will be use instead of the default one
-@export var use_previous_state_speed_multiplier: bool = true
-## Speed to be multiplied when active the ability
-@export var default_speed_multiplier: float = 1.2
-
-## Current speed multiplier, carried over from the previous state
-## If it doesn't exist in the previous state, default_speed_multiplier will be used
-var speed_multiplier: float ## Not needed, no other state has a higher multipier anyway
+## Time for the Player to reach full speed
+@export var acceleration: float = 8.0
+## Time for the Player to stop in place
+@export var deceleration: float = 8.0
+## Speed while in this state
+@export var speed_multiplier: float = 1.2
 
 
 @export_group("States")
@@ -36,9 +30,6 @@ func enter() -> void:
 	player.in_air = true
 	## The Player may want to do wall-related movement while in the air
 	player.WallDetection.enabled = true
-	
-	## Check how fast we should go
-	speed_multiplier_check()
 	
 	## Start the timer
 	ground_timer.start()
@@ -133,6 +124,7 @@ func physics_process(delta) -> BasePlayerState:
 	player.velocity.y -= player.gravity * BulletTime.time_scale * delta \
 						+ (player.gravity * player.air_time)
 	
+	
 	## air_time multiplier is only applied when the Player is falling from the jump's peak
 	if player.velocity.y <= 0:
 		## Increase air_time, thus increasing gravity until the ground is reached.
@@ -190,21 +182,3 @@ func apply_jump_impulse() -> float:
 	player.stomp_vertical_distance = 0.0
 	
 	return returned_jump_height
-
-
-
-
-
-## HERE - unnecessary, there is no state that has a higher multiplier than Jump
-## Check if this state should use the previous state's speed_multiplier
-func speed_multiplier_check() -> void:
-	## Set the multiplier to the default...
-	self.speed_multiplier = self.default_speed_multiplier
-	
-	## If we want the state_multiplier to change...
-	if use_previous_state_speed_multiplier == true:
-		## If the previous state has a speed_multiplier variable...
-		if previous_state.get("speed_multiplier") != null:
-			## If that variable is higher than the default...
-			if previous_state.speed_multiplier >= self.default_speed_multiplier:
-				self.speed_multiplier = previous_state.speed_multiplier

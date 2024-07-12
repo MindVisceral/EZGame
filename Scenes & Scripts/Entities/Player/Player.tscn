@@ -77,7 +77,6 @@ fall_state = NodePath("../Fall")
 
 [node name="Crouch" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "fall_state")]
 script = ExtResource("6_ib15b")
-speed_multiplier = 0.6
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 jump_state = NodePath("../Jump")
@@ -130,7 +129,6 @@ walljump_state = NodePath("../WallJump")
 
 [node name="WallJump" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
 script = ExtResource("10_gc6l4")
-speed_multiplier = 1.3
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 jump_state = NodePath("../Jump")
@@ -299,5 +297,13 @@ bullet_start_pos_node = NodePath("../../PlayerCamera")
 [node name="GPUParticlesAttractorVectorField3D" type="GPUParticlesAttractorVectorField3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00488281, 0.808258, 0)
 size = Vector3(1.6, 2.4, 1.6)
+
+[node name="PlayerAudio" type="Node" parent="."]
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="PlayerAudio"]
+max_polyphony = 2
+bus = &"Sounds"
+
+[node name="WallJumpSound" type="AudioStreamPlayer" parent="PlayerAudio"]
 
 [editable path="Head/BobbingNode/PlayerCamera"]

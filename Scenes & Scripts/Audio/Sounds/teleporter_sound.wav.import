@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b5wbw8g0k1pog"
-path="res://.godot/imported/teleporter_sound.wav-42fe497a7ea3d327f116d4cde3c379b8.sample"
+path="res://.godot/imported/teleporter_sound.wav-2624478be10d60251d9fbaf0573f0797.sample"
 
 [deps]
 
-source_file="res://Scenes & Scripts/Sounds/teleporter_sound.wav"
-dest_files=["res://.godot/imported/teleporter_sound.wav-42fe497a7ea3d327f116d4cde3c379b8.sample"]
+source_file="res://Scenes & Scripts/Audio/Sounds/teleporter_sound.wav"
+dest_files=["res://.godot/imported/teleporter_sound.wav-2624478be10d60251d9fbaf0573f0797.sample"]
 
 [params]
 
