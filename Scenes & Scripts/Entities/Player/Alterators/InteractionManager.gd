@@ -17,7 +17,7 @@ var camera: Camera3D
 ## All the Interactable nodes within Player's reach (reach is set in each Interactable separately)
 var interactables: Array[Interactable] = []
 
-var currently_focused_on: Interactable
+var closest_interactable: Interactable = null
 
 ###-------------------------------------------------------------------------###
 ##### Exported variables
@@ -49,69 +49,40 @@ func init(player: Player) -> void:
 ##### Executing functions
 ###-------------------------------------------------------------------------###
 
-func _unhandled_input(event: InputEvent) -> void:
-	## When the Player wants to interact with something...
-	if Input.is_action_just_pressed("input_interact"):
-		## Fire the InteractableCast, check if it collided with any Interactables
-		player.InteractableCast.force_shapecast_update()
-		if player.InteractableCast.is_colliding():
-			## Now we will find the closest Interactable among the Interactables that
-			## the InteractableCast managed to find
-			
-			## We make a new Array that holds all the Ineractables we will be considering
-			var found_interactables: Array
-			for found_interactable in player.InteractableCast.collision_result:
-				found_interactables.append(found_interactable.collider)
-			
-			## And we pass that Array to the find_closest_interactable() function, which
-			## will find the closest Interactable!
-			var closest_interactable = find_closest_interactable(found_interactables)
-			
-			## Now we simply interact with that closest Interactable
-			closest_interactable.interact.emit()
-
-
-
 func _process(delta: float) -> void:
-	## Maybe this belongs in _physics_process?
-	## A reimplementation of ray_picking; used in object highlighting
-	var ray_length: float = 1000.0
+	## Reset the closest_interactable, we find a new one every single frame, unfortunately
+	if closest_interactable != null:
+		closest_interactable.unfocused.emit()
+		closest_interactable = null
 	
-	## We get the mouse position on the screen, which should be right in the middle
-	## thanks to MOUSE_MODE_CAPTURED (set in the Player script)
-	var mouse_pos = get_viewport().get_mouse_position()
-	## We calcualate our ray's start and end postions
-	## by projecting from the Camera to some point in the distance
-	var from = camera.project_ray_origin(mouse_pos)
-	var to = from + camera.project_ray_normal(mouse_pos) * ray_length
-	
-	## Get space_state, cast a Ray
-	## MEEELT THE ICEEE, REHEEAAT THE DEEADDDD, TERRAFORM THE PLANET, COMPRESS THE LUUNGSS
-	var spaceState = player.get_world_3d().direct_space_state
-	var physicsRaycastQuery = PhysicsRayQueryParameters3D.create(from, to, ray_collision_mask)
-	## We only check for Interactables, which are areas
-	physicsRaycastQuery.collide_with_areas = true
-	physicsRaycastQuery.collide_with_bodies = false
-	physicsRaycastQuery.hit_from_inside = true
-	## We get the result
-	var result = spaceState.intersect_ray(physicsRaycastQuery)
-	
-	## First, we unfocus from the current Interatable, if one was set to be focused previously.
-	if currently_focused_on:
-		currently_focused_on.unfocused.emit()
-	
-	## If the result isn't null...
-	if result:
-		## If the collider is an Interactable node...
-		if result.collider is Interactable:
-			## We register this Interactable and make it emit the focused signal
-			currently_focused_on = result.collider
-			currently_focused_on.focused.emit()
+	## Fire the InteractableCast, check if it collided with any Interactables
+	if player.InteractableCast.is_colliding():
+		## Now we will find the closest Interactable among the Interactables that
+		## the InteractableCast managed to find
+		
+		
+		var collision_point: Vector3 = player.InteractableCast.get_collision_point(0)
+		
+		## We make a new Array that holds all the Ineractables we will be considering
+		var found_interactables: Array
+		for found_interactable in player.InteractableCast.collision_result:
+			found_interactables.append(found_interactable.collider)
+		
+		## And we pass that Array to the find_closest_interactable() function, which
+		## will find the closest Interactable!
+		closest_interactable = find_closest_interactable(found_interactables, collision_point)
+		
+		closest_interactable.focused.emit()
+		## When the Player wants to interact with something...
+		if Input.is_action_just_pressed("input_interact"):
+				## We simply interact with that closest Interactable
+				closest_interactable.interact.emit()
 
 
 ## Finds the Interactable which is the nearest to the Player
 ## (but only if it has been detected by InteractableCast)
-func find_closest_interactable(found_interactables_array: Array) -> Interactable:
+func find_closest_interactable(found_interactables_array: Array, \
+								collision_point: Vector3) -> Interactable:
 	
 	## INF on our first check in the loop, because there is no bigger distance than that
 	var distance_to_interactable = INF
@@ -122,8 +93,9 @@ func find_closest_interactable(found_interactables_array: Array) -> Interactable
 	## We loop through all the Interactables that the InteractableCast could find
 	## to find the Interactable that is the closest to the Player
 	for item in found_interactables_array:
-		## We get this Interactable's distance to the Player...
-		var new_distance = item.global_position.distance_to(player.global_position)
+		## We get this Interactable's distance to the InteractableCast's
+		## collision point with an Interactable.
+		var new_distance = item.global_position.distance_to(collision_point)
 		## ...and check if this distance is smaller than the last distance...
 		if new_distance < distance_to_interactable:
 			## If so, we update these two variables

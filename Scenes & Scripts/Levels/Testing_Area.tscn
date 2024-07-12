@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bg2u2fljqhcdk"]
+[gd_scene load_steps=27 format=3 uid="uid://bg2u2fljqhcdk"]
 
 [ext_resource type="Texture2D" uid="uid://dmjhoaedtxskg" path="res://Decal_tex.png" id="1"]
 [ext_resource type="Material" uid="uid://o0b4tbh6yup4" path="res://addons/character-controller/example/main/materials/rock.tres" id="2_2haa3"]
@@ -125,27 +125,6 @@ albedo_color = Color(0.513726, 0, 0, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_a6664"]
 size = Vector3(4, 5, 4)
 
-[sub_resource type="GDScript" id="GDScript_782ye"]
-resource_name = "test1"
-script/source = "extends Area3D
-
-
-
-func _on_mouse_entered() -> void:
-	print(\"entered\")
-
-
-func _on_mouse_exited() -> void:
-	print(\"exited\")
-
-
-func _on_input_event(camera: Node, event: InputEvent, position: Vector3, normal: Vector3, shape_idx: int) -> void:
-	print(\"event: \", event)
-"
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_6nk0d"]
-size = Vector3(5, 5, 5)
-
 [node name="Testing_Area" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -212,6 +191,10 @@ material = SubResource("StandardMaterial3D_npikr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3097, 1.81132, -1.61595)
 material = SubResource("StandardMaterial3D_b3adf")
 
+[node name="lamp_test3" parent="Map_elements" instance=ExtResource("4_nrllp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9658, 1.81132, -1.61595)
+material = SubResource("StandardMaterial3D_b3adf")
+
 [node name="Interactable" parent="Map_elements" instance=ExtResource("3_acpno")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.19207, 2.11573, 0)
 disable_mode = 2
@@ -219,17 +202,8 @@ disable_mode = 2
 [node name="CollisionShape3D" parent="Map_elements/Interactable" index="0"]
 shape = SubResource("BoxShape3D_a6664")
 
-[node name="TestArea3D" type="Area3D" parent="Map_elements"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99016, 1.96299, 11.1742)
-collision_layer = 32
-collision_mask = 0
-script = SubResource("GDScript_782ye")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map_elements/TestArea3D"]
-shape = SubResource("BoxShape3D_6nk0d")
-
 [node name="Player" parent="." instance=ExtResource("6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.83589, 0.0052982, 19.4816)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.83589, 0.0052982, 8.77601)
 
 [node name="Yellow Puppet" parent="." instance=ExtResource("4_23xl4")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
@@ -237,9 +211,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 [connection signal="focused" from="Map_elements/Fog/Interactable" to="Map_elements/Fog" method="_on_interactable_focused"]
 [connection signal="interact" from="Map_elements/Fog/Interactable" to="Map_elements/Fog" method="_on_interactable_interact"]
 [connection signal="unfocused" from="Map_elements/Fog/Interactable" to="Map_elements/Fog" method="_on_interactable_unfocused"]
-[connection signal="input_event" from="Map_elements/TestArea3D" to="Map_elements/TestArea3D" method="_on_input_event"]
-[connection signal="mouse_entered" from="Map_elements/TestArea3D" to="Map_elements/TestArea3D" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Map_elements/TestArea3D" to="Map_elements/TestArea3D" method="_on_mouse_exited"]
 
 [editable path="Map_elements/Fog/Interactable"]
 [editable path="Map_elements/Interactable"]
