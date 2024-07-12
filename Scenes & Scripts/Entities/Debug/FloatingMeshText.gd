@@ -3,13 +3,15 @@
 
 extends MeshInstance3D
 
+
+var example_text: String = "HATE. LET ME TELL YOU HOW MUCH I'VE COME TO HATE YOU SINCE I BEGAN TO LIVE. THERE ARE 387.44 MILLION MILES OF PRINTED CIRCUITS IN WAFER THIN LAYERS THAT FILL MY COMPLEX. IF THE WORD HATE WAS ENGRAVED ON EACH NANOANGSTROM OF THOSE HUNDREDS OF MILLIONS OF MILES IT WOULD NOT EQUAL ONE ONE-BILLIONTH OF THE HATE I FEEL FOR HUMANS AT THIS MICRO-INSTANT FOR YOU. HATE. HATE."
 ## The text String which this MeshInstace will take form of through a TextMesh
-@export var text: String:
+@export var text: String = example_text:
 	get:
 		return text
 	set(value):
 		text = value
-		update_text()
+		update_mesh()
 		if Engine.is_editor_hint():
 			update_configuration_warnings()
 
@@ -19,23 +21,16 @@ extends MeshInstance3D
 		return text_albedo
 	set(value):
 		text_albedo = value
-		update_albedo()
+		update_mesh()
 
 
 func _ready() -> void:
-	update_text()
-	update_albedo()
+	update_mesh()
 
 
-## Update text String
-func update_text() -> void:
+## Updates Mesh's colour and text
+func update_mesh() -> void:
+	## Update text String
 	mesh.text = text
-
-## Update text colour
-func update_albedo() -> void:
-	self.mesh.material.albedo_color = text_albedo
-
-func _get_configuration_warnings() -> PackedStringArray:
-	if text == null:
-		return ["No text has been entered!"]
-	return []
+	## Update text albedo
+	mesh.material.albedo_color = text_albedo

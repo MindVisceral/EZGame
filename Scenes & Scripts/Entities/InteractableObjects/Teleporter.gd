@@ -17,7 +17,10 @@ extends StaticBody3D
 		return effects_colour
 	set(value):
 		effects_colour = value
-		update_colours()
+		## We only change the colours like this in Editor.
+		## The actual colour change for in-game use happens in _ready()
+		if Engine.is_editor_hint():
+			update_colours()
 
 @onready var particles: GPUParticles3D = $Particles
 @onready var light: OmniLight3D = $Particles/Light
@@ -50,6 +53,7 @@ func _teleport_area_entered(thing: Node3D) -> void:
 
 ## Change the Teleporter's effects' colors
 func update_colours() -> void:
+	## Now we change the colour
 	particles.process_material.color = effects_colour
 	light.light_color = effects_colour
 
