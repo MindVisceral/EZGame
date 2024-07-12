@@ -1,10 +1,101 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv5fcfhevw1fe"]
+[gd_scene load_steps=7 format=3 uid="uid://dv5fcfhevw1fe"]
 
 [ext_resource type="Script" path="res://Resources/Entities/Weapons/Firearms/Firearm_Base.gd" id="1_6na40"]
 [ext_resource type="PackedScene" uid="uid://bemovxot15qyc" path="res://Resources/Entities/Weapons/Gun/gun1.glb" id="2_2ksbd"]
 
-[node name="FirearmBase" type="Marker3D"]
+[sub_resource type="Animation" id="Animation_hce73"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.202272, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.173451)]
+}
+
+[sub_resource type="Animation" id="Animation_gk3ao"]
+resource_name = "shoot"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.202272, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.173451), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dwe4j"]
+resource_name = "pull_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.179672, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.508222), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vusey"]
+_data = {
+"RESET": SubResource("Animation_hce73"),
+"pull_up": SubResource("Animation_dwe4j"),
+"shoot": SubResource("Animation_gk3ao")
+}
+
+[node name="FirearmBase" type="Marker3D" node_paths=PackedStringArray("AnimPlayer")]
+transform = Transform3D(0.984995, 0.172583, 0, -0.172583, 0.984995, 0, 0, 0, 1, 0.202272, 0, 0)
+visible = false
 script = ExtResource("1_6na40")
+AnimPlayer = NodePath("AnimationPlayer")
 
 [node name="ModelHolder" type="Node3D" parent="."]
 
@@ -12,5 +103,13 @@ script = ExtResource("1_6na40")
 
 [node name="Trigger_bone" parent="ModelHolder/Model/Armature/Base_bone" index="0"]
 transform = Transform3D(-0.719648, -0.694339, -2.59588e-06, 0.694339, -0.719648, 1.37298e-06, -2.82143e-06, -8.14356e-07, 1, -0.141371, 0.715085, 1.42901e-07)
+
+[node name="AnimationPlayer" parent="ModelHolder/Model" index="1"]
+autoplay = "Shoot"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vusey")
+}
 
 [editable path="ModelHolder/Model"]

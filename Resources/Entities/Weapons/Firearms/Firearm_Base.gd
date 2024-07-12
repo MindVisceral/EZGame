@@ -7,8 +7,8 @@ class_name Firearm
 ###-------------------------------------------------------------------------###
 
 ## This node is created automaticaly when a Model is imported,
-## if that Model had animations made in whatever program it was made in
-@onready var AnimPlayer: AnimationPlayer = $ModelHolder/Model/AnimationPlayer
+## if hte model file has animations attached to it 
+@export var AnimPlayer: AnimationPlayer
 
 
 ###-------------------------------------------------------------------------###
@@ -17,8 +17,19 @@ class_name Firearm
 
 var var1
 
-func _ready() -> void:
-	pass
+## Called by the WeaponManager when this weapon is meant to be wielded/put away by the Player
+func wield_weapon() -> void:
+	self.visible = true
+	AnimPlayer.play("pull_up")
+#
+func put_weapon_away() -> void:
+	self.visible = false
 
-func fire() -> void:
-	AnimPlayer.play("Shoot")
+## Called by the WeaponManager when the primary_action or the secondary_action buttons are pressed
+func primary_action() -> void:
+	print("called LMB")
+	AnimPlayer.play("shoot")
+#
+func secondary_action() -> void:
+	print("called RMB")
+	AnimPlayer.play("shoot")
