@@ -59,34 +59,14 @@ extends CharacterBody3D
 
 @export_group("Height and crouching")
 
-## Default Collider height in units
-@export_range(0.1, 2, 0.1) var default_height: float = 1.6
+## Standing Collider height in Units
+@export_range(0.1, 2, 0.1) var standing_height: float = 1.6
 
-## Default Collider crouch height in units
-@export_range(0.1, 2, 0.1) var crouch_height: float = 0.9
+## Crouching Collider height in Units
+@export_range(0.1, 2, 0.1) var crouch_height: float = 0.8
 
-
-## Default Collider width in units
-@export_range(0.1, 1, 0.05) var default_width: float = 0.45
-
-
-## Head's default height (Y coordinate) in units
-@export_range(0.1, 2, 0.1) var default_head_height: float = 1.4
-
-## Head's default crouch height (Y coordinate) in units
-@export_range(0.1, 2, 0.1) var crouch_head_height: float = 0.7
-
-
-## Feet default height (Y coordinate) in units
-@export_range(0.1, 1, 0.1) var default_feet_height: float = 0.2
-
-## Feet default crouch height (Y coordinate) in units
-@export_range(0.1, 1, 0.1) var crouch_feet_height: float = 0.6
-
-
-## The speed at which the Collider's shape is changed;
-## bigger number == faster Collider change to standing/crouch height
-@export_range(1, 70, 1) var crouch_speed: int = 12
+## Time (in seconds) over which the Collider's shape is changed
+@export_range(0.05, 10, 0.05) var crouch_speed: int = 0.5
 
 
 @export_group("Jump")
@@ -140,7 +120,7 @@ extends CharacterBody3D
 ## Player's children. Check a child's Editor Description to learn what it's used for
 @onready var States: PlayerStateManager = $Scripts/StateManager
 @onready var Weapons: PlayerWeaponManager = $Scripts/WeaponManager
-@onready var HeightAlternator: PlayerHeightAlternator = $Scripts/HeightAlterator
+@onready var HeightAlternator: PlayerHeightAlternator = $Scripts/HeightAlternator
 @onready var HeadBob: PlayerHeadbobHandler = $Scripts/HeadBob
 @onready var WeaponBob: PlayerWeaponbobHandler = $Scripts/WeaponBob
 @onready var InteractionManager: PlayerInteractionManager = $Scripts/InteractionManager
@@ -149,16 +129,16 @@ extends CharacterBody3D
 @onready var CoyoteTimeT: Timer = $Timers/CoyoteTimeTimer
 @onready var StompJumpT: Timer = $Timers/StompJumpTimer
 @onready var Collider: CollisionShape3D = $Collider
-@onready var FeetCollider: CollisionShape3D = $FeetCollider
-@onready var WallDetection: ShapeCast3D = $WallDetectionCast
-@onready var Head: Marker3D = $Head
-@onready var Firearms: Marker3D = $Head/BobbingNode/Firearms
+@onready var FeetCollider: CollisionShape3D = $Collider/FeetCollider
+@onready var WallDetection: ShapeCast3D = $Collider/WallDetectionCast
+@onready var Head: Marker3D = $Collider/Head
+@onready var Firearms: Marker3D = $Collider/Head/BobbingNode/Firearms
 #@onready var Firearms: Marker3D = $Head/Firearms
 #@onready var Firearms: Marker3D = $Firearms
 ## A special ShakeableCamera; this reference is used to make the Camera shake by Player scripts
-@onready var PlayerCamera: ShakeableCamera = $Head/BobbingNode/PlayerCamera
-@onready var InteractableCast: ShapeCast3D = $Head/BobbingNode/InteractableCast
-@onready var TPMarker: Marker3D = $Head/BobbingNode/TPMarker
+@onready var PlayerCamera: ShakeableCamera = $Collider/Head/BobbingNode/PlayerCamera
+@onready var InteractableCast: ShapeCast3D = $Collider/Head/BobbingNode/InteractableCast
+@onready var TPMarker: Marker3D = $Collider/Head/BobbingNode/TPMarker
 
 ## Player stats
 @export_group("Stats")
@@ -211,7 +191,7 @@ var consecutive_walljumps: int = 0
 
 #HERE unneccessary
 ## Stores the current height
-@onready var current_height: float = default_height
+@onready var current_height: float = standing_height
 
 #HERE unneccessary
 ## Character controller horizontal speed.
@@ -243,9 +223,6 @@ func _ready():
 	apply_exported()
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	#Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
-	#Input.warp_mouse(Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"), \
-	#ProjectSettings.get_setting("display/window/size/viewport_width")))
 
 
 func _input(event: InputEvent) -> void:
@@ -298,13 +275,7 @@ func apply_exported() -> void:
 		PlayerCamera.position = TPMarker.position
 	
 	## Instantly alter Collider dimensions
-	Collider.shape.height = default_height
-	Collider.shape.radius = default_width
-	
-	## Instantly alter Head (and thus Camera) height
-	Head.position.y = default_head_height
-	
-	clampf(WallDetection.shape.radius, default_width + 0.05, INF)
+	Collider.shape.height = standing_height
 
 ###
 func process_view_input(delta):

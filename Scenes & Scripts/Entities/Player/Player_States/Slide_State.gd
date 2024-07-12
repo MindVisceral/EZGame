@@ -25,6 +25,7 @@ func enter() -> void:
 	#player.HeightAlternator.alter_height(player.crouch_height, player.crouch_feet_height, \
 		#player.crouch_FloorCast_height, player.crouch_head_height)
 	
+	player.HeightAlternator.alter_collider_height(player.crouch_height)
 	
 	calculate_slide_direction()
 
@@ -34,6 +35,8 @@ func exit() -> void:
 	### Alter the total height to default height - defined in the Player script
 	#player.HeightAlternator.alter_height(player.default_height, player.default_feet_height, \
 		#player.default_FloorCast_height, player.default_head_height)
+	
+	player.HeightAlternator.alter_collider_height(player.standing_height)
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:

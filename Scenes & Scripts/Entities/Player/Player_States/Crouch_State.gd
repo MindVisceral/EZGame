@@ -22,16 +22,16 @@ func enter() -> void:
 	
 	player.consecutive_walljumps = 0
 	
-	## Alter the total height to crouch height - defined in the Player script
-	player.HeightAlternator.alter_height(player.crouch_height, player.crouch_feet_height, \
-		player.crouch_FloorCast_height, player.crouch_head_height)
+	### Alter the total height to crouch height - defined in the Player script
+	#player.HeightAlternator.alter_height(player.crouch_height, player.crouch_feet_height, \
+		#player.crouch_FloorCast_height, player.crouch_head_height)
 
 func exit() -> void:
 	super.exit()
 	
-	## Alter the total height to default height - defined in the Player script
-	player.HeightAlternator.alter_height(player.default_height, player.default_feet_height, \
-		player.default_FloorCast_height, player.default_head_height)
+	### Alter the total height to default height - defined in the Player script
+	#player.HeightAlternator.alter_height(player.default_height, player.default_feet_height, \
+		#player.default_FloorCast_height, player.default_head_height)
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:
