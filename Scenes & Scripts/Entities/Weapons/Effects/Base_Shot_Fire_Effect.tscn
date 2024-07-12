@@ -1,16 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://cta8h3tmvb3b0"]
+[gd_scene load_steps=10 format=3 uid="uid://cta8h3tmvb3b0"]
 
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Shot_Fire_Effect.gd" id="1_fmi5n"]
 [ext_resource type="Texture2D" uid="uid://cq8b8g5gqgse7" path="res://Scenes & Scripts/Entities/Weapons/Effects/smoke.png" id="2_ca05p"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yiod0"]
-transparency = 1
-blend_mode = 1
-cull_mode = 2
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_ca05p")
-texture_filter = 0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wmfpc"]
 atlas = ExtResource("2_ca05p")
@@ -107,9 +98,8 @@ _data = {
 script = ExtResource("1_fmi5n")
 
 [node name="FireSprite" type="AnimatedSprite3D" parent="."]
-material_override = SubResource("StandardMaterial3D_yiod0")
 cast_shadow = 0
-modulate = Color(1, 0.411765, 0.254902, 1)
+modulate = Color(0.971516, 0.404465, 0.286756, 0.964706)
 axis = 0
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_jjqw8")

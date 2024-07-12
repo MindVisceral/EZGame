@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://dv5fcfhevw1fe"]
+[gd_scene load_steps=4 format=3 uid="uid://dv5fcfhevw1fe"]
 
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Firearm_Base.gd" id="1_10xiy"]
+[ext_resource type="AudioStream" uid="uid://b5wbw8g0k1pog" path="res://Scenes & Scripts/Audio/Sounds/teleporter_sound.wav" id="4_3dsx7"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_t0uga"]
+random_pitch = 1.5
+random_volume_offset_db = 3.0
+streams_count = 1
+stream_0/stream = ExtResource("4_3dsx7")
+stream_0/weight = 1.0
 
 [node name="FirearmBase" type="Marker3D" node_paths=PackedStringArray("ShotCooldownTimer")]
 editor_description = "This is the Base Firearm Node! ALL the other weapons and weapon classes depend on it!
@@ -15,6 +23,15 @@ ShotCooldownTimer = NodePath("ShotCooldownTimer")
 bullet_collision_mask = 17
 
 [node name="ModelHolder" type="Node3D" parent="."]
+
+[node name="AudioPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_t0uga")
+unit_size = 30.0
+max_db = 5.0
+max_distance = 50.0
+max_polyphony = 4
+panning_strength = 0.1
+bus = &"Sounds"
 
 [node name="ShotCooldownTimer" type="Timer" parent="."]
 editor_description = "This Timer forces the weapon to wait a set amount of time before the next shot can be fired.

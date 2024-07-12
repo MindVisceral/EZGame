@@ -101,7 +101,7 @@ func cast_bullet_ray() -> void:
 	var shot_effect = shot_effect_emitter.instantiate()
 	get_tree().get_root().add_child(shot_effect)
 	## Set the shot_effect's transform to be the same as the bullet_start_point's
-	shot_effect.draw_effect(bullet_start_point.global_transform, Color.DIM_GRAY)
+	shot_effect.draw_effect(bullet_start_point.global_transform, Color.LIGHT_GRAY)
 	
 	## Instantiate a Fire Shot Effect coming out of the gun's barrel,
 	## This is completely independent from the bullet stuff.

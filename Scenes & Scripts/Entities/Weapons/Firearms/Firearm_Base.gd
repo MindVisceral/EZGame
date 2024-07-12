@@ -15,6 +15,9 @@ var player: Player
 ## Attempting to fire the Firearm before the last shot is done (and this Timer is up) does nothing.
 @export var ShotCooldownTimer: Timer
 
+## Reference to the Audio Player
+@onready var AudioPlayer: AudioStreamPlayer3D = $AudioPlayer
+
 ## HERE: Unnecessary?
 #
 ## This node is created Automaticaly when a Model is imported,
@@ -113,7 +116,8 @@ func put_weapon_away() -> void:
 
 ## Called when the primary_action button is pressed
 func primary_action() -> void:
-	pass
+	## Play a random firing sound
+	AudioPlayer.play()
 #
 ## Called when the secondary_action button is pressed
 func secondary_action() -> void:
