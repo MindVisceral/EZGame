@@ -29,7 +29,7 @@ func input(event: InputEvent) -> BasePlayerState:
 	if Input.is_action_just_pressed("input_crouch"):
 		return crouch_state
 	## Jump
-	elif Input.is_action_pressed("input_jump"):
+	elif Input.is_action_just_pressed("input_jump"):
 		return jump_state
 	
 	return null
