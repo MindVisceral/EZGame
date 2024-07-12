@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://lhlklylca50m"]
+
+[ext_resource type="Script" path="res://Resources/NewPlayer/hands1.gd" id="6"]
+
+[sub_resource type="CapsuleShape3D" id="15"]
+radius = 0.465
+height = 1.8
+
+[sub_resource type="BoxShape3D" id="16"]
+size = Vector3(0.4, 0.01, 0.4)
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+script = ExtResource("6")
+MAX_SPEED = null
+JUMP_SPEED = null
+ACCEL = null
+DEACCEL = null
+MAX_SLOPE_ANGLE = null
+MAX_SPRINT_SPEED = null
+SPRINT_ACCEL = null
+GRAVITY = null
+MOUSE_SENSITIVITY = null
+mouse_scroll_value = null
+MAX_HEALTH = null
+health = null
+
+[node name="Body_CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.912102, 0)
+shape = SubResource("15")
+
+[node name="Feet_CollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("16")
+
+[node name="Rotation_Helper" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.00437, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Rotation_Helper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.091)
+current = true
+fov = 86.0

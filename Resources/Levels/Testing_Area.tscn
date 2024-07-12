@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://bg2u2fljqhcdk"]
+
+[ext_resource type="Texture2D" uid="uid://dmjhoaedtxskg" path="res://Decal_tex.png" id="1"]
+[ext_resource type="Material" uid="uid://o0b4tbh6yup4" path="res://addons/character-controller/example/main/materials/rock.tres" id="2_2haa3"]
+[ext_resource type="PackedScene" uid="uid://lhlklylca50m" path="res://Resources/Entities/Player/Player.tscn" id="6"]
+
+[sub_resource type="BoxShape3D" id="12"]
+size = Vector3(200, 0.1, 200)
+
+[sub_resource type="StandardMaterial3D" id="14"]
+albedo_texture = ExtResource("1")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="10"]
+material = SubResource("14")
+size = Vector2(200, 200)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wnjms"]
+data = PackedVector3Array(-4, 2, 2, 4, 2, 2, -4, -2, 2, 4, 2, 2, 4, -2, 2, -4, -2, 2, 4, 2, -2, -4, 2, -2, 4, -2, -2, -4, 2, -2, -4, -2, -2, 4, -2, -2, 4, 2, 2, 4, 2, -2, 4, -2, 2, 4, 2, -2, 4, -2, -2, 4, -2, 2, -4, 2, -2, -4, 2, 2, -4, -2, -2, -4, 2, 2, -4, -2, 2, -4, -2, -2, 4, 2, 2, -4, 2, 2, 4, 2, -2, -4, 2, 2, -4, 2, -2, 4, 2, -2, -4, -2, 2, 4, -2, 2, -4, -2, -2, 4, -2, 2, 4, -2, -2, -4, -2, -2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bepso"]
+size = Vector3(8, 4, 4)
+
+[sub_resource type="Sky" id="15"]
+
+[sub_resource type="Environment" id="16"]
+background_mode = 1
+sky = SubResource("15")
+sky_custom_fov = 3.8
+sky_rotation = Vector3(0.685914, 0, 0)
+fog_light_color = Color(0.12549, 0.141176, 0.164706, 1)
+
+[node name="Testing_Area" type="Node3D"]
+
+[node name="Map_elements" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Map_elements"]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map_elements/Floor"]
+shape = SubResource("12")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map_elements/Floor"]
+mesh = SubResource("10")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map_elements"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.71622, -4)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map_elements/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_wnjms")
+
+[node name="Cube4" type="MeshInstance3D" parent="Map_elements/StaticBody3D"]
+material_override = ExtResource("2_2haa3")
+mesh = SubResource("BoxMesh_bepso")
+skeleton = NodePath("../..")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("16")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.735019, -0.663464, -0.139866, 0.476284, 0.358383, 0.802941, -0.482597, -0.656793, 0.579416, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6061, 5.39, -4.05668)
