@@ -20,9 +20,13 @@ extends BasePlayerState
 
 func enter() -> void:
 	super.enter()
+	
+	player.in_air = true
 
 func exit() -> void:
 	super.exit()
+	
+	player.in_air = false
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:

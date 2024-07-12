@@ -104,11 +104,14 @@ nodes, for ex. the Crouch State
 Initially a part of the Crouch state; soon made a separate script for ease of use and decluttering"
 script = ExtResource("8_rgs2k")
 
-[node name="HeadBop" type="Node" parent="Scripts" node_paths=PackedStringArray("bobbing_node")]
+[node name="HeadBob" type="Node" parent="Scripts" node_paths=PackedStringArray("bobbing_node")]
 editor_description = "Makes the chosen bopped_node - the Head or the Camera:
 -bop right and left as the Player walks
+-tilt to the side when moving  left or right
+-tilt down or up when moving forwards or backwards
 -tilt up when jumping
 -tilt down while falling
+
 
 Done for better immersion and responsivity"
 script = ExtResource("10_6kxr3")

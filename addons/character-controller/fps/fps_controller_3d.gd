@@ -66,7 +66,7 @@ class_name FPSController3D
 @onready var camera: Camera3D = get_node(NodePath("Head/Camera"))
 
 ## HeadBob reference
-@onready var head_bob: HeadBob = get_node(NodePath("Head/Head Bob"))
+@onready var head_bob = get_node(NodePath("Head/Head Bob"))
 
 ## Stores normal fov from camera fov
 @onready var normal_fov: float = camera.fov

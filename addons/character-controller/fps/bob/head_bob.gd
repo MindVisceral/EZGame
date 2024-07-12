@@ -1,5 +1,5 @@
 extends Node
-class_name HeadBob
+#class_name HeadBob
 
 ## HeadBob Effect for [FPSController3D]
 

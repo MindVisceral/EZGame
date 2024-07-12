@@ -8,15 +8,19 @@ extends BasePlayerState
 
 
 func enter() -> void:
+	super.enter()
+	
+	player.in_air = true
+	
 	## Reset velocity, otherwise the momentum would persist
 	player.velocity = Vector3.ZERO
 	## Apply stomp impulse
 	player.velocity.y -= player.stomp_strength
-	
-	super.enter()
 
 func exit() -> void:
 	super.exit()
+	
+	player.in_air = false
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:

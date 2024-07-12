@@ -30,14 +30,13 @@ var speed_multiplier: float
 func enter() -> void:
 	super.enter()
 	
+	player.in_air = true
+	
 	## Check how fast we should go
 	speed_multiplier_check()
 	
 	## Start the timer
 	ground_timer.start()
-	
-	## HeadBop needs this variable
-	player.jumped = true
 	
 	## Apply jump impulse
 	player.velocity.y += player.jump_height
@@ -45,7 +44,7 @@ func enter() -> void:
 func exit() -> void:
 	super.exit()
 	
-	player.jumped = false
+	player.in_air = false
 	
 	## Reset ground timer
 	ground_timer.stop()

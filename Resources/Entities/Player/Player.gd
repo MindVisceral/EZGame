@@ -121,7 +121,7 @@ class_name Player
 @onready var States: Node = $Scripts/StateManager
 @onready var UIcontroller: Node = $Scripts/UIController
 @onready var HeightAlternator: Node = $Scripts/HeightAlterator
-@onready var head_bob: Node = $Scripts/HeadBop
+@onready var HeadBob: Node = $Scripts/HeadBob
 @onready var JumpBufferT: Timer = $Timers/JumpBufferTimer
 @onready var Collider: CollisionShape3D = $Collider
 @onready var FeetCollider: CollisionShape3D = $FeetCollider
@@ -143,8 +143,8 @@ class_name Player
 
 ## Flags
 var is_dead: bool = false
-## HeadBop script needs this variable to enable Jump bob
-var jumped: bool = false
+## HeadBob script needs this
+var in_air: bool = false
 var is_reloading: bool = false
 var is_changing_weapons: bool = false
 var current_weapon = null
@@ -186,6 +186,8 @@ func _ready():
 	States.init(self)
 #	UIcontroller.init(self)
 	HeightAlternator.init(self)
+	HeadBob.init(self)
+	
 	
 	## Apply exported variables to the Player
 	apply_exported()
@@ -217,22 +219,11 @@ func _unhandled_input(event: InputEvent) -> void:
 ###
 func _physics_process(delta) -> void:
 	
-## Passed variables in order: horizontal movement Vector, 
-## a boolean that detect if Player is on floor, delta
-	head_bob.head_bob_process(Vector3(self.velocity.x, 0, self.velocity.z), true, delta)
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	if !is_dead:
 #		process_input(delta)
 		process_view_input(delta)
 #		process_movement(delta)
+		
 		
 		##States
 		States.physics_process(delta)
