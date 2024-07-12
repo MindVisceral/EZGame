@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://yj1henetlw1f"]
+
+[node name="Hurtbox" type="Area3D"]
+editor_description = "Detects intersections with Hitboxes, calls its parent's Hit function or State"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
