@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dierfhf8fylir"]
-
-[ext_resource type="Script" path="res://Scenes & Scripts/Autoloads/BulletTime.gd" id="1_ds2r0"]
-
-[node name="BulletTime" type="Node"]
-script = ExtResource("1_ds2r0")
