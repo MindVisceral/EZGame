@@ -1,12 +1,29 @@
-[gd_scene load_steps=16 format=3 uid="uid://c58jul0j3dxoj"]
+[gd_scene load_steps=14 format=3 uid="uid://c58jul0j3dxoj"]
 
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/InteractableObjects/Teleporter.gd" id="1_7qitw"]
-[ext_resource type="PackedScene" uid="uid://djxwsoyuoscmc" path="res://Blender/Teleporter.gltf" id="2_ibd7n"]
-[ext_resource type="AudioStream" uid="uid://b5wbw8g0k1pog" path="res://Scenes & Scripts/Sounds/teleporter_sound.wav" id="3_4cxde"]
+[ext_resource type="Texture2D" uid="uid://cx3vbrnrkrx47" path="res://Scenes & Scripts/Textures/Concrete/concrete_01.png" id="2_j8rdx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qmpeg"]
+shading_mode = 2
+albedo_color = Color(0.909804, 0.886275, 0.94902, 1)
+albedo_texture = ExtResource("2_j8rdx")
+albedo_texture_force_srgb = true
+metallic = 0.7
+metallic_specular = 0.0
+texture_filter = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_go4ft"]
+material = SubResource("StandardMaterial3D_qmpeg")
+top_radius = 0.8
+bottom_radius = 0.88
+height = 0.1
+radial_segments = 16
+rings = 1
+cap_bottom = false
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xqy3m"]
 height = 0.1
-radius = 0.923405
+radius = 0.8
 
 [sub_resource type="Gradient" id="Gradient_agjvh"]
 offsets = PackedFloat32Array(0, 0.51, 1)
@@ -22,9 +39,7 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_wfd4j"]
 curve = SubResource("Curve_2uubi")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_txoe6"]
-resource_local_to_scene = true
-particle_flag_align_y = true
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uhx60"]
 emission_shape_scale = Vector3(1, 1.6, 1)
 emission_shape = 6
 emission_ring_axis = Vector3(0, 0, 1)
@@ -49,7 +64,7 @@ collision_mode = 1
 collision_friction = 0.4
 collision_bounce = 0.6
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bnp2y"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pecm4"]
 shading_mode = 0
 diffuse_mode = 3
 specular_mode = 2
@@ -59,9 +74,8 @@ distance_fade_mode = 3
 distance_fade_min_distance = 30.0
 distance_fade_max_distance = 0.0
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_fxrhx"]
-resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_bnp2y")
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_v0ekq"]
+material = SubResource("StandardMaterial3D_pecm4")
 radius = 0.02
 height = 0.06
 radial_segments = 6
@@ -71,55 +85,16 @@ rings = 2
 height = 2.4
 radius = 0.65
 
-[sub_resource type="Animation" id="Animation_blsm1"]
-resource_name = "spin"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Teleporter/Base/Spinner:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_soa1d"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Teleporter/Base/Spinner:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_888p4"]
-_data = {
-"RESET": SubResource("Animation_soa1d"),
-"spin": SubResource("Animation_blsm1")
-}
-
 [node name="Teleporter" type="StaticBody3D"]
 editor_description = "When entered, teleports the Player (or any other Entity) to its connected exit.
-The Teleporter may be set to connect to another Teleporter, in which case the second Teleporter has it's cooldown activated so that the Player doesn't get stuck in a loop, teleporting between the two Teleporters indefinitely."
-collision_layer = 2
-collision_mask = 5
+The Teleporter may be set to connect to another Teleporter and vice versa."
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0489829, 0)
 script = ExtResource("1_7qitw")
 
-[node name="Teleporter" parent="." instance=ExtResource("2_ibd7n")]
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_go4ft")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0516484, 0)
 shape = SubResource("CylinderShape3D_xqy3m")
 
 [node name="Particles" type="GPUParticles3D" parent="."]
@@ -128,18 +103,16 @@ amount = 48
 collision_base_size = 0.04
 visibility_aabb = AABB(-2, -1.29513, -2, 4, 2.59025, 4)
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_txoe6")
-draw_pass_1 = SubResource("CapsuleMesh_fxrhx")
+process_material = SubResource("ParticleProcessMaterial_uhx60")
+draw_pass_1 = SubResource("CapsuleMesh_v0ekq")
 
 [node name="Light" type="OmniLight3D" parent="Particles"]
 light_color = Color(0.556863, 0.709804, 1, 1)
-light_energy = 4.4
-light_indirect_energy = 3.0
-light_volumetric_fog_energy = 6.0
-light_specular = 1.4
+light_energy = 4.0
+light_indirect_energy = 2.5
+light_volumetric_fog_energy = 4.0
 shadow_enabled = true
-omni_range = 2.3
-omni_attenuation = 0.85
+omni_range = 1.8
 
 [node name="TeleportArea3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
@@ -150,23 +123,11 @@ monitorable = false
 [node name="AreaCollider" type="CollisionShape3D" parent="TeleportArea3D"]
 shape = SubResource("CylinderShape3D_acnsr")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_888p4")
-}
-autoplay = "spin"
-
 [node name="AudioPlayer" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_4cxde")
-unit_size = 20.0
-max_db = 6.0
 max_distance = 30.0
-panning_strength = 0.3
 
 [node name="TeleportCooldown" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
 
 [connection signal="body_entered" from="TeleportArea3D" to="." method="_teleport_area_entered"]
-
-[editable path="Teleporter"]

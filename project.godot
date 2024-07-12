@@ -137,6 +137,7 @@ input_bullet_time={
 3d_physics/layer_4="Hitbox"
 3d_physics/layer_5="Hurtbox"
 3d_physics/layer_6="Interactable"
+3d_physics/layer_7="Teleporter"
 
 [physics]
 

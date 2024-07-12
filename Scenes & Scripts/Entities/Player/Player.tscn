@@ -257,3 +257,8 @@ bullet_start_pos_node = NodePath("../../PlayerCamera")
 transform = Transform3D(-3.34849e-08, -2.80971e-08, -1, -0.642788, 0.766044, 0, 0.766044, 0.642788, -4.37114e-08, 0, 0, 0)
 visible = false
 bullet_start_pos_node = NodePath("../../PlayerCamera")
+
+[node name="GPUParticlesAttractorVectorField3D" type="GPUParticlesAttractorVectorField3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00488281, 0.808258, 0)
+attenuation = 2.0
+size = Vector3(0.9, 1.6, 0.9)
