@@ -31,6 +31,15 @@ extends BasePlayerState
 ## Check Editor description for an explanation
 @onready var ground_timer: Timer = $GroundTimer
 
+
+## Stomp-boosted jump flag;
+## If the jump is performed within StompJumpTimer time, the jump makes the Player go
+## up by the distance between the stomp's start and end positions.
+var stomp_boosted: bool = false
+## The distance remaining for the Player to travel before the boost is over and gravity kicks in
+var remaining_boost_distance: float = 0.0
+
+
 func enter() -> void:
 	super.enter()
 	
@@ -54,8 +63,12 @@ func enter() -> void:
 func exit() -> void:
 	super.exit()
 	
+	## Reset!
+	stomp_boosted = false
+	remaining_boost_distance = 0.0
+	#
 	player.in_air = false
-	
+	#
 	player.WallDetection.enabled = false
 	
 	## Reset ground timer
@@ -72,6 +85,12 @@ func input(event: InputEvent) -> BasePlayerState:
 			return walljump_state
 	
 	return null
+
+
+
+
+
+var last_frame_y_value: float = 0.0
 
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
 func physics_process(delta) -> BasePlayerState:
@@ -116,12 +135,36 @@ func physics_process(delta) -> BasePlayerState:
 #	player.velocity.z += player.velocity.z + (player.direction.z * player.speed * speed_multiplier)
 	
 	
-	## Apply gravity (which is the Globals' gravity * multiplier)
-	## No multipier used for now.
-	## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
-	player.velocity.y -= player.gravity * BulletTime.time_scale * delta
 	
+	## According to apply_jump_impulse, this is a stomp-boosted jump!
+	if (stomp_boosted == true) and \
+	## This is a timer of sorts - remaining_boost_distance will tick down until it's '< 0'.
+	## In essence, the Player will go up until they reach the distance
+	## between the stomp's start and end positions
+	(remaining_boost_distance > 0.0):
+		
+		## Make the Player go up
+		player.velocity.y += player.gravity * BulletTime.time_scale * delta
+		## Clamp the velocity to be jump_speed_limit at most
+		player.velocity.y = minf(player.velocity.y, player.jump_speed_limit)
+		
+		## This is the actual timer part.
+		## It determines when the Player has finished travelling the stomp-boosted distance
+		remaining_boost_distance -= player.velocity.y * BulletTime.time_scale * delta
 	
+	## The Player has either gone the distance or this never was a stomp-boosted jump to begin with
+	## Either way, we apply gravity once again.
+	else:
+		## Apply gravity (which is the Globals' gravity * multiplier)
+		## No multipier used for now.
+		## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
+		player.velocity.y -= player.gravity * BulletTime.time_scale * delta
+		## Clamp the velocity to be falling_speed_limit at most.
+		## NOTE: maxf is used because velocity.y is negative when falling
+		player.velocity.y = maxf(player.velocity.y, player.falling_speed_limit)
+		
+	
+	print(player.velocity.y)
 	
 	## A short time after the Raycast leaves the ground...
 	if ground_timer.is_stopped():
@@ -167,8 +210,27 @@ func apply_jump_impulse() -> float:
 	
 	## If a Stomp has just been finished, we perform a Stomp-boosted jump
 	if !player.StompJumpT.is_stopped():
+		
+		## This jump will be stomp-boosted!
+		stomp_boosted = true
+		## So we don't apply an impulse like we do with a regualr jump.
+		## This jump's guts take place in _physics_process() - this is just setup
+		#impulse_jump_height = 0.0
+		impulse_jump_height = 50
+		
+		
+		## We will need the distance between the stomp's start and end points.
+		## NOTE: The jump will be limited to stomp_jump_height_limit value at most!
+		remaining_boost_distance = minf(player.stomp_vertical_distance, player.stomp_jump_height_limit)
+		
+		
+		
+		
 		## But a Stomp-boosted jump is limited to stomp_jump_height_limit
-		impulse_jump_height += minf(player.stomp_vertical_distance, player.stomp_jump_height_limit)
+		#impulse_jump_height += minf(player.stomp_vertical_distance, player.stomp_jump_height_limit)
+		
+
+		
 	## Otherwise, we just do a regular jump
 	else:
 		impulse_jump_height += player.jump_height

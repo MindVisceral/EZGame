@@ -99,8 +99,10 @@ func physics_process(delta) -> BasePlayerState:
 	
 	## Apply gravity (which is the Globals' gravity * multiplier)
 	## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
-	player.velocity.y -= player.gravity * BulletTime.time_scale * delta \
-						+ (player.gravity)
+	player.velocity.y -= player.gravity * BulletTime.time_scale * delta
+	## Clamp the velocity to be falling_speed_limit at most.
+	## NOTE: maxf is used because velocity.y is negative when falling
+	player.velocity.y = maxf(player.velocity.y, player.falling_speed_limit)
 	
 	## Even if the Player slides off the floor, they still continue sliding
 	#if !player.is_on_floor():

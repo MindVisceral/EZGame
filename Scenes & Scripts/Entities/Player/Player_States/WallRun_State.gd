@@ -75,6 +75,9 @@ func physics_process(delta) -> BasePlayerState:
 	## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
 	player.velocity.y -= player.gravity * player.wall_sliding_deceleration \
 						* BulletTime.time_scale * delta
+	## Clamp the velocity to be falling_speed_limit at most.
+	## NOTE: maxf is used because velocity.y is negative when falling
+	player.velocity.y = maxf(player.velocity.y, player.falling_speed_limit)
 	
 	
 	## If the Player isn't clinging to a wall, they start to fall
