@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://bg2u2fljqhcdk"]
+[gd_scene load_steps=30 format=3 uid="uid://bg2u2fljqhcdk"]
 
-[ext_resource type="Texture2D" uid="uid://dmjhoaedtxskg" path="res://Decal_tex.png" id="1"]
+[ext_resource type="Script" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1_hxp6x"]
 [ext_resource type="Material" uid="uid://o0b4tbh6yup4" path="res://addons/character-controller/example/main/materials/rock.tres" id="2_2haa3"]
+[ext_resource type="Resource" uid="uid://c36hv0o6g0udo" path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" id="2_xdfwx"]
 [ext_resource type="PackedScene" uid="uid://nf1bgcn3f8w0" path="res://Scenes & Scripts/Entities/Entity Elements/Interactable.tscn" id="3_acpno"]
 [ext_resource type="PackedScene" uid="uid://c8rq5wbjpbcux" path="res://Scenes & Scripts/Entities/Enemies/Yellow Puppet/YellowPuppet.tscn" id="4_23xl4"]
 [ext_resource type="PackedScene" uid="uid://dfg5rcmoasv08" path="res://lamp_test.tscn" id="4_nrllp"]
@@ -26,20 +27,31 @@ ambient_light_color = Color(0.486275, 0.486275, 0.486275, 1)
 reflected_light_source = 2
 fog_light_color = Color(0.12549, 0.141176, 0.164706, 1)
 
-[sub_resource type="BoxShape3D" id="12"]
-size = Vector3(200, 0.1, 200)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ppf5"]
 
-[sub_resource type="StandardMaterial3D" id="14"]
-albedo_texture = ExtResource("1")
-texture_filter = 0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j357v"]
 
-[sub_resource type="PlaneMesh" id="10"]
-material = SubResource("14")
-size = Vector2(200, 200)
+[sub_resource type="ArrayMesh" id="ArrayMesh_jqfpq"]
+_surfaces = [{
+"aabb": AABB(-104, -1, -104, 212, 1.00001, 212),
+"attribute_data": PackedByteArray(0, 0, 208, 68, 0, 0, 0, 0, 0, 0, 208, 68, 0, 0, 128, 65, 0, 0, 216, 196, 0, 0, 128, 65, 0, 0, 216, 196, 0, 0, 0, 0, 0, 0, 208, 196, 0, 0, 0, 0, 0, 0, 216, 68, 0, 0, 0, 0, 0, 0, 216, 68, 0, 0, 128, 65, 0, 0, 208, 196, 0, 0, 128, 65, 0, 0, 208, 68, 0, 0, 216, 196, 0, 0, 208, 68, 0, 0, 208, 68, 0, 0, 216, 196, 0, 0, 208, 68, 0, 0, 216, 196, 0, 0, 216, 196, 0, 0, 208, 196, 0, 0, 216, 196, 0, 0, 216, 68, 0, 0, 216, 196, 0, 0, 216, 68, 0, 0, 208, 68, 0, 0, 208, 196, 0, 0, 208, 68, 0, 0, 208, 68, 0, 0, 0, 0, 0, 0, 208, 68, 0, 0, 128, 65, 0, 0, 216, 196, 0, 0, 128, 65, 0, 0, 216, 196, 0, 0, 0, 0, 0, 0, 208, 196, 0, 0, 0, 0, 0, 0, 216, 68, 0, 0, 0, 0, 0, 0, 216, 68, 0, 0, 128, 65, 0, 0, 208, 196, 0, 0, 128, 65),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 4, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 8, 0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 0, 12, 0, 14, 0, 15, 0, 16, 0, 17, 0, 18, 0, 16, 0, 18, 0, 19, 0, 20, 0, 21, 0, 22, 0, 20, 0, 22, 0, 23, 0),
+"material": SubResource("StandardMaterial3D_j357v"),
+"name": "__TB_empty",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray(0, 0, 208, 194, 0, 0, 0, 0, 0, 0, 208, 194, 0, 0, 208, 194, 0, 0, 128, 191, 0, 0, 208, 194, 0, 0, 216, 66, 0, 0, 128, 191, 0, 0, 208, 194, 0, 0, 216, 66, 0, 0, 0, 0, 0, 0, 208, 194, 0, 0, 208, 194, 0, 0, 0, 0, 0, 0, 208, 194, 0, 0, 208, 194, 0, 0, 0, 0, 0, 0, 216, 66, 0, 0, 208, 194, 0, 0, 128, 191, 0, 0, 216, 66, 0, 0, 208, 194, 0, 0, 128, 191, 0, 0, 208, 194, 0, 0, 216, 66, 0, 0, 128, 191, 0, 0, 208, 194, 0, 0, 208, 194, 0, 0, 128, 191, 0, 0, 208, 194, 0, 0, 208, 194, 0, 0, 128, 191, 0, 0, 216, 66, 0, 0, 216, 66, 0, 0, 128, 191, 0, 0, 216, 66, 0, 0, 216, 66, 0, 0, 0, 0, 0, 0, 208, 194, 0, 0, 216, 66, 0, 0, 0, 0, 0, 0, 216, 66, 0, 0, 208, 194, 0, 0, 0, 0, 0, 0, 216, 66, 0, 0, 208, 194, 0, 0, 0, 0, 0, 0, 208, 194, 0, 0, 216, 66, 0, 0, 0, 0, 0, 0, 208, 194, 0, 0, 216, 66, 0, 0, 128, 191, 0, 0, 208, 194, 0, 0, 216, 66, 0, 0, 128, 191, 0, 0, 216, 66, 0, 0, 216, 66, 0, 0, 0, 0, 0, 0, 216, 66, 0, 0, 208, 194, 0, 0, 0, 0, 0, 0, 216, 66, 0, 0, 216, 66, 0, 0, 0, 0, 0, 0, 216, 66, 0, 0, 216, 66, 0, 0, 128, 191, 0, 0, 216, 66, 0, 0, 208, 194, 0, 0, 128, 191, 0, 0, 216, 66, 255, 255, 255, 255, 0, 0, 255, 191, 255, 255, 255, 255, 0, 0, 255, 191, 255, 255, 255, 255, 0, 0, 255, 191, 255, 255, 255, 255, 0, 0, 255, 191, 0, 0, 255, 127, 255, 127, 255, 191, 0, 0, 255, 127, 255, 127, 255, 191, 0, 0, 255, 127, 255, 127, 255, 191, 0, 0, 255, 127, 255, 127, 255, 191, 255, 127, 0, 0, 255, 255, 255, 255, 255, 127, 0, 0, 255, 255, 255, 255, 255, 127, 0, 0, 255, 255, 255, 255, 255, 127, 0, 0, 255, 255, 255, 255, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 255, 255, 127, 255, 255, 255, 255, 255, 255, 255, 127, 255, 255, 255, 255, 255, 255, 255, 127, 255, 255, 255, 255, 255, 255, 255, 127, 255, 255, 255, 255, 255, 127, 255, 127, 255, 255, 255, 191, 255, 127, 255, 127, 255, 255, 255, 191, 255, 127, 255, 127, 255, 255, 255, 191, 255, 127, 255, 127, 255, 255, 255, 191)
+}]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yek5n"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.0705882)
+[sub_resource type="ArrayOccluder3D" id="ArrayOccluder3D_2r4ar"]
+vertices = PackedVector3Array(-104, 0, -104, -104, -1, -104, 108, -1, -104, 108, 0, -104, -104, 0, -104, -104, 0, 108, -104, -1, 108, -104, -1, -104, 108, -1, -104, -104, -1, -104, -104, -1, 108, 108, -1, 108, 108, 0, -104, 108, 0, 108, -104, 0, 108, -104, 0, -104, 108, 0, -104, 108, -1, -104, 108, -1, 108, 108, 0, 108, -104, 0, 108, 108, 0, 108, 108, -1, 108, -104, -1, 108)
+indices = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7, 8, 9, 10, 8, 10, 11, 12, 13, 14, 12, 14, 15, 16, 17, 18, 16, 18, 19, 20, 21, 22, 20, 22, 23)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8iesh"]
+points = PackedVector3Array(-104, 0, -104, -104, -1, -104, 108, -1, -104, 108, 0, -104, -104, 0, 108, -104, -1, 108, 108, -1, 108, 108, 0, 108)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wnjms"]
 data = PackedVector3Array(-4, 2, 2, 4, 2, 2, -4, -2, 2, 4, 2, 2, 4, -2, 2, -4, -2, 2, 4, 2, -2, -4, 2, -2, 4, -2, -2, -4, 2, -2, -4, -2, -2, 4, -2, -2, 4, 2, 2, 4, 2, -2, 4, -2, 2, 4, 2, -2, 4, -2, -2, 4, -2, 2, -4, 2, -2, -4, 2, 2, -4, -2, -2, -4, 2, 2, -4, -2, 2, -4, -2, -2, 4, 2, 2, -4, 2, 2, 4, 2, -2, -4, 2, 2, -4, 2, -2, 4, 2, -2, -4, -2, 2, 4, -2, 2, -4, -2, -2, 4, -2, 2, 4, -2, -2, -4, -2, -2)
@@ -153,20 +165,27 @@ shadow_enabled = true
 shadow_normal_bias = 6.0
 shadow_opacity = 0.75
 
-[node name="Map_elements" type="Node3D" parent="."]
+[node name="QodotMap" type="Node3D" parent="."]
+script = ExtResource("1_hxp6x")
+map_file = "E:/Pliki/Games/Easy_FPS/Scenes & Scripts/Levels/Trenchbroom/test_room.map"
+entity_fgd = ExtResource("2_xdfwx")
+texture_file_extensions = PackedStringArray("png", "jpg", "jpeg", "bmp")
+default_material = SubResource("StandardMaterial3D_6ppf5")
 
-[node name="Floor" type="StaticBody3D" parent="Map_elements"]
+[node name="entity_0_worldspawn" type="StaticBody3D" parent="QodotMap"]
 collision_layer = 2
 collision_mask = 5
-input_ray_pickable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map_elements/Floor"]
-shape = SubResource("12")
+[node name="entity_0_mesh_instance" type="MeshInstance3D" parent="QodotMap/entity_0_worldspawn"]
+mesh = SubResource("ArrayMesh_jqfpq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Map_elements/Floor"]
-mesh = SubResource("10")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_yek5n")
+[node name="entity_0_occluder_instance" type="OccluderInstance3D" parent="QodotMap/entity_0_worldspawn"]
+occluder = SubResource("ArrayOccluder3D_2r4ar")
+
+[node name="entity_0_brush_0_collision_shape" type="CollisionShape3D" parent="QodotMap/entity_0_worldspawn"]
+shape = SubResource("ConvexPolygonShape3D_8iesh")
+
+[node name="Map_elements" type="Node3D" parent="."]
 
 [node name="Rock" type="StaticBody3D" parent="Map_elements"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.71622, -4)

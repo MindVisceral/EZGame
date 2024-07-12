@@ -23,7 +23,7 @@ BulletTime="*res://Scenes & Scripts/Autoloads/BulletTime.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/qodot/plugin.cfg")
 
 [filesystem]
 
