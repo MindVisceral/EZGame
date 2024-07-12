@@ -1,7 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://drcgshfh4ln3v"]
+[gd_scene load_steps=12 format=3 uid="uid://drcgshfh4ln3v"]
 
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Shot_Effect_Emitter.gd" id="1_mhiph"]
 [ext_resource type="Texture2D" uid="uid://cq8b8g5gqgse7" path="res://Scenes & Scripts/Entities/Weapons/Effects/smoke.png" id="2_gq3l8"]
+
+[sub_resource type="Curve" id="Curve_e4c1a"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.254637), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t1fhl"]
+curve = SubResource("Curve_e4c1a")
+
+[sub_resource type="Gradient" id="Gradient_jhdsf"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fq6d7"]
+gradient = SubResource("Gradient_jhdsf")
 
 [sub_resource type="Curve" id="Curve_s6opc"]
 _data = [Vector2(0, 1), 0.0, -0.253906, 0, 0, Vector2(1, 0), -0.23165, 0.0, 0, 0]
@@ -24,6 +37,8 @@ damping_max = 0.1
 scale_min = 0.6
 scale_max = 1.8
 scale_curve = SubResource("CurveTexture_8yqpc")
+color_ramp = SubResource("GradientTexture1D_fq6d7")
+alpha_curve = SubResource("CurveTexture_t1fhl")
 anim_offset_min = 1.0
 anim_offset_max = 1.0
 
@@ -39,6 +54,7 @@ billboard_keep_scale = true
 particles_anim_h_frames = 6
 particles_anim_v_frames = 5
 particles_anim_loop = true
+grow_amount = -0.457
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_h8tnc"]
 material = SubResource("StandardMaterial3D_cnpms")
@@ -49,10 +65,8 @@ orientation = 2
 script = ExtResource("1_mhiph")
 
 [node name="SmokeParticles" type="GPUParticles3D" parent="."]
-emitting = false
 amount = 25
-one_shot = true
-speed_scale = 4.0
+speed_scale = 9.0
 explosiveness = 0.96
 fixed_fps = 50
 process_material = SubResource("ParticleProcessMaterial_qqnbe")
