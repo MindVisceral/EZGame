@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bg2u2fljqhcdk"]
+[gd_scene load_steps=16 format=3 uid="uid://bg2u2fljqhcdk"]
 
 [ext_resource type="Texture2D" uid="uid://dmjhoaedtxskg" path="res://Decal_tex.png" id="1"]
 [ext_resource type="Material" uid="uid://o0b4tbh6yup4" path="res://addons/character-controller/example/main/materials/rock.tres" id="2_2haa3"]
@@ -14,6 +14,10 @@ texture_filter = 0
 [sub_resource type="PlaneMesh" id="10"]
 material = SubResource("14")
 size = Vector2(200, 200)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yek5n"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.0705882)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wnjms"]
 data = PackedVector3Array(-4, 2, 2, 4, 2, 2, -4, -2, 2, 4, 2, 2, 4, -2, 2, -4, -2, 2, 4, 2, -2, -4, 2, -2, 4, -2, -2, -4, 2, -2, -4, -2, -2, 4, -2, -2, 4, 2, 2, 4, 2, -2, 4, -2, 2, 4, 2, -2, 4, -2, -2, 4, -2, 2, -4, 2, -2, -4, 2, 2, -4, -2, -2, -4, 2, 2, -4, -2, 2, -4, -2, -2, 4, 2, 2, -4, 2, 2, 4, 2, -2, -4, 2, 2, -4, 2, -2, 4, 2, -2, -4, -2, 2, 4, -2, 2, -4, -2, -2, 4, -2, 2, 4, -2, -2, -4, -2, -2)
@@ -63,6 +67,7 @@ shape = SubResource("12")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Map_elements/Floor"]
 mesh = SubResource("10")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_yek5n")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Map_elements"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.71622, -4)

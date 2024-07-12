@@ -13,6 +13,7 @@ config_version=5
 config/name="Easy Fps"
 run/main_scene="res://Resources/Levels/Testing_Area.tscn"
 config/features=PackedStringArray("4.2")
+run/max_fps=65
 config/icon="res://icon.png"
 
 [autoload]
