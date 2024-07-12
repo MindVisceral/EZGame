@@ -32,4 +32,4 @@ func _teleport_area_entered(thing: Node3D) -> void:
 					teleport_target.teleport_cooldown.start()
 					teleport_target.audio_player.play()
 				
-				thing.global_position = teleport_target.position
+				thing.global_position = teleport_target.global_position

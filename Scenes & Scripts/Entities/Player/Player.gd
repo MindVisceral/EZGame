@@ -123,10 +123,6 @@ extends CharacterBody3D
 ## The lower the number, the slower they fall down.
 @export var wall_sliding_deceleration: float = 0.3
 
-## The distance of the edge of the WallDetection ShapeCast from the Player's center
-## Limited by the Collider's radius. This can't be lower or equal to that.
-@export_range(0.1, 1.0, 0.1) var wall_detector_radius: float = 0.5
-
 
 @export_group("Fly")
 
@@ -297,7 +293,6 @@ func apply_exported() -> void:
 	## Instantly alter Head (and thus Camera) height
 	Head.position.y = default_head_height
 	
-	WallDetection.shape.radius = wall_detector_radius
 	clampf(WallDetection.shape.radius, default_width + 0.05, INF)
 
 ###

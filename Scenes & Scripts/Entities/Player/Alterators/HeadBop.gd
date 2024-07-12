@@ -64,6 +64,16 @@ var original_rotation: Vector3
 @export var y_bob_amplitude: float = 0.1
 
 
+@export_group("Air Bob")
+
+## Enables headbob while in air
+@export var air_bob_enabled: bool = true
+
+
+
+
+
+
 ## NOTE: Done with an Input.get_vector()
 @export_group("Movement Tilt (Quake Like)")
 
@@ -114,6 +124,9 @@ func _process(delta: float) -> void:
 		var tween = get_tree().create_tween()
 		tween.tween_property(bobbing_node, "position", do_head_bob(delta), bob_multiplier * delta)
 	
+	## If air bobbing is enabled...
+	if air_bob_enabled == true:
+		pass
 	
 	## If movement tilt is enabled...
 	if movement_tilt_enabled == true:

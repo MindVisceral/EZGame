@@ -20,6 +20,7 @@ extends BasePlayerState
 @export var walljump_state: BasePlayerState
 
 
+
 func enter() -> void:
 	super.enter()
 	
@@ -81,8 +82,18 @@ func physics_process(delta) -> BasePlayerState:
 	player.air_time += delta * player.air_time_multiplier
 	
 	
-	## If the Player fell off the wall, they start to fall
+	
+	## If the Player isn't clinging to a wall, they start to fall
 	if !player.WallDetection.is_colliding() or !player.is_moving_at_wall():
+		if !player.WallDetection.is_colliding():
+			print("BECAUSE WALLDETECTION FAILED")
+		if !player.is_moving_at_wall():
+			print("BECAUSE WALL VELOCITY FAILED")
+		
+		
+		print("Is colliding: ", player.WallDetection.is_colliding())
+		print("Collided with: ", player.WallDetection.collision_result)
+		
 		return fall_state
 		
 	## But if they're still clinging to the wall...
