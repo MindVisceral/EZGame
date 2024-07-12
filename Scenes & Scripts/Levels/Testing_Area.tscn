@@ -1,8 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://bg2u2fljqhcdk"]
+[gd_scene load_steps=21 format=3 uid="uid://bg2u2fljqhcdk"]
 
 [ext_resource type="Texture2D" uid="uid://dmjhoaedtxskg" path="res://Decal_tex.png" id="1"]
 [ext_resource type="Material" uid="uid://o0b4tbh6yup4" path="res://addons/character-controller/example/main/materials/rock.tres" id="2_2haa3"]
+[ext_resource type="PackedScene" uid="uid://nf1bgcn3f8w0" path="res://Scenes & Scripts/Entities/Entity Elements/Interactable.tscn" id="3_acpno"]
 [ext_resource type="PackedScene" uid="uid://c8rq5wbjpbcux" path="res://Scenes & Scripts/Entities/Enemies/Yellow Puppet/YellowPuppet.tscn" id="4_23xl4"]
+[ext_resource type="PackedScene" uid="uid://dfg5rcmoasv08" path="res://lamp_test.tscn" id="4_nrllp"]
 [ext_resource type="PackedScene" uid="uid://lhlklylca50m" path="res://Scenes & Scripts/Entities/Player/Player.tscn" id="6"]
 
 [sub_resource type="BoxShape3D" id="12"]
@@ -36,6 +38,12 @@ albedo_color = Color(1, 1, 1, 0.207843)
 [sub_resource type="BoxMesh" id="BoxMesh_2txwi"]
 material = SubResource("StandardMaterial3D_ak28t")
 size = Vector3(4, 4, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_huvru"]
+size = Vector3(4, 4, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vg4sb"]
+size = Vector3(10, 10, 10)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sghrv"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -95,6 +103,18 @@ shape = SubResource("BoxShape3D_o58sf")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Map_elements/Fog"]
 mesh = SubResource("BoxMesh_2txwi")
 
+[node name="Interactable" parent="Map_elements/Fog" node_paths=PackedStringArray("interactable_object") instance=ExtResource("3_acpno")]
+interactable_object = NodePath("..")
+
+[node name="CollisionShape3D" parent="Map_elements/Fog/Interactable" index="0"]
+shape = SubResource("BoxShape3D_huvru")
+
+[node name="CollisionShape3D" parent="Map_elements/Fog/Interactable/InteractableRange" index="0"]
+shape = SubResource("BoxShape3D_vg4sb")
+
+[node name="lamp_test" parent="Map_elements" instance=ExtResource("4_nrllp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.7388, 1.47094, -1.3968)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("16")
 
@@ -109,3 +129,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6061, 0.0052982, 6.00207)
 
 [node name="Yellow Puppet" parent="." instance=ExtResource("4_23xl4")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[editable path="Map_elements/Fog/Interactable"]

@@ -11,7 +11,7 @@ extends Firearm
 @export var bullet_start_pos_node: Node3D
 
 ## The point from which a bullet Trail, and only the Trail, will start
-@onready var bullet_start_point: Marker3D = $ModelHolder/gun1/Armature/Base_bone/Grip1/TrailSpawnPoint
+@export var bullet_start_point: Marker3D
 ## This Node creates a Trail effect, we just instantiate it
 @onready var bullet_trail_emitter: PackedScene = \
 	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Bullet_Trail_Emitter.tscn")

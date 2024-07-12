@@ -4,8 +4,9 @@
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Pistol.gd" id="2_ejjpi"]
 [ext_resource type="PackedScene" uid="uid://bemovxot15qyc" path="res://Scenes & Scripts/Entities/Weapons/Gun/gun1.glb" id="3_hegno"]
 
-[node name="Pistol" node_paths=PackedStringArray("AnimPlayer") instance=ExtResource("1_opcfm")]
+[node name="Pistol" node_paths=PackedStringArray("bullet_start_point", "AnimPlayer") instance=ExtResource("1_opcfm")]
 script = ExtResource("2_ejjpi")
+bullet_start_point = NodePath("ModelHolder/gun1/Armature/Base_bone/Grip1/TrailSpawnPoint")
 AnimPlayer = NodePath("ModelHolder/gun1/AnimationPlayer")
 bullet_collision_mask = 18
 

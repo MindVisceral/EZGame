@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfg5rcmoasv08"]
+
+[ext_resource type="PackedScene" uid="uid://nf1bgcn3f8w0" path="res://Scenes & Scripts/Entities/Entity Elements/Interactable.tscn" id="1_0hf3u"]
+[ext_resource type="Script" path="res://lamp_test.gd" id="1_psx1e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kxqo7"]
+albedo_color = Color(0.513726, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y4xh1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r4qte"]
+size = Vector3(5, 5, 5)
+
+[node name="lamp_test" type="CSGBox3D"]
+cast_shadow = 0
+material = SubResource("StandardMaterial3D_kxqo7")
+script = ExtResource("1_psx1e")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.827451, 0.0588235, 0, 1)
+light_energy = 4.0
+light_cull_mask = 4294966273
+shadow_enabled = true
+
+[node name="Interactable" parent="." node_paths=PackedStringArray("interactable_object") instance=ExtResource("1_0hf3u")]
+interactable_object = NodePath("..")
+
+[node name="CollisionShape3D" parent="Interactable" index="0"]
+shape = SubResource("BoxShape3D_y4xh1")
+
+[node name="CollisionShape3D" parent="Interactable/InteractableRange" index="0"]
+shape = SubResource("BoxShape3D_r4qte")
+
+[editable path="Interactable"]

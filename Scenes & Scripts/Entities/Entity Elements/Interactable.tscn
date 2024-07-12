@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://nf1bgcn3f8w0"]
+
+[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Entity Elements/Interactable.gd" id="1_p5jh7"]
+
+[node name="Interactable" type="Area3D"]
+editor_description = "This node is added to objects that are supposed to be interactable; doors, switches, etc.
+When an Entity enters the InteractableRange Area3D, that means that it is within the range of the interactable object.
+When it comes to the Player, we also check if they are looking at the Interactable object, by casting a ray in space_state, which looks at and for an Interactable Area3D itself.
+
+If the Player is within the InteractableRange, and they are looking at the Interactable area, then we can perform the object's function, whatever that might be."
+collision_layer = 32
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_p5jh7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+
+[node name="InteractableRange" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 5
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableRange"]
+
+[connection signal="body_entered" from="InteractableRange" to="." method="_on_body_range_entered"]
+[connection signal="body_exited" from="InteractableRange" to="." method="_on_body_range_exited"]

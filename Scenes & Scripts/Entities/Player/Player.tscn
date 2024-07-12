@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://lhlklylca50m"]
+[gd_scene load_steps=17 format=3 uid="uid://lhlklylca50m"]
 
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player.gd" id="1_kmike"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/State_Manager.gd" id="2_c5aqi"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Alterators/HeadBop.gd" id="10_6kxr3"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Alterators/WeaponBob.gd" id="12_4bkuj"]
 [ext_resource type="PackedScene" uid="uid://b2fet7sg7ta7s" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Pistol.tscn" id="12_nnnx6"]
+[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Alterators/InteractionManager.gd" id="13_qk48y"]
 
 [sub_resource type="CapsuleShape3D" id="15"]
 radius = 0.45
@@ -120,6 +121,11 @@ bobbing_node = NodePath("../../Head/BobbingNode")
 [node name="WeaponBob" type="Node" parent="Scripts" node_paths=PackedStringArray("bobbing_node")]
 script = ExtResource("12_4bkuj")
 bobbing_node = NodePath("../../Head/BobbingNode/Firearms")
+
+[node name="InteractionManager" type="Node" parent="Scripts" node_paths=PackedStringArray("ray_start_pos_node")]
+script = ExtResource("13_qk48y")
+InteractableCast_range = 10.0
+ray_start_pos_node = NodePath("../../Head/BobbingNode/PlayerCamera")
 
 [node name="UIController" type="Node" parent="Scripts"]
 
