@@ -10,7 +10,7 @@ fractal_gain = 0.8
 
 [node name="ShakeableCamera" type="Camera3D"]
 editor_description = "This is a special Camera Node with an attached Area3D, which allows us to shake that Camera!
-The shakehappens as a result of the Player's actions and various in-game situations.
+The shake may be made to happen as a result of the Player's actions and various in-game situations.
 
 The shaking, besides being caused by a TraumaCauser-class node, may also be called through code - simply call add_trauma(trauma_amount: float)
 Important: a Collider must be added as a child of this Node when it's instantiated in a scene! It won't work otherwise."

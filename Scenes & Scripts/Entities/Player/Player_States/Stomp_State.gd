@@ -9,6 +9,7 @@ extends BasePlayerState
 @export var idle_state: BasePlayerState
 @export var walk_state: BasePlayerState
 @export var jump_state: BasePlayerState
+@export var walljump_state: BasePlayerState
 
 
 func enter() -> void:
@@ -33,6 +34,10 @@ func exit() -> void:
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:
+	## If the Player wants ot jump off the wall...
+	if Input.is_action_just_pressed("input_jump"):
+		if player.WallDetection.is_colliding():
+			return walljump_state
 	
 	return null
 
@@ -40,7 +45,7 @@ func input(event: InputEvent) -> BasePlayerState:
 func physics_process(delta) -> BasePlayerState:
 	
 	## Prepare the jump input buffer
-	## just_pressed makes this Input require timing, but _pressed, well, can just be pressed down
+	## just_pressed makes this Input require timing, but _pressed allows for hopping
 	if Input.is_action_just_pressed("input_jump"):
 		player.JumpBufferT.start()
 	
@@ -67,7 +72,7 @@ func physics_process(delta) -> BasePlayerState:
 		player.air_time = clampf(player.air_time, 1.0, 10.0)
 		player.PlayerCamera.add_trauma(trauma_amount * player.air_time)
 		
-		## If the jump button has been pressed within the buffer time, allow for an immediate jump
+		## If the jump button has been pressed within the buffer time, jump immediately
 		if !player.JumpBufferT.is_stopped():
 			
 			## HERE: This requires very precise Inputs; It should account for a few milisecond

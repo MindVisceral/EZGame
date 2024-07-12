@@ -24,7 +24,13 @@ extends BasePlayerState
 func enter() -> void:
 	super.enter()
 	
+	
 	player.in_air = true
+	
+	## The Player is falling now, but if they press the jump button before this Timer runs out,
+	## they will jump, despite not being grounded. This is coyote time and it's a gamefeel feature.
+	player.CoyoteTimeT.start()
+	
 	## The Player may want to do wall-related movement while in the air
 	player.WallDetection.enabled = true
 
@@ -40,11 +46,15 @@ func exit() -> void:
 func input(event: InputEvent) -> BasePlayerState:
 	if Input.is_action_just_pressed("input_crouch"):
 		return stomp_state
-	## If the Player wants to jump off the wall...
-	## NOTE: This has to be frame-perfect, because the wallrun_state is likely to trigger first
+	## If the Player wants to jump...
 	if Input.is_action_just_pressed("input_jump"):
+		## CoyoteTime takes priority; the Player will perform a regular jump
+		if !player.CoyoteTimeT.is_stopped():
+			return jump_state
+		## Otherwise, if coyote time doesn't apply, try to jump off the nearest wall
 		if player.WallDetection.is_colliding():
 			return walljump_state
+		
 	
 	return null
 

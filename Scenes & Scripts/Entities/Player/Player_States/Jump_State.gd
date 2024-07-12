@@ -65,7 +65,6 @@ func input(event: InputEvent) -> BasePlayerState:
 	if Input.is_action_just_pressed("input_crouch"):
 		return stomp_state
 	## If the Player wants to jump off the wall...
-	## NOTE: This has to be frame-perfect, because the wallrun_state is likely to trigger first
 	if Input.is_action_just_pressed("input_jump"):
 		if player.WallDetection.is_colliding():
 			return walljump_state
@@ -144,7 +143,7 @@ func physics_process(delta) -> BasePlayerState:
 		## Check if the Player is on floor...
 		if player.check_for_floor():
 			
-			## If the jump button has been pressed within the buffer time, allow for another jump
+			## If the jump button has been pressed within the buffer time, jump immediately
 			if !player.JumpBufferT.is_stopped():
 				return jump_state
 			
@@ -160,10 +159,8 @@ func physics_process(delta) -> BasePlayerState:
 		
 		## The Player isn't on the floor, so we check if they're near a wall...
 		elif player.WallDetection.is_colliding():
-			
 			## We check if the Player is moving up against the wall
 			if player.is_moving_at_wall():
-			
 				## The Player is near a wall, but are they falling?
 				if player.velocity.y <= 0:
 					## Since the Player is near a wall and is falling, we can make them run along it.

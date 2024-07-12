@@ -17,6 +17,7 @@ extends BasePlayerState
 @export var jump_state: BasePlayerState
 @export var stomp_state: BasePlayerState
 @export var wallrun_state: BasePlayerState
+@export var walljump_state: BasePlayerState
 
 ## Timer, so that the wall isn't detected immediately after a jump
 ## Check Editor description for an explanation
@@ -56,6 +57,9 @@ func input(event: InputEvent) -> BasePlayerState:
 	## If the Player wants to stomp back to the ground...
 	if Input.is_action_just_pressed("input_crouch"):
 		return stomp_state
+	## If the Player wants to walljump again...
+	#if Input.is_action_just_pressed("input_jump"):
+		#return walljump_state
 	
 	return null
 
@@ -123,6 +127,7 @@ func physics_process(delta) -> BasePlayerState:
 			
 			## If the jump button has been pressed within the buffer time, allow for another jump
 			if !player.JumpBufferT.is_stopped():
+				print("        REGULAR JUMP FROM WALLJUMP")
 				return jump_state
 			
 			## Otherwise (if the Player doesn't take the opportunity to jump)...
@@ -135,8 +140,13 @@ func physics_process(delta) -> BasePlayerState:
 			
 		## The Player isn't on the floor, so we check if they're near a wall...
 		elif player.WallDetection.is_colliding():
-			## The Player is near a wall, so we make them run on it.
-			return wallrun_state
+			## We check if the Player is moving up against the wall
+			if player.is_moving_at_wall():
+				## The Player is near a wall, but are they falling?
+				if player.velocity.y <= 0:
+					## Since the Player is near a wall and is falling, we can make them run along it.
+					## NOTE: WallJumping is detected on Input instead! This is only for WallRunning.
+					return wallrun_state
 			
 		
 	

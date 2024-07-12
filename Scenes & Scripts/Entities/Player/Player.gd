@@ -144,6 +144,7 @@ extends CharacterBody3D
 @onready var InteractionManager: PlayerInteractionManager = $Scripts/InteractionManager
 @onready var UIcontroller: Node = $Scripts/UIController
 @onready var JumpBufferT: Timer = $Timers/JumpBufferTimer
+@onready var CoyoteTimeT: Timer = $Timers/CoyoteTimeTimer
 @onready var Collider: CollisionShape3D = $Collider
 @onready var FeetCollider: CollisionShape3D = $FeetCollider
 @onready var WallDetection: ShapeCast3D = $WallDetectionCast

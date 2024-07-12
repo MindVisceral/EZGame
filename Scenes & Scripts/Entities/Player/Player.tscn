@@ -104,20 +104,22 @@ process_callback = 0
 wait_time = 0.05
 one_shot = true
 
-[node name="Fall" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "crouch_state", "stomp_state", "wallrun_state", "walljump_state")]
+[node name="Fall" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "crouch_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
 script = ExtResource("8_xbf4w")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 crouch_state = NodePath("../Crouch")
+jump_state = NodePath("../Jump")
 stomp_state = NodePath("../Stomp")
 wallrun_state = NodePath("../WallRun")
 walljump_state = NodePath("../WallJump")
 
-[node name="Stomp" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state")]
+[node name="Stomp" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "walljump_state")]
 script = ExtResource("8_fl03g")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 jump_state = NodePath("../Jump")
+walljump_state = NodePath("../WallJump")
 
 [node name="WallRun" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "fall_state", "stomp_state", "walljump_state")]
 script = ExtResource("9_encgj")
@@ -128,7 +130,7 @@ fall_state = NodePath("../Fall")
 stomp_state = NodePath("../Stomp")
 walljump_state = NodePath("../WallJump")
 
-[node name="WallJump" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "stomp_state", "wallrun_state")]
+[node name="WallJump" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
 script = ExtResource("10_gc6l4")
 speed_multiplier = 1.3
 idle_state = NodePath("../Idle")
@@ -136,6 +138,7 @@ walk_state = NodePath("../Walk")
 jump_state = NodePath("../Jump")
 stomp_state = NodePath("../Stomp")
 wallrun_state = NodePath("../WallRun")
+walljump_state = NodePath(".")
 
 [node name="WallTimer" type="Timer" parent="Scripts/StateManager/WallJump"]
 editor_description = "The WallDetection ShapeCast is used to check for a wall near the Player,
@@ -187,10 +190,21 @@ InteractableCast_range = 10.0
 [node name="Timers" type="Node" parent="."]
 
 [node name="JumpBufferTimer" type="Timer" parent="Timers"]
-editor_description = "Timer that allows to jump immediately after hitting the ground, if the jump button is pressed within 0.2s before hitting that ground
-Keep this Timer's around 0.2s for a nice, lean and forgivable jump
-Never reset this Timer, at least not on state exit(). Causes a bug when jump_state is re-enter()-ed, thus not allowing for another jump - implementation issue with how the Jump_state check for the ground, not planning on fixing it"
+editor_description = "Timer that allows to jump immediately after hitting the ground, if the jump button is pressed within wait_time before hitting that ground.
+Keep this Timer's around 0.2s for a nice, lean and forgivable jump.
+
+This Timer should be universal, as in, it should be independent from any states.
+Never reset this Timer, at least not on state exit(). Causes a bug when jump_state is re-enter()-ed, thus not allowing for another jump - implementation issue with how the Jump_state check for the ground; not planning on fixing it."
 wait_time = 0.2
+one_shot = true
+
+[node name="CoyoteTimeTimer" type="Timer" parent="Timers"]
+editor_description = "Timer that allows to jump soon after leaving the ground, if the jump button is pressed within wait_time right after leaving that ground.
+Keep this Timer's around 0.15s for a nice, but not jarring, coyote time jump.
+
+## NOTE: I don't know if this is an issue, this wasn't tested with this specific feature.
+Never reset this Timer, at least not on state exit(). Causes a bug when jump_state is re-enter()-ed, thus not allowing for another jump - implementation issue with how the Jump_state check for the ground, not planning on fixing it."
+wait_time = 0.15
 one_shot = true
 
 [node name="Collider" type="CollisionShape3D" parent="."]

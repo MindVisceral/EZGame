@@ -24,8 +24,6 @@ extends Camera3D
 ## NOTE: This is clamped and it's always a value between 0 and 1.
 var trauma = 0.0
 
-## A reference to the actual Camera
-@onready var Camera: Camera3D = $Camera
 ## We must keep track of this so the Camera returns to its proper rotation.
 @onready var initial_rotation: Vector3 = self.rotation_degrees
 
