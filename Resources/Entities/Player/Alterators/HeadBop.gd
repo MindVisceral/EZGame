@@ -178,15 +178,18 @@ func _do_head_bob(delta: float) -> Vector3:
 	var x_pos = (bob_curve.sample(cycle_position_x) * curve_multiplier.x * bob_range.x)
 	var y_pos = (bob_curve.sample(cycle_position_y) * curve_multiplier.y * bob_range.y)
 	
-	## Move the cycle by tick_speed so that the _pos variables will move smoothly next frame
+	## Used to move the cycle_position_x along the bob_curve
 	var tick_speed = (horizontal_velocity.length() * delta) / step_interval
+	## Actually move cycle_positions along the bob_curve
 	cycle_position_x += tick_speed
 	cycle_position_y += tick_speed * vertical_horizontal_ratio
 	
+	## When the end of the curve is reached, reset cycle_position
 	if(cycle_position_x > 1):
 		cycle_position_x -= 1
 	if(cycle_position_y > 1):
 		cycle_position_y -= 1
+	
 	
 	return Vector3(x_pos, y_pos, 0)
 

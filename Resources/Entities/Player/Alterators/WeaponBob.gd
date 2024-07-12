@@ -104,7 +104,7 @@ func _physics_process(delta: float) -> void:
 			
 			print(bobbing_node.position.x)
 		
-		## When jumped, reset bob
+		## When jumped, reset bob  ##HERE - temporary, do this for jump_bob_enabled
 		else:
 			bobbing_node.position = bobbing_node.position.lerp(original_position, delta * bob_multiplier)
 	
@@ -167,31 +167,29 @@ func better_bob(delta: float) -> Vector3:
 	## The position towards which the bobbing_node's position will be lerped
 	var new_pos: Vector3
 	
-	## Get which way the Player is moving in 3D space based on Input, without the Y axis.
+	## Get which way the Player is moving in 3D space based on Input
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
 	 "input_forwards", "input_backwards")
+	## Without the Y axis
 	var horizontal_velocity: Vector3 = Vector3(input_dir.x, 0, input_dir.y)
 	
 	## Weaponbob on the X axis only works when the Player is moving
 	## [and on the ground - check _physics_process]
 	if horizontal_velocity != Vector3.ZERO:
 		
-		### Get the position the bobbing_node will lerp towards on the X axis
-		#x_pos = (bob_curve.sample(cycle_position_x) * curve_multiplier.x * bob_range.x)
-		#
-		### Used to move the cycle_position_x along the bob_curve
-		#var tick_speed = (horizontal_velocity.length() * delta) / step_interval
-		### Actually move cycle_position_x along the bob_curve
-		#cycle_position_x += tick_speed
-		
-		## 
-		new_pos = Vector3(original_position.x + sin(Time.get_ticks_msec() * bob_speed) * bob_width, \
-			original_position.y, original_position.z)
+		## Make the bobbing_node move left and right
+		new_pos.x = original_position.x + sin(Time.get_ticks_msec() * bob_speed) * bob_width
+		## HERE - temporary
+		new_pos.y = original_position.y
+		new_pos.z = original_position.z
 		
 	## Otherwise, make the bobbing_node move towards its original_position
 	else:
-		print("HERE")
-		new_pos = original_position
+		
+		new_pos.x = original_position.x
+		## HERE - temporary
+		new_pos.y = original_position.y
+		new_pos.z = original_position.z
 	
 	return new_pos
 
