@@ -298,7 +298,7 @@ bullet_start_pos_node = NodePath("../../PlayerCamera")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00488281, 0.808258, 0)
 size = Vector3(1.6, 2.4, 1.6)
 
-[node name="PlayerAudio" type="Node" parent="."]
+[node name="PlayerAudio" type="Node3D" parent="."]
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="PlayerAudio"]
 max_polyphony = 2

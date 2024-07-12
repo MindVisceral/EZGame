@@ -1,7 +1,16 @@
+## @tool because we use configuration warnings for this node
+@tool
+
 class_name Teleporter
 extends StaticBody3D
 
-@export var teleport_target: Node3D
+@export var teleport_target: Node3D:
+	get:
+		return teleport_target
+	set(value):
+		teleport_target = value
+		if Engine.is_editor_hint():
+			update_configuration_warnings()
 @export var effects_colour: Color = Color("b291ff")
 
 @onready var particles: GPUParticles3D = $Particles
@@ -33,3 +42,10 @@ func _teleport_area_entered(thing: Node3D) -> void:
 					teleport_target.audio_player.play()
 				
 				thing.global_position = teleport_target.global_position
+
+
+
+func _get_configuration_warnings() -> PackedStringArray:
+	if teleport_target == null:
+		return ["Teleport target not set!"]
+	return []
