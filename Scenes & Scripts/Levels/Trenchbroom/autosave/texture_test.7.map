@@ -1,0 +1,270 @@
+// Game: Shooter
+// Format: Valve
+// entity 0
+{
+"mapversion" "220"
+"classname" "worldspawn"
+"_tb_textures" "textures;textures/Bricks;textures/Concrete;textures/Floor;textures/Ground;textures/Metal;textures/Panels;textures/Rocks;textures/Roof;textures/Shelves;textures/Tiles;textures/Walls;textures/Wood"
+"_tb_mod" "Scenes & Scripts"
+// brush 0
+{
+( -1536 -64 -32 ) ( -1536 -63 -32 ) ( -1536 -64 -31 ) Concrete/concrete_11 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -64 -1536 -32 ) ( -64 -1536 -31 ) ( -63 -1536 -32 ) Concrete/concrete_11 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -64 -64 -32 ) ( -63 -64 -32 ) ( -64 -63 -32 ) Concrete/concrete_11 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 64 64 0 ) ( 64 65 0 ) ( 65 64 0 ) Concrete/concrete_11 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 64 1664 0 ) ( 65 1664 0 ) ( 64 1664 1 ) Concrete/concrete_11 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1664 64 0 ) ( 1664 64 1 ) ( 1664 65 0 ) Concrete/concrete_11 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 1
+{
+( -512 192 64 ) ( -512 193 64 ) ( -512 192 65 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -512 192 64 ) ( -512 192 65 ) ( -511 192 64 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -512 192 64 ) ( -511 192 64 ) ( -512 193 64 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -480 576 240 ) ( -480 577 240 ) ( -479 576 240 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -480 576 96 ) ( -479 576 96 ) ( -480 576 97 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -480 576 96 ) ( -480 576 97 ) ( -480 577 96 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 2
+{
+( -256 448 160 ) ( -256 449 160 ) ( -256 448 161 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -256 448 160 ) ( -256 448 161 ) ( -255 448 160 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -256 448 160 ) ( -255 448 160 ) ( -256 449 160 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -224 832 336 ) ( -224 833 336 ) ( -223 832 336 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -224 832 192 ) ( -223 832 192 ) ( -224 832 193 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -224 832 192 ) ( -224 832 193 ) ( -224 833 192 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 3
+{
+( -512 704 224 ) ( -512 705 224 ) ( -512 704 225 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -512 704 224 ) ( -512 704 225 ) ( -511 704 224 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -512 704 224 ) ( -511 704 224 ) ( -512 705 224 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -480 1088 400 ) ( -480 1089 400 ) ( -479 1088 400 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -480 1088 256 ) ( -479 1088 256 ) ( -480 1088 257 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -480 1088 256 ) ( -480 1088 257 ) ( -480 1089 256 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 4
+{
+( -512 1088 -16 ) ( -512 1089 -16 ) ( -512 1088 -15 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -576 1088 -16 ) ( -576 1088 -15 ) ( -575 1088 -16 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -576 1088 160 ) ( -575 1088 160 ) ( -576 1089 160 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -256 1280 224 ) ( -256 1281 224 ) ( -255 1280 224 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -256 1344 48 ) ( -255 1344 48 ) ( -256 1344 49 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -224 1280 48 ) ( -224 1280 49 ) ( -224 1281 48 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 5
+{
+( -96 1088 96 ) ( -96 1089 96 ) ( -96 1088 97 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -96 1088 96 ) ( -96 1088 97 ) ( -95 1088 96 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -96 1088 0 ) ( -95 1088 0 ) ( -96 1089 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 32 1248 128 ) ( 32 1249 128 ) ( 33 1248 128 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 32 1344 128 ) ( 33 1344 128 ) ( 32 1344 129 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -32 1248 128 ) ( -32 1248 129 ) ( -32 1249 128 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 6
+{
+( -32 1088 64 ) ( -32 1089 64 ) ( -32 1088 65 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -32 1088 64 ) ( -32 1088 65 ) ( -31 1088 64 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -32 1088 0 ) ( -31 1088 0 ) ( -32 1089 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 0 1408 96 ) ( 0 1409 96 ) ( 1 1408 96 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 0 1344 96 ) ( 1 1344 96 ) ( 0 1344 97 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 32 1408 96 ) ( 32 1408 97 ) ( 32 1409 96 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 7
+{
+( 32 1088 32 ) ( 32 1089 32 ) ( 32 1088 33 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 32 1088 32 ) ( 32 1088 33 ) ( 33 1088 32 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 32 1088 0 ) ( 33 1088 0 ) ( 32 1089 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 64 1344 64 ) ( 64 1345 64 ) ( 65 1344 64 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 64 1344 64 ) ( 65 1344 64 ) ( 64 1344 65 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 96 1344 64 ) ( 96 1344 65 ) ( 96 1345 64 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 8
+{
+( -224 1088 128 ) ( -224 1089 128 ) ( -224 1088 129 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -192 1088 128 ) ( -192 1088 129 ) ( -191 1088 128 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -192 1088 0 ) ( -191 1088 0 ) ( -192 1089 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -128 1344 192 ) ( -128 1345 192 ) ( -127 1344 192 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -128 1344 160 ) ( -127 1344 160 ) ( -128 1344 161 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -160 1088 128 ) ( -160 1088 160 ) ( -160 1216 160 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 9
+{
+( -160 1088 128 ) ( -160 1216 160 ) ( -160 1088 160 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -192 1088 128 ) ( -192 1088 129 ) ( -191 1088 128 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -192 1088 0 ) ( -191 1088 0 ) ( -192 1089 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -128 1344 160 ) ( -128 1345 160 ) ( -127 1344 160 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -128 1344 160 ) ( -127 1344 160 ) ( -128 1344 161 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -96 1344 160 ) ( -96 1344 161 ) ( -96 1345 160 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 10
+{
+( 96 1088 0 ) ( 96 1089 0 ) ( 96 1088 1 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 96 1088 0 ) ( 96 1088 1 ) ( 97 1088 0 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 96 1088 0 ) ( 97 1088 0 ) ( 96 1089 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 128 1344 32 ) ( 128 1345 32 ) ( 129 1344 32 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 128 1344 32 ) ( 129 1344 32 ) ( 128 1344 33 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 160 1344 32 ) ( 160 1344 33 ) ( 160 1345 32 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 11
+{
+( -512 0 0 ) ( -512 1 0 ) ( -512 0 1 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -512 -192 0 ) ( -512 -192 1 ) ( -511 -192 0 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -512 0 0 ) ( -511 0 0 ) ( -512 1 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -320 64 32 ) ( -320 65 32 ) ( -319 64 32 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -320 64 32 ) ( -319 64 32 ) ( -320 64 33 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -224 64 32 ) ( -224 64 33 ) ( -224 65 32 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 12
+{
+( -512 1216 224 ) ( -512 1217 224 ) ( -512 1216 225 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -512 1088 224 ) ( -512 1088 225 ) ( -511 1088 224 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -512 1216 224 ) ( -511 1216 224 ) ( -512 1217 224 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -480 1344 512 ) ( -480 1345 512 ) ( -479 1344 512 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -480 1344 256 ) ( -479 1344 256 ) ( -480 1344 257 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -480 1344 256 ) ( -480 1344 257 ) ( -480 1345 256 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 13
+{
+( -480 1312 224 ) ( -480 1313 224 ) ( -480 1312 225 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -480 1312 224 ) ( -480 1312 225 ) ( -479 1312 224 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -480 1312 224 ) ( -479 1312 224 ) ( -480 1313 224 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -384 1344 512 ) ( -384 1345 512 ) ( -383 1344 512 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -384 1344 256 ) ( -383 1344 256 ) ( -384 1344 257 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -352 1344 256 ) ( -352 1344 257 ) ( -352 1345 256 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 14
+{
+( -480 1312 128 ) ( -480 1313 128 ) ( -480 1312 129 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -480 1312 128 ) ( -480 1312 129 ) ( -479 1312 128 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -480 1312 0 ) ( -479 1312 0 ) ( -480 1313 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -352 1344 160 ) ( -352 1345 160 ) ( -351 1344 160 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -352 1344 160 ) ( -351 1344 160 ) ( -352 1344 161 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -352 1344 160 ) ( -352 1344 161 ) ( -352 1345 160 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 15
+{
+( -512 1216 128 ) ( -512 1217 128 ) ( -512 1216 129 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -512 1216 128 ) ( -512 1216 129 ) ( -511 1216 128 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -512 1216 0 ) ( -511 1216 0 ) ( -512 1217 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -480 1344 160 ) ( -480 1345 160 ) ( -479 1344 160 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( -480 1344 160 ) ( -479 1344 160 ) ( -480 1344 161 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -480 1344 160 ) ( -480 1344 161 ) ( -480 1345 160 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 16
+{
+( 896 832 0 ) ( 896 833 0 ) ( 896 832 1 ) Bricks/brick_rough_blue [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 896 832 0 ) ( 896 832 1 ) ( 897 832 0 ) Bricks/brick_rough_blue [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 896 832 0 ) ( 897 832 0 ) ( 896 833 0 ) Bricks/brick_rough_blue [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 960 1408 4096 ) ( 960 1409 4096 ) ( 961 1408 4096 ) Bricks/brick_rough_blue [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 960 1408 64 ) ( 961 1408 64 ) ( 960 1408 65 ) Bricks/brick_rough_blue [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1024 1408 64 ) ( 1024 1408 65 ) ( 1024 1409 64 ) Bricks/brick_rough_blue [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 17
+{
+( 1280 832 0 ) ( 1280 833 0 ) ( 1280 832 1 ) Bricks/brick_rough_blue [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1280 832 0 ) ( 1280 832 1 ) ( 1281 832 0 ) Bricks/brick_rough_blue [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1280 832 0 ) ( 1281 832 0 ) ( 1280 833 0 ) Bricks/brick_rough_blue [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1344 1408 4096 ) ( 1344 1409 4096 ) ( 1345 1408 4096 ) Bricks/brick_rough_blue [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1344 1408 64 ) ( 1345 1408 64 ) ( 1344 1408 65 ) Bricks/brick_rough_blue [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1408 1408 64 ) ( 1408 1408 65 ) ( 1408 1409 64 ) Bricks/brick_rough_blue [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 18
+{
+( 896 -1280 0 ) ( 896 -1279 0 ) ( 896 -1280 1 ) Bricks/brick_rough_blue [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 896 -1280 0 ) ( 896 -1280 1 ) ( 897 -1280 0 ) Bricks/brick_rough_blue [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 896 -1280 0 ) ( 897 -1280 0 ) ( 896 -1279 0 ) Bricks/brick_rough_blue [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 960 -704 10048 ) ( 960 -703 10048 ) ( 961 -704 10048 ) Bricks/brick_rough_blue [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 960 -704 64 ) ( 961 -704 64 ) ( 960 -704 65 ) Bricks/brick_rough_blue [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1024 -704 64 ) ( 1024 -704 65 ) ( 1024 -703 64 ) Bricks/brick_rough_blue [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 19
+{
+( 1280 -1280 0 ) ( 1280 -1279 0 ) ( 1280 -1280 1 ) Bricks/brick_rough_blue [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1280 -1280 0 ) ( 1280 -1280 1 ) ( 1281 -1280 0 ) Bricks/brick_rough_blue [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1280 -1280 0 ) ( 1281 -1280 0 ) ( 1280 -1279 0 ) Bricks/brick_rough_blue [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1344 -704 10048 ) ( 1344 -703 10048 ) ( 1345 -704 10048 ) Bricks/brick_rough_blue [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1344 -704 64 ) ( 1345 -704 64 ) ( 1344 -704 65 ) Bricks/brick_rough_blue [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1408 -704 64 ) ( 1408 -704 65 ) ( 1408 -703 64 ) Bricks/brick_rough_blue [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 20
+{
+( 608 1312 0 ) ( 608 1313 0 ) ( 608 1312 1 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 832 1312 0 ) ( 832 1312 1 ) ( 833 1312 0 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 832 1312 0 ) ( 833 1312 0 ) ( 832 1313 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 896 1344 32 ) ( 896 1345 32 ) ( 897 1344 32 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 896 1344 32 ) ( 897 1344 32 ) ( 896 1344 33 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 896 1344 32 ) ( 896 1344 33 ) ( 896 1345 32 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 21
+{
+( 736 1344 0 ) ( 736 1345 0 ) ( 736 1344 1 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 736 1344 0 ) ( 736 1344 1 ) ( 737 1344 0 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 736 1344 0 ) ( 737 1344 0 ) ( 736 1345 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 768 1408 168 ) ( 768 1409 168 ) ( 769 1408 168 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 768 1376 32 ) ( 769 1376 32 ) ( 768 1376 33 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 768 1408 32 ) ( 768 1408 33 ) ( 768 1409 32 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 22
+{
+( 1024 960 0 ) ( 1024 961 0 ) ( 1024 960 1 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1024 960 0 ) ( 1024 960 1 ) ( 1025 960 0 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1024 960 0 ) ( 1025 960 0 ) ( 1024 961 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1088 992 128 ) ( 1088 993 128 ) ( 1089 992 128 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1088 992 32 ) ( 1089 992 32 ) ( 1088 992 33 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1088 992 32 ) ( 1088 992 33 ) ( 1088 993 32 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 23
+{
+( 1024 1152 0 ) ( 1024 1153 0 ) ( 1024 1152 1 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1024 1152 0 ) ( 1024 1152 1 ) ( 1025 1152 0 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1024 1152 0 ) ( 1025 1152 0 ) ( 1024 1153 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1088 1184 192 ) ( 1088 1185 192 ) ( 1089 1184 192 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1088 1184 32 ) ( 1089 1184 32 ) ( 1088 1184 33 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1088 1184 32 ) ( 1088 1184 33 ) ( 1088 1185 32 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 24
+{
+( 1024 1056 0 ) ( 1024 1057 0 ) ( 1024 1056 1 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1024 1056 0 ) ( 1024 1056 1 ) ( 1025 1056 0 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1024 1056 0 ) ( 1025 1056 0 ) ( 1024 1057 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1088 1088 160 ) ( 1088 1089 160 ) ( 1089 1088 160 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1088 1088 32 ) ( 1089 1088 32 ) ( 1088 1088 33 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1088 1088 32 ) ( 1088 1088 33 ) ( 1088 1089 32 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 25
+{
+( 1024 1344 0 ) ( 1024 1345 0 ) ( 1024 1344 1 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1024 1344 0 ) ( 1024 1344 1 ) ( 1025 1344 0 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1024 1344 0 ) ( 1025 1344 0 ) ( 1024 1345 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1088 1376 256 ) ( 1088 1377 256 ) ( 1089 1376 256 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1088 1376 32 ) ( 1089 1376 32 ) ( 1088 1376 33 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1088 1376 32 ) ( 1088 1376 33 ) ( 1088 1377 32 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 26
+{
+( 1024 1248 0 ) ( 1024 1249 0 ) ( 1024 1248 1 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1024 1248 0 ) ( 1024 1248 1 ) ( 1025 1248 0 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1024 1248 0 ) ( 1025 1248 0 ) ( 1024 1249 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1088 1280 224 ) ( 1088 1281 224 ) ( 1089 1280 224 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1088 1280 32 ) ( 1089 1280 32 ) ( 1088 1280 33 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1088 1280 32 ) ( 1088 1280 33 ) ( 1088 1281 32 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 27
+{
+( 1024 864 0 ) ( 1024 865 0 ) ( 1024 864 1 ) Concrete/conrete_painted_blue_dirty_01 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1024 864 0 ) ( 1024 864 1 ) ( 1025 864 0 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1024 864 0 ) ( 1025 864 0 ) ( 1024 865 0 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1088 896 96 ) ( 1088 897 96 ) ( 1089 896 96 ) Concrete/conrete_painted_blue_dirty_01 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 1088 896 32 ) ( 1089 896 32 ) ( 1088 896 33 ) Concrete/conrete_painted_blue_dirty_01 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1088 896 32 ) ( 1088 896 33 ) ( 1088 897 32 ) Concrete/conrete_painted_blue_dirty_01 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+// brush 28
+{
+( 384 1472 0 ) ( 384 1473 0 ) ( 384 1472 1 ) Bricks/brick_rough_blue [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 384 1472 0 ) ( 384 1472 1 ) ( 385 1472 0 ) Bricks/brick_rough_blue [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 384 1472 0 ) ( 385 1472 0 ) ( 384 1473 0 ) Bricks/brick_rough_blue [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 448 1536 3680 ) ( 448 1537 3680 ) ( 449 1536 3680 ) Bricks/brick_rough_blue [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 448 1536 16 ) ( 449 1536 16 ) ( 448 1536 17 ) Bricks/brick_rough_blue [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 448 1536 16 ) ( 448 1536 17 ) ( 448 1537 16 ) Bricks/brick_rough_blue [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+}

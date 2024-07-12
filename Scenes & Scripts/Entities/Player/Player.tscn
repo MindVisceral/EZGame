@@ -207,6 +207,17 @@ Never reset this Timer, at least not on state exit(). Causes a bug when jump_sta
 wait_time = 0.15
 one_shot = true
 
+[node name="StompJumpTimer" type="Timer" parent="Timers"]
+editor_description = "Timer that allows the jump to be much higher if it's performed very soon after exiting the Stomp state.
+Keep this Timer's around 0.2s for forgivable stomp jump timing; should probably be similiar to JumpBufferTimer's wait_time.
+
+This Timer should be universal, as in, it should be independent from any states.
+
+## NOTE: This is untested, no idea.
+Never reset this Timer, at least not on state exit(). Causes a bug when jump_state is re-enter()-ed, thus not allowing for another jump - implementation issue with how the Jump_state check for the ground; not planning on fixing it."
+wait_time = 0.2
+one_shot = true
+
 [node name="Collider" type="CollisionShape3D" parent="."]
 editor_description = "Main body Collider for the Player
 Its height can be changed through the HeightAlternator"

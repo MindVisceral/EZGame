@@ -12,8 +12,16 @@ extends BasePlayerState
 @export var walljump_state: BasePlayerState
 
 
+## We store the vertical value of the global position of the Player
+## at the time the Stomp state is entered. This is used to make stomp jumps higher.
+var stomp_start_vertical_point: float
+
+
+
 func enter() -> void:
 	super.enter()
+	
+	stomp_start_vertical_point = player.global_position.y
 	
 	player.in_air = true
 	## The Player may want to do wall-related movement while in the air
@@ -23,9 +31,17 @@ func enter() -> void:
 	player.velocity = Vector3.ZERO
 	## Apply stomp impulse
 	player.velocity.y -= player.stomp_strength * player.gravity * BulletTime.time_scale
+	
+	
 
 func exit() -> void:
 	super.exit()
+	
+	## Stomp is done for one reason or another, so we calcualte how far the Player has fallen down
+	player.stomp_vertical_distance = abs(stomp_start_vertical_point - player.global_position.y)
+	## And we start the StompJumpTimer, it's needed for the jump to work as we want it to.
+	player.StompJumpT.start()
+	
 	
 	player.in_air = false
 	player.air_time = 0.0
@@ -74,12 +90,6 @@ func physics_process(delta) -> BasePlayerState:
 		
 		## If the jump button has been pressed within the buffer time, jump immediately
 		if !player.JumpBufferT.is_stopped():
-			
-			## HERE: This requires very precise Inputs; It should account for a few milisecond
-			## HERE: after touching the ground too.
-			## The jump_height_multiplier is only applied to the very next jump
-			player.jump_height_multiplier = 1.0 + abs(player.velocity.y) + player.air_time
-			
 			return jump_state
 		
 		## Otherwise (if the Player doesn't take the opportunity to jump)...

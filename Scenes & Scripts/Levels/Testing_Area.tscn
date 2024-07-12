@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://bg2u2fljqhcdk"]
+[gd_scene load_steps=69 format=3 uid="uid://bg2u2fljqhcdk"]
 
 [ext_resource type="Script" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1_hxp6x"]
 [ext_resource type="Material" uid="uid://o0b4tbh6yup4" path="res://addons/character-controller/example/main/materials/rock.tres" id="2_2haa3"]
@@ -291,6 +291,11 @@ resource_local_to_scene = true
 next_pass = SubResource("ShaderMaterial_h5aoq")
 albedo_color = Color(0.513726, 0, 0, 1)
 
+[sub_resource type="BoxMesh" id="BoxMesh_k0pet"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_q5qop"]
+size = Vector3(2, 2, 2)
+
 [node name="Testing_Area" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -528,8 +533,17 @@ teleport_target = NodePath("../../BigWall/BigWallMarker")
 [node name="Tremor" parent="Map_elements" instance=ExtResource("11_2x63x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.2367, 0, 30.1397)
 
+[node name="OneMeterCube" type="MeshInstance3D" parent="Map_elements"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.5, 0.5, 8.5)
+mesh = SubResource("BoxMesh_k0pet")
+
+[node name="TwoMeterCube" type="MeshInstance3D" parent="Map_elements"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67, 1, 7)
+mesh = SubResource("BoxMesh_q5qop")
+
 [node name="Player" parent="." instance=ExtResource("6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.3081, 0, 36.2515)
+stomp_jump_height_limit = 82.5
 
 [node name="Yellow Puppet" parent="." instance=ExtResource("4_23xl4")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

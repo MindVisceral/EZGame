@@ -40,7 +40,7 @@ extends CharacterBody3D
 ## Player base speed
 ## All states use this base variable, instead modify the state's multiplier
 ## if you want to change movement speed.
-@export var speed: float = 11
+@export var speed: float = 11.0
 
 ## Sets control in the air; the lower the number, the less control there is
 ## HERE: TO BE DEPRICATED - this doesn't mesh well with ULTRAKILL-like movement
@@ -95,25 +95,29 @@ extends CharacterBody3D
 @export_group("Jump")
 
 ## Jump impulse height in units. Applied once on enter()
-@export var jump_height: float = 14
+@export var jump_height: float = 14.0
 
 
 @export_group("Stomp")
 
 ## Stomp impulse in units. Applied once on enter()
-@export var stomp_strength: float = 50
+@export var stomp_strength: float = 50.0
+
+## The maximum height the Player may jump when performing a stomp jump
+## 230 meters is the limit, but setting this to (96.5 - jump_height)grants that desired height
+@export var stomp_jump_height_limit: float = 82.5
 
 
 @export_group("Wall-running, -jumping, -sliding")
 
 ## The vertical height of the jump from the wall
 ## NOTE: This is !added! to the Player's Y velocity
-@export var wall_jump_height: float = 14
+@export var wall_jump_height: float = 14.0
 
 ## The horizontal power of the jump away from the wall
 ## NOTE: This is !multiplied! by the wall's normal,
 ## NOTE: which is fine because the normal is always either 0 or 1
-@export var wall_jump_distance: float = 17
+@export var wall_jump_distance: float = 17.0
 
 ## When the Player is on a wall, they fall down slower
 ## The lower the number, the slower they fall down.
@@ -145,6 +149,7 @@ extends CharacterBody3D
 @onready var UIcontroller: Node = $Scripts/UIController
 @onready var JumpBufferT: Timer = $Timers/JumpBufferTimer
 @onready var CoyoteTimeT: Timer = $Timers/CoyoteTimeTimer
+@onready var StompJumpT: Timer = $Timers/StompJumpTimer
 @onready var Collider: CollisionShape3D = $Collider
 @onready var FeetCollider: CollisionShape3D = $FeetCollider
 @onready var WallDetection: ShapeCast3D = $WallDetectionCast
@@ -161,8 +166,8 @@ extends CharacterBody3D
 ## Player stats
 @export_group("Stats")
 
-@export var MAX_HEALTH = 150
-@export var health = 100
+@export_range(0.5, 250, 0.5) var MAX_HEALTH: float = 150
+@export_range(0.5, 250, 0.5) var health: float = 100
 #
 
 ###-------------------------------------------------------------------------###
@@ -185,9 +190,11 @@ var direction: Vector3 = Vector3()
 ## Used in gravity code in all states; the longer the time, the faster the Player falls
 var air_time: float = 0.0
 
-## How many times higher the next jump should be.
-## Used to make ground jumps higher after jumping right after a stomp
-var jump_height_multiplier: float = 1.0
+## The distance between the point from which the Player started a stomp, and the ground they hit.
+## Set in the stomp script, used in the jump script to make the very next jump after a stomp
+## reach the stomp's start height.
+## Limited by stomp_jump_height_limit in the jump state script on enter()
+var stomp_vertical_distance: float = 0.0
 
 
 ## Current counter used to calculate next step.

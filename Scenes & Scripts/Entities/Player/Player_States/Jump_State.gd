@@ -43,10 +43,13 @@ func enter() -> void:
 	## Start the timer
 	ground_timer.start()
 	
-	## Apply jump impulse
-	player.velocity.y += player.jump_height * player.jump_height_multiplier
-	## Reset jump_height_multiplier
-	player.jump_height_multiplier = 1.0
+	## Apply jump impulse; jump_height is added, and stomp_vertical_distance too, but only if
+	## this jump has been performed within StompJumpTimer's wait_time
+	player.velocity.y += player.jump_height + \
+							(minf(player.stomp_vertical_distance, player.stomp_jump_height_limit) * \
+							float(!player.StompJumpT.is_stopped()))
+	## Reset stomp_vertical_distance
+	player.stomp_vertical_distance = 0.0
 
 func exit() -> void:
 	super.exit()
