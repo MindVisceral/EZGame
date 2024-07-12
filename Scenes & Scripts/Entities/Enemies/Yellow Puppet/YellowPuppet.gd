@@ -12,5 +12,4 @@ func _process(delta: float) -> void:
 func handle_hit(hit_point: Vector3) -> void:
 	super(hit_point)
 	
-	print("WORKED?")
 	States.change_state(States.states[1])
