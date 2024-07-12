@@ -409,8 +409,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.4307, 0, 44.6259)
 teleport_target = NodePath(".")
 effects_colour = Color(0.486275, 0.745098, 0.231373, 1)
 
+[node name="TeleporterStairs" parent="Map_elements" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.9486, 0, 31.9903)
+teleport_target = NodePath("../TeleporterWalls")
+effects_colour = Color(0.027451, 0.772549, 0.956863, 1)
+
+[node name="TeleporterWalls" parent="Map_elements" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.877, 14.0149, -19.5246)
+teleport_target = NodePath("../TeleporterStairs")
+effects_colour = Color(0, 0.305882, 0.611765, 1)
+
 [node name="Player" parent="." instance=ExtResource("6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 77.9582, 14.0407, -24.4241)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.3081, 0, 36.2515)
 
 [node name="Yellow Puppet" parent="." instance=ExtResource("4_23xl4")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

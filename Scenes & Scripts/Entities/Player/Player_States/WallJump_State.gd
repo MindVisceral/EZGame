@@ -17,7 +17,10 @@ extends BasePlayerState
 @export var jump_state: BasePlayerState
 @export var stomp_state: BasePlayerState
 @export var wallrun_state: BasePlayerState
-@export var walljump_state: BasePlayerState
+
+## Timer, so that the wall isn't detected immediately after a jump
+## Check Editor description for an explanation
+@onready var wall_timer: Timer = $WallTimer
 
 func enter() -> void:
 	super.enter()
@@ -25,6 +28,9 @@ func enter() -> void:
 	player.in_air = true
 	## The Player may want to do wall-related movement while in the air
 	player.WallDetection.enabled = true
+	
+	## Start the timer
+	wall_timer.start()
 	
 	## Calculate and apply jump impulse (depending on the wall's normal)
 	player.velocity += wall_normal_check()
@@ -36,6 +42,9 @@ func exit() -> void:
 	player.air_time = 0.0
 	
 	player.WallDetection.enabled = false
+	
+	## Reset ground timer
+	wall_timer.stop()
 
 
 ## When a movement button is pressed, change to a corresponding State node
@@ -43,11 +52,6 @@ func input(event: InputEvent) -> BasePlayerState:
 	## If the Player wants to stomp back to the ground...
 	if Input.is_action_just_pressed("input_crouch"):
 		return stomp_state
-	## If the Player wants to jump off the wall...
-	## NOTE: This has to be frame-perfect, because the wallrun_state is likely to trigger first
-	if Input.is_action_just_pressed("input_jump"):
-		if player.WallDetection.is_colliding():
-			return walljump_state
 	
 	return null
 
@@ -105,31 +109,34 @@ func physics_process(delta) -> BasePlayerState:
 	## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
 	player.velocity.y -= player.gravity * BulletTime.time_scale * delta \
 						+ (player.gravity * player.air_time)
+	
 	## Increase air_time, thus increasing gravity until the ground is reached.
 	player.air_time += delta * player.air_time_multiplier
 	
 	
-	## Check if the Player is on floor...
-	if player.check_for_floor():
+	## A short time after the Shapecast leaves the wall...
+	if wall_timer.is_stopped():
+		## Check if the Player is on floor...
+		if player.check_for_floor():
+			
+			## If the jump button has been pressed within the buffer time, allow for another jump
+			if !player.JumpBufferT.is_stopped():
+				return jump_state
+			
+			## Otherwise (if the Player doesn't take the opportunity to jump)...
+			## If the Player stops moving around, return to Idle state. The Y axis is ignored
+			elif Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
+				return idle_state
+			## Otherwise, keep on walking
+			else:
+				return walk_state
+			
+		## The Player isn't on the floor, so we check if they're near a wall...
+		elif player.WallDetection.is_colliding():
+			## The Player is near a wall, so we make them run on it.
+			return wallrun_state
+			
 		
-		## If the jump button has been pressed within the buffer time, allow for another jump
-		if !player.JumpBufferT.is_stopped():
-			return jump_state
-		
-		## Otherwise (if the Player doesn't take the opportunity to jump)...
-		## If the Player stops moving around, return to Idle state. The Y axis is ignored
-		elif Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
-			return idle_state
-		## Otherwise, keep on walking
-		else:
-			return walk_state
-		
-	## The Player isn't on the floor, so we check if they're near a wall...
-	elif player.WallDetection.is_colliding():
-		## The Player is near a wall, so we make them run on it.
-		return wallrun_state
-		
-	
 	
 	
 	return null
@@ -140,14 +147,16 @@ func wall_normal_check() -> Vector3:
 	## The direction in which the Player will jump away from the wall
 	var jump_direction: Vector3 = Vector3.ZERO
 	
+	var wall_normal_result: Vector3 = player.find_closest_wall_normal()
+	
 	## Horizontal calculations;
 	## Multiplying is fine here, because the normal is always either 0 or 1
-	jump_direction.x = player.find_closest_wall_normal().x * player.wall_jump_distance
-	jump_direction.z = player.find_closest_wall_normal().z * player.wall_jump_distance
-	
+	jump_direction.x = wall_normal_result.x * player.wall_jump_distance
+	jump_direction.z = wall_normal_result.z * player.wall_jump_distance
 	
 	## Vertical impulse;
 	## We must add the height value and not multiply it
 	jump_direction.y += player.wall_jump_height
 	
+	## Return the jump direction away from the normal of the nearest wall
 	return jump_direction

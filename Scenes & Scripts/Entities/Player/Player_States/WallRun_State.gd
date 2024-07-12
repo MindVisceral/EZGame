@@ -48,7 +48,7 @@ func input(event: InputEvent) -> BasePlayerState:
 func physics_process(delta) -> BasePlayerState:
 	
 	## We need the closest's wall's normal to make the Player run along it.
-	player.find_closest_wall_normal()
+	#player.find_closest_wall_normal()
 	
 	## The direction of Player movement based on Input
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
@@ -70,8 +70,13 @@ func physics_process(delta) -> BasePlayerState:
 	
 	## Apply gravity (which is the Globals' gravity * multiplier)
 	## Affected by running on the wall; falling is slowed down by that.
+	## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
 	player.velocity.y -= player.gravity * player.wall_sliding_deceleration \
-						* BulletTime.time_scale * delta
+						* BulletTime.time_scale * delta \
+						+ (player.gravity * player.air_time)
+	## Increase air_time, thus increasing gravity until the ground is reached.
+	player.air_time += delta * player.air_time_multiplier
+
 	
 	
 	## If the Player fell off the wall, they start to fall

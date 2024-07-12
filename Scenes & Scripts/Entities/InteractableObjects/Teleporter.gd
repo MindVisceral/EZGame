@@ -20,16 +20,14 @@ func _ready() -> void:
 func _teleport_area_entered(thing: Node3D) -> void:
 	if thing:
 		if teleport_cooldown.is_stopped():
-			
-			## Play Teleporter effects
-			audio_player.play()
-			
-			## Start the cooldown
-			## NOTE: Unneccesary - only useful if the teleport_target is a Teleporter too
-			teleport_cooldown.start()
-			
-			## If a target is set, teleport the thing to that target's position.
+			## If a target is set, teleport the thing to that target's position and play effects
 			if teleport_target:
+				## Play Teleporter effects
+				audio_player.play()
+				## Start the cooldown
+				## NOTE: Sometimes unneccesary - only useful if the teleport_target is a Teleporter
+				teleport_cooldown.start()
+				
 				if teleport_target is Teleporter:
 					teleport_target.teleport_cooldown.start()
 					teleport_target.audio_player.play()

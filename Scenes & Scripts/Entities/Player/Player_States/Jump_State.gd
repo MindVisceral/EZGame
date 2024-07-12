@@ -156,9 +156,11 @@ func physics_process(delta) -> BasePlayerState:
 			
 		## The Player isn't on the floor, so we check if they're near a wall...
 		elif player.WallDetection.is_colliding():
-			## The Player is near a wall, so we make them run on it.
-			## NOTE: WallJumping is detected on Input instead! This is only for WallRunning.
-			return wallrun_state
+			## The Player is near a wall, but are they falling?
+			if player.velocity.y <= 0:
+				## Since the Player is near a wall and is falling, we can make them run along it.
+				## NOTE: WallJumping is detected on Input instead! This is only for WallRunning.
+				return wallrun_state
 		
 	
 	return null
