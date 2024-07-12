@@ -126,6 +126,7 @@ extends CharacterBody3D
 #@onready var Firearms: Marker3D = $Head/Firearms
 #@onready var Firearms: Marker3D = $Firearms
 @onready var Camera: Camera3D = $Head/BobbingNode/PlayerCamera
+@onready var InteractableCast: ShapeCast3D = $Head/BobbingNode/InteractableCast
 @onready var TPMarker: Marker3D = $Head/BobbingNode/TPMarker
 
 ## Player stats

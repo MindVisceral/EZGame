@@ -1,9 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfg5rcmoasv08"]
+[gd_scene load_steps=8 format=3 uid="uid://dfg5rcmoasv08"]
 
 [ext_resource type="PackedScene" uid="uid://nf1bgcn3f8w0" path="res://Scenes & Scripts/Entities/Entity Elements/Interactable.tscn" id="1_0hf3u"]
 [ext_resource type="Script" path="res://lamp_test.gd" id="1_psx1e"]
+[ext_resource type="Shader" path="res://outline.gdshader" id="1_rbn4i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1khk6"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_rbn4i")
+shader_parameter/border_width = 0.0
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pattern = false
+shader_parameter/line_number = null
+shader_parameter/line_sharpness = null
+shader_parameter/pulse = null
+shader_parameter/pulse_speed = null
+shader_parameter/line_movement = null
+shader_parameter/line_movement_speed = null
+shader_parameter/wave = null
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kxqo7"]
+resource_local_to_scene = true
+next_pass = SubResource("ShaderMaterial_1khk6")
 albedo_color = Color(0.513726, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_y4xh1"]
@@ -22,13 +40,16 @@ light_energy = 4.0
 light_cull_mask = 4294966273
 shadow_enabled = true
 
-[node name="Interactable" parent="." node_paths=PackedStringArray("interactable_object") instance=ExtResource("1_0hf3u")]
-interactable_object = NodePath("..")
+[node name="Interactable" parent="." instance=ExtResource("1_0hf3u")]
 
 [node name="CollisionShape3D" parent="Interactable" index="0"]
 shape = SubResource("BoxShape3D_y4xh1")
 
 [node name="CollisionShape3D" parent="Interactable/InteractableRange" index="0"]
 shape = SubResource("BoxShape3D_r4qte")
+
+[connection signal="focused" from="Interactable" to="." method="_on_focused"]
+[connection signal="interact" from="Interactable" to="." method="_on_interact"]
+[connection signal="unfocused" from="Interactable" to="." method="_on_unfocused"]
 
 [editable path="Interactable"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bg2u2fljqhcdk"]
+[gd_scene load_steps=28 format=3 uid="uid://bg2u2fljqhcdk"]
 
 [ext_resource type="Texture2D" uid="uid://dmjhoaedtxskg" path="res://Decal_tex.png" id="1"]
 [ext_resource type="Material" uid="uid://o0b4tbh6yup4" path="res://addons/character-controller/example/main/materials/rock.tres" id="2_2haa3"]
@@ -28,22 +28,225 @@ data = PackedVector3Array(-4, 2, 2, 4, 2, 2, -4, -2, 2, 4, 2, 2, 4, -2, 2, -4, -
 [sub_resource type="BoxMesh" id="BoxMesh_bepso"]
 size = Vector3(8, 4, 4)
 
+[sub_resource type="GDScript" id="GDScript_4bvp3"]
+script/source = "extends StaticBody3D
+
+@onready var original_albdeo = $MeshInstance3D.mesh.material.albedo_color
+@onready var current_alpha = $MeshInstance3D.mesh.material.albedo_color.a
+
+func _on_interactable_interact() -> void:
+	$MeshInstance3D.mesh.material.albedo_color.a -= 0.05
+	current_alpha = $MeshInstance3D.mesh.material.albedo_color.a
+
+
+##
+func _on_interactable_focused() -> void:
+	$MeshInstance3D.mesh.material.albedo_color = Color.LIGHT_CORAL
+	$MeshInstance3D.mesh.material.albedo_color.a = current_alpha
+#
+func _on_interactable_unfocused() -> void:
+	$MeshInstance3D.mesh.material.albedo_color = original_albdeo
+	$MeshInstance3D.mesh.material.albedo_color.a = current_alpha
+"
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_o58sf"]
 size = Vector3(4, 4, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ak28t"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ekc1"]
 transparency = 1
-albedo_color = Color(1, 1, 1, 0.207843)
+albedo_color = Color(1, 1, 1, 0.333333)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2txwi"]
-material = SubResource("StandardMaterial3D_ak28t")
+material = SubResource("StandardMaterial3D_5ekc1")
 size = Vector3(4, 4, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_huvru"]
 size = Vector3(4, 4, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vg4sb"]
-size = Vector3(10, 10, 10)
+size = Vector3(5, 5, 5)
+
+[sub_resource type="Shader" id="Shader_xjvxh"]
+resource_local_to_scene = true
+code = "//Copyright 2021 redvillusion
+//
+//Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files 
+//(the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, 
+//merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished
+//to do so, subject to the following conditions:
+//
+//The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+//
+//THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+//OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
+//LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
+//IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ 
+shader_type spatial;
+ 
+render_mode unshaded, cull_front;
+ 
+ 
+uniform float border_width : hint_range(0,1,0.001);
+uniform vec4 color : source_color = vec4(1.0);
+ 
+uniform bool pattern;
+uniform float line_number : hint_range(0,100,1);
+uniform float line_sharpness : hint_range(0,10,0.001);
+ 
+uniform bool pulse;
+uniform float pulse_speed : hint_range(0,100,1);
+ 
+uniform bool line_movement;
+uniform float line_movement_speed : hint_range(-100,100,1);
+ 
+uniform bool wave;
+ 
+void vertex() {
+	VERTEX += VERTEX * border_width;
+}
+ 
+void fragment() {
+	ALBEDO = color.xyz;
+	if (pattern) 
+	{
+		vec2 uv = VERTEX.xy * line_number;
+		ALBEDO = sin(uv.xxx + uv.yyy) * line_sharpness * color.xyz;
+ 
+		if (pulse)
+		{
+			ALBEDO = sin(uv.xxx + uv.yyy) * line_sharpness * color.xyz * sin(TIME * pulse_speed);
+		}
+ 
+		if (line_movement)
+		{
+			ALBEDO = sin(uv.xxx + uv.yyy + TIME * line_movement_speed) * line_sharpness * color.xyz;
+		}
+ 
+		if (pulse && line_movement)
+		{
+			ALBEDO = sin(uv.xxx + uv.yyy + TIME * line_movement_speed) * line_sharpness * color.xyz * sin(TIME * pulse_speed);
+		}
+	}
+ 
+	if (wave)
+	{
+		vec2 uv = VERTEX.xy * line_number;
+		ALBEDO = sin(uv.xxx + TIME * line_movement_speed) * line_sharpness * color.xyz;
+	}
+ 
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5xkfj"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_xjvxh")
+shader_parameter/border_width = 0.0
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pattern = false
+shader_parameter/line_number = null
+shader_parameter/line_sharpness = null
+shader_parameter/pulse = null
+shader_parameter/pulse_speed = null
+shader_parameter/line_movement = null
+shader_parameter/line_movement_speed = null
+shader_parameter/wave = null
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1gx1p"]
+resource_local_to_scene = true
+next_pass = SubResource("ShaderMaterial_5xkfj")
+albedo_color = Color(0.513726, 0, 0, 1)
+
+[sub_resource type="Shader" id="Shader_uoxk0"]
+resource_local_to_scene = true
+code = "//Copyright 2021 redvillusion
+//
+//Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files 
+//(the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, 
+//merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished
+//to do so, subject to the following conditions:
+//
+//The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+//
+//THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+//OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
+//LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
+//IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ 
+shader_type spatial;
+ 
+render_mode unshaded, cull_front;
+ 
+ 
+uniform float border_width : hint_range(0,1,0.001);
+uniform vec4 color : source_color = vec4(1.0);
+ 
+uniform bool pattern;
+uniform float line_number : hint_range(0,100,1);
+uniform float line_sharpness : hint_range(0,10,0.001);
+ 
+uniform bool pulse;
+uniform float pulse_speed : hint_range(0,100,1);
+ 
+uniform bool line_movement;
+uniform float line_movement_speed : hint_range(-100,100,1);
+ 
+uniform bool wave;
+ 
+void vertex() {
+	VERTEX += VERTEX * border_width;
+}
+ 
+void fragment() {
+	ALBEDO = color.xyz;
+	if (pattern) 
+	{
+		vec2 uv = VERTEX.xy * line_number;
+		ALBEDO = sin(uv.xxx + uv.yyy) * line_sharpness * color.xyz;
+ 
+		if (pulse)
+		{
+			ALBEDO = sin(uv.xxx + uv.yyy) * line_sharpness * color.xyz * sin(TIME * pulse_speed);
+		}
+ 
+		if (line_movement)
+		{
+			ALBEDO = sin(uv.xxx + uv.yyy + TIME * line_movement_speed) * line_sharpness * color.xyz;
+		}
+ 
+		if (pulse && line_movement)
+		{
+			ALBEDO = sin(uv.xxx + uv.yyy + TIME * line_movement_speed) * line_sharpness * color.xyz * sin(TIME * pulse_speed);
+		}
+	}
+ 
+	if (wave)
+	{
+		vec2 uv = VERTEX.xy * line_number;
+		ALBEDO = sin(uv.xxx + TIME * line_movement_speed) * line_sharpness * color.xyz;
+	}
+ 
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vuufr"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_uoxk0")
+shader_parameter/border_width = 0.0
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/pattern = false
+shader_parameter/line_number = null
+shader_parameter/line_sharpness = null
+shader_parameter/pulse = null
+shader_parameter/pulse_speed = null
+shader_parameter/line_movement = null
+shader_parameter/line_movement_speed = null
+shader_parameter/wave = null
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cfq42"]
+resource_local_to_scene = true
+next_pass = SubResource("ShaderMaterial_vuufr")
+albedo_color = Color(0.513726, 0, 0, 1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sghrv"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -96,6 +299,7 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.20547, -13.7237)
 collision_layer = 16
 collision_mask = 0
+script = SubResource("GDScript_4bvp3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map_elements/Fog"]
 shape = SubResource("BoxShape3D_o58sf")
@@ -103,8 +307,7 @@ shape = SubResource("BoxShape3D_o58sf")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Map_elements/Fog"]
 mesh = SubResource("BoxMesh_2txwi")
 
-[node name="Interactable" parent="Map_elements/Fog" node_paths=PackedStringArray("interactable_object") instance=ExtResource("3_acpno")]
-interactable_object = NodePath("..")
+[node name="Interactable" parent="Map_elements/Fog" instance=ExtResource("3_acpno")]
 
 [node name="CollisionShape3D" parent="Map_elements/Fog/Interactable" index="0"]
 shape = SubResource("BoxShape3D_huvru")
@@ -112,8 +315,13 @@ shape = SubResource("BoxShape3D_huvru")
 [node name="CollisionShape3D" parent="Map_elements/Fog/Interactable/InteractableRange" index="0"]
 shape = SubResource("BoxShape3D_vg4sb")
 
-[node name="lamp_test" parent="Map_elements" instance=ExtResource("4_nrllp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.7388, 1.47094, -1.3968)
+[node name="lamp_test1" parent="Map_elements" instance=ExtResource("4_nrllp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.377, 1.81132, -1.61595)
+material = SubResource("StandardMaterial3D_1gx1p")
+
+[node name="lamp_test2" parent="Map_elements" instance=ExtResource("4_nrllp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3097, 1.81132, -1.61595)
+material = SubResource("StandardMaterial3D_cfq42")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("16")
@@ -129,5 +337,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6061, 0.0052982, 6.00207)
 
 [node name="Yellow Puppet" parent="." instance=ExtResource("4_23xl4")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[connection signal="focused" from="Map_elements/Fog/Interactable" to="Map_elements/Fog" method="_on_interactable_focused"]
+[connection signal="interact" from="Map_elements/Fog/Interactable" to="Map_elements/Fog" method="_on_interactable_interact"]
+[connection signal="unfocused" from="Map_elements/Fog/Interactable" to="Map_elements/Fog" method="_on_interactable_unfocused"]
 
 [editable path="Map_elements/Fog/Interactable"]

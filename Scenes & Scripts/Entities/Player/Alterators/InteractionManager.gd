@@ -9,8 +9,8 @@ extends Node
 ## Reference to the Player, so its functions and variables can be accessed directly
 var player: Player
 
-## All the interactable objects within Player's reach (reach is set by each Interactable separately)
-var interactables: Array[Node3D] = []
+## All the Interactable nodes within Player's reach (reach is set in each Interactable separately)
+var interactables: Array[Interactable] = []
 
 
 ###-------------------------------------------------------------------------###
@@ -42,61 +42,90 @@ func init(player: Player) -> void:
 ##### Executing functions
 ###-------------------------------------------------------------------------###
 
-func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("interact"):
-		interact()
-
-
-## We try to interact with an Interactable node
-func interact() -> void:
-	## First, check if there are any Interactables within range
-	#
-	## If not, nothing happens
+func _physics_process(delta: float) -> void:
+	
+#region No Interactables in range
+	## If there are no Interactables within range, we turn off the InteractableCast for efficiency
 	if interactables.size() == 0:
-		return
-	## If there is just one (and the Player is looking at it), we interact with it.
+		player.InteractableCast.enabled = false
+#endregion
+	
+#region One Interactable within range
+	## Otherwise, we turn it on and...
 	elif interactables.size() == 1:
-		var result: Dictionary = cast_interactable_ray()
-		## If there is an Interactable where we're looking,
-		if result:
-			## We get the interactable_object from the Interactable node
-			var interactable_object: Node3D = result.collider.interactable_object
+		player.InteractableCast.enabled = true
+		
+		## ...check if the InteractableCast intersects with that one Interactable
+		player.InteractableCast.force_shapecast_update()
+		if player.InteractableCast.is_colliding():
 			
-			## We call the interactable_object's interact() function directly
-			## and it does whatever it wants to do when it's interacted with
-			if interactable_object.has_method("interact"):
-				interactable_object.interact()
-				
-				interactable_object
+			## Since it does, we tell this Interactable to emit the "focused" signal
+			interactables[0].focused.emit()
+			
+			## If the Player wants to, they may interact with this Interactable
+			if Input.is_action_just_pressed("interact"):
+				player.InteractableCast.get_collider(0).interact.emit()
+			
 		
-		
-	## If there is just one (and the Player is looking at it), we interact with it.
+		## Since it doesn't, we tell this Interactable to emit the "unfocused" signal
+		else:
+			interactables[0].unfocused.emit()
+			## The Interactable becomes "unfocused" if the Player exits its range too
+			## (that is written into the Interactable code itself)
+#endregion
+	
+#region Two or more Interactables are within range
+	## Here, we also turn on the InteractableCast and...
 	elif interactables.size() >= 2:
-		pass
+		player.InteractableCast.enabled = true
+		## ...check if the InteractableCast intersects with at least one of those Interactables
+		player.InteractableCast.force_shapecast_update()
+		if player.InteractableCast.is_colliding():
+			
+			## Since there is more than one Interactable within range,
+			## we check which one that is the closest to the Player...
+			var closest_interactable = find_closest_interactable()
+			## ...unfocus all of them...
+			for interactable in interactables:
+				interactable.unfocused.emit()
+			## ...and finally, focus only on the closest Interactable
+			closest_interactable.focused.emit()
+			
+			## And if the Player wants to, they may interact with this Interactable
+			if Input.is_action_just_pressed("interact"):
+				closest_interactable.interact.emit()
+			
+		
+		## If it isn't colliding, we unfocus all the Interactables
+		else:
+			for interactable in interactables:
+				interactable.unfocused.emit()
+			## An Interactables becomes "unfocused" if the Player exits its range too
+			## (that is written into the Interactable code itself)
+#endregion
 
 
-
-
-## Create a Ray in Space, which will look for Interactable Area3Ds
-func cast_interactable_ray() -> Dictionary:
-	## We get the space_state by asking the Player to get it. A Node cannot access it otherwise.
-	var space_state: PhysicsDirectSpaceState3D = player.get_world_3d().direct_space_state
+## Finds the Interactable which is the nearest to the Player
+## (but only if it has been detected by InteractableCast)
+func find_closest_interactable() -> Interactable:
 	
-	## Parameters of the Ray;
-	#
-	## Starting position of the Ray
-	var start_pos: Vector3 = ray_start_pos_node.global_transform.origin
-	## End position of the Ray; start_pos extended towards where the Player is looking,
-	## multiplied by InteractableCast_range
-	var end_pos: Vector3 = start_pos - \
-	ray_start_pos_node.global_transform.basis.z * InteractableCast_range
+	## INF on our first check in the loop, because there is no bigger distance than that
+	var distance_to_interactable = INF
+	## I left this at Null, because we know that there is a closest Interactable somewhere
+	## If we couldn't be absolutely sure of that, as we are here, this would have to be different
+	var closest_interactable: Interactable
 	
-	## Set the above Ray parameters
-	var ray_param: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(start_pos, \
-		end_pos, ray_collision_mask)
-	## We want it to detect only areas
-	ray_param.collide_with_areas = true
-	ray_param.collide_with_bodies = false
+	## We loop through all the results in InteractableCast's collision_result
+	## to find the collider (Interactable) that is the closest to the Player
+	for result in player.InteractableCast.collision_result:
+		## We get this Interactable's distance to the Player...
+		var new_distance = result.collider.global_position.distance_to(player.global_position)
+		## ...and check if this distance is smaller than the last distance...
+		if new_distance < distance_to_interactable:
+			## If so, we update these two variables
+			distance_to_interactable = new_distance
+			closest_interactable = result.collider
+		
 	
-	## Finally, cast the Ray itself in space_state, with ray_param as its parameters
-	return space_state.intersect_ray(ray_param)
+	## Now that we are sure which Interactable is the closest, we simply return it
+	return closest_interactable

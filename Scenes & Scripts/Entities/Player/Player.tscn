@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://lhlklylca50m"]
+[gd_scene load_steps=18 format=3 uid="uid://lhlklylca50m"]
 
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player.gd" id="1_kmike"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/State_Manager.gd" id="2_c5aqi"]
@@ -22,6 +22,10 @@ height = 1.6
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hata5"]
 height = 0.01
 radius = 0.425
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3mfp7"]
+height = 3.0
+radius = 0.15
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_mask = 6
@@ -180,6 +184,16 @@ editor_description = "Main Player camera, typically placed at Head's (0, 0, 0) c
 Its FOV can be changed through an exported variable in the Player node"
 current = true
 fov = 90.0
+
+[node name="InteractableCast" type="ShapeCast3D" parent="Head/BobbingNode"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+enabled = false
+shape = SubResource("CylinderShape3D_3mfp7")
+target_position = Vector3(0, -1.5, 0)
+max_results = 8
+collision_mask = 32
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="TPMarker" type="Marker3D" parent="Head/BobbingNode"]
 editor_description = "Marks the position of the Camera's third person view
