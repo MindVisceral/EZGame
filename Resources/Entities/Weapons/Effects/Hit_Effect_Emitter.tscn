@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://0clng625rshm"]
 
-[ext_resource type="Script" path="res://Resources/Entities/Weapons/Effects/Hit_Effect.gd" id="1_uc3k7"]
+[ext_resource type="Script" path="res://Resources/Entities/Weapons/Effects/Hit_Effect_Emitter.gd" id="1_uc3k7"]
 [ext_resource type="Shader" path="res://Test_Trail.gdshader" id="2_hlq0q"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k0bku"]
@@ -21,7 +21,7 @@ height = 0.04
 radial_segments = 6
 rings = 6
 
-[node name="HitEffect" type="Node3D"]
+[node name="HitEffectEmitter" type="Node3D"]
 script = ExtResource("1_uc3k7")
 
 [node name="Particles" type="GPUParticles3D" parent="."]

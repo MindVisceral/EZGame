@@ -12,9 +12,12 @@ extends Firearm
 
 ## The point from which a bullet Trail, and only the Trail, will start
 @onready var bullet_start_point: Marker3D = $ModelHolder/gun1/Armature/Base_bone/Grip1/TrailSpawnPoint
-## This Node create a Trail effect, we just instantiate it
+## This Node creates a Trail effect, we just instantiate it
 @onready var bullet_trail_emitter: PackedScene = \
 	preload("res://Resources/Entities/Weapons/Bullet_Trail_Emitter.tscn")
+	## This Node creates the Hit Effect, we just instantiate it
+@onready var hit_effect: PackedScene = \
+	preload("res://Resources/Entities/Weapons/Effects/Hit_Effect.tscn")
 
 
 
@@ -48,7 +51,7 @@ func secondary_action() -> void:
 
 ## HERE - Could be made into bullet holes. LATER [?]
 var decal_insta = preload("res://test_decal.tscn")
-@onready var hit_effect = preload("res://Resources/Entities/Weapons/Effects/Hit_Effect.tscn")
+
 
 ## Create a Ray in Space, which will act as a bullet for this RayCast-type weapon
 func cast_bullet_ray() -> void:
@@ -79,34 +82,32 @@ func cast_bullet_ray() -> void:
 	## Check results
 	## TODO HERE - do damage calcualtions, then hitting the environment, then not hitting anything
 	
+	## Doesn't matter if the "Bullet" hits anything, we will instantiate a Trail
+	## BUT passing parameters to the Trail function requires getting hit info. This part is below
+	var trail = bullet_trail_emitter.instantiate()
+	get_tree().get_root().add_child(trail)
 	
-	
-	
+	## The "Bullet" hit something. We need hit info to instantiate the Trail and the Hit Effect
 	if result:
-#		print(result)
 		## Test decal to check for collision
 		var decal = decal_insta.instantiate()
 		get_tree().get_root().add_child(decal)
+		
 		decal.position = result.position
 		
-	else:
-		print("shot nothing!")
-	
-	
-	## Either way, instantiate a trail
-	var trail = bullet_trail_emitter.instantiate()
-	get_tree().get_root().add_child(trail)
-	## The first parameter is the point at which the Trail will start,
-	## the second one is where the Trail ends
-	if result:
+		## Instantiate a Hit Effect
+		var hiteffect = hit_effect.instantiate()
+		get_tree().get_root().add_child(hiteffect)
+		
+		hiteffect.draw_effect(result.position, result.normal)
+		
+		
+		
+		## The first parameter is the point at which the Trail starts,
+		## the second one is where the Trail ends
 		trail.draw_mesh(bullet_start_point.global_position, result.position)
 		
 		
-		##
-		var hiteffect = hit_effect.instantiate()
-		get_tree().get_root().add_child(hiteffect)
-		hiteffect.draw_effect(result.position, result.normal)
-		
+	## The Bullet hasn't hit anything. We only instantiate the Trail
 	else:
 		trail.draw_mesh(bullet_start_point.global_position, end_pos)
-	
