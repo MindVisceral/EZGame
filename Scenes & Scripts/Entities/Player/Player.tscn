@@ -1,10 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://lhlklylca50m"]
+[gd_scene load_steps=28 format=3 uid="uid://lhlklylca50m"]
 
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player.gd" id="1_kmike"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/State_Manager.gd" id="2_c5aqi"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/Idle_State.gd" id="3_f5lbm"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/Walk_State.gd" id="4_fu07a"]
 [ext_resource type="AudioStream" uid="uid://uwe5gj4gp3ot" path="res://Scenes & Scripts/Audio/Sounds/landed_sound.wav" id="4_lkchw"]
+[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/Slide_State.gd" id="5_pecq6"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/Crouch_State.gd" id="6_ib15b"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/Jump_State.gd" id="7_b1yw5"]
 [ext_resource type="AudioStream" uid="uid://cnpcbiobbqaqs" path="res://Scenes & Scripts/Audio/Sounds/jump_sound.wav" id="7_na2xp"]
@@ -62,19 +63,28 @@ Stores all the States, in case the current_state has to be changed by a Node/scr
 Can change the current_state on behest of an individual State"
 script = ExtResource("2_c5aqi")
 starting_state = NodePath("Idle")
-states = [NodePath("Idle"), NodePath("Walk"), NodePath("Crouch"), NodePath("Jump"), NodePath("Fall"), NodePath("Stomp"), NodePath("WallRun"), NodePath("WallJump")]
+states = [NodePath("Idle"), NodePath("Walk"), NodePath("Slide"), NodePath("Crouch"), NodePath("Jump"), NodePath("Fall"), NodePath("Stomp"), NodePath("WallRun"), NodePath("WallJump")]
 
-[node name="Idle" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("walk_state", "crouch_state", "jump_state", "fall_state")]
+[node name="Idle" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("walk_state", "slide_state", "crouch_state", "jump_state", "fall_state")]
 script = ExtResource("3_f5lbm")
 walk_state = NodePath("../Walk")
+slide_state = NodePath("../Slide")
 crouch_state = NodePath("../Crouch")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 
-[node name="Walk" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "crouch_state", "jump_state", "fall_state")]
+[node name="Walk" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "slide_state", "crouch_state", "jump_state", "fall_state")]
 script = ExtResource("4_fu07a")
 idle_state = NodePath("../Idle")
+slide_state = NodePath("../Slide")
 crouch_state = NodePath("../Crouch")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
+
+[node name="Slide" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "fall_state")]
+script = ExtResource("5_pecq6")
+idle_state = NodePath("../Idle")
+walk_state = NodePath("../Walk")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 
@@ -85,11 +95,11 @@ walk_state = NodePath("../Walk")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 
-[node name="Jump" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "crouch_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
+[node name="Jump" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "slide_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
 script = ExtResource("7_b1yw5")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
-crouch_state = NodePath("../Crouch")
+slide_state = NodePath("../Slide")
 jump_state = NodePath(".")
 stomp_state = NodePath("../Stomp")
 wallrun_state = NodePath("../WallRun")
@@ -106,21 +116,22 @@ process_callback = 0
 wait_time = 0.05
 one_shot = true
 
-[node name="Fall" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "crouch_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
+[node name="Fall" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "slide_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
 script = ExtResource("8_xbf4w")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
-crouch_state = NodePath("../Crouch")
+slide_state = NodePath("../Slide")
 jump_state = NodePath("../Jump")
 stomp_state = NodePath("../Stomp")
 wallrun_state = NodePath("../WallRun")
 walljump_state = NodePath("../WallJump")
 landing_sound = ExtResource("4_lkchw")
 
-[node name="Stomp" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "walljump_state")]
+[node name="Stomp" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "slide_state", "jump_state", "walljump_state")]
 script = ExtResource("8_fl03g")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
+slide_state = NodePath("../Slide")
 jump_state = NodePath("../Jump")
 walljump_state = NodePath("../WallJump")
 stomp_sound = ExtResource("11_txwo3")
@@ -134,10 +145,11 @@ fall_state = NodePath("../Fall")
 stomp_state = NodePath("../Stomp")
 walljump_state = NodePath("../WallJump")
 
-[node name="WallJump" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
+[node name="WallJump" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "slide_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
 script = ExtResource("10_gc6l4")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
+slide_state = NodePath("../Slide")
 jump_state = NodePath("../Jump")
 stomp_state = NodePath("../Stomp")
 wallrun_state = NodePath("../WallRun")
@@ -235,6 +247,7 @@ Its height can be changed through the HeightAlternator
 The regular Collider is rounded on the bottom and that makes the Player fall off edges - this collider prevents that"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 shape = SubResource("CylinderShape3D_hata5")
+disabled = true
 
 [node name="WallDetectionCast" type="ShapeCast3D" parent="."]
 editor_description = "This ShapeCast detects walls that are within reach of the Player.
@@ -244,19 +257,11 @@ Many RayCasts could be used instead, but that seems very annoying to work with.
 
 Disabled by defailt, enabled (by a state) while in the air"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+visible = false
 shape = SubResource("CylinderShape3D_bxcyr")
 target_position = Vector3(0, 0, 0)
 max_results = 8
 debug_shape_custom_color = Color(0.49, 0.7, 0, 1)
-
-[node name="FloorCast" type="RayCast3D" parent="."]
-editor_description = "A short RayCast3D placed at the very bottom of the Collider
-Activated for a single frame with check_for_floor() in the Player script"
-enabled = false
-target_position = Vector3(0, -0.25, 0)
-hit_from_inside = true
-debug_shape_custom_color = Color(1, 1, 1, 1)
-debug_shape_thickness = 5
 
 [node name="Head" type="Marker3D" parent="."]
 editor_description = "Holds the Camera as its child
@@ -271,6 +276,9 @@ Using the Head node for bobbing nullifies mouse movement, which also rotates the
 
 [node name="PlayerCamera" parent="Head/BobbingNode" instance=ExtResource("17_b5tqw")]
 noise = SubResource("FastNoiseLite_hjmpv")
+
+[node name="TraumaDetectionArea" parent="Head/BobbingNode/PlayerCamera" index="0"]
+visible = false
 
 [node name="Collider" type="CollisionShape3D" parent="Head/BobbingNode/PlayerCamera/TraumaDetectionArea" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.65, 0)
@@ -305,10 +313,7 @@ bullet_start_pos_node = NodePath("../../PlayerCamera")
 
 [node name="GPUParticlesAttractorVectorField3D" type="GPUParticlesAttractorVectorField3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00488281, 0.808258, 0)
+visible = false
 size = Vector3(1.6, 2.4, 1.6)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AudioStreamPlayer"]
 
 [editable path="Head/BobbingNode/PlayerCamera"]

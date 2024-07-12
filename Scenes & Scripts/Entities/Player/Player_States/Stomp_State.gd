@@ -8,6 +8,7 @@ extends BasePlayerState
 #
 @export var idle_state: BasePlayerState
 @export var walk_state: BasePlayerState
+@export var slide_state: BasePlayerState
 @export var jump_state: BasePlayerState
 @export var walljump_state: BasePlayerState
 
@@ -92,7 +93,7 @@ func physics_process(delta) -> BasePlayerState:
 	
 	## Check if the Player has reached the ground already
 	## Stomp is unstoppable otherwise
-	if player.check_for_floor() or player.is_on_floor():
+	if player.is_on_floor():
 		
 		## Stomp was successful, therefore landing causes Camera shaking;
 		## Player's air time makes the shaking stronger,

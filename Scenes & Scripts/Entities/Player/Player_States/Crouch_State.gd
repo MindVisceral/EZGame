@@ -36,7 +36,7 @@ func exit() -> void:
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:
 	## Uncrouch
-	if Input.is_action_just_pressed("input_crouch"):
+	if Input.is_action_just_pressed("input_slide"):
 		return walk_state
 	## Jump
 	elif Input.is_action_just_pressed("input_jump"):
@@ -68,7 +68,6 @@ func physics_process(delta) -> BasePlayerState:
 	## Apply gravity (which is the Globals' gravity * multiplier)
 	player.velocity.y -= player.gravity * BulletTime.time_scale * delta
 	
-#	if !player.check_for_floor():
 	if !player.is_on_floor():
 		return fall_state
 	

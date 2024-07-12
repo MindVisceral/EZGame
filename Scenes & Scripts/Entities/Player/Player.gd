@@ -84,12 +84,6 @@ extends CharacterBody3D
 @export_range(0.1, 1, 0.1) var crouch_feet_height: float = 0.6
 
 
-## FloorCast default height (Y coordinate) in units
-@export_range(0.0, 1, 0.1) var default_FloorCast_height: float = 0.0
-
-## FloorCast default crouch height (Y coordinate) in units
-@export_range(0.0, 1, 0.1) var crouch_FloorCast_height: float = 0.4
-
 ## The speed at which the Collider's shape is changed;
 ## bigger number == faster Collider change to standing/crouch height
 @export_range(1, 70, 1) var crouch_speed: int = 12
@@ -157,7 +151,6 @@ extends CharacterBody3D
 @onready var Collider: CollisionShape3D = $Collider
 @onready var FeetCollider: CollisionShape3D = $FeetCollider
 @onready var WallDetection: ShapeCast3D = $WallDetectionCast
-@onready var FloorCast: RayCast3D = $FloorCast
 @onready var Head: Marker3D = $Head
 @onready var Firearms: Marker3D = $Head/BobbingNode/Firearms
 #@onready var Firearms: Marker3D = $Head/Firearms
@@ -320,11 +313,6 @@ func process_view_input(delta):
 	
 	pass
 ###
-
-func check_for_floor() -> bool:
-	FloorCast.force_raycast_update()
-#	print(FloorCast.is_colliding())
-	return FloorCast.is_colliding()
 
 
 #region  ## Wall-running, -jumping, and -sliding

@@ -14,7 +14,7 @@ extends BasePlayerState
 #
 @export var idle_state: BasePlayerState
 @export var walk_state: BasePlayerState
-@export var crouch_state: BasePlayerState
+@export var slide_state: BasePlayerState
 @export var jump_state: BasePlayerState
 @export var stomp_state: BasePlayerState
 @export var wallrun_state: BasePlayerState
@@ -49,7 +49,7 @@ func exit() -> void:
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:
-	if Input.is_action_just_pressed("input_crouch"):
+	if Input.is_action_just_pressed("input_slide"):
 		return stomp_state
 	## If the Player wants to jump...
 	if Input.is_action_just_pressed("input_jump"):
@@ -110,7 +110,7 @@ func physics_process(delta) -> BasePlayerState:
 	
 	
 	## Check if the Player has reached the ground already
-	if player.check_for_floor():
+	if player.is_on_floor():
 		
 		## If the jump button has been pressed within the buffer time, allow for another jump
 		if !player.JumpBufferT.is_stopped():
