@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bfset8kv0qt4r"]
 
-[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Effects/Bullet_Trail_Emitter.gd" id="1_b5mfj"]
+[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Bullet_Trail_Emitter.gd" id="1_b5mfj"]
 [ext_resource type="Shader" path="res://Test_Trail.gdshader" id="2_aklup"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mnggm"]

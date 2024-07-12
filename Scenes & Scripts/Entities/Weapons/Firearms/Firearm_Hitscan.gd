@@ -21,15 +21,15 @@ class_name FirearmHitscan
 
 ## This Node creates a Trail effect, we will instantiate one to create the effect.
 @export var bullet_trail_emitter: PackedScene = \
-	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Bullet_Trail_Emitter.tscn")
+	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Base_Bullet_Trail_Emitter.tscn")
 
 ## This Node creates the Hit Effect, we will instantiate it at the bullet end hit point.
 @export var hit_effect_emitter: PackedScene = \
-	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Hit_Effect_Emitter.tscn")
+	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Base_Hit_Effect_Emitter.tscn")
 
 ## 
 @export var bullet_hole_decal: PackedScene = \
-	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Bullet_Hole_Decal.tscn")
+	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Base_Bullet_Hole_Decal.tscn")
 
 
 ###-------------------------------------------------------------------------###
@@ -138,7 +138,7 @@ func cast_bullet_ray() -> void:
 		## we use it to make the Decak face away from the hit object
 		decal.draw_decal(result.position, result.normal)
 		
-		## Instantiate a Hit Effect
+		## Instantiate a regular Hit Effect
 		var hit_effect = hit_effect_emitter.instantiate()
 		get_tree().get_root().add_child(hit_effect)
 		## The first parameter is the point at which the Hit Effect is emitted,
@@ -147,7 +147,7 @@ func cast_bullet_ray() -> void:
 		hit_effect.draw_effect(result.position, result.normal)
 		
 		## The first parameter is the point at which the Trail starts,
-		## the second one is where the Trail ends
+		## the second one is where the Trail ends. In this case it's where the bullet ended up.
 		trail.draw_mesh(bullet_start_point.global_position, result.position)
 		
 	

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dmfqn2l3j8aoy"]
 
 [ext_resource type="Texture2D" uid="uid://o5i28wbw7i4s" path="res://icon.png" id="1_rg37t"]
-[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Effects/Bullet_Hole_Decal.gd" id="2_ebqn4"]
+[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Bullet_Hole_Decal.gd" id="2_ebqn4"]
 
 [sub_resource type="Animation" id="Animation_7tasv"]
 resource_name = "fade_out"
