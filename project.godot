@@ -23,6 +23,7 @@ buses/default_bus_layout="res://Scenes & Scripts/Audio/default_bus_layout.tres"
 [autoload]
 
 Globals="*res://Scenes & Scripts/Autoloads/Globals.gd"
+AudioManager="*res://Scenes & Scripts/Autoloads/AudioManager.gd"
 BulletTime="*res://Scenes & Scripts/Autoloads/BulletTime.gd"
 
 [display]
@@ -60,6 +61,18 @@ texture={
 "size_limit": 0,
 "stream": false,
 "svg/scale": 1.0
+}
+wav={
+"compress/mode": 0,
+"edit/loop_begin": 0,
+"edit/loop_end": -1,
+"edit/loop_mode": 0,
+"edit/normalize": true,
+"edit/trim": false,
+"force/8_bit": false,
+"force/max_rate": false,
+"force/max_rate_hz": 44100,
+"force/mono": false
 }
 
 [input]

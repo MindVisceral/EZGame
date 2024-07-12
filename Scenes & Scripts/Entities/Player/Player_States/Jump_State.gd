@@ -20,6 +20,13 @@ extends BasePlayerState
 @export var wallrun_state: BasePlayerState
 @export var walljump_state: BasePlayerState
 
+
+@export_group("Sounds")
+#
+@export var jump_sound: AudioStream
+@export var landing_sound: AudioStream
+
+
 ## Timer, so that the ground isn't detected immediately after a jump
 ## Check Editor description for an explanation
 @onready var ground_timer: Timer = $GroundTimer
@@ -39,6 +46,12 @@ func enter() -> void:
 	## within StompJumpTimer's wait_time
 	
 	player.velocity.y += apply_jump_impulse()
+	
+	## We play the jump sound through the AudioManager autoload
+	AudioManager.play(
+		AudioManager.Type.NON_POSITIONAL,
+		player,
+		jump_sound)
 
 func exit() -> void:
 	super.exit()
@@ -143,9 +156,11 @@ func physics_process(delta) -> BasePlayerState:
 			## Otherwise (if the Player doesn't take the opportunity to jump)...
 			## If the Player stops moving around, return to Idle state. The Y axis is ignored
 			elif Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
+				player.play_landing_sound(landing_sound)
 				return idle_state
 			## Otherwise, keep on walking
 			else:
+				player.play_landing_sound(landing_sound)
 				return walk_state
 			
 		

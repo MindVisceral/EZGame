@@ -17,8 +17,11 @@ extends BasePlayerState
 @export var jump_state: BasePlayerState
 @export var fall_state: BasePlayerState
 
+
 func enter() -> void:
 	super.enter()
+	
+	player.consecutive_walljumps = 0
 
 func exit() -> void:
 	super.exit()

@@ -20,6 +20,8 @@ extends BasePlayerState
 func enter() -> void:
 	super.enter()
 	
+	player.consecutive_walljumps = 0
+	
 	## Alter the total height to crouch height - defined in the Player script
 	player.HeightAlternator.alter_height(player.crouch_height, player.crouch_feet_height, \
 		player.crouch_FloorCast_height, player.crouch_head_height)

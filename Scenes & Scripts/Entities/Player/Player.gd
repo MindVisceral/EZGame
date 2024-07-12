@@ -201,6 +201,8 @@ var air_time: float = 0.0
 ## Limited by stomp_jump_height_limit in the jump state script on enter()
 var stomp_vertical_distance: float = 0.0
 
+## The number of walljumps that have been performed without touching the ground since it was left.
+var consecutive_walljumps: int = 0
 
 ## Current counter used to calculate next step.
 #var step_cycle: float = 0
@@ -325,6 +327,8 @@ func check_for_floor() -> bool:
 	return FloorCast.is_colliding()
 
 
+#region  ## Wall-running, -jumping, and -sliding
+
 ## Finds and returns the normal of the wall that is the closest to the Player;
 ## The walls are detected by the WallDetection S-Cast and here is decided which one is the closest.
 func find_closest_wall_normal() -> Vector3:
@@ -389,3 +393,16 @@ func is_moving_at_wall() -> bool:
 			return true
 	## Otherwise, (in both cases), we return false.
 	return false
+
+#endregion
+
+#region  ## Sound stuff
+
+## Play the landing sound. Puthere because many states use it.
+func play_landing_sound(landing_sound) -> void:
+	## We play the jump sound through the AudioManager autoload
+	AudioManager.play(
+		AudioManager.Type.NON_POSITIONAL,
+		self,
+		landing_sound)
+#endregion

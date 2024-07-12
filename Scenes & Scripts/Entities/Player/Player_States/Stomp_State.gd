@@ -12,6 +12,11 @@ extends BasePlayerState
 @export var walljump_state: BasePlayerState
 
 
+@export_group("Sounds")
+#
+@export var stomp_sound: AudioStream
+
+
 ## We store the vertical value of the global position of the Player
 ## at the time the Stomp state is entered. This is used to make stomp jumps higher.
 var stomp_start_vertical_point: float
@@ -31,8 +36,6 @@ func enter() -> void:
 	player.velocity = Vector3.ZERO
 	## Apply stomp impulse
 	player.velocity.y -= player.stomp_strength * player.gravity * BulletTime.time_scale
-	
-	
 
 func exit() -> void:
 	super.exit()
@@ -50,6 +53,12 @@ func exit() -> void:
 	player.air_time = 0.0
 	
 	player.WallDetection.enabled = false
+	
+	## We play the jump sound through the AudioManager autoload
+	AudioManager.play(
+		AudioManager.Type.POSITIONAL_3D,
+		player,
+		stomp_sound)
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:

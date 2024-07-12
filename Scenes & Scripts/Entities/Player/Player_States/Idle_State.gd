@@ -10,6 +10,10 @@ extends BasePlayerState
 
 func enter() -> void:
 	super.enter()
+	
+	player.consecutive_walljumps = 0
+	
+	
 
 func exit() -> void:
 	super.exit()

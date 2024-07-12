@@ -19,6 +19,12 @@ extends BasePlayerState
 @export var wallrun_state: BasePlayerState
 @export var walljump_state: BasePlayerState
 
+@export_group("Sounds")
+#
+@export var jump_sound: AudioStream
+@export var landing_sound: AudioStream
+
+
 ## Timer, so that the wall isn't detected immediately after a jump
 ## Check Editor description for an explanation
 @onready var wall_timer: Timer = $WallTimer
@@ -27,6 +33,7 @@ func enter() -> void:
 	super.enter()
 	
 	player.in_air = true
+	player.consecutive_walljumps += 1
 	## The Player may want to do wall-related movement while in the air
 	player.WallDetection.enabled = true
 	
@@ -39,6 +46,15 @@ func enter() -> void:
 	
 	## Calculate and apply jump impulse (depending on the wall's normal)
 	player.velocity += wall_normal_check()
+	
+	## We play the jump sound through the AudioManager autoload
+	## NOTE: pitch_scale is divided by the number of consecutive walljumps
+	AudioManager.play(
+		AudioManager.Type.NON_POSITIONAL,
+		player,
+		jump_sound,
+		0.0,
+		1.0 / player.consecutive_walljumps)
 
 func exit() -> void:
 	super.exit()
@@ -133,9 +149,11 @@ func physics_process(delta) -> BasePlayerState:
 			## Otherwise (if the Player doesn't take the opportunity to jump)...
 			## If the Player stops moving around, return to Idle state. The Y axis is ignored
 			elif Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
+				player.play_landing_sound(landing_sound)
 				return idle_state
 			## Otherwise, keep on walking
 			else:
+				player.play_landing_sound(landing_sound)
 				return walk_state
 			
 		## The Player isn't on the floor, so we check if they're near a wall...

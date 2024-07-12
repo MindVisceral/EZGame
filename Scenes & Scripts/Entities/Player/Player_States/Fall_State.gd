@@ -21,6 +21,11 @@ extends BasePlayerState
 @export var walljump_state: BasePlayerState
 
 
+@export_group("Sounds")
+#
+@export var landing_sound: AudioStream
+
+
 func enter() -> void:
 	super.enter()
 	
@@ -114,10 +119,13 @@ func physics_process(delta) -> BasePlayerState:
 		## Otherwise (if the Player doesn't take the opportunity to jump)...
 		## If the Player stops moving around, return to Idle state. The Y axis is ignored
 		elif Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
+			player.play_landing_sound(landing_sound)
 			return idle_state
 		## Otherwise, get to walking
 		else:
+			player.play_landing_sound(landing_sound)
 			return walk_state
+			
 		
 	## The Player isn't on the floor, so we check if they're near a wall...
 	elif player.WallDetection.is_colliding() and player.is_moving_at_wall():

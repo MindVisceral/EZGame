@@ -1,11 +1,13 @@
-[gd_scene load_steps=24 format=3 uid="uid://lhlklylca50m"]
+[gd_scene load_steps=27 format=3 uid="uid://lhlklylca50m"]
 
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player.gd" id="1_kmike"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/State_Manager.gd" id="2_c5aqi"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/Idle_State.gd" id="3_f5lbm"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/Walk_State.gd" id="4_fu07a"]
+[ext_resource type="AudioStream" uid="uid://uwe5gj4gp3ot" path="res://Scenes & Scripts/Audio/Sounds/landed_sound.wav" id="4_lkchw"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/Crouch_State.gd" id="6_ib15b"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/Jump_State.gd" id="7_b1yw5"]
+[ext_resource type="AudioStream" uid="uid://cnpcbiobbqaqs" path="res://Scenes & Scripts/Audio/Sounds/jump_sound.wav" id="7_na2xp"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/Stomp_State.gd" id="8_fl03g"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Alterators/HeightAlterator.gd" id="8_rgs2k"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/Fall_State.gd" id="8_xbf4w"]
@@ -13,6 +15,7 @@
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/WallRun_State.gd" id="9_encgj"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Alterators/HeadBop.gd" id="10_6kxr3"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/WallJump_State.gd" id="10_gc6l4"]
+[ext_resource type="AudioStream" uid="uid://6t4qgn4shsqh" path="res://Scenes & Scripts/Audio/Sounds/stomp_sound.wav" id="11_txwo3"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Alterators/WeaponBob.gd" id="12_4bkuj"]
 [ext_resource type="PackedScene" uid="uid://b2fet7sg7ta7s" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Pistol.tscn" id="12_nnnx6"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Alterators/InteractionManager.gd" id="13_qk48y"]
@@ -91,6 +94,8 @@ jump_state = NodePath(".")
 stomp_state = NodePath("../Stomp")
 wallrun_state = NodePath("../WallRun")
 walljump_state = NodePath("../WallJump")
+jump_sound = ExtResource("7_na2xp")
+landing_sound = ExtResource("4_lkchw")
 
 [node name="GroundTimer" type="Timer" parent="Scripts/StateManager/Jump"]
 editor_description = "The FloorCast is used to check for a floor beneath the Player,
@@ -110,6 +115,7 @@ jump_state = NodePath("../Jump")
 stomp_state = NodePath("../Stomp")
 wallrun_state = NodePath("../WallRun")
 walljump_state = NodePath("../WallJump")
+landing_sound = ExtResource("4_lkchw")
 
 [node name="Stomp" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "walljump_state")]
 script = ExtResource("8_fl03g")
@@ -117,6 +123,7 @@ idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 jump_state = NodePath("../Jump")
 walljump_state = NodePath("../WallJump")
+stomp_sound = ExtResource("11_txwo3")
 
 [node name="WallRun" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "fall_state", "stomp_state", "walljump_state")]
 script = ExtResource("9_encgj")
@@ -135,6 +142,8 @@ jump_state = NodePath("../Jump")
 stomp_state = NodePath("../Stomp")
 wallrun_state = NodePath("../WallRun")
 walljump_state = NodePath(".")
+jump_sound = ExtResource("7_na2xp")
+landing_sound = ExtResource("4_lkchw")
 
 [node name="WallTimer" type="Timer" parent="Scripts/StateManager/WallJump"]
 editor_description = "The WallDetection ShapeCast is used to check for a wall near the Player,
@@ -298,12 +307,8 @@ bullet_start_pos_node = NodePath("../../PlayerCamera")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00488281, 0.808258, 0)
 size = Vector3(1.6, 2.4, 1.6)
 
-[node name="PlayerAudio" type="Node3D" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
-[node name="JumpSound" type="AudioStreamPlayer" parent="PlayerAudio"]
-max_polyphony = 2
-bus = &"Sounds"
-
-[node name="WallJumpSound" type="AudioStreamPlayer" parent="PlayerAudio"]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="AudioStreamPlayer"]
 
 [editable path="Head/BobbingNode/PlayerCamera"]
