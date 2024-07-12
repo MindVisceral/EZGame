@@ -9,6 +9,8 @@ extends BasePlayerState
 @export_range(10.0, 110.0, 1.0) var deceleration: float = 60.0
 ## Speed while in this state
 @export_range(0.1, 2.0, 0.05) var speed_multiplier: float = 1.5
+## % of player.speed used in sideways movement calculations
+@export_range(0.1, 2.0, 0.05) var sideways_speed_multiplier: float = 0.4
 
 
 @export_group("States")
@@ -72,15 +74,7 @@ func input(event: InputEvent) -> BasePlayerState:
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
 func physics_process(delta) -> BasePlayerState:
 	
-	## Horizontal direction of Player movement based on Input
-	var sideways_input_dir: float = Input.get_axis("input_left", "input_right")
-	
-	## Reset the direction. Otherwise, sideways movement would accumulate over time.
-	player.direction = slide_direction
-	## Add sideways movement to the slide
-	## (without multipliying by basis, sideways movement would work on global transform)
-	player.direction += player.transform.basis.x * sideways_input_dir
-	## Normalize the direction, because adding sideways_input_dir can make it go over 1.0
+	## Normalize the direction here since calculate_slide_direction() doesn't do that by itself.
 	player.direction = player.direction.normalized()
 	
 	
@@ -93,9 +87,32 @@ func physics_process(delta) -> BasePlayerState:
 		temp_accel = deceleration
 	
 	
+	## Horizontal direction of Player movement based on Input
+	## Does the Player want to move left or right while sliding?
+	var sideways_input_dir: float = Input.get_axis("input_left", "input_right")
+	
+	## We want sideways movement to influence Player's velocity in relation to the Camera;
+	## Moving left/right moves the Player to left/right from the camera's POV, even allowing the
+	## Player to make the slide slower by turning 90° from slide direction and pressing L/R key.
+	var sideways_velocity: Vector3 = player.transform.basis * \
+		Vector3(sideways_input_dir, 0.0, 0.0).normalized() * \
+		player.speed * sideways_speed_multiplier
+	
+	
 	## Apply velocity, take speed_multiplier and acceleration into account
-	player.velocity = player.velocity.lerp((player.direction * player.speed * speed_multiplier), \
-	acceleration * delta)
+	## and add sideways_velocity
+	player.velocity = player.velocity.lerp((player.direction * player.speed * speed_multiplier) +\
+		sideways_velocity, acceleration * delta)
+	
+	
+	### We want sideways movement to influence Player's velocity in relation to the Camera;
+	### Moving left/right moves the Player to left/right from the camera's POV, even allowing the
+	### Player to make the slide slower by turning 90° from slide direction and pressing L/R key.
+	#var sideways_velocity: Vector3 = player.transform.basis * \
+		#Vector3(sideways_input_dir, 0.0, 0.0).normalized() * player.speed
+	#
+	### Add that sideways velocity to sliding velocity.
+	#player.velocity += sideways_velocity
 	
 	
 	## Apply gravity (which is the Globals' gravity * multiplier)
@@ -127,14 +144,17 @@ func physics_process(delta) -> BasePlayerState:
 ## If the Player is holding down a directional movement key, then they will slide in that direction.
 ## Otherwise they slide in the direction they are looking at.
 func calculate_slide_direction() -> Vector3:
+	## Temporary return vector
 	var return_vector: Vector3
 	
 	## The direction of Player movement based on Input
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
- "input_forwards", "input_backwards")
+		"input_forwards", "input_backwards")
+	
 	
 	## Input takes priority,
 	if input_dir:
+		## Take Input and use it to determine Player movement in relation to the world.
 		## We ignore the Y axis, and place input_dir on the XZ axis
 		return_vector = (player.transform.basis * Vector3(input_dir.x, 0.0, input_dir.y).normalized())
 		
@@ -146,6 +166,7 @@ func calculate_slide_direction() -> Vector3:
 		## I guess sin and cos transform the rotation into the right Vector?
 		## NOTE: This Vector is NEGATIVE! This doesn't work otherwise.
 		return_vector = -Vector3(sin(player.rotation.y), 0, cos(player.rotation.y))
+	
 	
 	## Return the Vector3 we just determined
 	return return_vector
