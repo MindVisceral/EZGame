@@ -1,5 +1,11 @@
 extends Node
 
+## Makes sine go faster
+@export var bob_speed: float = 0.01
+## Sine amplitude
+@export var bob_width: float = 0.1
+## How fast the bob lerps between positions
+@export var bob_multiplier: float = 12
 
 ###-------------------------------------------------------------------------###
 ##### Variables and references
@@ -13,15 +19,16 @@ var player: Player
 var speed: float = 0
 
 ## Store original position of bobbing_node, because we will be editing this value
-var original_position: Vector3
+var original_position: Vector3 = Vector3(0.0, 0.0, 0.0)
 ## No rotation! A weapons animation is responsible for that.
 
 ## Actual cycle x of step weaponbob
-var cycle_position_x: float = 0
+## Current point on the bob_curve. Changes over time
+var cycle_position_x: float = 0.0
 ## Actual cycle y of step weaponbob
-var cycle_position_y: float = 0
+var cycle_position_y: float = 0.0
 ## Actual cycle z of step weaponbob
-var cycle_position_z: float = 0
+var cycle_position_z: float = 0.0
 
 ### Value to be added to compute a step, each frame that the character is walking this value 
 ### is added to a counter
@@ -52,7 +59,7 @@ var step_interval: float = 6.0 * 2
 @export var bob_curve: Curve
 
 ## Bigger number, bigger oscillations up/down and right/left
-@export var curve_multiplier: Vector3 = Vector3(2, 2, 2)
+@export var curve_multiplier: Vector3 = Vector3(2.0, 2.0, 2.0)
 
 
 @export_group("Jump Bob")
@@ -76,25 +83,34 @@ func _ready():
 	## Store the bobbing_node's original position;
 	## we will be editing that to make bobs happen.
 	original_position = bobbing_node.position
+	#original_position = Vector3(float(bobbing_node.position.x), float(bobbing_node.position.y), float(bobbing_node.position.z))
+	print(bobbing_node.position)
 
 
 ###-------------------------------------------------------------------------###
 ##### Executing functions
 ###-------------------------------------------------------------------------###
 
-## Applies step and jump weaponbob, and movement tilt
+## Applies step and jump weaponbob
 func _physics_process(delta: float) -> void:
-	
-	## Reset the new_position, we will calculate it soon
-	var new_position = original_position
-	
 	
 	## If bobbing on steps is enabled...
 	if step_bob_enabled == true:
-		## This type of weaponbob is only applied if the Player is walking
+		## This type of weaponbob is only applied if the Player is on the ground
 		if player.in_air == false:
 			## Calculate a new position for the bobbing_node
-			new_position += _do_weapon_bob(delta)
+			#bobbing_node.position += _do_weapon_bob(delta)
+			bobbing_node.position = bobbing_node.position.lerp(better_bob(delta), delta * bob_multiplier)
+			
+			print(bobbing_node.position.x)
+		
+		## When jumped, reset bob
+		else:
+			bobbing_node.position = bobbing_node.position.lerp(original_position, delta * bob_multiplier)
+	
+	
+	
+	
 	## If a bob on jump is enabled...
 	if jump_bob_enabled:
 		## This type of weaponbob is only applied if the Player is in the air
@@ -105,23 +121,31 @@ func _physics_process(delta: float) -> void:
 			
 		
 	
-	## Bobbing calculations are done, apply bobbing to the bobbing_node
-	bobbing_node.position = new_position
+	
+	
+	
+	## Bobbing calculations are done, apply new_position to the bobbing_node
+	## NOTE: Every frame we reset bobbing_node to original_position,
+	## then we calculate new_position, and teleport the bobbing_node there;
+	## it's only an illusion of moving from new_position to new_position
+	#bobbing_node.position = new_position
 
 
 func _do_weapon_bob(delta: float) -> Vector3:
 	## As the name says, get Player's velocity Vector, but without the Y axis
 	## We use it to get tick_speed
-	#var horizontal_velocity = Vector3(player.velocity.x, 0, player.velocity.z)
-	var horizontal_velocity = player.velocity
+	var horizontal_velocity = Vector3(player.velocity.x, 0, player.velocity.z)
+	#var horizontal_velocity: Vector3 = player.velocity
 	
 	## Calculate the bobbing_node's new position as we move through the curve
 	var x_pos = (bob_curve.sample(cycle_position_x) * curve_multiplier.x * bob_range.x)
 	var y_pos = (bob_curve.sample(cycle_position_y) * curve_multiplier.y * bob_range.y)
 	var z_pos = (bob_curve.sample(cycle_position_z) * curve_multiplier.z * bob_range.z)
 	
-	## No idea how the following lines work, but they just do
+	## Move the cycle by tick_speed so that the _pos variables will move smoothly next frame
 	var tick_speed = (horizontal_velocity.length() * delta) / step_interval
+	
+	
 	cycle_position_x += tick_speed
 	cycle_position_y += tick_speed
 	cycle_position_z += tick_speed
@@ -137,8 +161,47 @@ func _do_weapon_bob(delta: float) -> Vector3:
 	return Vector3(x_pos, y_pos, z_pos)
 
 
+## 
+func better_bob(delta: float) -> Vector3:
+	
+	## The position towards which the bobbing_node's position will be lerped
+	var new_pos: Vector3
+	
+	## Get which way the Player is moving in 3D space based on Input, without the Y axis.
+	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
+	 "input_forwards", "input_backwards")
+	var horizontal_velocity: Vector3 = Vector3(input_dir.x, 0, input_dir.y)
+	
+	## Weaponbob on the X axis only works when the Player is moving
+	## [and on the ground - check _physics_process]
+	if horizontal_velocity != Vector3.ZERO:
+		
+		### Get the position the bobbing_node will lerp towards on the X axis
+		#x_pos = (bob_curve.sample(cycle_position_x) * curve_multiplier.x * bob_range.x)
+		#
+		### Used to move the cycle_position_x along the bob_curve
+		#var tick_speed = (horizontal_velocity.length() * delta) / step_interval
+		### Actually move cycle_position_x along the bob_curve
+		#cycle_position_x += tick_speed
+		
+		## 
+		new_pos = Vector3(original_position.x + sin(Time.get_ticks_msec() * bob_speed) * bob_width, \
+			original_position.y, original_position.z)
+		
+	## Otherwise, make the bobbing_node move towards its original_position
+	else:
+		print("HERE")
+		new_pos = original_position
+	
+	return new_pos
+
+
+
+
 ## Reset weaponbob step cycles
 func reset_head_bob_cycles(): ## HERE - not used
-	cycle_position_x = 0
-	cycle_position_y = 0
-	cycle_position_z = 0
+	#cycle_position_x = 0
+	#cycle_position_y = 0
+	#cycle_position_z = 0
+	
+	pass

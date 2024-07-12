@@ -86,7 +86,7 @@ shadow_normal_bias = 6.0
 shadow_opacity = 0.75
 
 [node name="Player" parent="." instance=ExtResource("6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6061, 5.39, -4.05668)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6061, 0.0052982, 6.00207)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.20547, -13.7237)

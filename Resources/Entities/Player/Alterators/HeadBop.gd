@@ -153,7 +153,10 @@ func _physics_process(delta: float) -> void:
 			input_dir.y * float(movement_tilt_roll), delta)
 	
 	
-	## Bobbing calculations are done, apply bobbing to the bobbing_node
+	## Bobbing calculations are done, apply new_position to the bobbing_node
+	## NOTE: Every frame, we reset bobbing_node's pos and rot to original_pos/rot,
+	## then we calculate new_position/rotation, and instantly apply those values to bobbing_node;
+	## it's only an illusion of moving and rotating
 	bobbing_node.position = new_position
 	bobbing_node.rotation = new_rotation
 
@@ -175,7 +178,7 @@ func _do_head_bob(delta: float) -> Vector3:
 	var x_pos = (bob_curve.sample(cycle_position_x) * curve_multiplier.x * bob_range.x)
 	var y_pos = (bob_curve.sample(cycle_position_y) * curve_multiplier.y * bob_range.y)
 	
-	## No idea how the following lines work, but they just do
+	## Move the cycle by tick_speed so that the _pos variables will move smoothly next frame
 	var tick_speed = (horizontal_velocity.length() * delta) / step_interval
 	cycle_position_x += tick_speed
 	cycle_position_y += tick_speed * vertical_horizontal_ratio

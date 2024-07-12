@@ -23,6 +23,11 @@ Globals="*res://Globals.gd"
 
 enabled=PackedStringArray()
 
+[filesystem]
+
+import/blender/enabled.android=true
+import/blender/enabled.web=true
+
 [importer_defaults]
 
 texture={

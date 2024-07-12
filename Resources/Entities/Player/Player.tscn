@@ -139,7 +139,7 @@ movement_tilt_pitch = false
 [node name="WeaponBob" type="Node" parent="Scripts" node_paths=PackedStringArray("bobbing_node")]
 script = ExtResource("12_4bkuj")
 bobbing_node = NodePath("../../Head/BobbingNode/Firearms")
-bob_range = Vector3(0.07, 0, 0)
+bob_range = Vector3(0.56, 0, 0)
 bob_curve = SubResource("Curve_8satt")
 jump_bob_enabled = false
 
