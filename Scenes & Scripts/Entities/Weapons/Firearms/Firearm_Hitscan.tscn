@@ -3,13 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://dv5fcfhevw1fe" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Firearm_Base.tscn" id="1_m78hj"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Firearm_Hitscan.gd" id="1_t1rr7"]
 [ext_resource type="PackedScene" uid="uid://bfset8kv0qt4r" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Bullet_Trail_Emitter.tscn" id="3_0d3ib"]
-[ext_resource type="PackedScene" uid="uid://drcgshfh4ln3v" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Shot_Effect_Emmiter.tscn" id="4_7dg20"]
+[ext_resource type="PackedScene" uid="uid://drcgshfh4ln3v" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Shot_Effect_Emitter.tscn" id="4_jqy4o"]
 [ext_resource type="PackedScene" uid="uid://0clng625rshm" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Hit_Effect_Emitter.tscn" id="4_wwicu"]
 [ext_resource type="PackedScene" uid="uid://dmfqn2l3j8aoy" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Bullet_Hole_Decal.tscn" id="5_psfvp"]
 
 [node name="FirearmHitscan" instance=ExtResource("1_m78hj")]
 script = ExtResource("1_t1rr7")
 bullet_trail_emitter = ExtResource("3_0d3ib")
-shot_effect_emitter = ExtResource("4_7dg20")
+shot_effect_emitter = ExtResource("4_jqy4o")
 hit_effect_emitter = ExtResource("4_wwicu")
 bullet_hole_decal = ExtResource("5_psfvp")

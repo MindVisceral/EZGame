@@ -34,3 +34,8 @@ func draw_effect(pos: Vector3, normal: Vector3) -> void:
 	
 	## Make the Particles emit in the same direction as the hit object's Normals
 	Particles.process_material.direction = normal
+
+## Delete this Node once it's done.
+func _on_particles_finished() -> void:
+	if !Engine.is_editor_hint():
+		queue_free()
