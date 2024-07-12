@@ -44,7 +44,9 @@ func enter() -> void:
 	ground_timer.start()
 	
 	## Apply jump impulse
-	player.velocity.y += player.jump_height
+	player.velocity.y += player.jump_height * player.jump_height_multiplier
+	## Reset jump_height_multiplier
+	player.jump_height_multiplier = 1.0
 
 func exit() -> void:
 	super.exit()

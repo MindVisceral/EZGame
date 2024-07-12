@@ -69,6 +69,12 @@ func physics_process(delta) -> BasePlayerState:
 		
 		## If the jump button has been pressed within the buffer time, allow for an immediate jump
 		if !player.JumpBufferT.is_stopped():
+			
+			## HERE: This requires very precise Inputs; It should account for a few milisecond
+			## HERE: after touching the ground too.
+			## The jump_height_multiplier is only applied to the very next jump
+			player.jump_height_multiplier = 1.0 + abs(player.velocity.y) + player.air_time
+			
 			return jump_state
 		
 		## Otherwise (if the Player doesn't take the opportunity to jump)...

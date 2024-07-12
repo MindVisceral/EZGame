@@ -186,6 +186,10 @@ var direction: Vector3 = Vector3()
 ## Used in gravity code in all states; the longer the time, the faster the Player falls
 var air_time: float = 0.0
 
+## How many times higher the next jump should be.
+## Used to make ground jumps higher after jumping right after a stomp
+var jump_height_multiplier: float = 1.0
+
 
 ## Current counter used to calculate next step.
 #var step_cycle: float = 0
