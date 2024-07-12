@@ -14,19 +14,17 @@ var speed: float = 0
 
 ## Store original position of bobbing_node, because we will be editing this value
 var original_position: Vector3
-
 ## Store original rotation of bobbing_node, because we will be editing this value
 var original_rotation: Vector3
 
 ## Actual cycle x of step headbob
 var cycle_position_x: float = 0
-
-## Actual cycle x of step headbob
+## Actual cycle y of step headbob
 var cycle_position_y: float = 0
 
 ### Value to be added to compute a step, each frame that the character is walking this value 
 ### is added to a counter
-### Ignore that mumbo-jumbo above. Bigger number == each step takes long to get to the next step
+### Ignore that mumbo-jumbo above. Bigger number == each step takes longer to get to the next step
 var step_interval: float = 6.0 * 2
 ## HERE - Test ^this^, maybe there's a better value
 
@@ -36,7 +34,7 @@ var step_interval: float = 6.0 * 2
 ###-------------------------------------------------------------------------###
 
 ## A choosen node that will be controlled by the HeadBob script
-## Should be set to the BobbingNodenode, but could be set to the Camera itself
+## Should be set to the BobbingNode Node, but could be set to the Camera itself
 ## Shouldn't be set to the Head node; that causes a conflict with a piece of code
 ## in the Player script which rotates the Head with mouse movement.
 ## This script would nullify that
@@ -82,7 +80,6 @@ var step_interval: float = 6.0 * 2
 
 ## Enable tilting forwards and backwards
 @export var movement_tilt_pitch: bool = true
-
 ## Enable tilting left and right
 @export var movement_tilt_roll: bool = true
 
@@ -152,8 +149,8 @@ func _physics_process(delta: float) -> void:
 		## so the value doesn't change, and therefore tilting does happen;
 		## If roll/pitch is false, its respective input_dir is multiplied by 0,
 		## so the value becomes 0, and tilting doesn't happen;
-		new_rotation += _movement_tilt(input_dir.x * float(movement_tilt_roll), \
-			input_dir.y * float(movement_tilt_pitch), delta)
+		new_rotation += _movement_tilt(input_dir.x * float(movement_tilt_pitch), \
+			input_dir.y * float(movement_tilt_roll), delta)
 	
 	
 	## Bobbing calculations are done, apply bobbing to the bobbing_node
@@ -190,7 +187,7 @@ func _do_head_bob(delta: float) -> Vector3:
 	
 	return Vector3(x_pos, y_pos, 0)
 
-## Reset head bob step cycles
+## Reset headbob step cycles
 func reset_head_bob_cycles(): ## HERE - not used
 	cycle_position_x = 0
 	cycle_position_y = 0

@@ -15,7 +15,7 @@ extends Firearm
 ## This Node creates a Trail effect, we just instantiate it
 @onready var bullet_trail_emitter: PackedScene = \
 	preload("res://Resources/Entities/Weapons/Bullet_Trail_Emitter.tscn")
-	## This Node creates the Hit Effect, we just instantiate it
+## This Node creates the Hit Effect, we just instantiate it
 @onready var hit_effect_emitter: PackedScene = \
 	preload("res://Resources/Entities/Weapons/Effects/Hit_Effect_Emitter.tscn")
 

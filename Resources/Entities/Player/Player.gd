@@ -123,6 +123,7 @@ class_name Player
 @onready var UIcontroller: Node = $Scripts/UIController
 @onready var HeightAlternator: Node = $Scripts/HeightAlterator
 @onready var HeadBob: Node = $Scripts/HeadBob
+@onready var WeaponBob: Node = $Scripts/WeaponBob
 @onready var JumpBufferT: Timer = $Timers/JumpBufferTimer
 @onready var Collider: CollisionShape3D = $Collider
 @onready var FeetCollider: CollisionShape3D = $FeetCollider
@@ -192,6 +193,7 @@ func _ready():
 #	UIcontroller.init(self)
 	HeightAlternator.init(self)
 	HeadBob.init(self)
+	WeaponBob.init(self)
 	
 	
 	## Apply exported variables to the Player
