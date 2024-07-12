@@ -88,7 +88,6 @@ func physics_process(delta) -> BasePlayerState:
 	player.velocity.y -= player.gravity * BulletTime.time_scale * delta
 	
 	## Increase air_time - this is used to influence camera shake strength.
-	## NOTE: Notice that player.air_time_multiplier isn't used here - we want actual time in air
 	player.air_time += delta
 	
 	## Check if the Player has reached the ground already
@@ -96,8 +95,8 @@ func physics_process(delta) -> BasePlayerState:
 	if player.is_on_floor():
 		
 		## Stomp was successful, therefore landing causes Camera shaking;
-		## Player's air time makes the shaking stronger,
-		## but it is clamped to always be at the minimum of trauma_amount.
+		## Player's air_time makes the shaking stronger,
+		## but it is clamped to always be at least the same as trauma_amount.
 		player.air_time = clampf(player.air_time, 1.0, 10.0)
 		player.PlayerCamera.add_trauma(trauma_amount * player.air_time)
 		

@@ -57,7 +57,6 @@ func exit() -> void:
 	super.exit()
 	
 	player.in_air = false
-	player.air_time = 0.0
 	
 	player.WallDetection.enabled = false
 	
@@ -134,18 +133,8 @@ func physics_process(delta) -> BasePlayerState:
 	## Apply gravity (which is the Globals' gravity * multiplier)
 	## No multipier used for now.
 	## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
-	player.velocity.y -= player.gravity * BulletTime.time_scale * delta \
-						+ (player.gravity * player.air_time)
-	## Increase air_time, thus increasing gravity until the ground is reached.
-	player.air_time += delta * player.air_time_multiplier
-	## We limit this value to falling_speed_limit, so the falling speed doesn't increase to infinity
-	player.air_time = minf(player.air_time, player.falling_speed_limit)
+	player.velocity.y -= player.gravity * BulletTime.time_scale * delta
 	
-	
-	## air_time multiplier is only applied when the Player is falling from the jump's peak
-	if player.velocity.y <= 0:
-		## Increase air_time, thus increasing gravity until the ground is reached.
-		player.air_time += delta * player.air_time_multiplier
 	
 	
 	## A short time after the Raycast leaves the ground...

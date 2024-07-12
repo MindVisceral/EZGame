@@ -31,13 +31,8 @@ extends CharacterBody3D
 ## the shorter the jump will be.
 @export var gravity_multiplier: float = 1.0
 
-## This number is added to the Player's falling speed every second
-## The bigger this number, the faster the fall (but it is limited by falling_speed_limit!)
-## NOTE: This acceleration should be barely noticable. Keep it below 0.1 or so. 0.02 is best
-@export var air_time_multiplier: float = 0.02
-
-## The maximum speed the Player may reach when falling; In practise, limits air_time
-@export var falling_speed_limit: float = 2.0
+## The maximum speed the Player may reach when falling
+@export var falling_speed_limit: float = 50.0
 
 ## Player base speed
 ## All states use this base variable, instead modify the state's multiplier
@@ -167,8 +162,7 @@ var current_weapon = null
 var direction: Vector3 = Vector3()
 
 ## How long the Player has been in the air.
-## Used in gravity code in all states; the longer the time, the faster the Player falls
-## But that is limited by X in Y on Z
+## Used in the Stomp state to determine camera shake strength. Longer in air = stronger shake.
 var air_time: float = 0.0
 
 ## The distance between the point from which the Player started a stomp, and the ground they hit.

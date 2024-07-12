@@ -30,8 +30,6 @@ func enter() -> void:
 func exit() -> void:
 	super.exit()
 	
-	player.air_time = 0.0
-	
 	player.WallDetection.enabled = false
 	player.on_wall = false
 
@@ -76,11 +74,7 @@ func physics_process(delta) -> BasePlayerState:
 	## Affected by running on the wall; falling is slowed down by that.
 	## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
 	player.velocity.y -= player.gravity * player.wall_sliding_deceleration \
-						* BulletTime.time_scale * delta \
-						+ (player.gravity * player.air_time)
-	## Increase air_time, thus increasing gravity until the ground is reached.
-	player.air_time += delta * player.air_time_multiplier
-	
+						* BulletTime.time_scale * delta
 	
 	
 	## If the Player isn't clinging to a wall, they start to fall
