@@ -10,7 +10,7 @@ var current_state: BaseEnemyState
 
 
 ## The States need a reference to the enemy to access its functions and variables
-func init(enemy: Enemy) -> void:
+func init(enemy: EnemyBase) -> void:
 	#Get each state and give it a reference to the enemy and the StateManager, so that their
 	#functions and variables can be accesses directly.
 	for state in states:

@@ -20,7 +20,7 @@ extends Node
 ###-------------------------------------------------------------------------###
 
 ## Reference to the Enemy so that their functions and variables can be accessed directly
-var enemy: Enemy
+var enemy: EnemyBase
 
 ## Self-explainatory
 var current_health: float = 1.0
@@ -37,7 +37,7 @@ func _ready() -> void:
 	current_health = clampf(current_health, -INF, max_health)
 
 ## The Stats Node needs a reference to the enemy to access its functions and variables
-func init(enemy: Enemy) -> void:
+func init(enemy: EnemyBase) -> void:
 	self.enemy = enemy
 
 

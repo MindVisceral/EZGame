@@ -27,7 +27,7 @@ class_name FirearmHitscan
 @export var hit_effect_emitter: PackedScene = \
 	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Base_Hit_Effect_Emitter.tscn")
 
-## 
+## This Node creates a decal, we will instantiate it at the bullet end hit point.
 @export var bullet_hole_decal: PackedScene = \
 	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Base_Bullet_Hole_Decal.tscn")
 
@@ -91,28 +91,21 @@ func cast_bullet_ray() -> void:
 	var result: Dictionary = space_state.intersect_ray(ray_param)
 	
 	
-	## Now we check results of this Ray we just cast.
-	## TODO HERE - do damage calcualtions, then hitting the environment, then not hitting anything
-	
 	## Instantiate a Trail, no matter if the bullet (RayCast) hit anything or not;
-	## we will check if it did later.
+	## but we will check if it did soon.
 	var trail = bullet_trail_emitter.instantiate()
 	get_tree().get_root().add_child(trail)
 	
-	
+	## Now we may check results of this Ray we just cast.
+	#
 	## Options 1 & 2: The "bullet" hit something and returned a result.
-	## NOTE: We need hit info to make the Trail and the Hit Effect work.
 	if result:
 		
-		## Option 1: The "bullet" hit an Entity.
-		## This necessitates a special, Entity-specific hit effect!
-		
-		
-		
-		## If the Ray-hit Node is a Hurtbox, we can pass weapon-specific damage values to it!
+		## Option 1: The "bullet" hit an Entity - we know that because it has a Hurtbox
+		## This necessitates damage calculations an an Entity-specific hit effect
 		if result.collider is Hurtbox:
-			## Create a new DamageData Resource, which the Hurtbox will interpret
-			## and pass on to the Enemy
+			## Create a new DamageData Resource, which will be passed to the Hurtbox, which
+			## will interpret it and pass on to the Entity
 			var damageData = DamageData.new()
 			
 			## We give this Resource some data
@@ -123,29 +116,29 @@ func cast_bullet_ray() -> void:
 			## we pass this Resource on to the result.collider's Hurtbox
 			result.collider.pass_DamageData(damageData)
 		
+		## Option 2: The "bullet" hit a part of the Environment. But we only assume that it did,
+		## because there was not Hurtbox.
+		## This necessitates the regular hit effect and an Environment decal
+		elif result.collider:
+		
+			## Instantiate a decal...
+			var decal = bullet_hole_decal.instantiate()
+			get_tree().get_root().add_child(decal)
+			## The first parameter is the point at which the Decal is drawn,
+			## the second one is the result's normal;
+			## we use it to make the Decak face away from the hit object
+			decal.draw_decal(result.position, result.normal)
+			
+			## Instantiate a regular Hit Effect
+			var hit_effect = hit_effect_emitter.instantiate()
+			get_tree().get_root().add_child(hit_effect)
+			## The first parameter is the point at which the Hit Effect is emitted,
+			## the second one is the result's normal;
+			## we use it to make the Particles emit at the proper angle to the hit object
+			hit_effect.draw_effect(result.position, result.normal)
 		
 		
-		
-		
-		## Option 2: The "bullet" hit a part of the Environment.
-		## This necessitates the regular hit effect and an Environment decal.
-		
-		## Instantiate a test decal...
-		var decal = bullet_hole_decal.instantiate()
-		get_tree().get_root().add_child(decal)
-		## The first parameter is the point at which the Decal is drawn,
-		## the second one is the result's normal;
-		## we use it to make the Decak face away from the hit object
-		decal.draw_decal(result.position, result.normal)
-		
-		## Instantiate a regular Hit Effect
-		var hit_effect = hit_effect_emitter.instantiate()
-		get_tree().get_root().add_child(hit_effect)
-		## The first parameter is the point at which the Hit Effect is emitted,
-		## the second one is the result's normal;
-		## we use it to make the Particles emit at the proper angle to the hit object
-		hit_effect.draw_effect(result.position, result.normal)
-		
+		## NOTE: No matter if the hit 'something' is an Entity or not, instantiate a trail.
 		## The first parameter is the point at which the Trail starts,
 		## the second one is where the Trail ends. In this case it's where the bullet ended up.
 		trail.draw_mesh(bullet_start_point.global_position, result.position)

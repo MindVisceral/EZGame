@@ -1,4 +1,4 @@
-class_name Enemy
+class_name EnemyBase
 extends CharacterBody3D
 
 
@@ -56,18 +56,14 @@ extends CharacterBody3D
 ## Enemy's children. Check a child's Editor Description to learn what it's used for
 @export var model: Node3D   ## A Node with a Skeleton3D, a Mesh, and an AnimationPlayer
 @export var AnimPlayer: AnimationPlayer
-@onready var States: EnemyStateManager = $Scripts/StateManager
-@onready var stats: Stats = $Scripts/Stats
-@onready var Hurt_Handler: HurtHandler = $Scripts/HurtHandler
-@onready var Animation_Handler: AnimationHandler = $Scripts/AnimationHandler
-@onready var Collider: CollisionShape3D = $CollisionShape3D
-@onready var FloorCast: RayCast3D = $FloorCast
-@onready var hurtbox: Area3D = $Hurtbox
-
-
-
-
-var latest_DamageData: DamageData
+@export var States: EnemyStateManager
+@export var stats: Stats
+@export var Hurt_Handler: HurtHandler
+@export var Animation_Handler: AnimationHandler
+@export var Hit_Point_Handler: HitPointHandler
+@export var Collider: CollisionShape3D
+@export var FloorCast: RayCast3D
+@export var hurtbox: Hurtbox
 
 
 ###-------------------------------------------------------------------------###
@@ -82,6 +78,10 @@ var in_air: bool = false
 ## Direction of movement calculated in a State
 var direction: Vector3 = Vector3()
 
+## The most recent DamageData packed that has been received
+var latest_DamageData: DamageData
+
+
 ###-------------------------------------------------------------------------###
 
 
@@ -93,10 +93,10 @@ func _ready() -> void:
 	stats.init(self)
 	Hurt_Handler.init(self)
 	Animation_Handler.init(self)
+	Hit_Point_Handler.init(self)
 	
 	## Apply exported variables to the Enemy
 	apply_exported()
-	
 
 ###
 func _physics_process(delta) -> void:
@@ -113,9 +113,8 @@ func _process(delta) -> void:
 	States.process(delta)
 
 
-## On ready, apply exported variables like this: 
+## On ready, apply exported variables.
 func apply_exported() -> void:
-	
 	## Instantly alter Collider dimensions
 	Collider.shape.height = default_height
 	Collider.shape.radius = default_width
@@ -126,9 +125,12 @@ func check_for_floor() -> bool:
 	return FloorCast.is_colliding()
 
 
-
-func handle_hit(hit_point: Vector3) -> void:
-	pass
+## Receive damage data from the Hurtbox, store it, and send it off to
+## the Hurthandler for it to interpret it
+## and pass each data point on to the Node that can handle it
+func receive_DamageData(damageData: DamageData) -> void:
+	latest_DamageData = damageData
+	Hurt_Handler.receive_DamageData(damageData)
 
 
 
