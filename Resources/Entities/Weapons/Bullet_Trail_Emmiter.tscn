@@ -1,32 +1,69 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfset8kv0qt4r"]
+[gd_scene load_steps=6 format=3 uid="uid://bfset8kv0qt4r"]
 
 [ext_resource type="Script" path="res://Resources/Entities/Weapons/Bullet_Trail_Emmiter.gd" id="1_u321q"]
+[ext_resource type="Texture2D" uid="uid://o5i28wbw7i4s" path="res://icon.png" id="2_evyjb"]
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ai702"]
-spread = 0.0
-gravity = Vector3(0, 0, 0)
-attractor_interaction_enabled = false
+[sub_resource type="Animation" id="Animation_4ff0d"]
+resource_name = "animation"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TrailSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0), Vector3(6.28319, 1.5708, 0)]
+}
 
-[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_imbrw"]
-radius = 0.03
-section_length = 0.08
-cap_top = false
-cap_bottom = false
+[sub_resource type="Animation" id="Animation_xi0ex"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TrailSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(6.28319, 1.5708, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2otdo"]
+_data = {
+"RESET": SubResource("Animation_xi0ex"),
+"animation": SubResource("Animation_4ff0d")
+}
 
 [node name="BulletTrailEmmiter" type="Node3D"]
 script = ExtResource("1_u321q")
 
+[node name="TrailSprite" type="Sprite3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1.74846e-07, 1, 0, 1, -1.74846e-07, -1, -7.64274e-15, -4.37114e-08, 0, 0, 0)
+cast_shadow = 0
+centered = false
+offset = Vector2(0, -32)
+transparent = false
+texture = ExtResource("2_evyjb")
+region_enabled = true
+region_rect = Rect2(0, 0, 100, 64)
+
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
+process_callback = 0
+wait_time = 2.0
 one_shot = true
 autostart = true
 
-[node name="test_particle" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-amount = 100
-lifetime = 5.0
-visibility_aabb = AABB(-0.5, -0.5, -0.5, 1, 1, 1)
-process_material = SubResource("ParticleProcessMaterial_ai702")
-draw_pass_1 = SubResource("TubeTrailMesh_imbrw")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2otdo")
+}
+autoplay = "animation"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

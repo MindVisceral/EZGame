@@ -72,7 +72,7 @@ func cast_bullet_ray() -> void:
 	var result = space_state.intersect_ray(ray_param)
 	
 	## Check results
-	## #HERE - do damage calcualtions, then hitting the environment, then not hitting anything
+	## #TODO #HERE - do damage calcualtions, then hitting the environment, then not hitting anything
 	if result:
 #		print(result)
 		## Test decal to check for collision
@@ -87,9 +87,12 @@ func cast_bullet_ray() -> void:
 	var trail = bullet_trail_emmiter.instantiate()
 	get_tree().get_root().add_child(trail)
 	
-	## This first variable is the trail's global_position and start_pos,
-	## the second one is where the trail will end up after some time
-	trail.init(bullet_start_point.global_position, end_pos)
+	if result:
+		trail.draw_trail(bullet_start_point.global_position, result.position)
+	else:
+		## This first variable is the trail's global_position and starting position,
+		## the second one is where the trail will end up after some time, if not queue_free()-d earlier
+		trail.draw_trail(bullet_start_point.global_position, end_pos)
 	
 	
 #	print("Start position: ", trail.start_position)

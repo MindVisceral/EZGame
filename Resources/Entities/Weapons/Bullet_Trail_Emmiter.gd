@@ -1,40 +1,44 @@
 extends Node3D
 
-## This Timer will lead to queue_free() once it runs out
+## This Timer will lead to queue_free() once it runs out of time
 @onready var timer: Timer = $Timer
 
-## 
-var velocity: Vector3
+## This Sprite3D is, essentailly, our whole Trail. We simply stretch it to the desired length.
+@onready var TrailSprite: Sprite3D = $TrailSprite
 
-## The starting position of this Trail
-var start_position: Vector3
-## The final position of this Trail. It will be deleted once it reaches it
-var end_position: Vector3
+## Changes the region_rect's height (size.y) variable; makes the Trail bigger or smaller
+@export_range(1, 128, 1) var trail_height: int = 16
 
 
-## We calculate how long it will take this Node until it reaches end_position
-var time_until_arrival
+func _ready() -> void:
+	## region_rect's "size.y" is just the Sprite3D's height
+	TrailSprite.region_rect.size.y = trail_height
 
-func init(start_pos, end_pos) -> void:
+
+
+## The first variable is, typically, the gun's barrel; the Trail originates here
+## The second variable is, typically, position which the RayCast bullet hit; the Trail ends here
+func draw_trail(start_pos: Vector3, end_pos: Vector3) -> void:
+	## Put the whole trail at the start_pos; now it will originate from this point in the world
 	self.global_position = start_pos
-	self.start_position = start_pos
-	self.end_position = end_pos
 	
-	## Make the trail face towards the end_position
-	## NOTE: The particle node is rotated on the X axis to make its cyllinders point the right way
-	look_at(self.global_transform.origin + end_position, Vector3.UP)
+	## We want the Sprite3D's offset to be half of the region_rect's height (size.y).
+	## Thanks to this, we can easily change the height of the Trail (through trail_height),
+	## and the Trail will always come out at the right place
+	TrailSprite.offset.y = -(trail_height / 2)
+	
+	## We use the same principle to stretch the Sprite3D between the start and end positions
+	#
+	## #NOTE: "* 100", because 1px is 0.01 meters. Could be tweaked with pixel_size,
+	## but that breaks the texture (makes it scale up???)
+	TrailSprite.region_rect.size.x = start_pos.distance_to(end_pos) * 100
+	
+	## Make the whole TrailEmmiter face towards the end_position
+	## #NOTE: The Sprite3D is rotated on the Y axis to make it point the right way
+	self.look_at(end_pos, Vector3.UP)
 
-## When this Node is instatianted, it will move from start_position to end_position
-## to simulate a bullet coming out of a gun
-func _physics_process(delta: float) -> void:
-#	time_until_arrival
-	
-#	velocity = end_position - start_position
-#	self.global_position += velocity * delta * 0.0005	##0.01
-	
-	self.global_position += (end_position - start_position) * delta * 0.0005	##0.01
 
-## This is a safeguard in case the Trail has been travelling for too long; deletes it
+## Kill the Trail once its "animation" is finished
 func _on_timer_timeout() -> void:
 	print(" DELETED ")
 	queue_free()
