@@ -38,7 +38,7 @@ func input(event: InputEvent) -> BasePlayerState:
 	
 	return null
 
-## Velocity equasions for this specific state and physics. Unrealated to player Inputs
+## Velocity equasions for this specific state and physics. Unrelated to player Inputs
 func physics_process(delta) -> BasePlayerState:
 	## If the Player is still moving, make them decelerate down to zero
 	player.velocity = player.velocity.lerp((player.direction * player.speed), \

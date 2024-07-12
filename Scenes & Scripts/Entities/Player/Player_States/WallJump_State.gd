@@ -7,7 +7,7 @@ extends BasePlayerState
 ## Time for the Player to stop in place
 @export var deceleration: float = 8.0
 ## Speed while in this state
-@export var speed_multiplier: float = 1.2
+@export_range(0.1, 2.0, 0.05) var speed_multiplier: float = 1.2
 
 
 @export_group("States")
@@ -160,7 +160,7 @@ func physics_process(delta) -> BasePlayerState:
 		## The Player isn't on the floor, so we check if they're near a wall...
 		elif player.WallDetection.is_colliding():
 			## We check if the Player is moving up against the wall
-			if player.is_moving_at_wall():
+			if player.is_moving_at_wall(true):
 				## The Player is near a wall, but are they falling?
 				if player.velocity.y <= 0:
 					## Since the Player is near a wall and is falling, we can make them run along it.

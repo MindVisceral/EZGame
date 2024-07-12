@@ -7,7 +7,7 @@ extends BasePlayerState
 ## Time for the Player to stop in place
 @export var deceleration: float = 10.0
 ## Speed while in this state
-@export var speed_multiplier: float = 1.0
+@export_range(0.1, 2.0, 0.05) var speed_multiplier: float = 1.0
 
 
 @export_group("States")
@@ -65,7 +65,7 @@ func physics_process(delta) -> BasePlayerState:
 		return fall_state
 	
 	## If the Player stops moving, return to Idle state. The Y axis is ignored
-	if Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
+	if Vector3(player.velocity.x, 0.0, player.velocity.z) == Vector3.ZERO:
 		return idle_state
 	
 	return null

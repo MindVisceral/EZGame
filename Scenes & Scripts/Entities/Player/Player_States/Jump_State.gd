@@ -7,7 +7,7 @@ extends BasePlayerState
 ## Time for the Player to stop in place
 @export var deceleration: float = 8.0
 ## Speed while in this state
-@export var speed_multiplier: float = 1.2
+@export_range(0.1, 2.0, 0.05) var speed_multiplier: float = 1.2
 
 
 @export_group("States")
@@ -136,6 +136,10 @@ func physics_process(delta) -> BasePlayerState:
 	## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
 	player.velocity.y -= player.gravity * BulletTime.time_scale * delta \
 						+ (player.gravity * player.air_time)
+	## Increase air_time, thus increasing gravity until the ground is reached.
+	player.air_time += delta * player.air_time_multiplier
+	## We limit this value to falling_speed_limit, so the falling speed doesn't increase to infinity
+	player.air_time = minf(player.air_time, player.falling_speed_limit)
 	
 	
 	## air_time multiplier is only applied when the Player is falling from the jump's peak
@@ -168,7 +172,7 @@ func physics_process(delta) -> BasePlayerState:
 		## The Player isn't on the floor, so we check if they're near a wall...
 		elif player.WallDetection.is_colliding():
 			## We check if the Player is moving up against the wall
-			if player.is_moving_at_wall():
+			if player.is_moving_at_wall(true):
 				## The Player is near a wall, but are they falling?
 				if player.velocity.y <= 0:
 					## Since the Player is near a wall and is falling, we can make them run along it.

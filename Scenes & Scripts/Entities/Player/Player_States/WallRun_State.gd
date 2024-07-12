@@ -7,7 +7,7 @@ extends BasePlayerState
 ## Time for the Player to stop in place
 @export var deceleration: float = 8.0
 ## Speed while in this state
-@export var speed_multiplier: float = 1.4
+@export_range(0.1, 2.0, 0.05) var speed_multiplier: float = 1.4
 
 
 @export_group("States")
@@ -84,7 +84,7 @@ func physics_process(delta) -> BasePlayerState:
 	
 	
 	## If the Player isn't clinging to a wall, they start to fall
-	if !player.WallDetection.is_colliding() or !player.is_moving_at_wall():
+	if !player.WallDetection.is_colliding() or !player.is_moving_at_wall(true):
 		return fall_state
 		
 	## But if they're still clinging to the wall...

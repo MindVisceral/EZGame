@@ -3,10 +3,12 @@ extends BasePlayerState
 @export_group("Movement")
 #
 ## Time for the Player to reach full speed
-## 60 and above is pretty much instant movement
+## 60 and above is pretty much instant movement, but keep below 110 because of stuttering
 @export_range(10.0, 110.0, 1.0) var acceleration: float = 60.0
+## Time for the Player to stop in place
+@export_range(10.0, 110.0, 1.0) var deceleration: float = 60.0
 ## Speed while in this state
-@export var speed_multiplier: float = 1.4
+@export_range(0.1, 2.0, 0.05) var speed_multiplier: float = 1.4
 
 
 @export_group("States")
@@ -17,13 +19,17 @@ extends BasePlayerState
 @export var fall_state: BasePlayerState
 
 
-
 ## This holds the direction in which the Player will slide. Set by calculate_slide_direction()
 var slide_direction: Vector3 = Vector3.ZERO
 
 
 func enter() -> void:
 	super.enter()
+	
+	
+	##
+	player.WallDetection.enabled = true
+	
 	
 	## Alter the height to crouch height
 	player.HeightAlternator.alter_collider_height(player.crouch_height)
@@ -37,6 +43,12 @@ func enter() -> void:
 
 func exit() -> void:
 	super.exit()
+	
+	
+	##
+	player.WallDetection.enabled = false
+	
+	
 	
 	## Alter the height to standing height
 	player.HeightAlternator.alter_collider_height(player.standing_height)
@@ -64,11 +76,6 @@ func physics_process(delta) -> BasePlayerState:
 	## Horizontal direction of Player movement based on Input
 	var sideways_input_dir: float = Input.get_axis("input_left", "input_right")
 	
-	## We use sideways_input_dir to get left/right movement, we ignore the Y axis,
-	## and we keep the Z axis as it is.
-	#player.direction = (Vector3((slide_direction.x), \
-		#0.0, slide_direction.z).normalized())
-	
 	## Reset the direction. Otherwise, sideways movement would accumulate over time.
 	player.direction = slide_direction
 	## Add sideways movement to the slide
@@ -76,6 +83,16 @@ func physics_process(delta) -> BasePlayerState:
 	player.direction += player.transform.basis.x * sideways_input_dir
 	## Normalize the direction, because adding sideways_input_dir can make it go over 1.0
 	player.direction = player.direction.normalized()
+	
+	
+	## Decide if the Player going to accelerate or decelerate.
+	var temp_accel
+	## We use the dot product to see if the Player is facing the direction they are moving in
+	if player.direction.dot(Vector3(player.direction.x, 0.0, 0.0)) > 0:
+		temp_accel = acceleration
+	else:
+		temp_accel = deceleration
+	
 	
 	## Apply velocity, take speed_multiplier and acceleration into account
 	player.velocity = player.velocity.lerp((player.direction * player.speed * speed_multiplier), \
@@ -95,6 +112,13 @@ func physics_process(delta) -> BasePlayerState:
 	if Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
 		return idle_state
 	
+	## We check if the Player is near a wall
+	if player.WallDetection.is_colliding():
+		## We check if the Player is moving up against the wall
+		if !player.is_moving_at_wall(false, 0.20):
+			print("at wall!")
+			return idle_state
+	
 	return null
 
 
@@ -103,6 +127,6 @@ func calculate_slide_direction() -> Vector3:
 	## Make the Player's direction be the same as their rotation on the Y axis,
 	## (which changes with horizontal mouse movement in the Player script)
 	## NOTE: I stole this piece of code, I have no idea how it, and the principle behind it, work.
-	## NOTE: I guess sin and cos transform the rotation into the right Vector?
+	## I guess sin and cos transform the rotation into the right Vector?
 	## NOTE: This Vector is NEGATIVE! This doesn't work otherwise.
 	return -Vector3(sin(player.rotation.y), 0, cos(player.rotation.y))

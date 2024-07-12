@@ -7,7 +7,7 @@ extends BasePlayerState
 ## Time for the Player to stop in place
 @export var deceleration: float = 10.0
 ## Speed while in this state
-@export var speed_multiplier: float = 1.2
+@export_range(0.1, 2.0, 0.05) var speed_multiplier: float = 1.2
 
 
 @export_group("States")
@@ -128,7 +128,7 @@ func physics_process(delta) -> BasePlayerState:
 			
 		
 	## The Player isn't on the floor, so we check if they're near a wall...
-	elif player.WallDetection.is_colliding() and player.is_moving_at_wall():
+	elif player.WallDetection.is_colliding() and player.is_moving_at_wall(true):
 		## The Player is near a wall, so we make them run on it.
 		## NOTE: WallJumping is detected on Input instead! This is only for WallRunning.
 		return wallrun_state

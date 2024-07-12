@@ -7,7 +7,7 @@ extends BasePlayerState
 ## Time for the Player to stop in place
 @export var deceleration: float = 14.0
 ## Speed while in this state
-@export var speed_multiplier: float = 0.4
+@export_range(0.1, 2.0, 0.05) var speed_multiplier: float = 0.4
 
 
 @export_group("States")

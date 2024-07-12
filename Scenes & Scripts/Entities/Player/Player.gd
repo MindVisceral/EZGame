@@ -328,14 +328,20 @@ func find_closest_wall_normal() -> Vector3:
 
 ## Checks the dot product from the Player's velocity and the nearest wall's normal,
 ## returns true if the dot product is above a certain number.
-func is_moving_at_wall() -> bool:
+#
+## process_input is here, because different states expect different results from this function
+## If the dot_product is below dot_product_value, the Player is not moving at a wall.
+func is_moving_at_wall(process_input: bool = true, dot_product_value: float = 0.11) -> bool:
 	
-	## Check if the Player is pressing any buttons.
+	## Check if the Player is pressing any horizontal input keys.
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
 											"input_forwards", "input_backwards")
 	
-	## If the Player isn't pressing anything at the moment...
-	if input_dir != Vector2.ZERO:
+	## If it doesn't matter if the Player is pressing anything, just proceed.
+	if (process_input == false) or \
+	## But if the Player must be pressing something for this to work,
+	## only proceed if process_input is TRUE
+	(process_input == true and input_dir != Vector2.ZERO):
 		
 		## Prepare the nearest wall's normal for comparison
 		var temp_wall_normal: Vector3 = find_closest_wall_normal()
@@ -350,11 +356,11 @@ func is_moving_at_wall() -> bool:
 		var dot_product: float = temp_velocity.dot(wall_normal_vector2)
 		
 		
-		## If the dot_product is over the arbitrary value of 0.11,
+		## If the dot_product is over the arbitrary value of dot_product_value (0.11 by default),
 		## we consider the Player to be rubbing against the wall. We return true.
-		if abs(dot_product) >= 0.11:
+		if abs(dot_product) >= dot_product_value:
 			return true
-	## Otherwise, (in both cases), we return false.
+	## Otherwise, (in both cases,) we return false.
 	return false
 
 #endregion
