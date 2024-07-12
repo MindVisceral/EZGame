@@ -21,8 +21,12 @@ var player: Player
 ## The maximum distance the bullets may travel away from their starting point
 ## (Used both for bullets that are Rays and Projectiles, but those must be destroyed manually)
 @export var max_distance: float = 10000
-## Layers the weapon will check for collisions; typically the Environment and Enemies layers
-@export var bullet_collision_layer: int = 1
+## Layer on which the bullet is; should be the Hitbox layer
+@export_flags_3d_physics var bullet_collision_layer
+## Layers which the bullet can see; should be the Hurtbox layer
+## (in a RayCast weapon, also the Environment)
+@export_flags_3d_physics var bullet_collision_mask
+
 
 ## Called by the WeaponManager when this weapon is meant to be wielded/put away by the Player
 func wield_weapon() -> void:

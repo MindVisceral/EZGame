@@ -4,13 +4,19 @@
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Pistol.gd" id="2_ejjpi"]
 [ext_resource type="PackedScene" uid="uid://bemovxot15qyc" path="res://Scenes & Scripts/Entities/Weapons/Gun/gun1.glb" id="3_hegno"]
 
-[node name="Pistol" instance=ExtResource("1_opcfm")]
+[node name="Pistol" node_paths=PackedStringArray("AnimPlayer") instance=ExtResource("1_opcfm")]
 script = ExtResource("2_ejjpi")
+AnimPlayer = NodePath("ModelHolder/gun1/AnimationPlayer")
+bullet_collision_layer = 8
+bullet_collision_mask = 18
 
 [node name="ModelHolder" parent="." index="0"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="gun1" parent="ModelHolder" index="0" instance=ExtResource("3_hegno")]
+
+[node name="Trigger_bone" parent="ModelHolder/gun1/Armature/Base_bone" index="0"]
+transform = Transform3D(-0.719648, -0.694339, -2.59588e-06, 0.694339, -0.719648, 1.37298e-06, -2.82143e-06, -8.14356e-07, 1, -0.141371, 0.715085, 1.42901e-07)
 
 [node name="TrailSpawnPoint" type="Marker3D" parent="ModelHolder/gun1/Armature/Base_bone/Grip1" index="0"]
 transform = Transform3D(1, 4.9738e-14, -1.98952e-13, 0, 1, -1.22394e-14, 0, 1.95063e-16, 1, -0.857, 0.107156, 1.04812e-10)

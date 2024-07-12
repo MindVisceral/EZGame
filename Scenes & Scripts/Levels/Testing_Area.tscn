@@ -26,6 +26,17 @@ data = PackedVector3Array(-4, 2, 2, 4, 2, 2, -4, -2, 2, 4, 2, 2, 4, -2, 2, -4, -
 [sub_resource type="BoxMesh" id="BoxMesh_bepso"]
 size = Vector3(8, 4, 4)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_o58sf"]
+size = Vector3(4, 4, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ak28t"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.207843)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2txwi"]
+material = SubResource("StandardMaterial3D_ak28t")
+size = Vector3(4, 4, 1)
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sghrv"]
 sky_top_color = Color(0, 0, 0, 1)
 sky_horizon_color = Color(0, 0, 0, 1)
@@ -44,23 +55,13 @@ ambient_light_color = Color(0.486275, 0.486275, 0.486275, 1)
 reflected_light_source = 2
 fog_light_color = Color(0.12549, 0.141176, 0.164706, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_o58sf"]
-size = Vector3(4, 4, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ak28t"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.207843)
-
-[sub_resource type="BoxMesh" id="BoxMesh_2txwi"]
-material = SubResource("StandardMaterial3D_ak28t")
-size = Vector3(4, 4, 1)
-
 [node name="Testing_Area" type="Node3D"]
 
 [node name="Map_elements" type="Node3D" parent="."]
 
 [node name="Floor" type="StaticBody3D" parent="Map_elements"]
 collision_layer = 2
+collision_mask = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map_elements/Floor"]
 shape = SubResource("12")
@@ -70,17 +71,29 @@ mesh = SubResource("10")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_yek5n")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Map_elements"]
+[node name="Rock" type="StaticBody3D" parent="Map_elements"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1.71622, -4)
 collision_layer = 2
+collision_mask = 5
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map_elements/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map_elements/Rock"]
 shape = SubResource("ConcavePolygonShape3D_wnjms")
 
-[node name="Cube4" type="MeshInstance3D" parent="Map_elements/StaticBody3D"]
+[node name="Cube4" type="MeshInstance3D" parent="Map_elements/Rock"]
 material_override = ExtResource("2_2haa3")
 mesh = SubResource("BoxMesh_bepso")
 skeleton = NodePath("../..")
+
+[node name="Fog" type="StaticBody3D" parent="Map_elements"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.20547, -13.7237)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map_elements/Fog"]
+shape = SubResource("BoxShape3D_o58sf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map_elements/Fog"]
+mesh = SubResource("BoxMesh_2txwi")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("16")
@@ -93,16 +106,5 @@ shadow_opacity = 0.75
 
 [node name="Player" parent="." instance=ExtResource("6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6061, 0.0052982, 6.00207)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.20547, -13.7237)
-collision_layer = 65535
-collision_mask = 65535
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_o58sf")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("BoxMesh_2txwi")
 
 [node name="Yellow Puppet" parent="." instance=ExtResource("4_23xl4")]

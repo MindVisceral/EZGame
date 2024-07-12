@@ -1,5 +1,5 @@
 extends Firearm
-## ^NOTE: Extends Firearm! Check that scene/script for more information if you can't find it here!^
+## ^NOTE: Extends Firearm! Check that scene/script for more if you can't find something here!^
 
 
 ###-------------------------------------------------------------------------###
@@ -14,7 +14,7 @@ extends Firearm
 @onready var bullet_start_point: Marker3D = $ModelHolder/gun1/Armature/Base_bone/Grip1/TrailSpawnPoint
 ## This Node creates a Trail effect, we just instantiate it
 @onready var bullet_trail_emitter: PackedScene = \
-	preload("res://Scenes & Scripts/Entities/Weapons/Bullet_Trail_Emitter.tscn")
+	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Bullet_Trail_Emitter.tscn")
 ## This Node creates the Hit Effect, we just instantiate it
 @onready var hit_effect_emitter: PackedScene = \
 	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Hit_Effect_Emitter.tscn")
@@ -41,7 +41,7 @@ func put_weapon_away() -> void:
 func primary_action() -> void:
 	super.primary_action()
 	
-	## Create a "bullet"
+	## Primary action creates a RayCast "bullet"
 	cast_bullet_ray()
 #
 func secondary_action() -> void:
@@ -62,28 +62,34 @@ func cast_bullet_ray() -> void:
 	## Starting position of the Ray, the point from which the bullets will come out of
 	var start_pos: Vector3 = bullet_start_pos_node.global_transform.origin
 	## End pos of the Ray; start_pos extended towards where the Player is looking,
-	## multiplied by the weapon's exported max_distance variable
+	## multiplied by the weapon's @export-ed max_distance variable
 	var end_pos: Vector3 = start_pos - bullet_start_pos_node.global_transform.basis.z * self.max_distance
 	#
-	## bullet_collision_layer is @exported; it's set in editor. It's in the Firearm script
+	## bullet_collision_mask is @export-ed from the Firearm script; change it in the editor
+	## the RayCast only detects objects with on this variable
 	
-	## Set Ray parameters; they are above this comment
+	## Set the above Ray parameters
 	var ray_param: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(start_pos, \
-		end_pos, self.bullet_collision_layer)
-	## Cast the Ray itself in space_state, with ray_param as its parameters
+		end_pos, bullet_collision_mask)
+	## We want it to detect HurtBoxes (which are Areas) too, not just bodies
+	ray_param.collide_with_areas = true
+	## Finally, cast the Ray itself in space_state, with ray_param as its parameters
 	var result: Dictionary = space_state.intersect_ray(ray_param)
 	
 	
-	## Check results
+	## Now we check results of this cast Ray
 	## TODO HERE - do damage calcualtions, then hitting the environment, then not hitting anything
 	
-	## Doesn't matter if the "Bullet" hits anything, we will instantiate a Trail anyway
-	## BUT passing parameters to the Trail function requires getting hit info - that part is below
+	## Doesn't matter if the "Bullet" hits anything, we always instantiate a Trail anyway
+	## BUT passing parameters to the Trail function requires getting hit info
+	## (or the lack of it) - that part is below
 	var trail = bullet_trail_emitter.instantiate()
 	get_tree().get_root().add_child(trail)
 	
+	
 	## The "Bullet" hit something. We need hit info to instantiate the Trail and the Hit Effect
 	if result:
+		
 		## Instantiate a test decal
 		var decal = decal_insta.instantiate()
 		get_tree().get_root().add_child(decal)

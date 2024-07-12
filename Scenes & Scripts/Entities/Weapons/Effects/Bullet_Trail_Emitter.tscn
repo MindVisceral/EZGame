@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://bfset8kv0qt4r"]
 
-[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Bullet_Trail_Emitter.gd" id="1_3of3c"]
-[ext_resource type="Shader" path="res://Test_Trail.gdshader" id="2_08ham"]
+[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Effects/Bullet_Trail_Emitter.gd" id="1_b5mfj"]
+[ext_resource type="Shader" path="res://Test_Trail.gdshader" id="2_aklup"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mnggm"]
 render_priority = 0
-shader = ExtResource("2_08ham")
+shader = ExtResource("2_aklup")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_g0hfg"]
 resource_local_to_scene = true
@@ -64,7 +64,7 @@ _data = {
 }
 
 [node name="BulletTrailEmitter" type="Node3D"]
-script = ExtResource("1_3of3c")
+script = ExtResource("1_b5mfj")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
