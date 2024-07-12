@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bg2u2fljqhcdk"]
+[gd_scene load_steps=14 format=3 uid="uid://bg2u2fljqhcdk"]
 
 [ext_resource type="Texture2D" uid="uid://dmjhoaedtxskg" path="res://Decal_tex.png" id="1"]
 [ext_resource type="Material" uid="uid://o0b4tbh6yup4" path="res://addons/character-controller/example/main/materials/rock.tres" id="2_2haa3"]
@@ -29,6 +29,17 @@ sky = SubResource("15")
 sky_custom_fov = 3.8
 sky_rotation = Vector3(0.685914, 0, 0)
 fog_light_color = Color(0.12549, 0.141176, 0.164706, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o58sf"]
+size = Vector3(4, 4, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ak28t"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.207843)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2txwi"]
+material = SubResource("StandardMaterial3D_ak28t")
+size = Vector3(4, 4, 1)
 
 [node name="Testing_Area" type="Node3D"]
 
@@ -65,3 +76,14 @@ shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6061, 5.39, -4.05668)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.20547, -13.7237)
+collision_layer = 65535
+collision_mask = 65535
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_o58sf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_2txwi")

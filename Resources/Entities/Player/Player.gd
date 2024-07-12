@@ -186,9 +186,9 @@ var _last_is_on_floor: bool = false
 func _ready():
 	## Passes a reference of the Player class to the states so that it can be used by them
 	States.init(self)
-	## Passes a reference of the WeaponHolder node to the WeaponManager
-	## so that it can find the Weapons
-	Weapons.init(Firearms)
+	## Passes a reference of the Player and of the Firearms node
+	## to the WeaponManager, so it can find the Weapons
+	Weapons.init(self, Firearms)
 #	UIcontroller.init(self)
 	HeightAlternator.init(self)
 	HeadBob.init(self)

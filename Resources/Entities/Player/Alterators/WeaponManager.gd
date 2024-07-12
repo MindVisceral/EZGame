@@ -4,6 +4,10 @@ extends Node
 ##### Variables and references
 ###-------------------------------------------------------------------------###
 
+
+## Reference to the Player, so its functions and variables can be accessed directly
+## Each weapon needs this reference
+var player: Player
 ## This is the node which all the weapons are children of
 ## A reference to it is passed by the Player in the init() function in this script
 var Firearms: Marker3D
@@ -29,7 +33,8 @@ var current_weapon: Firearm
 ###-------------------------------------------------------------------------###
 
 ## This is ran once; when Player is _ready()
-func init(firearms_node) -> void:
+func init(player, firearms_node) -> void:
+	self.player = player
 	## We get a reference to the WeaponsHolder node. All the Weapons are stored under it
 	self.Firearms = firearms_node
 	
@@ -153,6 +158,7 @@ func update_weapons_array() -> void:
 	## and store all the weapons again
 	for weapon in Firearms.get_children():
 		weapons.append(weapon)
+		weapon.player = self.player
 		
 		print("Firearm found: ", weapon)
 	

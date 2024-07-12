@@ -18,6 +18,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Globals="*res://Globals.gd"
+BulletTraceGenerator="*res://Resources/Bullet_Trace_Generator.tscn"
 
 [editor_plugins]
 

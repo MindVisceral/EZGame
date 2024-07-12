@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://Resources/Entities/Player/Player_States/Fall_State.gd" id="8_xbf4w"]
 [ext_resource type="Script" path="res://Resources/Entities/Player/Alterators/WeaponManager.gd" id="9_cyjjp"]
 [ext_resource type="Script" path="res://Resources/Entities/Player/Alterators/HeadBop.gd" id="10_6kxr3"]
-[ext_resource type="PackedScene" uid="uid://dv5fcfhevw1fe" path="res://Resources/Entities/Weapons/Firearms/Firearm_Base.tscn" id="11_ml0a7"]
+[ext_resource type="PackedScene" uid="uid://b2fet7sg7ta7s" path="res://Resources/Entities/Weapons/Firearms/Pistol.tscn" id="12_nnnx6"]
 
 [sub_resource type="Curve" id="Curve_l27pf"]
 min_value = -1.0
@@ -174,11 +174,17 @@ Using the Head node for bobbing nullifies mouse movement, which also rotates the
 [node name="Firearms" type="Marker3D" parent="Head/BobbingNode"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.313777, -0.335983, -0.165569)
 
-[node name="FirearmBase" parent="Head/BobbingNode/Firearms" instance=ExtResource("11_ml0a7")]
-transform = Transform3D(0.984995, 0.172583, 0, -0.172583, 0.984995, 0, 0, 0, 1, 0.202272, 0, 0)
+[node name="Pistol" parent="Head/BobbingNode/Firearms" node_paths=PackedStringArray("bullet_start_pos_node") instance=ExtResource("12_nnnx6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+visible = false
+bullet_start_pos_node = NodePath("../../PlayerCamera")
+bullet_collision_layer = 2
 
-[node name="FirearmBase2" parent="Head/BobbingNode/Firearms" instance=ExtResource("11_ml0a7")]
-transform = Transform3D(0.984995, 0.172583, 0, -0.172583, 0.984995, 0, 0, 0, 1, 0.202272, 0, 0)
+[node name="Pistol2" parent="Head/BobbingNode/Firearms" node_paths=PackedStringArray("bullet_start_pos_node", "AnimPlayer") instance=ExtResource("12_nnnx6")]
+transform = Transform3D(-3.34849e-08, -2.80971e-08, -1, -0.642788, 0.766044, 0, 0.766044, 0.642788, -4.37114e-08, 0, 0, 0)
+visible = false
+bullet_start_pos_node = NodePath("../../PlayerCamera")
+AnimPlayer = NodePath("../Pistol/ModelHolder/gun1/AnimationPlayer")
 
 [node name="PlayerCamera" type="Camera3D" parent="Head/BobbingNode"]
 editor_description = "Main Player camera, typically placed at Head's (0, 0, 0) coordinate
