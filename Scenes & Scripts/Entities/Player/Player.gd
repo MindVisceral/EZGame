@@ -38,7 +38,7 @@ extends CharacterBody3D
 ## Player base speed
 ## All states use this base variable, instead modify the state's multiplier
 ## if you want to change movement speed.
-@export var speed: float = 11.0
+@export_range(1.0, 20.0, 0.1) var speed: float = 10.0
 
 ## Sets control in the air; the lower the number, the less control there is
 ## HERE: TO BE DEPRICATED - this doesn't mesh well with ULTRAKILL-like movement

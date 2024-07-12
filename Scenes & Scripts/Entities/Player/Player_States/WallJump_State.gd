@@ -171,9 +171,10 @@ func wall_normal_check() -> Vector3:
 	## The direction in which the Player will jump away from the wall
 	var jump_velocity: Vector3 = Vector3.ZERO
 	
+	## Get the nearest wall's nearest face's normal
 	var wall_normal_result: Vector3 = player.find_closest_wall_normal()
 	
-	## Horizontal calculations;
+	## Horizontal velocity calculations;
 	## Multiplying is fine here, because the normal is always either 0 or 1
 	jump_velocity.x = wall_normal_result.x * player.wall_jump_distance
 	jump_velocity.z = wall_normal_result.z * player.wall_jump_distance
