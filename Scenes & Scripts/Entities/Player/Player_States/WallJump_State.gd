@@ -99,10 +99,10 @@ func physics_process(delta) -> BasePlayerState:
 			temp_accel * delta)
 		
 	
-	## Apply gravity (which is the Globals gravity * multiplier)
+	## Apply gravity (which is the Globals' gravity * multiplier)
 	## No multipier used for now.
 	## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
-	player.velocity.y -= player.gravity * BulletTime.time_scale
+	player.velocity.y -= player.gravity * BulletTime.time_scale * delta
 	
 	
 	## Check if the Player is on floor...

@@ -37,8 +37,8 @@ func physics_process(delta) -> BasePlayerState:
 #	player.deceleration * delta)
 #	print(player.velocity)
 	
-	## Apply gravity (which is the Globals gravity * multiplier)
-	player.velocity.y -= player.gravity * BulletTime.time_scale
+	## Apply gravity (which is the Globals' gravity * multiplier)
+	player.velocity.y -= player.gravity * BulletTime.time_scale * delta
 	
 	if !player.check_for_floor():
 		return fall_state

@@ -68,9 +68,10 @@ func physics_process(delta) -> BasePlayerState:
 	player.velocity = player.velocity.lerp((player.direction * player.speed * speed_multiplier), \
 	temp_accel * delta)
 	
-	## Apply gravity (which is the Globals gravity * multiplier)
+	## Apply gravity (which is the Globals' gravity * multiplier)
 	## Affected by running on the wall; falling is slowed down by that.
-	player.velocity.y -= player.gravity * player.wall_sliding_deceleration * BulletTime.time_scale
+	player.velocity.y -= player.gravity * player.wall_sliding_deceleration \
+						* BulletTime.time_scale * delta
 	
 	
 	## If the Player fell off the wall, they start to fall

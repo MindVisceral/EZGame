@@ -44,8 +44,8 @@ func physics_process(delta) -> BasePlayerState:
 	 "input_forwards", "input_backwards")
 	
 	
-	## Apply gravity (which is the Globals gravity * multiplier)
-	player.velocity.y -= player.gravity * BulletTime.time_scale
+	## Apply gravity (which is the Globals' gravity * multiplier)
+	player.velocity.y -= player.gravity * BulletTime.time_scale * delta
 	
 	
 	## Check if the Player has reached the ground already

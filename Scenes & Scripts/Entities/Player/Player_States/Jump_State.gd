@@ -123,10 +123,10 @@ func physics_process(delta) -> BasePlayerState:
 #	player.velocity.z += player.velocity.z + (player.direction.z * player.speed * speed_multiplier)
 	
 	
-	## Apply gravity (which is the Globals gravity * multiplier)
+	## Apply gravity (which is the Globals' gravity * multiplier)
 	## No multipier used for now.
 	## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
-	player.velocity.y -= player.gravity * BulletTime.time_scale
+	player.velocity.y -= player.gravity * BulletTime.time_scale * delta
 	
 	
 	## A short time after the Raycast leaves the ground...

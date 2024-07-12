@@ -170,7 +170,6 @@ extends CharacterBody3D
 
 ## Flags
 var is_dead: bool = false
-## HeadBob script needs this
 var in_air: bool = false
 var on_wall: bool = false
 var is_reloading: bool = false
@@ -180,6 +179,11 @@ var current_weapon = null
 
 ## Direction of movement calculated from Input in a State
 var direction: Vector3 = Vector3()
+
+## How long the Player has been in the air.
+## Used in gravity code in all states; the longer the time, the faster the Player falls
+var air_time: float = 0.0
+
 
 ## Current counter used to calculate next step.
 #var step_cycle: float = 0

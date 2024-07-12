@@ -63,8 +63,8 @@ func physics_process(delta) -> BasePlayerState:
 	player.velocity = player.velocity.lerp((player.direction * player.speed * speed_multiplier), \
 	temp_accel * delta)
 	
-	## Apply gravity (which is the Globals gravity * multiplier)
-	player.velocity.y -= player.gravity * BulletTime.time_scale
+	## Apply gravity (which is the Globals' gravity * multiplier)
+	player.velocity.y -= player.gravity * BulletTime.time_scale * delta
 	
 #	if !player.check_for_floor():
 	if !player.is_on_floor():
