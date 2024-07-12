@@ -41,7 +41,7 @@ func physics_process(delta) -> BasePlayerState:
 	
 	
 	## Apply gravity (which is the Globals gravity * multiplier)
-	player.velocity.y -= player.gravity
+	player.velocity.y -= player.gravity * BulletTime.time_scale
 	
 	
 	## Check if the Player has reached the ground already

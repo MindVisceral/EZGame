@@ -64,7 +64,7 @@ func physics_process(delta) -> BasePlayerState:
 	temp_accel * delta)
 	
 	## Apply gravity (which is the Globals gravity * multiplier)
-	player.velocity.y -= player.gravity
+	player.velocity.y -= player.gravity * BulletTime.time_scale
 	
 #	if !player.check_for_floor():
 	if !player.is_on_floor():
