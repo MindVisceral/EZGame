@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1"]
 [ext_resource type="Resource" uid="uid://c36hv0o6g0udo" path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" id="2"]
-[ext_resource type="Texture2D" uid="uid://df7s57f6m26uf" path="res://addons/qodot/textures/pbr/military-panel/military-panel_metallic.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://b3g5hqkvp4mqv" path="res://addons/qodot/textures/pbr/military-panel/military-panel_normal.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://cpxl04ai0om41" path="res://addons/qodot/textures/pbr/military-panel/military-panel_roughness.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://cshuyxat1wpeh" path="res://addons/qodot/textures/pbr/military-panel/military-panel_ao.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://bqr2xncwk0api" path="res://addons/qodot/textures/pbr/military-panel.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://df7s57f6m26uf" path="res://Scenes & Scripts/textures/pbr/military-panel/military-panel_metallic.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://b3g5hqkvp4mqv" path="res://Scenes & Scripts/textures/pbr/military-panel/military-panel_normal.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://cpxl04ai0om41" path="res://Scenes & Scripts/textures/pbr/military-panel/military-panel_roughness.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://cshuyxat1wpeh" path="res://Scenes & Scripts/textures/pbr/military-panel/military-panel_ao.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://bqr2xncwk0api" path="res://Scenes & Scripts/textures/pbr/military-panel.png" id="8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uug1j"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)

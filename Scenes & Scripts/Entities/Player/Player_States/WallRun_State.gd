@@ -1,34 +1,35 @@
 extends BasePlayerState
 
 @export_group("Movement")
-#
+
 ## Time for the character to reach full speed
 @export var acceleration: float = 8
-## Time for the character to stop in place
+## Time for the character to stop walking
 @export var deceleration: float = 10
-## If this is true, speed_multiplier from the previous state will be use instead of the default one
-@export var use_previous_state_speed_multiplier: bool = true
 ## Speed to be multiplied when active the ability
-@export var default_speed_multiplier: float = 1.2
-
-## Current speed multiplier, carried over from the previous state
-## If it doesn't exist in the previous state, default_speed_multiplier will be used
-var speed_multiplier: float ## Not needed, no other state has a higher multipier anyway
+@export var speed_multiplier: float = 1
 
 
 @export_group("States")
 #
 @export var idle_state: BasePlayerState
 @export var walk_state: BasePlayerState
+@export var fall_state: BasePlayerState
 @export var stomp_state: BasePlayerState
 @export var walljump_state: BasePlayerState
 
 
 func enter() -> void:
 	super.enter()
+	
+	player.WallDetection.enabled = true
+	player.on_wall = true
 
 func exit() -> void:
 	super.exit()
+	
+	player.WallDetection.enabled = false
+	player.on_wall = false
 
 
 ## When a movement button is pressed, change to a corresponding State node
@@ -42,6 +43,9 @@ func input(event: InputEvent) -> BasePlayerState:
 
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
 func physics_process(delta) -> BasePlayerState:
+	
+	player.find_closest_wall()
+	
 	## The direction of Player movement based on Input
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
 	 "input_forwards", "input_backwards")

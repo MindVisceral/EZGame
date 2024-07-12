@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1"]
 [ext_resource type="Resource" uid="uid://c36hv0o6g0udo" path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" id="2"]
 [ext_resource type="Material" path="res://addons/qodot/textures/orrery/metal.tres" id="3"]
-[ext_resource type="Texture2D" uid="uid://bw7tponn4vieu" path="res://addons/qodot/textures/base/grid.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://bw7tponn4vieu" path="res://Scenes & Scripts/textures/base/grid.png" id="5"]
 [ext_resource type="Script" path="res://addons/qodot/game_definitions/fgd/solid_classes/rotate.gd" id="6_760ln"]
 [ext_resource type="Material" path="res://addons/qodot/textures/orrery/sun.tres" id="8"]
 

@@ -1,0 +1,18 @@
+// Game: Shooter
+// Format: Valve
+// entity 0
+{
+"mapversion" "220"
+"classname" "worldspawn"
+"_tb_textures" "textures"
+"_tb_mod" "Scenes & Scripts"
+// brush 0
+{
+( -1536 -64 -16 ) ( -1536 -63 -16 ) ( -1536 -64 -15 ) Concrete/concrete_16 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -64 -1536 -16 ) ( -64 -1536 -15 ) ( -63 -1536 -16 ) Concrete/concrete_16 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( -64 -64 -16 ) ( -63 -64 -16 ) ( -64 -63 -16 ) Concrete/concrete_16 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 64 64 16 ) ( 64 65 16 ) ( 65 64 16 ) Concrete/concrete_16 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 64 1664 16 ) ( 65 1664 16 ) ( 64 1664 17 ) Concrete/concrete_16 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 1664 64 16 ) ( 1664 64 17 ) ( 1664 65 16 ) Concrete/concrete_16 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+}

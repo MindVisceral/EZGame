@@ -103,10 +103,11 @@ idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 jump_state = NodePath("../Jump")
 
-[node name="WallRun" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "stomp_state", "walljump_state")]
+[node name="WallRun" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "fall_state", "stomp_state", "walljump_state")]
 script = ExtResource("9_encgj")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
+fall_state = NodePath("../Fall")
 stomp_state = NodePath("../Stomp")
 walljump_state = NodePath("../WallJump")
 

@@ -153,6 +153,7 @@ extends CharacterBody3D
 var is_dead: bool = false
 ## HeadBob script needs this
 var in_air: bool = false
+var on_wall: bool = false
 var is_reloading: bool = false
 var is_changing_weapons: bool = false
 var current_weapon = null
@@ -283,8 +284,34 @@ func check_for_floor() -> bool:
 	return FloorCast.is_colliding()
 
 func find_closest_wall() -> StaticBody3D:
-	
-	
-	
+	if WallDetection.is_colliding():
+		## First, we find the StaticBody wall that is the closest to the Player
+		## NOTE: Since almost all walls are probably made in TrenchBroom, most of them are part
+		## NOTE: of the same StaticBody. So this is a check we make just in case.
+		## NOTE: A wall's normal is more important to us.
+		
+		## INF on our first check in the loop, because there is no bigger distance than that
+		var distance_to_wall = INF
+		## I left this at Null, because we know that there is a closest Wall somewhere,
+		## because this function wouldn't be called otherwise.
+		var closest_wall: StaticBody3D
+		
+		
+		
+		print("DETECTED:     ", WallDetection.collision_result)
+		
+		## We loop through all the Walls that the WallDetection ShapeCast could find
+		## to find the Wall that is the closest to the Player
+		for result in WallDetection.collision_result:
+			## We get this Wall's distance to the Player's origin point
+			var new_distance = result.collider.global_position.distance_to(self.global_position)
+			## ...and check if this distance is smaller than the last distance...
+			if new_distance < distance_to_wall:
+				## If so, we update these two variables
+				distance_to_wall = new_distance
+				closest_wall = result.collider
+				
+			
+		#print(closest_wall)
 	
 	return
