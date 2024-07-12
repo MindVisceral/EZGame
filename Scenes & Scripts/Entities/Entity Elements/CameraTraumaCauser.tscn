@@ -4,6 +4,7 @@
 
 [node name="CameraTraumaCauser" type="Area3D"]
 editor_description = "This is a special Node used to make any nearby ShakeableCamera-class nodes shake, when such an Area3D enters this node's range.
+Keep in mind that this is not a standalone Node, and it must be added as a child of a parent Node, which then calls this TraumaCauser's cause_trauma() fuction and creates shaking in all nearby ShakableCameras.
 
 This Area3D pretty much just detects ShakeableCameras at that's about it.
 Important: a Collider must be added to this Area when it's instantiated! It won't work otherwise."

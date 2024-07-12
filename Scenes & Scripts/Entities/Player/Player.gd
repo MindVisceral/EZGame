@@ -152,10 +152,8 @@ extends CharacterBody3D
 @onready var Firearms: Marker3D = $Head/BobbingNode/Firearms
 #@onready var Firearms: Marker3D = $Head/Firearms
 #@onready var Firearms: Marker3D = $Firearms
-## Node of class ShakeableCamera; a reference to this specifically is used to make the Camera shake
-@onready var PlayerShakeableCamera: ShakeableCamera = $Head/BobbingNode/PlayerCamera
-## Actual Camera Node itself; we need this to change the Camera's parameters
-@onready var Camera: Camera3D = PlayerShakeableCamera.Camera
+## A special ShakeableCamera; this reference is used to make the Camera shake by Player scripts
+@onready var PlayerCamera: ShakeableCamera = $Head/BobbingNode/PlayerCamera
 @onready var InteractableCast: ShapeCast3D = $Head/BobbingNode/InteractableCast
 @onready var TPMarker: Marker3D = $Head/BobbingNode/TPMarker
 
@@ -283,13 +281,13 @@ func _process(delta) -> void:
 ## On ready, apply exported variables like this: 
 func apply_exported() -> void:
 	## Change PlayerCamera's FOV to the set value
-	Camera.fov = camera_FOV
+	PlayerCamera.fov = camera_FOV
 	
 	## Change the Camera's position to make it first or third person
 	if first_person == true:
-		Camera.position = Vector3.ZERO
+		PlayerCamera.position = Vector3.ZERO
 	else:
-		Camera.position = TPMarker.position
+		PlayerCamera.position = TPMarker.position
 	
 	## Instantly alter Collider dimensions
 	Collider.shape.height = default_height

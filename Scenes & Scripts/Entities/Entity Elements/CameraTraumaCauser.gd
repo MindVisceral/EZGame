@@ -8,9 +8,10 @@ extends Area3D
 
 ## Calling this method will check for all shakeable cameras this "trauma causer" overlaps with,
 ## then increase their camerashake intensity by trauma_amount.
-## NOTE: 
+## NOTE: This functions is called by the parent of this TraumaCauser!
+## NOTE: There is "area.owner" here, because the root of the ShakableCamera Node is not an Area!
 func cause_trauma():
 	var trauma_areas: Array[Area3D] = get_overlapping_areas()
 	for area in trauma_areas:
-		if area.has_method("add_trauma"):
-			area.add_trauma(trauma_amount)
+		if area.owner.has_method("add_trauma"):
+			area.owner.add_trauma(trauma_amount)

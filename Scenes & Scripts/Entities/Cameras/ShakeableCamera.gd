@@ -1,7 +1,7 @@
 ## For usage instructions, see the YouTube video below (by Pefeper):
 ## https://www.youtube.com/watch?v=1i5SB8Ct1y0
 class_name ShakeableCamera
-extends Area3D
+extends Camera3D
 
 ## Trauma is reduced by this decay value (multiplied by delta) every frame;
 ## Makes the screen shake fade over time
@@ -27,7 +27,7 @@ var trauma = 0.0
 ## A reference to the actual Camera
 @onready var Camera: Camera3D = $Camera
 ## We must keep track of this so the Camera returns to its proper rotation.
-@onready var initial_rotation: Vector3 = Camera.rotation_degrees
+@onready var initial_rotation: Vector3 = self.rotation_degrees
 
 
 func _process(delta):
@@ -35,9 +35,9 @@ func _process(delta):
 	trauma = max(trauma - delta * trauma_decay_rate, 0.0)
 	
 	## We rotate the Camera by trauma^2 and by noise to get random, but smooth shaking
-	Camera.rotation_degrees.x = initial_rotation.x + max_x * get_shake_intensity() * get_noise_from_seed(0)
-	Camera.rotation_degrees.y = initial_rotation.y + max_y * get_shake_intensity() * get_noise_from_seed(1)
-	Camera.rotation_degrees.z = initial_rotation.z + max_z * get_shake_intensity() * get_noise_from_seed(2)
+	self.rotation_degrees.x = initial_rotation.x + max_x * get_shake_intensity() * get_noise_from_seed(0)
+	self.rotation_degrees.y = initial_rotation.y + max_y * get_shake_intensity() * get_noise_from_seed(1)
+	self.rotation_degrees.z = initial_rotation.z + max_z * get_shake_intensity() * get_noise_from_seed(2)
 
 ## Called by nodes and scripts which want to add trauma (and thus some shaking) to the Camera
 func add_trauma(trauma_amount : float):

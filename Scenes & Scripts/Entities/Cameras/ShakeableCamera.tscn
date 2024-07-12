@@ -8,16 +8,15 @@ fractal_octaves = 4
 fractal_lacunarity = 20.0
 fractal_gain = 0.8
 
-[node name="ShakeableCamera" type="Area3D"]
-editor_description = "This is a special Area3D Node with an attached Camera, which allows us to make that Camera shake!
-The shake is played as a result of the Player's actions and various in-game situations.
+[node name="ShakeableCamera" type="Camera3D"]
+editor_description = "This is a special Camera Node with an attached Area3D, which allows us to shake that Camera!
+The shakehappens as a result of the Player's actions and various in-game situations.
 
 The shaking, besides being caused by a TraumaCauser-class node, may also be called through code - simply call add_trauma(trauma_amount: float)
-Important: a Collider must be added to this Area when it's instantiated! It won't work otherwise."
-collision_layer = 128
-collision_mask = 256
-input_ray_pickable = false
+Important: a Collider must be added as a child of this Node when it's instantiated in a scene! It won't work otherwise."
 script = ExtResource("1_tc0cd")
 noise = SubResource("FastNoiseLite_xwv1w")
 
-[node name="Camera" type="Camera3D" parent="."]
+[node name="TraumaDetectionArea" type="Area3D" parent="."]
+collision_layer = 128
+collision_mask = 256

@@ -43,7 +43,7 @@ var closest_interactable: Interactable = null
 ## This Node needs a reference to the Player to access its functions and variables
 func init(player: Player) -> void:
 	self.player = player
-	self.camera = player.Camera
+	self.camera = player.PlayerCamera
 
 ###-------------------------------------------------------------------------###
 ##### Executing functions
