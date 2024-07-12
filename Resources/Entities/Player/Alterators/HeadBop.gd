@@ -36,7 +36,10 @@ var step_interval: float = 6.0 * 2
 ###-------------------------------------------------------------------------###
 
 ## A choosen node that will be controlled by the HeadBob script
-## Should be set to the Head node, but could be set to the Camera itself too
+## Should be set to the BobbingNodenode, but could be set to the Camera itself
+## Shouldn't be set to the Head node; that causes a conflict with a piece of code
+## in the Player script which rotates the Head with mouse movement.
+## This script would nullify that
 @export var bobbing_node: Node3D
 
 
@@ -123,27 +126,32 @@ func _physics_process(delta: float) -> void:
 	
 	## If bobbing on steps is enabled...
 	if step_bob_enabled == true:
-		## This headbob is only applied if the Player is walking
+		## This type of headbob is only applied if the Player is walking
 		if player.in_air == false:
 			## Calculate a new position for the bobbing_node
 			new_position += _do_head_bob(delta)
 		
 	## If a bob on jump is enabled...
-	if jump_bob_enabled:  ## If jump_bob_enabled:
+	if jump_bob_enabled:
+		## This type of headbob is only applied if the Player is in the air
 		if player.in_air == true:
-			pass ## do a jump bob curve here
+			if player.velocity.y > 0:
+				## The bobbing_node is moved down when going up
+				pass ## HERE - do this part
+			
+		
 	
 	## If movement tilt is enabled...
 	if movement_tilt_enabled == true:
 		## ...we add this tilt to the rotation.
 		#
-		## We multiply the input_dir by these tilt booleans;
-		## If roll/pitch is true, its respective input_dir is multiplied by 1,
-		## so the value doesn't change, and therefore we allow for tilting;
-		## If roll/pitch is false, its respective input_dir is multiplied by 0,
-		## so the value becomes a 0 and tilting doesn't happen;
-		#
+		## We multiply the input_dir by these two tilt booleans;
 		## "roll" is tilting left/right, "pitch" is tilting forwards/backwards
+		#
+		## If roll/pitch is true, its respective input_dir is multiplied by 1,
+		## so the value doesn't change, and therefore tilting does happen;
+		## If roll/pitch is false, its respective input_dir is multiplied by 0,
+		## so the value becomes 0, and tilting doesn't happen;
 		new_rotation += _movement_tilt(input_dir.x * float(movement_tilt_roll), \
 			input_dir.y * float(movement_tilt_pitch), delta)
 	
@@ -156,7 +164,7 @@ func _physics_process(delta: float) -> void:
 ## Takes X and Z of input_dir (the horizontal direction the Player is moving in),
 ## and returns on which axis the bobbing_node should be tilted
 func _movement_tilt(x, z, delta) -> Vector3:
-	## 0.0, because we're ignoring the Y axis
+	## 0.0, because we're ignoring the Y axis. That would be head *turning*
 	var target_tilt = Vector3(x * angle_limit_for_tilt, 0.0, -z * angle_limit_for_tilt)
 	return lerp(bobbing_node.rotation, target_tilt, speed_rotation * delta)
 
@@ -183,6 +191,6 @@ func _do_head_bob(delta: float) -> Vector3:
 	return Vector3(x_pos, y_pos, 0)
 
 ## Reset head bob step cycles
-func reset_head_bob_cycles():
+func reset_head_bob_cycles(): ## HERE - not used
 	cycle_position_x = 0
 	cycle_position_y = 0

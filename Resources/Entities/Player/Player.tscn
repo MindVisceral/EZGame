@@ -77,6 +77,10 @@ jump_state = NodePath(".")
 stomp_state = NodePath("../Stomp")
 
 [node name="GroundTimer" type="Timer" parent="Scripts/StateManager/Jump"]
+editor_description = "The FloorCast is used to check for a floor beneath the Player,
+but when the Player jumps, there's a tiny window of time for the FloorCast to detect a floor,
+which immediately disables the jump.
+This Timer is used as a workaround to that problem - we wait until this Timer is finished to check if there's a floor beneath the Player."
 process_callback = 0
 wait_time = 0.05
 one_shot = true
@@ -115,7 +119,7 @@ editor_description = "Makes the chosen bopped_node - the Head or the Camera:
 
 Done for better immersion and responsivity"
 script = ExtResource("10_6kxr3")
-bobbing_node = NodePath("../../Head")
+bobbing_node = NodePath("../../Head/BobbingNode")
 bob_curve = SubResource("Curve_l27pf")
 
 [node name="UIController" type="Node" parent="Scripts"]
@@ -125,7 +129,7 @@ bob_curve = SubResource("Curve_l27pf")
 [node name="JumpBufferTimer" type="Timer" parent="Timers"]
 editor_description = "Timer that allows to jump immediately after hitting the ground, if the jump button is pressed within 0.2s before hitting that ground
 Keep this Timer's around 0.2s for a nice, lean and forgivable jump
-Never reset this Timer, at least not on state exit(). Causes a bug when jump_state is re-enter()-ed, thus not allowing for another jump - implementation issue, not planning on fixing it"
+Never reset this Timer, at least not on state exit(). Causes a bug when jump_state is re-enter()-ed, thus not allowing for another jump - implementation issue with how the Jump_state check for the ground, not planning on fixing it"
 wait_time = 0.2
 one_shot = true
 
@@ -158,13 +162,17 @@ Change it's Y position (height) through the HeightAlternator to make the camera 
 for example when crouching"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 
-[node name="PlayerCamera" type="Camera3D" parent="Head"]
+[node name="BobbingNode" type="Node3D" parent="Head"]
+editor_description = "This node is bobbed by the HeadBob script instead of the Head node
+Using the Head node for bobbing nullifies mouse movement, which also rotates the Head node"
+
+[node name="PlayerCamera" type="Camera3D" parent="Head/BobbingNode"]
 editor_description = "Main Player camera, typically placed at Head's (0, 0, 0) coordinate
 Its FOV can be changed through an exported variable in the Player node"
 current = true
 fov = 90.0
 
-[node name="TPMarker" type="Marker3D" parent="Head"]
+[node name="TPMarker" type="Marker3D" parent="Head/BobbingNode"]
 editor_description = "Marks the position of the Camera's third person view
 Janky and not very developed. Could be expanded upon"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)

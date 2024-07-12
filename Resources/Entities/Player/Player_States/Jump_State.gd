@@ -13,7 +13,7 @@ extends BasePlayerState
 
 ## Current speed multiplier, carried over from the previous state
 ## If it doesn't exist in the previous state, default_speed_multiplier will be used
-var speed_multiplier: float
+var speed_multiplier: float ## Not needed, no other state has a higher multipier anyway
 
 
 @export_group("States")
@@ -25,6 +25,7 @@ var speed_multiplier: float
 @export var stomp_state: BasePlayerState
 
 ## Timer, so that the ground isn't detected immediately after a jump
+## Check Editor description for an explanation
 @onready var ground_timer: Timer = $GroundTimer
 
 func enter() -> void:

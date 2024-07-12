@@ -127,8 +127,8 @@ class_name Player
 @onready var FeetCollider: CollisionShape3D = $FeetCollider
 @onready var FloorCast: RayCast3D = $FloorCast
 @onready var Head: Marker3D = $Head
-@onready var Camera: Camera3D = $Head/PlayerCamera
-@onready var TPMarker: Marker3D = $Head/TPMarker
+@onready var Camera: Camera3D = $Head/BobbingNode/PlayerCamera
+@onready var TPMarker: Marker3D = $Head/BobbingNode/TPMarker
 
 ## Player stats
 @export_group("Stats")
@@ -193,12 +193,6 @@ func _ready():
 	apply_exported()
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
-	
-	
-	
-	
-	
 
 
 func _input(event: InputEvent) -> void:
