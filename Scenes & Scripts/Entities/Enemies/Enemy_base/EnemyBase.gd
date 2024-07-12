@@ -58,9 +58,8 @@ extends CharacterBody3D
 @export var AnimPlayer: AnimationPlayer
 @export var States: EnemyStateManager
 @export var stats: Stats
-@export var Hurt_Handler: HurtHandler
+@export var DamageData_Handler: DamageDataHandler
 @export var Animation_Handler: AnimationHandler
-@export var Hit_Point_Handler: HitPointHandler
 @export var Collider: CollisionShape3D
 @export var FloorCast: RayCast3D
 @export var hurtbox: Hurtbox
@@ -91,9 +90,8 @@ func _ready() -> void:
 	## Passes a reference of the Enemy Node to the states so that it can be used by them
 	States.init(self)
 	stats.init(self)
-	Hurt_Handler.init(self)
+	DamageData_Handler.init(self)
 	Animation_Handler.init(self)
-	Hit_Point_Handler.init(self)
 	
 	## Apply exported variables to the Enemy
 	apply_exported()
@@ -130,7 +128,7 @@ func check_for_floor() -> bool:
 ## and pass each data point on to the Node that can handle it
 func receive_DamageData(damageData: DamageData) -> void:
 	latest_DamageData = damageData
-	Hurt_Handler.receive_DamageData(damageData)
+	DamageData_Handler.receive_DamageData(damageData)
 
 
 

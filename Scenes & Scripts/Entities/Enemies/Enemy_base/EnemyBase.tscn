@@ -1,20 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfl36ykvecfd4"]
+[gd_scene load_steps=7 format=3 uid="uid://bfl36ykvecfd4"]
 
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Enemies/Enemy_base/EnemyBase.gd" id="1_mglqm"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Enemies/States/EnemyStateManager.gd" id="2_ofog0"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Enemies/Enemy_base/Stats.gd" id="3_0kcgh"]
 [ext_resource type="PackedScene" uid="uid://yj1henetlw1f" path="res://Scenes & Scripts/Entities/Entity Elements/Hurtbox.tscn" id="3_bl2ki"]
-[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Enemies/Enemy_base/HurtHandler.gd" id="4_s31qy"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Enemies/Enemy_base/AnimationHandler.gd" id="5_t7vsf"]
-[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Enemies/Enemy_base/HitPointHandler.gd" id="6_l4k8g"]
+[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Enemies/Enemy_base/DamageDataHandler.gd" id="7_npa2a"]
 
-[node name="BaseEnemy" type="CharacterBody3D" node_paths=PackedStringArray("States", "stats", "Hurt_Handler", "Animation_Handler", "Collider", "FloorCast", "hurtbox")]
+[node name="BaseEnemy" type="CharacterBody3D" node_paths=PackedStringArray("States", "stats", "DamageData_Handler", "Animation_Handler", "Collider", "FloorCast", "hurtbox")]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_mglqm")
 States = NodePath("Scripts/StateManager")
 stats = NodePath("Scripts/Stats")
-Hurt_Handler = NodePath("Scripts/HurtHandler")
+DamageData_Handler = NodePath("Scripts/DamageDataHandler")
 Animation_Handler = NodePath("Scripts/AnimationHandler")
 Collider = NodePath("Collider")
 FloorCast = NodePath("FloorCast")
@@ -33,14 +32,11 @@ script = ExtResource("2_ofog0")
 editor_description = "Manages Enemy stats (including health);"
 script = ExtResource("3_0kcgh")
 
-[node name="HurtHandler" type="Node" parent="Scripts"]
-script = ExtResource("4_s31qy")
+[node name="DamageDataHandler" type="Node" parent="Scripts"]
+script = ExtResource("7_npa2a")
 
 [node name="AnimationHandler" type="Node" parent="Scripts"]
 script = ExtResource("5_t7vsf")
-
-[node name="HitPointHandler" type="Node" parent="Scripts"]
-script = ExtResource("6_l4k8g")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 

@@ -1,17 +1,31 @@
-extends BaseEnemyState
+extends HitPointHandler
+## ^NOTE: This extendes the generic HitPointHandler script^
 
 
-func enter() -> void:
-	super.enter()
-	
-	handle_hit_point(enemy.latest_DamageData.hit_point)
+###-------------------------------------------------------------------------###
+##### Exported variables
+###-------------------------------------------------------------------------###
 
-func exit() -> void:
-	super.exit()
+@export_group("Exported")
+
+###-------------------------------------------------------------------------###
+##### Regular variables
+###-------------------------------------------------------------------------###
 
 
-## 
-func handle_hit_point(hit_point: Vector3) -> void:
+###-------------------------------------------------------------------------###
+##### Functions
+###-------------------------------------------------------------------------###
+
+
+## This Node needs a reference to the enemy to access its functions and variables
+func init(enemy: EnemyBase) -> void:
+	self.enemy = enemy
+
+
+## Get the point at which YP has been hit, determine the direction of the hit in relation
+## to the origin point. With that information, play the corresponding animation.
+func handle_hit_point(hit_point) -> void:
 	
 	
 	## We want to get the angle between the Enemy origin point,

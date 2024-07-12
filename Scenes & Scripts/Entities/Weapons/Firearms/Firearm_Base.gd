@@ -107,6 +107,8 @@ func wield_weapon() -> void:
 ## Called by the WeaponManager when this weapon is meant to be put away by the Player
 func put_weapon_away() -> void:
 	self.visible = false
+	## Consider the primary_fire button released. The weapon will continue shooting otherwise.
+	primary_fire_is_held = false
 
 
 ## Called when the primary_action button is pressed

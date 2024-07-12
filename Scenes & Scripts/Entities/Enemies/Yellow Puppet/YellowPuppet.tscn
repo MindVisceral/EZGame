@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Enemies/Yellow Puppet/YellowPuppet.gd" id="1_wx6pj"]
 [ext_resource type="PackedScene" uid="uid://crhliit2dj4dg" path="res://Blender/yellow_puppet.gltf" id="3_pu5e3"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Enemies/States/Idle.gd" id="4_7qq6o"]
-[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Enemies/States/Hit.gd" id="5_qn7rw"]
+[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Enemies/Yellow Puppet/YP_HitPointHandler.gd" id="6_t44ac"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wl7vi"]
 radius = 0.469
@@ -14,11 +14,10 @@ height = 1.528
 radius = 0.468507
 height = 1.52785
 
-[node name="Yellow Puppet" node_paths=PackedStringArray("model", "AnimPlayer", "Hit_Point_Handler") instance=ExtResource("1_tm6i6")]
+[node name="Yellow Puppet" node_paths=PackedStringArray("model", "AnimPlayer") instance=ExtResource("1_tm6i6")]
 script = ExtResource("1_wx6pj")
 model = NodePath("yellow_puppet")
 AnimPlayer = NodePath("yellow_puppet/AnimationPlayer")
-Hit_Point_Handler = NodePath("Scripts/HitPointHandler")
 
 [node name="yellow_puppet" parent="." index="0" instance=ExtResource("3_pu5e3")]
 
@@ -39,21 +38,22 @@ bones/26/rotation = Quaternion(0.0819713, -0.000451291, -0.0164166, 0.996499)
 
 [node name="StateManager" parent="Scripts" index="0" node_paths=PackedStringArray("starting_state", "states")]
 starting_state = NodePath("Idle")
-states = [NodePath("Idle"), NodePath("Hit")]
+states = [NodePath("Idle")]
 
 [node name="Idle" type="Node" parent="Scripts/StateManager" index="0" node_paths=PackedStringArray("states")]
 script = ExtResource("4_7qq6o")
-states = [NodePath("../Hit")]
-
-[node name="Hit" type="Node" parent="Scripts/StateManager" index="1"]
-script = ExtResource("5_qn7rw")
+states = [NodePath(".")]
 
 [node name="Stats" parent="Scripts" index="1"]
 default_health = 50.0
 max_health = 1000.0
 
-[node name="HurtHandler" parent="Scripts" index="2"]
+[node name="DamageDataHandler" parent="Scripts" index="2" node_paths=PackedStringArray("hit_point_handler")]
 handle_hit_point = true
+hit_point_handler = NodePath("YP_HitPointHandler")
+
+[node name="YP_HitPointHandler" type="Node" parent="Scripts/DamageDataHandler" index="0"]
+script = ExtResource("6_t44ac")
 
 [node name="Collider" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0631747, 0.774942, 0)

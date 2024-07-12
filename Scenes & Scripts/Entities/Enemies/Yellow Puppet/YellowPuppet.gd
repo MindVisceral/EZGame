@@ -11,5 +11,3 @@ func _process(delta: float) -> void:
 
 func receive_DamageData(damageData: DamageData) -> void:
 	super(damageData)
-	
-	States.change_state(States.states[1])
