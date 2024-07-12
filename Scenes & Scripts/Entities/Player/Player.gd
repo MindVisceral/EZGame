@@ -60,13 +60,13 @@ extends CharacterBody3D
 @export_group("Height and crouching")
 
 ## Standing Collider height in Units
-@export_range(0.1, 2, 0.1) var standing_height: float = 1.6
+@export_range(0.1, 2, 0.01) var standing_height: float = 1.6
 
 ## Crouching Collider height in Units
-@export_range(0.1, 2, 0.1) var crouch_height: float = 0.8
+@export_range(0.1, 2, 0.01) var crouch_height: float = 0.55
 
 ## Time (in seconds) over which the Collider's shape is changed
-@export_range(0.05, 10, 0.05) var crouch_speed: int = 0.5
+@export_range(0.05, 10, 0.05) var crouch_speed: float = 0.15
 
 
 @export_group("Jump")

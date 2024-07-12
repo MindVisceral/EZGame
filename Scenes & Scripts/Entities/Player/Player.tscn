@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://lhlklylca50m"]
+[gd_scene load_steps=31 format=3 uid="uid://lhlklylca50m"]
 
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player.gd" id="1_kmike"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/State_Manager.gd" id="2_c5aqi"]
@@ -26,6 +26,12 @@
 radius = 0.15
 height = 1.6
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8ft6d"]
+radius = 0.15
+height = 1.6
+radial_segments = 16
+rings = 4
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hata5"]
 height = 0.01
 radius = 0.2
@@ -33,6 +39,17 @@ radius = 0.2
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bxcyr"]
 height = 0.35
 radius = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2p0f"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.235294)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4ktjy"]
+material = SubResource("StandardMaterial3D_e2p0f")
+radius = 0.2
+height = 0.4
+radial_segments = 16
+rings = 8
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_hjmpv"]
 resource_local_to_scene = true
@@ -52,6 +69,7 @@ collision_layer = 2
 collision_mask = 7
 input_ray_pickable = false
 script = ExtResource("1_kmike")
+first_person = false
 gravity_multiplier = 1.0
 
 [node name="Scripts" type="Node" parent="."]
@@ -234,6 +252,10 @@ Its height can be changed through the HeightAlternator"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("15")
 
+[node name="capsulemesh" type="MeshInstance3D" parent="Collider"]
+visible = false
+mesh = SubResource("CapsuleMesh_8ft6d")
+
 [node name="FeetCollider" type="CollisionShape3D" parent="Collider"]
 editor_description = "\"Feet\" collider for the Player
 Its height can be changed through the HeightAlternator
@@ -261,6 +283,10 @@ Change it's Y position (height) through the HeightAlternator to make the camera 
 for example when crouching"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 gizmo_extents = 0.1
+
+[node name="circlemesh" type="MeshInstance3D" parent="Collider/Head"]
+mesh = SubResource("SphereMesh_4ktjy")
+skeleton = NodePath("../..")
 
 [node name="BobbingNode" type="Node3D" parent="Collider/Head"]
 editor_description = "This node is bobbed by the HeadBob script instead of the Head node
