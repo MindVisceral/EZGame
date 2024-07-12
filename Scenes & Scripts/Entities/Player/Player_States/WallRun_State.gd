@@ -85,15 +85,6 @@ func physics_process(delta) -> BasePlayerState:
 	
 	## If the Player isn't clinging to a wall, they start to fall
 	if !player.WallDetection.is_colliding() or !player.is_moving_at_wall():
-		if !player.WallDetection.is_colliding():
-			print("BECAUSE WALLDETECTION FAILED")
-		if !player.is_moving_at_wall():
-			print("BECAUSE WALL VELOCITY FAILED")
-		
-		
-		print("Is colliding: ", player.WallDetection.is_colliding())
-		print("Collided with: ", player.WallDetection.collision_result)
-		
 		return fall_state
 		
 	## But if they're still clinging to the wall...

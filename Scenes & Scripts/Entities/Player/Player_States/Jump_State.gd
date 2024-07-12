@@ -131,12 +131,7 @@ func physics_process(delta) -> BasePlayerState:
 	player.velocity.y -= player.gravity * BulletTime.time_scale * delta \
 						+ (player.gravity * player.air_time)
 	
-	
-		#player.velocity.y -= player.gravity * delta \
-						#+ (player.gravity * player.air_time)
-	
-	
-	## air_time multiplier is only applied when the Player is falling from the jump peak
+	## air_time multiplier is only applied when the Player is falling from the jump's peak
 	if player.velocity.y <= 0:
 		## Increase air_time, thus increasing gravity until the ground is reached.
 		player.air_time += delta * player.air_time_multiplier

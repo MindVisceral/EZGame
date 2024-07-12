@@ -32,6 +32,10 @@ func enter() -> void:
 	## Start the timer
 	wall_timer.start()
 	
+	## Player vertical velocity is reset, because if it wasn't, gravity and other calculations from
+	## the previous state would mess with the jump, making it inconsistent
+	player.velocity.y = 0.0
+	
 	## Calculate and apply jump impulse (depending on the wall's normal)
 	player.velocity += wall_normal_check()
 
@@ -81,7 +85,7 @@ func physics_process(delta) -> BasePlayerState:
 		temp_accel = deceleration
 	
 	## Control in the air is damped (or raised) while moving (horizontally)
-#	temp_accel *= player.air_control
+	temp_accel *= player.air_control
 	
 	## Apply velocity, take speed_multiplier and acceleration into account
 	## But only on X and Z axes! The Y axis should be unrestrained by .speed and .multipliers
@@ -106,8 +110,10 @@ func physics_process(delta) -> BasePlayerState:
 	player.velocity.y -= player.gravity * BulletTime.time_scale * delta \
 						+ (player.gravity * player.air_time)
 	
-	## Increase air_time, thus increasing gravity until the ground is reached.
-	player.air_time += delta * player.air_time_multiplier
+	## air_time multiplier is only applied when the Player is falling from the jump's peak
+	if player.velocity.y <= 0:
+		## Increase air_time, thus increasing gravity until the ground is reached.
+		player.air_time += delta * player.air_time_multiplier
 	
 	
 	## A short time after the Shapecast leaves the wall...

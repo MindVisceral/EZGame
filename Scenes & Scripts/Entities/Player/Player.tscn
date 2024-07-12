@@ -261,13 +261,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 [node name="Firearms" type="Marker3D" parent="Head/BobbingNode"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.315, -0.264, -0.106)
 
-[node name="Pistol" parent="Head/BobbingNode/Firearms" instance=ExtResource("12_nnnx6")]
+[node name="Pistol" parent="Head/BobbingNode/Firearms" node_paths=PackedStringArray("bullet_start_pos_node") instance=ExtResource("12_nnnx6")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 visible = false
+bullet_start_pos_node = NodePath("../../PlayerCamera")
 
-[node name="Pistol2" parent="Head/BobbingNode/Firearms" instance=ExtResource("12_nnnx6")]
+[node name="Pistol2" parent="Head/BobbingNode/Firearms" node_paths=PackedStringArray("bullet_start_pos_node") instance=ExtResource("12_nnnx6")]
 transform = Transform3D(-0.766044, -0.642788, 8.74228e-08, -0.642788, 0.766044, 0, -6.69697e-08, -5.61943e-08, -1, 0, 0, 0)
 visible = false
+bullet_start_pos_node = NodePath("../../PlayerCamera")
 
 [node name="GPUParticlesAttractorVectorField3D" type="GPUParticlesAttractorVectorField3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00488281, 0.808258, 0)
