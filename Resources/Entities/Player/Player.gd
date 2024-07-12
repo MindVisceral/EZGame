@@ -53,10 +53,6 @@ class_name Player
 ## Maximum counter value to be computed one step
 @export var step_lengthen: float = 0.7
 
-## Value to be added to compute a step, each frame that the character is walking this value 
-## is added to a counter
-@export var step_interval: float = 6.0
-
 
 @export_group("Height and crouching")
 
@@ -98,13 +94,13 @@ class_name Player
 
 @export_group("Jump")
 
-## Jump height in units
+## Jump impulse height in units. Applied once on enter()
 @export var jump_height: float = 25
 
 
 @export_group("Stomp")
 
-## Jump height in units
+## Stomp impulse in units. Applied once on enter()
 @export var stomp_strength: float = 50
 
 
@@ -125,6 +121,7 @@ class_name Player
 @onready var States: Node = $Scripts/StateManager
 @onready var UIcontroller: Node = $Scripts/UIController
 @onready var HeightAlternator: Node = $Scripts/HeightAlterator
+@onready var head_bob: Node = $Scripts/HeadBop
 @onready var JumpBufferT: Timer = $Timers/JumpBufferTimer
 @onready var Collider: CollisionShape3D = $Collider
 @onready var FeetCollider: CollisionShape3D = $FeetCollider
@@ -132,12 +129,6 @@ class_name Player
 @onready var Head: Marker3D = $Head
 @onready var Camera: Camera3D = $Head/PlayerCamera
 @onready var TPMarker: Marker3D = $Head/TPMarker
-
-## Flags
-var is_reloading: bool = false
-var is_changing_weapons: bool = false
-var is_dead: bool = false
-var current_weapon = null
 
 ## Player stats
 @export_group("Stats")
@@ -150,7 +141,14 @@ var current_weapon = null
 ##### Variable storage
 ###-------------------------------------------------------------------------###
 
-## Direction of movement calculated from Input
+## Flags
+var is_dead: bool = false
+var is_reloading: bool = false
+var is_changing_weapons: bool = false
+var current_weapon = null
+
+
+## Direction of movement calculated from Input in a State
 var direction: Vector3 = Vector3()
 
 ## Current counter used to calculate next step.
@@ -160,6 +158,9 @@ var step_cycle: float = 0
 var next_step: float = 0
 
 ###-------------------------------------------------------------------------###
+
+
+
 
 
 #HERE unneccessary
@@ -188,18 +189,25 @@ func _ready():
 	apply_exported()
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	
+	
+	
+	
+	
+
 
 func _input(event: InputEvent) -> void:
 	if is_dead:
 		return
 	
+	## Move the Head up/down and the whole Player right/left with mouse movement
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		Head.rotate_x(deg_to_rad(event.relative.y * MOUSE_SENSITIVITY * -1))
 		self.rotate_y(deg_to_rad(event.relative.x * MOUSE_SENSITIVITY * -1))
 		
-		var camera_rot = Head.rotation_degrees
-		camera_rot.x = clamp(camera_rot.x, -89, 89)
-		Head.rotation_degrees = camera_rot
+		## Clamp Head's rotation. Otherwise we could turn up/down in a circle - that causes bugs
+		Head.rotation_degrees.x = clamp(Head.rotation_degrees.x, -89, 89)
 
 func _unhandled_input(event: InputEvent) -> void:
 	States.input(event)
@@ -207,15 +215,27 @@ func _unhandled_input(event: InputEvent) -> void:
 ###
 func _physics_process(delta) -> void:
 	
+## Passed variables in order: horizontal movement Vector, 
+## a boolean that detect if Player is on floor, delta
+	head_bob.head_bob_process(Vector3(self.velocity.x, 0, self.velocity.z), true, delta)
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	if !is_dead:
 #		process_input(delta)
 		process_view_input(delta)
 #		process_movement(delta)
 		
-		##States and movement
+		##States
 		States.physics_process(delta)
+		## Player's movement itself, dictated by the current_state in StateManager
 		set_velocity(velocity)
-#		set_up_direction(Vector3.UP)
 		move_and_slide()
 		velocity = velocity
 

@@ -333,7 +333,7 @@ func _check_step(_delta):
 
 func _direction_input(input : Vector2, input_down : bool, input_up : bool, aim_node : Node3D) -> Vector3:
 	_direction = Vector3()
-	var aim = aim_node.get_global_transform().basis
+	var aim = aim_node.get_global_transform().basis  #self.get_global_transform().basis bastard
 	if input.x >= 0.5:
 		_direction -= aim.z
 	if input.x <= -0.5:

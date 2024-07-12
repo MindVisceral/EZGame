@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://lhlklylca50m"]
+[gd_scene load_steps=14 format=3 uid="uid://lhlklylca50m"]
 
 [ext_resource type="Script" path="res://Resources/Entities/Player/Player.gd" id="1_kmike"]
 [ext_resource type="Script" path="res://Resources/Entities/Player/Player_States/State_Manager.gd" id="2_c5aqi"]
@@ -9,6 +9,12 @@
 [ext_resource type="Script" path="res://Resources/Entities/Player/Player_States/Stomp_State.gd" id="8_fl03g"]
 [ext_resource type="Script" path="res://Resources/Entities/Player/Alterators/HeightAlterator.gd" id="8_rgs2k"]
 [ext_resource type="Script" path="res://Resources/Entities/Player/Player_States/Fall_State.gd" id="8_xbf4w"]
+[ext_resource type="Script" path="res://Resources/Entities/Player/Alterators/HeadBop.gd" id="10_6kxr3"]
+
+[sub_resource type="Curve" id="Curve_l27pf"]
+min_value = -1.0
+_data = [Vector2(0, 0), 0.0, 6.0, 0, 0, Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), -6.0, -6.0, 0, 0, Vector2(0.75, -1), 0.0, 0.0, 0, 0, Vector2(1, 0), 3.98718, 0.0, 0, 0]
+point_count = 5
 
 [sub_resource type="CapsuleShape3D" id="15"]
 radius = 0.45
@@ -97,6 +103,17 @@ editor_description = "Alters the height of:
 nodes, for ex. the Crouch State
 Initially a part of the Crouch state; soon made a separate script for ease of use and decluttering"
 script = ExtResource("8_rgs2k")
+
+[node name="HeadBop" type="Node" parent="Scripts" node_paths=PackedStringArray("bobbing_node")]
+editor_description = "Makes the chosen bopped_node - the Head or the Camera:
+-bop right and left as the Player walks
+-tilt up when jumping
+-tilt down while falling
+
+Done for better immersion and responsivity"
+script = ExtResource("10_6kxr3")
+bobbing_node = NodePath("../../Head")
+bob_curve = SubResource("Curve_l27pf")
 
 [node name="UIController" type="Node" parent="Scripts"]
 

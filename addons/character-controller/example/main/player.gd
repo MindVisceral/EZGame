@@ -17,7 +17,7 @@ class_name Player2
 @export var input_forward_action_name := "input_forwards"
 @export var input_left_action_name := "input_left"
 @export var input_right_action_name := "input_right"
-@export var input_sprint_action_name := "input_sprint"
+@export var input_sprint_action_name := "input_forwards"
 @export var input_jump_action_name := "input_jump"
 @export var input_crouch_action_name := "input_crouch"
 @export var input_fly_mode_action_name := "move_fly_mode"
