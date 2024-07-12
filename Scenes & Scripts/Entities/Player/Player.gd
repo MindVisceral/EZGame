@@ -351,21 +351,29 @@ func find_closest_wall_normal() -> Vector3:
 ## returns true if the dot product is above a certain number.
 func is_moving_at_wall() -> bool:
 	
-	## Prepare the nearest wall's normal for comparison
-	var temp_wall_normal: Vector3 = find_closest_wall_normal()
-	var wall_normal_vector2: Vector2 = Vector2(temp_wall_normal.x, temp_wall_normal.z)
+	## Check if the Player is pressing any buttons.
+	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
+											"input_forwards", "input_backwards")
 	
-	## Prepare the Player's velocity for comparison
-	var temp_velocity: Vector2 = Vector2(velocity.x, velocity.z)
-	## Must be normalized for the dot_product to be between 0 and 1
-	temp_velocity = temp_velocity.normalized()
-	
-	## Now we calculate the dot product between Player velocity and wall's normal
-	var dot_product: float = temp_velocity.dot(wall_normal_vector2)
-	
-	## If the dot_product is over the arbitrary value of 0.11,
-	## we consider the Player to be rubbing against the wall. We return true.
-	if abs(dot_product) >= 0.11:
-		return true
-	## Otherwise, we return false.
+	## If the Player isn't pressing anything at the moment...
+	if input_dir != Vector2.ZERO:
+		
+		## Prepare the nearest wall's normal for comparison
+		var temp_wall_normal: Vector3 = find_closest_wall_normal()
+		var wall_normal_vector2: Vector2 = Vector2(temp_wall_normal.x, temp_wall_normal.z)
+		
+		## Prepare the Player's velocity for comparison
+		var temp_velocity: Vector2 = Vector2(velocity.x, velocity.z)
+		## Must be normalized for the dot_product to be between 0 and 1
+		temp_velocity = temp_velocity.normalized()
+		
+		## Now we calculate the dot product between Player velocity and the wall's normal
+		var dot_product: float = temp_velocity.dot(wall_normal_vector2)
+		
+		
+		## If the dot_product is over the arbitrary value of 0.11,
+		## we consider the Player to be rubbing against the wall. We return true.
+		if abs(dot_product) >= 0.11:
+			return true
+	## Otherwise, (in both cases), we return false.
 	return false

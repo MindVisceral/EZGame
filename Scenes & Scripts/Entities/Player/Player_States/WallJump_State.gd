@@ -58,8 +58,8 @@ func input(event: InputEvent) -> BasePlayerState:
 	if Input.is_action_just_pressed("input_crouch"):
 		return stomp_state
 	## If the Player wants to walljump again...
-	#if Input.is_action_just_pressed("input_jump"):
-		#return walljump_state
+	if Input.is_action_just_pressed("input_jump"):
+		return walljump_state
 	
 	return null
 
