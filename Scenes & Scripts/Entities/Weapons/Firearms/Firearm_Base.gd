@@ -36,6 +36,12 @@ var player: Player
 ## and setting this to "Automatic" allows the Player to hold the firing button.
 @export_enum("Single-shot", "Automatic") var firing_mode: int = 0
 
+## Number of bullets created in a single shot, in ex. shotguns.
+@export_range(0, 50, 1) var number_of_bullets: int = 1
+
+## Bullet spread in degrees.
+@export_range(0, 90, 0.1) var bullet_spread: float = 0.0
+
 ## Time the weapon waits before the next individual shot can be fired, measured in seconds.
 ## Attempting to fire before this time is up doesn't do anything.
 @export_range(0.01, 3.0, 0.01) var shot_cooldown: float = 0.15

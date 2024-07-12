@@ -661,6 +661,9 @@ autowrap_mode = 3
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("16")
 
+[node name="WorldReflectionProbe" type="ReflectionProbe" parent="."]
+size = Vector3(500, 500, 500)
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.735019, -0.663464, -0.139866, 0.476284, 0.358383, 0.802941, -0.482597, -0.656793, 0.579416, 0, 0, 0)
 light_energy = 0.8
