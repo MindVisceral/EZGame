@@ -44,6 +44,10 @@ states = [NodePath("Idle")]
 [node name="Idle" type="Node" parent="Scripts/StateManager" index="0"]
 script = ExtResource("4_7qq6o")
 
+[node name="Stats" parent="Scripts" index="1"]
+default_health = 50.0
+max_health = 1000.0
+
 [node name="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.778073, 0)
 shape = SubResource("CapsuleShape3D_wsnvm")

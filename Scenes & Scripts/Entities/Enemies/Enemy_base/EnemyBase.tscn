@@ -20,7 +20,6 @@ script = ExtResource("2_ofog0")
 [node name="Stats" type="Node" parent="Scripts"]
 editor_description = "Manages Enemy stats (including health);"
 script = ExtResource("3_0kcgh")
-default_health = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 

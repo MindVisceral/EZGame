@@ -124,6 +124,10 @@ func check_for_floor() -> bool:
 #	print(FloorCast.is_colliding())
 	return FloorCast.is_colliding()
 
+## When the Hurtbox is hit, a Normal is generated, which is the Vector3 between the
+## itself, and the thing that hit it. What should be done with this information?
+func handle_hit(hit_point: Vector3) -> void:
+	pass
 
 ## Enemy's current_health has reached 0
 func death() -> void:

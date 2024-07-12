@@ -108,3 +108,4 @@ shadow_opacity = 0.75
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6061, 0.0052982, 6.00207)
 
 [node name="Yellow Puppet" parent="." instance=ExtResource("4_23xl4")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)

@@ -47,6 +47,7 @@ func init(enemy: Enemy) -> void:
 ## Receive the DamageData Resource and use its values
 func receive_DamageData(damageData: DamageData) -> void:
 	lower_health(damageData.damage_value)
+	enemy.handle_hit(damageData.hit_point)
 
 ## Lower Entity's current_health by the provided damage value
 func lower_health(damage_value) -> void:
