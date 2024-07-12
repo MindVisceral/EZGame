@@ -8,7 +8,7 @@ class_name SwimAbility3D
 ## - floating in water
 ## - Submerged
 ##
-## Note: the [b]actived[/b] and [b]deactived[/b] signals are emitted when it is 
+## NOTE: the [b]actived[/b] and [b]deactived[/b] signals are emitted when it is 
 ## submerged(active) and surfaced(deactived)
 
 ## Emitted when character controller touched water

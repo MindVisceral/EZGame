@@ -119,6 +119,7 @@ class_name Player
 
 ## Player's children. Check a child's Editor Description to learn what it's used for
 @onready var States: Node = $Scripts/StateManager
+@onready var Weapons: Node = $Scripts/WeaponManager
 @onready var UIcontroller: Node = $Scripts/UIController
 @onready var HeightAlternator: Node = $Scripts/HeightAlterator
 @onready var HeadBob: Node = $Scripts/HeadBob
@@ -127,6 +128,7 @@ class_name Player
 @onready var FeetCollider: CollisionShape3D = $FeetCollider
 @onready var FloorCast: RayCast3D = $FloorCast
 @onready var Head: Marker3D = $Head
+@onready var Firearms: Marker3D = $Head/BobbingNode/Firearms
 @onready var Camera: Camera3D = $Head/BobbingNode/PlayerCamera
 @onready var TPMarker: Marker3D = $Head/BobbingNode/TPMarker
 
@@ -184,6 +186,9 @@ var _last_is_on_floor: bool = false
 func _ready():
 	## Passes a reference of the Player class to the states so that it can be used by them
 	States.init(self)
+	## Passes a reference of the WeaponHolder node to the WeaponManager
+	## so that it can find the Weapons
+	Weapons.init(Firearms)
 #	UIcontroller.init(self)
 	HeightAlternator.init(self)
 	HeadBob.init(self)
@@ -209,6 +214,7 @@ func _input(event: InputEvent) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	States.input(event)
+	Weapons.input(event)
 
 ###
 func _physics_process(delta) -> void:
@@ -319,7 +325,7 @@ func process_input(delta):
 
 ## On ready, apply exported variables like this: 
 func apply_exported() -> void:
-	## Change the PlayerCamera's FOV to the set value
+	## Change PlayerCamera's FOV to the set value
 	Camera.fov = camera_FOV
 	
 	## Change the Camera's position to make it first or third person

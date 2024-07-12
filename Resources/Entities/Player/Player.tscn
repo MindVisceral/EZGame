@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://lhlklylca50m"]
+[gd_scene load_steps=16 format=3 uid="uid://lhlklylca50m"]
 
 [ext_resource type="Script" path="res://Resources/Entities/Player/Player.gd" id="1_kmike"]
 [ext_resource type="Script" path="res://Resources/Entities/Player/Player_States/State_Manager.gd" id="2_c5aqi"]
@@ -9,7 +9,9 @@
 [ext_resource type="Script" path="res://Resources/Entities/Player/Player_States/Stomp_State.gd" id="8_fl03g"]
 [ext_resource type="Script" path="res://Resources/Entities/Player/Alterators/HeightAlterator.gd" id="8_rgs2k"]
 [ext_resource type="Script" path="res://Resources/Entities/Player/Player_States/Fall_State.gd" id="8_xbf4w"]
+[ext_resource type="Script" path="res://Resources/Entities/Player/Alterators/WeaponManager.gd" id="9_cyjjp"]
 [ext_resource type="Script" path="res://Resources/Entities/Player/Alterators/HeadBop.gd" id="10_6kxr3"]
+[ext_resource type="PackedScene" uid="uid://dv5fcfhevw1fe" path="res://Resources/Entities/Weapons/Firearms/Firearm_Base.tscn" id="11_ml0a7"]
 
 [sub_resource type="Curve" id="Curve_l27pf"]
 min_value = -1.0
@@ -98,6 +100,9 @@ idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 jump_state = NodePath("../Jump")
 
+[node name="WeaponManager" type="Node" parent="Scripts"]
+script = ExtResource("9_cyjjp")
+
 [node name="HeightAlterator" type="Node" parent="Scripts"]
 editor_description = "Alters the height of:
 -Collider
@@ -165,6 +170,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 [node name="BobbingNode" type="Node3D" parent="Head"]
 editor_description = "This node is bobbed by the HeadBob script instead of the Head node
 Using the Head node for bobbing nullifies mouse movement, which also rotates the Head node"
+
+[node name="Firearms" type="Marker3D" parent="Head/BobbingNode"]
+
+[node name="FirearmBase" parent="Head/BobbingNode/Firearms" instance=ExtResource("11_ml0a7")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.224335, -0.254474, -0.0952809)
+visible = false
 
 [node name="PlayerCamera" type="Camera3D" parent="Head/BobbingNode"]
 editor_description = "Main Player camera, typically placed at Head's (0, 0, 0) coordinate

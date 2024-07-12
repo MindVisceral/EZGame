@@ -73,7 +73,7 @@ var step_interval: float = 6.0 * 2
 #@export var timed_bob_curve: TimedBobCurve
 
 
-## Note: Done with an Input.get_vector()
+## NOTE: Done with an Input.get_vector()
 @export_group("Movement Tilt (Quake Like)")
 
 ## As the Player moves horizontally, tilt them the way they're moving;

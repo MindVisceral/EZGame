@@ -71,7 +71,7 @@ signal stopped_floating
 @export var gravity_multiplier := 3.0
 
 ## Controller base speed
-## Note: this speed is used as a basis for abilities to multiply their 
+## NOTE: this speed is used as a basis for abilities to multiply their 
 ## respective values, changing it will have consequences on [b]all abilities[/b]
 ## that use velocity.
 @export var speed := 10

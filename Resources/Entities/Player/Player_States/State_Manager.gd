@@ -64,4 +64,3 @@ func process(delta: float) -> void:
 	var new_state = current_state.process(delta)
 	if new_state:
 		change_state(new_state)
-#
