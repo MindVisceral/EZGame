@@ -38,7 +38,7 @@ var original_rotation: Vector3
 
 ## How fast the bob lerps between positions;
 ## how fast it returns to original_position from new_pos
-@export var bob_multiplier: float = 12.0
+@export var bob_speed: float = 12.0
 
 
 ## X-axis bobbing is based on a sine wave
@@ -90,9 +90,9 @@ var original_rotation: Vector3
 @export var movement_tilt_roll: bool = true
 
 
-## Maxium angle we will tilt the bobbing_node to
+## Maxium angle the bobbing_node may be tilted to.
+## NOTE: 0.01 is almost imperceivable, 0.05 is very subtle, 0.1 is clearly visible
 @export_range(0.01, 0.15, 0.01) var angle_limit_for_tilt: float = 0.05
-## ^^0.01 is almost imperceivable, 0.05 is very subtle, 0.1 is clearly visible^^
 
 
 ###-------------------------------------------------------------------------###
@@ -125,7 +125,7 @@ func _process(delta: float) -> void:
 		## NOTE: BulletTime.time_scale multiplication happens in the do_head_bob() function
 		var bob_tween = get_tree().create_tween()
 		bob_tween.tween_property(bobbing_node, "position", do_head_bob(), \
-										bob_multiplier * BulletTime.time_scale * delta)
+										bob_speed * BulletTime.time_scale * delta)
 	
 	## If air bobbing is enabled...
 	if air_bob_enabled == true:
@@ -188,15 +188,15 @@ func do_head_bob() -> Vector3:
 		if X_axis_bob_enabled == true:
 			## Make the bobbing_node move left and right
 			new_pos.x = original_position.x + (sin(Time.get_ticks_msec() * BulletTime.time_scale \
-								* x_bob_frequency) * x_bob_amplitude * \
-								int(!player.in_air) * int(!player.on_wall))
+						* x_bob_frequency) * x_bob_amplitude * \
+						int(!player.in_air) * int(!player.on_wall)) * int(player.headbob_active)
 		
 		## If bobbing on Y axis is enabled...
 		if Y_axis_bob_enabled == true:
 			## Make the bobbing_node move up and down
 			new_pos.y = original_position.y + (sin(Time.get_ticks_msec() * BulletTime.time_scale \
 						* y_bob_frequency) * y_bob_amplitude * \
-							int(!player.in_air) * int(!player.on_wall))
+						int(!player.in_air) * int(!player.on_wall)) * int(player.headbob_active)
 	
 	
 	### NOTE: This happens no matter if the Player is on the ground or in the air
@@ -208,4 +208,3 @@ func do_head_bob() -> Vector3:
 	
 	
 	return new_pos
-

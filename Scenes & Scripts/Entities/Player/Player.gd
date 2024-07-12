@@ -152,11 +152,15 @@ extends CharacterBody3D
 ###-------------------------------------------------------------------------###
 
 ## Flags
+#
 var is_dead: bool = false
 var in_air: bool = false
 var on_wall: bool = false
+var headbob_active: bool = true
+## HERE: Old flags to be removed or reintegrated
 var is_reloading: bool = false
 var is_changing_weapons: bool = false
+## ^^^
 var current_weapon = null
 
 

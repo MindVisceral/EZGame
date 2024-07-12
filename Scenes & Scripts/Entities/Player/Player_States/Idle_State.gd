@@ -1,5 +1,12 @@
 extends BasePlayerState
 
+
+@export_group("Movement")
+#
+## Time for the Player to stop in place
+@export var deceleration: float = 10.0
+
+
 @export_group("States")
 #
 @export var walk_state: BasePlayerState
@@ -34,11 +41,8 @@ func input(event: InputEvent) -> BasePlayerState:
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
 func physics_process(delta) -> BasePlayerState:
 	## If the Player is still moving, make them decelerate down to zero
-	## Grayed out, seems unneccessary, since Idle only turns on when velocity is ZERO
-	#
-#	player.velocity.lerp(Vector3(player.velocity.x, 0.0, player.velocity.z), \
-#	player.deceleration * delta)
-#	print(player.velocity)
+	player.velocity = player.velocity.lerp((player.direction * player.speed), \
+	deceleration * delta)
 	
 	## Apply gravity (which is the Globals' gravity * multiplier)
 	player.velocity.y -= player.gravity * BulletTime.time_scale * delta

@@ -43,7 +43,7 @@ func physics_process(delta) -> BasePlayerState:
 	## The direction of Player movement based on Input
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
 	 "input_forwards", "input_backwards")
-	## We keep the Y axis the same, and place input_dir on the XZ axis
+	## We ignore the Y axis, and place input_dir on the XZ axis
 	player.direction = (player.transform.basis * Vector3(input_dir.x, 0.0, input_dir.y).normalized())
 	
 	## Decide if the Player going to accelerate or decelerate.

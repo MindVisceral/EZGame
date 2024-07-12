@@ -673,7 +673,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67, 1, 7)
 mesh = SubResource("BoxMesh_q5qop")
 
 [node name="Player" parent="." instance=ExtResource("6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.3081, 0, 36.2515)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 0, 36)
 
 [node name="Yellow Puppet" parent="." instance=ExtResource("4_23xl4")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
