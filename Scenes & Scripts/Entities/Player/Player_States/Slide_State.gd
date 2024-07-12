@@ -26,10 +26,8 @@ var slide_direction: Vector3 = Vector3.ZERO
 func enter() -> void:
 	super.enter()
 	
-	
-	##
+	## We must detect walls to stop the Player when they collide with one at certain angles
 	player.WallDetection.enabled = true
-	
 	
 	## Alter the height to crouch height
 	player.HeightAlternator.alter_collider_height(player.crouch_height)
@@ -115,8 +113,8 @@ func physics_process(delta) -> BasePlayerState:
 	## We check if the Player is near a wall
 	if player.WallDetection.is_colliding():
 		## We check if the Player is moving up against the wall
-		if !player.is_moving_at_wall(false, 0.20):
-			print("at wall!")
+		## If that is so, we stop the slide state.
+		if player.is_moving_at_wall(false, 0.7):
 			return idle_state
 	
 	return null
