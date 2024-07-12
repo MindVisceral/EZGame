@@ -1,5 +1,5 @@
-extends CharacterBody3D
 class_name Player
+extends CharacterBody3D
 
 ###-------------------------------------------------------------------------###
 ##### Variables of Movement and Input
@@ -118,12 +118,12 @@ class_name Player
 @onready var gravity = Globals.global_gravity * gravity_multiplier
 
 ## Player's children. Check a child's Editor Description to learn what it's used for
-@onready var States: Node = $Scripts/StateManager
-@onready var Weapons: Node = $Scripts/WeaponManager
+@onready var States: PlayerStateManager = $Scripts/StateManager
+@onready var Weapons: PlayerWeaponManager = $Scripts/WeaponManager
 @onready var UIcontroller: Node = $Scripts/UIController
-@onready var HeightAlternator: Node = $Scripts/HeightAlterator
-@onready var HeadBob: Node = $Scripts/HeadBob
-@onready var WeaponBob: Node = $Scripts/WeaponBob
+@onready var HeightAlternator: PlayerHeightAlternator = $Scripts/HeightAlterator
+@onready var HeadBob: PlayerHeadbobHandler = $Scripts/HeadBob
+@onready var WeaponBob: PlayerWeaponbobHandler = $Scripts/WeaponBob
 @onready var JumpBufferT: Timer = $Timers/JumpBufferTimer
 @onready var Collider: CollisionShape3D = $Collider
 @onready var FeetCollider: CollisionShape3D = $FeetCollider

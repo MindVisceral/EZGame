@@ -1,3 +1,4 @@
+class_name PlayerStateManager
 extends Node
 
 ## The State in which the Player will start

@@ -1,3 +1,4 @@
+class_name PlayerWeaponbobHandler
 extends Node
 
 

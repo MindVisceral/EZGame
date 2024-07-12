@@ -56,20 +56,13 @@ extends CharacterBody3D
 ## Enemy's children. Check a child's Editor Description to learn what it's used for
 @export var model: Node3D   ## A Node with a Skeleton3D, a Mesh, and an AnimationPlayer
 @export var AnimPlayer: AnimationPlayer
-@onready var States: Node = $Scripts/StateManager
-@onready var stats: Node = $Scripts/Stats
+@onready var States: EnemyStateManager = $Scripts/StateManager
+@onready var stats: Stats = $Scripts/Stats
+@onready var Hurt_Handler: HurtHandler = $Scripts/HurtHandler
 @onready var Collider: CollisionShape3D = $CollisionShape3D
 @onready var FloorCast: RayCast3D = $FloorCast
 @onready var hurtbox: Area3D = $Hurtbox
 
-
-
-## Enemy stats
-@export_group("Stats")
-
-@export var MAX_HEALTH = 150
-@export var health = 100
-#
 
 ###-------------------------------------------------------------------------###
 ##### Variable storage
@@ -92,6 +85,7 @@ func _ready() -> void:
 	## Passes a reference of the Enemy Node to the states so that it can be used by them
 	States.init(self)
 	stats.init(self)
+	Hurt_Handler.init(self)
 	
 	## Apply exported variables to the Enemy
 	apply_exported()
@@ -124,10 +118,6 @@ func check_for_floor() -> bool:
 #	print(FloorCast.is_colliding())
 	return FloorCast.is_colliding()
 
-## When the Hurtbox is hit, a Normal is generated, which is the Vector3 between the
-## itself, and the thing that hit it. What should be done with this information?
-func handle_hit(hit_point: Vector3) -> void:
-	pass
 
 ## Enemy's current_health has reached 0
 func death() -> void:

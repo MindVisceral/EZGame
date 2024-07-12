@@ -1,3 +1,4 @@
+class_name EnemyStateManager
 extends Node
 
 ## The State in which the Enemy will start
