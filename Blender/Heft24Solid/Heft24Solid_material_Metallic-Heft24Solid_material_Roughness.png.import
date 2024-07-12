@@ -2,28 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtyk2ul0ms5mm"
-path.s3tc="res://.godot/imported/gun1_Bez tytułu.png-d87308c2ffa8fe55c3b13cc9177d8e7e.s3tc.ctex"
+uid="uid://cjup5jewgluxl"
+path="res://.godot/imported/Heft24Solid_material_Metallic-Heft24Solid_material_Roughness.png-18423dc1432f1cff315bcf8ae011cb1d.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
-generator_parameters={}
 
 [deps]
 
-source_file="res://Scenes & Scripts/Entities/Weapons/Gun/gun1_Bez tytułu.png"
-dest_files=["res://.godot/imported/gun1_Bez tytułu.png-d87308c2ffa8fe55c3b13cc9177d8e7e.s3tc.ctex"]
+source_file="res://Blender/Heft24Solid/Heft24Solid_material_Metallic-Heft24Solid_material_Roughness.png"
+dest_files=["res://.godot/imported/Heft24Solid_material_Metallic-Heft24Solid_material_Roughness.png-18423dc1432f1cff315bcf8ae011cb1d.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=2
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

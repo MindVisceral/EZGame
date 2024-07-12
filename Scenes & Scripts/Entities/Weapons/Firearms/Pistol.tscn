@@ -2,22 +2,20 @@
 
 [ext_resource type="PackedScene" uid="uid://bn7y4wu56lcq0" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Firearm_Hitscan.tscn" id="1_k8jy2"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Pistol.gd" id="2_ejjpi"]
-[ext_resource type="PackedScene" uid="uid://bemovxot15qyc" path="res://Scenes & Scripts/Entities/Weapons/Gun/gun1.glb" id="3_hegno"]
+[ext_resource type="PackedScene" uid="uid://bvoqgew4r1sdh" path="res://Blender/Heft24Solid/Heft24Solid.gltf" id="3_ayanl"]
 
 [node name="Pistol" node_paths=PackedStringArray("bullet_start_point", "AnimPlayer") instance=ExtResource("1_k8jy2")]
 editor_description = ""
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("2_ejjpi")
-bullet_start_point = NodePath("ModelHolder/gun1/Armature/Base_bone/Grip1/TrailSpawnPoint")
-AnimPlayer = NodePath("ModelHolder/gun1/AnimationPlayer")
+bullet_start_point = NodePath("ModelHolder/Heft24Solid/TrailSpawnPoint")
+AnimPlayer = NodePath("")
 shot_cooldown = 1.6
 
-[node name="gun1" parent="ModelHolder" index="0" instance=ExtResource("3_hegno")]
+[node name="Heft24Solid" parent="ModelHolder" index="0" instance=ExtResource("3_ayanl")]
 
-[node name="Trigger_bone" parent="ModelHolder/gun1/Armature/Base_bone" index="0"]
-transform = Transform3D(-0.719648, -0.694339, -2.59588e-06, 0.694339, -0.719648, 1.37298e-06, -2.82143e-06, -8.14356e-07, 1, -0.141371, 0.715085, 1.42901e-07)
-
-[node name="TrailSpawnPoint" type="Marker3D" parent="ModelHolder/gun1/Armature/Base_bone/Grip1" index="0"]
-transform = Transform3D(1, 4.9738e-14, -1.98952e-13, 0, 1, -1.22394e-14, 0, 1.95063e-16, 1, -0.857, 0.107156, 1.04812e-10)
+[node name="TrailSpawnPoint" type="Marker3D" parent="ModelHolder/Heft24Solid" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.21528e-08, 0.106245, 0.367785)
 gizmo_extents = 0.05
 
-[editable path="ModelHolder/gun1"]
+[editable path="ModelHolder/Heft24Solid"]
