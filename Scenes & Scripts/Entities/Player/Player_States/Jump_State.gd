@@ -43,13 +43,11 @@ func enter() -> void:
 	## Start the timer
 	ground_timer.start()
 	
-	## Apply jump impulse; jump_height is added, and stomp_vertical_distance too, but only if
-	## this jump has been performed within StompJumpTimer's wait_time
-	player.velocity.y += player.jump_height + \
-							(minf(player.stomp_vertical_distance, player.stomp_jump_height_limit) * \
-							float(!player.StompJumpT.is_stopped()))
-	## Reset stomp_vertical_distance
-	player.stomp_vertical_distance = 0.0
+	## Apply jump impulse; jump_height is added, and stomp_vertical_distance too
+	## (though it's limited), but only if this jump has been performed
+	## within StompJumpTimer's wait_time
+	
+	player.velocity.y += apply_jump_impulse()
 
 func exit() -> void:
 	super.exit()
@@ -174,6 +172,27 @@ func physics_process(delta) -> BasePlayerState:
 		
 	
 	return null
+
+
+## Calculates the jump's height
+func apply_jump_impulse() -> float:
+	
+	var returned_jump_height: float = 0.0
+	
+	## If a Stomp has just been finished, we perform a StompJump
+	if !player.StompJumpT.is_stopped():
+		returned_jump_height += minf(player.stomp_vertical_distance, player.stomp_jump_height_limit)
+	## Otherwise, we just do a regular jump
+	else:
+		returned_jump_height += player.jump_height
+	
+	## Either way, we reset the stomp_vertical_distance
+	player.stomp_vertical_distance = 0.0
+	
+	return returned_jump_height
+
+
+
 
 
 ## HERE - unnecessary, there is no state that has a higher multiplier than Jump

@@ -33,9 +33,12 @@ extends CharacterBody3D
 
 ## How fast the Player accelerates when falling down
 ## The bigger the number, the faster the fall
-## NOTE: This acceleration should only be visible when falling for a long time. Keep this # low.
+## NOTE: This acceleration should only be visible when falling for a long time. Keep this # low
 @export var air_time_multiplier: float = 0.05
 
+## The maximum speed the Player may reach when falling; In practise, limits air_time
+## Should be about the same as stomp_strength
+@export var falling_speed_limit: float = 15.0
 
 ## Player base speed
 ## All states use this base variable, instead modify the state's multiplier
@@ -101,11 +104,12 @@ extends CharacterBody3D
 @export_group("Stomp")
 
 ## Stomp impulse in units. Applied once on enter()
-@export var stomp_strength: float = 50.0
+## Should be around the same as falling_speed_limit
+@export var stomp_strength: float = 15.0
 
 ## The maximum height the Player may jump when performing a stomp jump
 ## 230 meters is the limit, but setting this to (96.5 - jump_height) grants that desired height
-@export var stomp_jump_height_limit: float = 82.5
+@export var stomp_jump_height_limit: float = 96.5
 
 
 @export_group("Wall-running, -jumping, -sliding")
@@ -188,6 +192,7 @@ var direction: Vector3 = Vector3()
 
 ## How long the Player has been in the air.
 ## Used in gravity code in all states; the longer the time, the faster the Player falls
+## But that is limited by X in Y on Z
 var air_time: float = 0.0
 
 ## The distance between the point from which the Player started a stomp, and the ground they hit.

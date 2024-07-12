@@ -49,8 +49,6 @@ collision_mask = 7
 input_ray_pickable = false
 script = ExtResource("1_kmike")
 gravity_multiplier = 1.0
-stomp_strength = 4.0
-wall_sliding_deceleration = 0.6
 
 [node name="Scripts" type="Node" parent="."]
 
@@ -174,7 +172,6 @@ editor_description = "Makes the chosen bopped_node - the Head or the Camera:
 Done for better immersion and responsivity"
 script = ExtResource("10_6kxr3")
 bobbing_node = NodePath("../../Head/BobbingNode")
-movement_tilt_enabled = false
 
 [node name="WeaponBob" type="Node" parent="Scripts" node_paths=PackedStringArray("bobbing_node")]
 script = ExtResource("12_4bkuj")

@@ -100,6 +100,8 @@ func physics_process(delta) -> BasePlayerState:
 						+ (player.gravity * player.air_time)
 	## Increase air_time, thus increasing gravity until the ground is reached.
 	player.air_time += delta * player.air_time_multiplier
+	## We limit this value to falling_speed_limit, so the falling speed doesn't increase to infinity
+	player.air_time = minf(player.air_time, player.falling_speed_limit)
 	
 	
 	## Check if the Player has reached the ground already
