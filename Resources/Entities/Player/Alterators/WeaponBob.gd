@@ -31,7 +31,7 @@ var step_interval: float = 6.0 * 2
 
 @export_group("Weapon Bob")
 
-## Enables weaponbob
+## Enables WeaponBob in general
 @export var weapon_bob_enabled: bool = true
 
 ## How fast the bob lerps between positions; how fast it returns to original_position from new_pos
@@ -42,7 +42,7 @@ var step_interval: float = 6.0 * 2
 ## X-axis bobbing is based on a sine wave
 @export_subgroup("Left-Right weapon bob")
 
-## Enables weaponbob on the X axis (moving from left to right and back)
+## Enables WeaponBob on the X axis (moving from left to right and back)
 @export var X_axis_bob_enabled: bool = true
 
 ## Makes bobbing_node move faster between extremes; bigger number = faster bobbing
@@ -54,11 +54,11 @@ var step_interval: float = 6.0 * 2
 ## Z-axis bobbing simply moves the bobbing_node on the Z axis
 @export_subgroup("Forwards-Backwards weapon bob")
 
-## Enables weaponbob on the Z axis (moves the bobbing_node slightly forwards, or slightly backwards)
+## Enables WeaponBob on the Z axis (moves the bobbing_node slightly forwards, or slightly backwards)
 @export var Z_axis_bob_enabled: bool = true
 
 ## This length limits how far forwards/backwards the bobbing_node may move
-@export var Z_bob_length: float = 0.01
+@export var Z_bob_length: float = 0.001
 
 
 ##
@@ -88,7 +88,7 @@ func _ready():
 ##### Executing functions
 ###-------------------------------------------------------------------------###
 
-## Applies all weaponbob; _process() is used, because this bobbing is purely visual anyway
+## Applies all WeaponBob; _process() is used, because this bobbing is purely visual anyway
 func _process(delta: float) -> void:
 	
 	## If bobbing is enabled...
@@ -99,39 +99,40 @@ func _process(delta: float) -> void:
 		tween.tween_property(bobbing_node, "position", do_weapon_bob(delta), bob_multiplier * delta)
 
 
-## Move bobbing_node on the X, Y and Z axes when the Player is moving
+## Move bobbing_node on the X, Y and Z axes depending on Player Input or velocity
 func do_weapon_bob(delta: float) -> Vector3:
 	
+	## NOTE: This is made the same as original_position at first, because if bobbing on an axis
+	## NOTE: was disabled or broken, the weapon would go to 0 on that axis!
 	## The position towards which the bobbing_node's position will be lerped
-	var new_pos: Vector3
+	var new_pos: Vector3 = original_position
 	
-	## Get which way the Player is moving based on Input
-	## NOTE: This is a Vector2, but we use it along some Vector3-s!
-	## Consider its X value to be the X value, and the Y value to be the Z value in 3D space
-	## NOTE: input_dir.X is left/right, input_dir.Y is forwards/backwards
+	## Get IF the Player is moving based on Input.
+	## Could be done with many Input.is_button_pressed()-s, but this is cleaner.
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
 	 "input_forwards", "input_backwards")
 	
-		
-	## Weaponbob on the X and Z axes only works when the Player is pressing horizontal Input buttons
-	## So, if the Player is moving horizontally...
+	## WeaponBob on the X axis only works when the Player is pressing horizontal Input buttons...
 	if input_dir != Vector2.ZERO:
-		
-		## NOTE: !player.in_air ensures that this only happens when the Player is not in the air
-		## Make the bobbing_node move left and right
-		new_pos.x = original_position.x + (sin(Time.get_ticks_msec() \
-							* x_bob_frequency) * x_bob_amplitude * int(!player.in_air))
-		## Make the bobbing_node move fowards or backwards
-		new_pos.z = original_position.z + (input_dir.y * Z_bob_length * int(!player.in_air))
-		
-		
-	## Otherwise, make the bobbing_node return to its original_position
-	else:
-		new_pos.x = original_position.x
-		new_pos.z = original_position.z
+		## NOTE: !player.in_air ensures that this only happens when the Player is NOT in the air
+		## If bobbing on X axis is enabled...
+		if X_axis_bob_enabled == true:
+			## Make the bobbing_node move left and right
+			new_pos.x = original_position.x + (sin(Time.get_ticks_msec() \
+								* x_bob_frequency) * x_bob_amplitude * int(!player.in_air))
 	
-	## Make the bobbing_node move up or down
-	## NOTE: player.in_air ensures that this only happens when the Player is in the air
-	new_pos.y = original_position.y + (player.velocity.y * Y_bob_height * int(player.in_air))
+	## NOTE: This happens no matter if the Player is on the ground or in the air
+	## If bobbing on Z axis is enabled...
+	if Z_axis_bob_enabled == true:
+		## NOTE: player.velocity.z could be input_dir.y, but there seems to be not much difference
+		## Make the bobbing_node move fowards or backwards
+		new_pos.z = original_position.z + (player.velocity.z * Z_bob_length)
+	
+	## NOTE: player.in_air ensures that this only happens when the Player IS in the air
+	## If bobbing on Y axis is enabled...
+	if Y_axis_bob_enabled == true:
+		## Make the bobbing_node move up or down
+		new_pos.y = original_position.y + (player.velocity.y * Y_bob_height * int(player.in_air))
+	
 	
 	return new_pos
