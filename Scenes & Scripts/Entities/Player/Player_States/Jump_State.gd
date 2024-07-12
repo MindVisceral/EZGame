@@ -23,6 +23,8 @@ var speed_multiplier: float ## Not needed, no other state has a higher multipier
 @export var crouch_state: BasePlayerState
 @export var jump_state: BasePlayerState
 @export var stomp_state: BasePlayerState
+@export var wallrun_state: BasePlayerState
+@export var walljump_state: BasePlayerState
 
 ## Timer, so that the ground isn't detected immediately after a jump
 ## Check Editor description for an explanation
@@ -32,6 +34,8 @@ func enter() -> void:
 	super.enter()
 	
 	player.in_air = true
+	## The Player may want to do wall-related movement while in the air
+	player.WallDetection.enabled = true
 	
 	## Check how fast we should go
 	speed_multiplier_check()
@@ -46,14 +50,20 @@ func exit() -> void:
 	super.exit()
 	
 	player.in_air = false
+	player.WallDetection.enabled = false
 	
 	## Reset ground timer
 	ground_timer.stop()
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:
+	## If the Player wants to stomp back to the ground...
 	if Input.is_action_just_pressed("input_crouch"):
 		return stomp_state
+	## If the Player wants to jump off the wall...
+	if Input.is_action_just_pressed("input_jump"):
+		if player.WallDetection.is_colliding():
+			return walljump_state
 	
 	return null
 
@@ -66,12 +76,13 @@ func physics_process(delta) -> BasePlayerState:
 		player.JumpBufferT.start()
 	
 	
-	## The direction of Player movement based on Input
+	## The direction the Player's movement based on Input
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
 	 "input_forwards", "input_backwards")
 	## We keep the Y axis the same, and place input_dir on the XZ axis
 	player.direction = (player.transform.basis * \
 		Vector3(input_dir.x, 0.0, input_dir.y).normalized())
+		
 	
 	## Decide if the Player going to accelerate or decelerate.
 	var temp_accel
@@ -81,17 +92,17 @@ func physics_process(delta) -> BasePlayerState:
 	else:
 		temp_accel = deceleration
 	
-	## Control in the air is damped (or raised) while moving horizontally
+	## Control in the air is damped (or raised) while moving (horizontally)
 #	temp_accel *= player.air_control
 	
 	## Apply velocity, take speed_multiplier and acceleration into account
 	## But only on X and Z axes! The Y axis should be unrestrained by .speed and .multipliers
-#	player.velocity.x = lerp(player.velocity.x, \
-#		(player.direction.x * player.speed * speed_multiplier), \
-#		temp_accel * delta)
-#	player.velocity.z = lerp(player.velocity.z, \
-#		(player.direction.z * player.speed * speed_multiplier), \
-#		temp_accel * delta)
+	#player.velocity.x = lerp(player.velocity.x, \
+		#(player.direction.x * player.speed * speed_multiplier), \
+		#temp_accel * delta)
+	#player.velocity.z = lerp(player.velocity.z, \
+		#(player.direction.z * player.speed * speed_multiplier), \
+		#temp_accel * delta)
 	
 	## When the horizontal Input keys are pressed, make the Player move in that direction
 	## Otherwise, keep the momentum
@@ -102,6 +113,7 @@ func physics_process(delta) -> BasePlayerState:
 		player.velocity.z = lerp(player.velocity.z, \
 			(player.direction.z * player.speed * speed_multiplier), \
 			temp_accel * delta)
+		
 	
 #	player.velocity = Vector3(player.velocity.x, 0, player.velocity.z).lerp((player.direction \
 #		* player.speed * speed_multiplier), temp_accel * delta)
@@ -118,7 +130,7 @@ func physics_process(delta) -> BasePlayerState:
 	
 	## A short time after the Raycast leaves the ground...
 	if ground_timer.is_stopped():
-		## Check if the Player is on floor
+		## Check if the Player is on floor...
 		if player.check_for_floor():
 			
 			## If the jump button has been pressed within the buffer time, allow for another jump
@@ -132,6 +144,13 @@ func physics_process(delta) -> BasePlayerState:
 			## Otherwise, keep on walking
 			else:
 				return walk_state
+			
+		## The Player isn't on the floor, so we check if they're near a wall...
+		elif player.WallDetection.is_colliding():
+			## The Player is near a wall, so we make them run on it.
+			## NOTE: WallJumping is detect on Input instead! This is only for WallRunning.
+			return wallrun_state
+		
 	
 	return null
 

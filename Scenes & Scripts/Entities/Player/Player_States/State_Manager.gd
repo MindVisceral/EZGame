@@ -41,7 +41,7 @@ func change_state(new_state: BasePlayerState) -> void:
 ## The Player calls these functions, the state changes are handled as needed by States themselves
 ##
 func physics_process(delta: float) -> void:
-#	print(current_state)
+	print(current_state)
 #	if current_state.get("speed_multiplier"):
 #		print(current_state.speed_multiplier)
 	

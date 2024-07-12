@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://lhlklylca50m"]
+[gd_scene load_steps=21 format=3 uid="uid://lhlklylca50m"]
 
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player.gd" id="1_kmike"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/State_Manager.gd" id="2_c5aqi"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Alterators/WeaponManager.gd" id="9_cyjjp"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/WallRun_State.gd" id="9_encgj"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Alterators/HeadBop.gd" id="10_6kxr3"]
+[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/WallJump_State.gd" id="10_gc6l4"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Alterators/WeaponBob.gd" id="12_4bkuj"]
 [ext_resource type="PackedScene" uid="uid://b2fet7sg7ta7s" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Pistol.tscn" id="12_nnnx6"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Alterators/InteractionManager.gd" id="13_qk48y"]
@@ -23,6 +24,9 @@ height = 1.6
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hata5"]
 height = 0.01
 radius = 0.425
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_da65o"]
+height = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oey6e"]
 radius = 0.15
@@ -43,7 +47,7 @@ Stores all the States, in case the current_state has to be changed by a Node/scr
 Can change the current_state on behest of an individual State"
 script = ExtResource("2_c5aqi")
 starting_state = NodePath("Idle")
-states = [NodePath("Idle"), NodePath("Walk"), NodePath("Crouch"), NodePath("Jump"), NodePath("Fall"), NodePath("Stomp"), NodePath("WallRun")]
+states = [NodePath("Idle"), NodePath("Walk"), NodePath("Crouch"), NodePath("Jump"), NodePath("Fall"), NodePath("Stomp"), NodePath("WallRun"), NodePath("WallJump")]
 
 [node name="Idle" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("walk_state", "crouch_state", "jump_state", "fall_state")]
 script = ExtResource("3_f5lbm")
@@ -67,13 +71,15 @@ walk_state = NodePath("../Walk")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 
-[node name="Jump" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "crouch_state", "jump_state", "stomp_state")]
+[node name="Jump" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "crouch_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
 script = ExtResource("7_b1yw5")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 crouch_state = NodePath("../Crouch")
 jump_state = NodePath(".")
 stomp_state = NodePath("../Stomp")
+wallrun_state = NodePath("../WallRun")
+walljump_state = NodePath("../WallJump")
 
 [node name="GroundTimer" type="Timer" parent="Scripts/StateManager/Jump"]
 editor_description = "The FloorCast is used to check for a floor beneath the Player,
@@ -97,8 +103,15 @@ idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 jump_state = NodePath("../Jump")
 
-[node name="WallRun" type="Node" parent="Scripts/StateManager"]
+[node name="WallRun" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "stomp_state", "walljump_state")]
 script = ExtResource("9_encgj")
+idle_state = NodePath("../Idle")
+walk_state = NodePath("../Walk")
+stomp_state = NodePath("../Stomp")
+walljump_state = NodePath("../WallJump")
+
+[node name="WallJump" type="Node" parent="Scripts/StateManager"]
+script = ExtResource("10_gc6l4")
 
 [node name="WeaponManager" type="Node" parent="Scripts"]
 script = ExtResource("9_cyjjp")
@@ -150,16 +163,29 @@ one_shot = true
 editor_description = "Main body Collider for the Player
 Its height can be changed through the HeightAlternator"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
-visible = false
 shape = SubResource("15")
 
 [node name="FeetCollider" type="CollisionShape3D" parent="."]
 editor_description = "\"Feet\" collider for the Player
 Its height can be changed through the HeightAlternator
-The regualar Collider makes the Player fall off edges, and this collider prevents that"
+The regular Collider is rounded on the bottom and that makes the Player fall off edges - this collider prevents that"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-visible = false
 shape = SubResource("CylinderShape3D_hata5")
+
+[node name="WallDetectionCast" type="ShapeCast3D" parent="."]
+editor_description = "This ShapeCast detects walls that are within reach of the Player.
+It's located at about the halfway point of the Player's height and its radius is dependant on the Collider's default_width.
+It's used in the WallRunning State script to allow for wall-running, wall-jumping and sliding down walls.
+Many RayCasts could be used instead, but that seems very annoying to work with.
+
+Disabled by defailt, enabled (by a state) while in the air"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+enabled = false
+shape = SubResource("CylinderShape3D_da65o")
+margin = 0.04
+max_results = 8
+collision_mask = 2
+debug_shape_custom_color = Color(0.49, 0.7, 0, 1)
 
 [node name="FloorCast" type="RayCast3D" parent="."]
 editor_description = "A short RayCast3D placed at the very bottom of the Collider

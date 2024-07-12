@@ -11,6 +11,8 @@ func enter() -> void:
 	super.enter()
 	
 	player.in_air = true
+	## The Player may want to do wall-related movement while in the air
+	player.WallDetection.enabled = true
 	
 	## Reset velocity, otherwise the momentum would persist
 	player.velocity = Vector3.ZERO
@@ -21,6 +23,7 @@ func exit() -> void:
 	super.exit()
 	
 	player.in_air = false
+	player.WallDetection.enabled = false
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:

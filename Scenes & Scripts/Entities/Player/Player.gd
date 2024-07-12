@@ -43,6 +43,7 @@ extends CharacterBody3D
 @export_group("Footsteps")
 
 ## Maximum counter value to be computed one step
+## ?????
 @export var step_lengthen: float = 0.7
 
 
@@ -96,9 +97,16 @@ extends CharacterBody3D
 @export var stomp_strength: float = 50
 
 
+@export_group("Wall-running, -jumping, -sliding")
+
+## The distance of the edge of the WallDetection ShapeCast from the Player's center
+## Limited by the Collider's radius. This can't be lower or equal to that.
+@export_range(0.1, 1.0, 0.1) var wall_detector_radius: float = 0.5
+
 @export_group("Fly")
 
 ## Speed multiplier when fly mode is activated
+## HERE: Unimplemented, unused ?????
 @export var fly_mode_speed_modifier: int = 2
 
 
@@ -120,6 +128,7 @@ extends CharacterBody3D
 @onready var JumpBufferT: Timer = $Timers/JumpBufferTimer
 @onready var Collider: CollisionShape3D = $Collider
 @onready var FeetCollider: CollisionShape3D = $FeetCollider
+@onready var WallDetection: ShapeCast3D = $WallDetectionCast
 @onready var FloorCast: RayCast3D = $FloorCast
 @onready var Head: Marker3D = $Head
 @onready var Firearms: Marker3D = $Head/BobbingNode/Firearms
@@ -256,6 +265,9 @@ func apply_exported() -> void:
 	
 	## Instantly alter Head (and thus Camera) height
 	Head.position.y = default_head_height
+	
+	WallDetection.shape.radius = wall_detector_radius
+	clampf(WallDetection.shape.radius, default_width + 0.05, INF)
 
 ###
 func process_view_input(delta):
@@ -269,3 +281,10 @@ func check_for_floor() -> bool:
 	FloorCast.force_raycast_update()
 #	print(FloorCast.is_colliding())
 	return FloorCast.is_colliding()
+
+func find_closest_wall() -> StaticBody3D:
+	
+	
+	
+	
+	return
