@@ -4,12 +4,11 @@
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Pistol.gd" id="2_ejjpi"]
 [ext_resource type="PackedScene" uid="uid://bvoqgew4r1sdh" path="res://Blender/Heft24Solid/Heft24Solid.gltf" id="3_ayanl"]
 
-[node name="Pistol" node_paths=PackedStringArray("bullet_start_point", "AnimPlayer") instance=ExtResource("1_k8jy2")]
+[node name="Pistol" node_paths=PackedStringArray("bullet_start_point") instance=ExtResource("1_k8jy2")]
 editor_description = ""
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("2_ejjpi")
 bullet_start_point = NodePath("ModelHolder/Heft24Solid/TrailSpawnPoint")
-AnimPlayer = NodePath("")
 shot_cooldown = 1.6
 
 [node name="Heft24Solid" parent="ModelHolder" index="0" instance=ExtResource("3_ayanl")]

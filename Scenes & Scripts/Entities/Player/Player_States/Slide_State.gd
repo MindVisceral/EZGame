@@ -19,7 +19,8 @@ extends BasePlayerState
 @export var fall_state: BasePlayerState
 
 
-## This holds the direction in which the Player will slide. Set by calculate_slide_direction()
+## This holds the direction in which the Player will slide for the duration of this slide.
+## Set by calculate_slide_direction()
 var slide_direction: Vector3 = Vector3.ZERO
 
 
@@ -122,11 +123,29 @@ func physics_process(delta) -> BasePlayerState:
 	return null
 
 
-## When the Slide State is first entered, we must check in which direction the Player will go
+## When the Slide State is first entered, we must check which direction the Player will go in
+## If the Player is holding down a directional movement key, then they will slide in that direction.
+## Otherwise they slide in the direction they are looking at.
 func calculate_slide_direction() -> Vector3:
-	## Make the Player's direction be the same as their rotation on the Y axis,
-	## (which changes with horizontal mouse movement in the Player script)
-	## NOTE: I stole this piece of code, I have no idea how it, and the principle behind it, work.
-	## I guess sin and cos transform the rotation into the right Vector?
-	## NOTE: This Vector is NEGATIVE! This doesn't work otherwise.
-	return -Vector3(sin(player.rotation.y), 0, cos(player.rotation.y))
+	var return_vector: Vector3
+	
+	## The direction of Player movement based on Input
+	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
+ "input_forwards", "input_backwards")
+	
+	## Input takes priority,
+	if input_dir:
+		## We ignore the Y axis, and place input_dir on the XZ axis
+		return_vector = (player.transform.basis * Vector3(input_dir.x, 0.0, input_dir.y).normalized())
+		
+	## ...but if there is no Input...
+	else:
+		## Make the Player's direction be the same as their rotation on the Y axis,
+		## (which changes with horizontal mouse movement in the Player script)
+		## NOTE: I stole this piece of code, I have no idea how it (or the principle behind it) work.
+		## I guess sin and cos transform the rotation into the right Vector?
+		## NOTE: This Vector is NEGATIVE! This doesn't work otherwise.
+		return_vector = -Vector3(sin(player.rotation.y), 0, cos(player.rotation.y))
+	
+	## Return the Vector3 we just determined
+	return return_vector
