@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://lhlklylca50m"]
+[gd_scene load_steps=33 format=3 uid="uid://lhlklylca50m"]
 
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player.gd" id="1_kmike"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/State_Manager.gd" id="2_c5aqi"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Alterators/HeightAlternator.gd" id="16_e4sa7"]
 [ext_resource type="PackedScene" uid="uid://bf3osgw1tg5x5" path="res://Scenes & Scripts/Entities/Cameras/ShakeableCamera.tscn" id="17_b5tqw"]
 [ext_resource type="PackedScene" uid="uid://cl8fqu8ewudby" path="res://Scenes & Scripts/Entities/Player/Player_Model/HanMurstan_model.tscn" id="22_3fsrc"]
+[ext_resource type="PackedScene" uid="uid://dfekoydtlmwum" path="res://Scenes & Scripts/Entities/Weapons/Firearms/LMB-21.tscn" id="22_pkbhp"]
 
 [sub_resource type="CapsuleShape3D" id="15"]
 radius = 0.15
@@ -334,6 +335,11 @@ bullet_start_pos_node = NodePath("../../PlayerCamera")
 firing_mode = 1
 shot_cooldown = 0.2
 default_damage = 0.5
+
+[node name="LMB-21" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("bullet_start_pos_node") instance=ExtResource("22_pkbhp")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.00702256, 0.103284, -0.304065)
+visible = false
+bullet_start_pos_node = NodePath("../../PlayerCamera")
 
 [node name="Visuals" type="Node3D" parent="."]
 visible = false

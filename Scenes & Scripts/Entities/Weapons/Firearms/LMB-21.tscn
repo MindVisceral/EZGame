@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfekoydtlmwum"]
+
+[ext_resource type="PackedScene" uid="uid://bn7y4wu56lcq0" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Firearm_Hitscan.tscn" id="1_fq3sh"]
+[ext_resource type="PackedScene" uid="uid://biubyhfx27djp" path="res://Blender/LMB-21/LMB-21.gltf" id="2_a7a8p"]
+
+[node name="LMB-21" node_paths=PackedStringArray("bullet_start_point") instance=ExtResource("1_fq3sh")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+bullet_start_point = NodePath("ModelHolder/LMB-21/TrailSpawnPoint")
+shot_cooldown = 0.6
+max_distance = 2000.0
+
+[node name="LMB-21" parent="ModelHolder" index="0" instance=ExtResource("2_a7a8p")]
+
+[node name="TrailSpawnPoint" type="Marker3D" parent="ModelHolder/LMB-21" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.51534e-08, 0.0174266, 0.299139)
+gizmo_extents = 0.05
+
+[editable path="ModelHolder/LMB-21"]
