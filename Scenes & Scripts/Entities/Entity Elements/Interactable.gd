@@ -22,3 +22,19 @@ func _on_body_range_exited(body: Node3D) -> void:
 		## The Entity can't focus on the Interactable if it isn't within its reach, now can it?
 		unfocused.emit()
 		print(body, " has exited ", self.owner, "'s Range!")
+
+
+## Outline system test
+func _on_mouse_entered() -> void:
+	focused.emit()
+	print("FOCUSED")
+#
+func _on_mouse_exited() -> void:
+	unfocused.emit()
+	print("UNFOCUSED")
+
+
+func _on_input_event(camera: Node, event: InputEvent, position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	if event is InputEventMouse:
+		if event.button_mask == MOUSE_BUTTON_MASK_LEFT:
+			print("CLICKED")

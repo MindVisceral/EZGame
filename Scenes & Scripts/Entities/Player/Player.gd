@@ -198,6 +198,9 @@ func _ready():
 	apply_exported()
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+	#Input.warp_mouse(Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"), \
+	#ProjectSettings.get_setting("display/window/size/viewport_width")))
 
 
 func _input(event: InputEvent) -> void:
@@ -256,8 +259,10 @@ func apply_exported() -> void:
 
 ###
 func process_view_input(delta):
-	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
-		return
+	#if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+		#return
+	
+	pass
 ###
 
 func check_for_floor() -> bool:

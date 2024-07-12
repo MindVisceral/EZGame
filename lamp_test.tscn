@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfg5rcmoasv08"]
+[gd_scene load_steps=7 format=3 uid="uid://dfg5rcmoasv08"]
 
 [ext_resource type="PackedScene" uid="uid://nf1bgcn3f8w0" path="res://Scenes & Scripts/Entities/Entity Elements/Interactable.tscn" id="1_0hf3u"]
 [ext_resource type="Script" path="res://lamp_test.gd" id="1_psx1e"]
@@ -24,10 +24,8 @@ resource_local_to_scene = true
 next_pass = SubResource("ShaderMaterial_1khk6")
 albedo_color = Color(0.513726, 0, 0, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_y4xh1"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_r4qte"]
-size = Vector3(5, 5, 5)
+[sub_resource type="BoxShape3D" id="BoxShape3D_tqlkv"]
+size = Vector3(1.2, 1.2, 1.2)
 
 [node name="lamp_test" type="CSGBox3D"]
 cast_shadow = 0
@@ -43,10 +41,7 @@ shadow_enabled = true
 [node name="Interactable" parent="." instance=ExtResource("1_0hf3u")]
 
 [node name="CollisionShape3D" parent="Interactable" index="0"]
-shape = SubResource("BoxShape3D_y4xh1")
-
-[node name="CollisionShape3D" parent="Interactable/InteractableRange" index="0"]
-shape = SubResource("BoxShape3D_r4qte")
+shape = SubResource("BoxShape3D_tqlkv")
 
 [connection signal="focused" from="Interactable" to="." method="_on_focused"]
 [connection signal="interact" from="Interactable" to="." method="_on_interact"]

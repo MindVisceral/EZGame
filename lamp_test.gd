@@ -4,7 +4,7 @@ extends CSGBox3D
 
 
 @export var is_turned_on: bool = true
-@export var is_focused: bool = false
+var is_focused: bool = false
 
 
 ## Toggle on and off when interacted with
