@@ -27,8 +27,8 @@ func input(event: InputEvent) -> BasePlayerState:
 func physics_process(delta) -> BasePlayerState:
 	
 	## Prepare to walk if a movement key is pressed
-	var horizontal_movement: Vector2 = Input.get_vector("input_left", "input_right", \
-		"input_forwards", "input_backwards")
+	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
+	 "input_forwards", "input_backwards")
 	
 	## Prepare the jump input buffer
 	## just_pressed makes this Input require timing, but _pressed, well, can just be pressed down
@@ -50,7 +50,7 @@ func physics_process(delta) -> BasePlayerState:
 		
 		## Otherwise...
 		## If a horizontal movement has been detected, return walk_state
-		elif horizontal_movement != Vector2.ZERO:
+		elif input_dir != Vector2.ZERO:
 			return walk_state
 		else:
 			return idle_state

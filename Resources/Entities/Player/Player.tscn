@@ -16,6 +16,7 @@ height = 1.6
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hata5"]
 height = 0.01
+radius = 0.425
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_mask = 2
