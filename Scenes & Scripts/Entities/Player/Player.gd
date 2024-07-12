@@ -40,7 +40,7 @@ extends CharacterBody3D
 ## Player base speed
 ## All states use this base variable, instead modify the state's multiplier
 ## if you want to change movement speed.
-@export var speed: float = 16
+@export var speed: float = 11
 
 ## Sets control in the air; the lower the number, the less control there is
 ## HERE: TO BE DEPRICATED - this doesn't mesh well with ULTRAKILL-like movement
@@ -95,7 +95,7 @@ extends CharacterBody3D
 @export_group("Jump")
 
 ## Jump impulse height in units. Applied once on enter()
-@export var jump_height: float = 25
+@export var jump_height: float = 14
 
 
 @export_group("Stomp")
@@ -347,3 +347,27 @@ func find_closest_wall_normal() -> Vector3:
 		
 	
 	return wall_normal
+
+##
+## Accepts input_dir to detect player movement directions's dot product to
+## the wall's normal
+func is_moving_at_wall() -> bool:
+	
+	var is_moving_at_wall: bool = false
+	
+	var dot_product: float
+	
+	var temp_wall_normal: Vector3 = find_closest_wall_normal()
+	var wall_normal_vector2: Vector2 = Vector2(temp_wall_normal.x, temp_wall_normal.z)
+	
+	var temp_velocity: Vector2 = Vector2(velocity.x, velocity.z)
+	temp_velocity = temp_velocity.normalized()
+	dot_product = temp_velocity.dot(wall_normal_vector2)
+	
+	## If the dot_product is over the arbitrary value of 0.15,
+	## we consider the Player to be rubbing against the wall. We return true.
+	if abs(dot_product) >= 0.11:
+		is_moving_at_wall = true
+	
+	print("dot prod.: ", dot_product)
+	return is_moving_at_wall

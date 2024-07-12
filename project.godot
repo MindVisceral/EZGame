@@ -141,6 +141,7 @@ input_bullet_time={
 
 [physics]
 
+3d/default_gravity=20.0
 common/physics_interpolation=true
 
 [rendering]

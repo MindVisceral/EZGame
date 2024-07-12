@@ -29,6 +29,8 @@ func enter() -> void:
 func exit() -> void:
 	super.exit()
 	
+	player.air_time = 0.0
+	
 	player.WallDetection.enabled = false
 	player.on_wall = false
 
@@ -68,6 +70,7 @@ func physics_process(delta) -> BasePlayerState:
 	player.velocity = player.velocity.lerp((player.direction * player.speed * speed_multiplier), \
 	temp_accel * delta)
 	
+	
 	## Apply gravity (which is the Globals' gravity * multiplier)
 	## Affected by running on the wall; falling is slowed down by that.
 	## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
@@ -76,11 +79,10 @@ func physics_process(delta) -> BasePlayerState:
 						+ (player.gravity * player.air_time)
 	## Increase air_time, thus increasing gravity until the ground is reached.
 	player.air_time += delta * player.air_time_multiplier
-
 	
 	
 	## If the Player fell off the wall, they start to fall
-	if !player.WallDetection.is_colliding():
+	if !player.WallDetection.is_colliding() or !player.is_moving_at_wall():
 		return fall_state
 		
 	## But if they're still clinging to the wall...

@@ -145,18 +145,18 @@ func physics_process(delta) -> BasePlayerState:
 ## We use the wall's normal to calculate which way the Player should be pushed.
 func wall_normal_check() -> Vector3:
 	## The direction in which the Player will jump away from the wall
-	var jump_direction: Vector3 = Vector3.ZERO
+	var jump_velocity: Vector3 = Vector3.ZERO
 	
 	var wall_normal_result: Vector3 = player.find_closest_wall_normal()
 	
 	## Horizontal calculations;
 	## Multiplying is fine here, because the normal is always either 0 or 1
-	jump_direction.x = wall_normal_result.x * player.wall_jump_distance
-	jump_direction.z = wall_normal_result.z * player.wall_jump_distance
+	jump_velocity.x = wall_normal_result.x * player.wall_jump_distance
+	jump_velocity.z = wall_normal_result.z * player.wall_jump_distance
 	
 	## Vertical impulse;
 	## We must add the height value and not multiply it
-	jump_direction.y += player.wall_jump_height
+	jump_velocity.y += player.wall_jump_height
 	
 	## Return the jump direction away from the normal of the nearest wall
-	return jump_direction
+	return jump_velocity

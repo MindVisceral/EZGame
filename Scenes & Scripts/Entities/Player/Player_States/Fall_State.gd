@@ -108,7 +108,7 @@ func physics_process(delta) -> BasePlayerState:
 			return walk_state
 		
 	## The Player isn't on the floor, so we check if they're near a wall...
-	elif player.WallDetection.is_colliding():
+	elif player.WallDetection.is_colliding() and player.is_moving_at_wall():
 		## The Player is near a wall, so we make them run on it.
 		## NOTE: WallJumping is detected on Input instead! This is only for WallRunning.
 		return wallrun_state
