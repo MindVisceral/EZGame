@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2fet7sg7ta7s"]
+[gd_scene load_steps=5 format=3 uid="uid://b2fet7sg7ta7s"]
 
 [ext_resource type="PackedScene" uid="uid://bn7y4wu56lcq0" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Firearm_Hitscan.tscn" id="1_k8jy2"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Pistol.gd" id="2_ejjpi"]
 [ext_resource type="PackedScene" uid="uid://bemovxot15qyc" path="res://Scenes & Scripts/Entities/Weapons/Gun/gun1.glb" id="3_hegno"]
+[ext_resource type="PackedScene" uid="uid://cta8h3tmvb3b0" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Shot_Fire_Effect.tscn" id="3_hv8nt"]
 
 [node name="Pistol" node_paths=PackedStringArray("bullet_start_point", "AnimPlayer") instance=ExtResource("1_k8jy2")]
 editor_description = ""
 script = ExtResource("2_ejjpi")
 bullet_start_point = NodePath("ModelHolder/gun1/Armature/Base_bone/Grip1/TrailSpawnPoint")
+shot_fire_effect = ExtResource("3_hv8nt")
 AnimPlayer = NodePath("ModelHolder/gun1/AnimationPlayer")
 shot_cooldown = 1.6
 

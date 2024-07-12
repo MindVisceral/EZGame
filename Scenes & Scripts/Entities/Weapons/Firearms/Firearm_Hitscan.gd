@@ -26,6 +26,9 @@ class_name FirearmHitscan
 @export var shot_effect_emitter: PackedScene = \
 	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Base_Shot_Effect_Emitter.tscn")
 
+@export var shot_fire_effect: PackedScene = \
+	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Base_Shot_Fire_Effect.tscn")
+
 ## This Node creates the Hit Effect, we will instantiate it at the bullet end hit point.
 @export var hit_effect_emitter: PackedScene = \
 	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Base_Hit_Effect_Emitter.tscn")
@@ -97,9 +100,15 @@ func cast_bullet_ray() -> void:
 	## This is completely independent from the bullet stuff.
 	var shot_effect = shot_effect_emitter.instantiate()
 	get_tree().get_root().add_child(shot_effect)
-	##
-	#shot_effect.draw_effect(bullet_start_point.global_position, bullet_start_point.global_transform.basis)
+	## Set the shot_effect's transform to be the same as the bullet_start_point's
 	shot_effect.draw_effect(bullet_start_point.global_transform)
+	
+	## Instantiate a Fire Shot Effect coming out of the gun's barrel,
+	## This is completely independent from the bullet stuff.
+	var fire_shot_effect = shot_fire_effect.instantiate()
+	## NOTE: No need to set any Transforms since this effect will not be a child of root
+	bullet_start_point.add_child(fire_shot_effect)
+	
 	
 	## Instantiate a Trail, no matter if the bullet (RayCast) hit anything or not;
 	## but we will check if it did soon.
