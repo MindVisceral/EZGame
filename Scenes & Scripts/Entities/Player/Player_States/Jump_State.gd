@@ -136,21 +136,33 @@ func physics_process(delta) -> BasePlayerState:
 	
 	
 	
-	## According to apply_jump_impulse, this is a stomp-boosted jump!
-	if (stomp_boosted == true) and \
-	## This is a timer of sorts - remaining_boost_distance will tick down until it's '< 0'.
-	## In essence, the Player will go up until they reach the distance
-	## between the stomp's start and end positions
-	(remaining_boost_distance > 0.0):
+	### According to apply_jump_impulse, this is a stomp-boosted jump!
+	#if (stomp_boosted == true) and \
+	### This is a timer of sorts - remaining_boost_distance will tick down until it's '< 0'.
+	### In essence, the Player will go up until they reach the distance
+	### between the stomp's start and end positions
+	#(remaining_boost_distance > 0.0):
 		
-		## Make the Player go up
-		player.velocity.y += player.gravity * BulletTime.time_scale * delta
-		## Clamp the velocity to be jump_speed_limit at most
-		player.velocity.y = minf(player.velocity.y, player.jump_speed_limit)
 		
-		## This is the actual timer part.
-		## It determines when the Player has finished travelling the stomp-boosted distance
-		remaining_boost_distance -= player.velocity.y * BulletTime.time_scale * delta
+	if (stomp_boosted == true):
+		if (remaining_boost_distance > 0.0):
+			
+			
+			## Make the Player go up
+			player.velocity.y += player.gravity * BulletTime.time_scale * delta * acceleration
+			## Clamp the velocity to be jump_speed_limit at most
+			player.velocity.y = minf(player.velocity.y, player.jump_speed_limit)
+			
+			## This is the actual timer part.
+			## It determines when the Player has finished travelling the stomp-boosted distance
+			remaining_boost_distance -= player.velocity.y * BulletTime.time_scale * delta
+		else:
+			player.velocity.y -= player.gravity * BulletTime.time_scale * delta * deceleration
+			player.velocity.y = maxf(player.velocity.y, player.falling_speed_limit)
+	
+	
+	
+	
 	
 	## The Player has either gone the distance or this never was a stomp-boosted jump to begin with
 	## Either way, we apply gravity once again.

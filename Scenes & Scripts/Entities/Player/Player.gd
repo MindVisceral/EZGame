@@ -71,7 +71,7 @@ extends CharacterBody3D
 
 ## The maximum speed the Player may reach when jumping
 ## Used in stomp-boosted jumping code
-@export_range(-100, 0, 0.1) var jump_speed_limit: float = 80.0
+@export_range(0, 100, 0.1) var jump_speed_limit: float = 80.0
 
 
 @export_group("Stomp")
