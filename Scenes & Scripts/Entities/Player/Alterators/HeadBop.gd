@@ -119,12 +119,13 @@ func _process(delta: float) -> void:
 	
 	## If bobbing is enabled...
 	if step_bob_enabled == true:
+		
 		## Calculate a new position for the bobbing_node,
 		## and tween the bobbing_node's position towards that point
 		## NOTE: BulletTime.time_scale multiplication happens in the do_head_bob() function
 		var bob_tween = get_tree().create_tween()
-		bob_tween.tween_property(bobbing_node, "position", do_head_bob(delta), \
-										bob_multiplier * delta)
+		bob_tween.tween_property(bobbing_node, "position", do_head_bob(), \
+										bob_multiplier * BulletTime.time_scale * delta)
 	
 	## If air bobbing is enabled...
 	if air_bob_enabled == true:
@@ -135,13 +136,13 @@ func _process(delta: float) -> void:
 		## Calculate a new rotation for the bobbing_node,
 		## and tween the bobbing_node's rotation towards that value
 		var tilt_tween = get_tree().create_tween()
-		tilt_tween.tween_property(bobbing_node, "rotation", movement_tilt(delta), \
+		tilt_tween.tween_property(bobbing_node, "rotation", movement_tilt(), \
 										rotation_speed * BulletTime.time_scale * delta)
 
 
 ## Takes X and Z of input_dir (the horizontal direction the Player is moving in),
 ## and returns on which axis the bobbing_node should be tilted
-func movement_tilt(delta: float) -> Vector3:
+func movement_tilt() -> Vector3:
 	
 	## The rotation towards which the bobbing_node's rotation will be tweened
 	var new_rot: Vector3 = original_rotation
@@ -166,7 +167,7 @@ func movement_tilt(delta: float) -> Vector3:
 
 
 ## Move bobbing_node on the X, Y and Z axes depending on Player Input or velocity
-func do_head_bob(delta: float) -> Vector3:
+func do_head_bob() -> Vector3:
 	
 	## NOTE: This is made the same as original_position at first, because if bobbing on an axis
 	## NOTE: was disabled or broken, the Head would go to 0 on that axis!
@@ -181,18 +182,21 @@ func do_head_bob(delta: float) -> Vector3:
 	## HeadBob on the X axis only works when the Player is pressing horizontal Input buttons...
 	if input_dir != Vector2.ZERO:
 		## NOTE: !player.in_air ensures that this only happens when the Player is NOT in the air
+		## NOTE: !player.on_wall ensures that this only happens when the Player is NOT on a wall
 		
 		## If bobbing on X axis is enabled...
 		if X_axis_bob_enabled == true:
 			## Make the bobbing_node move left and right
 			new_pos.x = original_position.x + (sin(Time.get_ticks_msec() * BulletTime.time_scale \
-								* x_bob_frequency) * x_bob_amplitude * int(!player.in_air))
+								* x_bob_frequency) * x_bob_amplitude * \
+								int(!player.in_air) * int(!player.on_wall))
 		
 		## If bobbing on Y axis is enabled...
 		if Y_axis_bob_enabled == true:
 			## Make the bobbing_node move up and down
 			new_pos.y = original_position.y + (sin(Time.get_ticks_msec() * BulletTime.time_scale \
-						* y_bob_frequency) * y_bob_amplitude * int(!player.in_air))
+						* y_bob_frequency) * y_bob_amplitude * \
+							int(!player.in_air) * int(!player.on_wall))
 	
 	
 	### NOTE: This happens no matter if the Player is on the ground or in the air

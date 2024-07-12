@@ -42,7 +42,6 @@ func exit() -> void:
 	## And we start the StompJumpTimer, it's needed for the jump to work as we want it to.
 	player.StompJumpT.start()
 	
-	
 	player.in_air = false
 	player.air_time = 0.0
 	

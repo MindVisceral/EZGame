@@ -104,7 +104,7 @@ extends CharacterBody3D
 @export var stomp_strength: float = 50.0
 
 ## The maximum height the Player may jump when performing a stomp jump
-## 230 meters is the limit, but setting this to (96.5 - jump_height)grants that desired height
+## 230 meters is the limit, but setting this to (96.5 - jump_height) grants that desired height
 @export var stomp_jump_height_limit: float = 82.5
 
 
