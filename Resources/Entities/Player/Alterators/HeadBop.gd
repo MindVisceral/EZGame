@@ -126,7 +126,7 @@ func _physics_process(delta: float) -> void:
 		## This type of headbob is only applied if the Player is walking
 		if player.in_air == false:
 			## Calculate a new position for the bobbing_node
-			new_position += _do_head_bob(delta)
+			new_position += do_head_bob(delta)
 		
 	## If a bob on jump is enabled...
 	if jump_bob_enabled:
@@ -149,7 +149,7 @@ func _physics_process(delta: float) -> void:
 		## so the value doesn't change, and therefore tilting does happen;
 		## If roll/pitch is false, its respective input_dir is multiplied by 0,
 		## so the value becomes 0, and tilting doesn't happen;
-		new_rotation += _movement_tilt(input_dir.x * float(movement_tilt_pitch), \
+		new_rotation += movement_tilt(input_dir.x * float(movement_tilt_pitch), \
 			input_dir.y * float(movement_tilt_roll), delta)
 	
 	
@@ -163,13 +163,14 @@ func _physics_process(delta: float) -> void:
 
 ## Takes X and Z of input_dir (the horizontal direction the Player is moving in),
 ## and returns on which axis the bobbing_node should be tilted
-func _movement_tilt(x, z, delta) -> Vector3:
+func movement_tilt(x, z, delta) -> Vector3:
 	## 0.0, because we're ignoring the Y axis. That would be head *turning*
 	var target_tilt = Vector3(x * angle_limit_for_tilt, 0.0, -z * angle_limit_for_tilt)
 	return lerp(bobbing_node.rotation, target_tilt, speed_rotation * delta)
 
 
-func _do_head_bob(delta: float) -> Vector3:
+## Move bobbing_node on the X and Y axes when the Player is moving
+func do_head_bob(delta: float) -> Vector3:
 	## As the name says, get Player's velocity Vector, but without the Y axis
 	## We use it to get tick_speed
 	var horizontal_velocity = Vector3(player.velocity.x, 0, player.velocity.z)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://lhlklylca50m"]
+[gd_scene load_steps=17 format=3 uid="uid://lhlklylca50m"]
 
 [ext_resource type="Script" path="res://Resources/Entities/Player/Player.gd" id="1_kmike"]
 [ext_resource type="Script" path="res://Resources/Entities/Player/Player_States/State_Manager.gd" id="2_c5aqi"]
@@ -15,11 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://b2fet7sg7ta7s" path="res://Resources/Entities/Weapons/Firearms/Pistol.tscn" id="12_nnnx6"]
 
 [sub_resource type="Curve" id="Curve_l27pf"]
-min_value = -1.0
-_data = [Vector2(0, 0), 0.0, 6.0, 0, 0, Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), -6.0, -6.0, 0, 0, Vector2(0.75, -1), 0.0, 0.0, 0, 0, Vector2(1, 0), 6.0, 0.0, 0, 0]
-point_count = 5
-
-[sub_resource type="Curve" id="Curve_8satt"]
 min_value = -1.0
 _data = [Vector2(0, 0), 0.0, 6.0, 0, 0, Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), -6.0, -6.0, 0, 0, Vector2(0.75, -1), 0.0, 0.0, 0, 0, Vector2(1, 0), 6.0, 0.0, 0, 0]
 point_count = 5
@@ -139,8 +134,6 @@ movement_tilt_pitch = false
 [node name="WeaponBob" type="Node" parent="Scripts" node_paths=PackedStringArray("bobbing_node")]
 script = ExtResource("12_4bkuj")
 bobbing_node = NodePath("../../Head/BobbingNode/Firearms")
-bob_range = Vector3(0.56, 0, 0)
-bob_curve = SubResource("Curve_8satt")
 jump_bob_enabled = false
 
 [node name="UIController" type="Node" parent="Scripts"]

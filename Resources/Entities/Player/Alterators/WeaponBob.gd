@@ -1,11 +1,5 @@
 extends Node
 
-## Makes sine go faster
-@export var bob_speed: float = 0.01
-## Sine amplitude
-@export var bob_width: float = 0.1
-## How fast the bob lerps between positions
-@export var bob_multiplier: float = 12
 
 ###-------------------------------------------------------------------------###
 ##### Variables and references
@@ -15,26 +9,15 @@ extends Node
 var player: Player
 
 
-## Actual speed of weaponbob
-var speed: float = 0
-
 ## Store original position of bobbing_node, because we will be editing this value
 var original_position: Vector3 = Vector3(0.0, 0.0, 0.0)
 ## No rotation! A weapons animation is responsible for that.
-
-## Actual cycle x of step weaponbob
-## Current point on the bob_curve. Changes over time
-var cycle_position_x: float = 0.0
-## Actual cycle y of step weaponbob
-var cycle_position_y: float = 0.0
-## Actual cycle z of step weaponbob
-var cycle_position_z: float = 0.0
 
 ### Value to be added to compute a step, each frame that the character is walking this value 
 ### is added to a counter
 ### Ignore that mumbo-jumbo above. Bigger number == each step takes longer to get to the next step
 var step_interval: float = 6.0 * 2
-## HERE - Test ^this^, maybe there's a better value
+## HERE - Could this replace bob_multiplier to sync with HeadBob step_interval?
 
 
 ###-------------------------------------------------------------------------###
@@ -51,15 +34,31 @@ var step_interval: float = 6.0 * 2
 ## Enables weaponbob when walking (on each "step", we calculate that in this script)
 @export var step_bob_enabled: bool = true
 
-## Maximum range (deviation?) value of weaponbob
-@export var bob_range: Vector3 = Vector3(0.07, 0.07, 0.07)
+## How fast the bob lerps between positions; how fast it returns to original_position from new_pos
+@export var bob_multiplier: float = 12
+## HERE - similiar to step_interval?
 
-## Curve that makes the bob happen; value is to be kept between -1 and 1
-## Positive value translates to going up and to the right of original_position, and vice versa
-@export var bob_curve: Curve
 
-## Bigger number, bigger oscillations up/down and right/left
-@export var curve_multiplier: Vector3 = Vector3(2.0, 2.0, 2.0)
+##
+@export_subgroup("Left-Right weapon bob")
+
+## Enables weaponbob on the X axis (moving from left to right and back)
+@export var X_axis_bob_enabled: bool = true
+
+## NOTE: This X-axis bobbing is based on a sine wave!
+## Makes bobbing_node move faster between extremes; bigger number = faster bobbing
+@export var x_bob_frequency: float = 0.01
+## Makes bobbing_node go further away from original_position; bigger number = wider sine
+@export var x_bob_amplitude: float = 0.1
+
+##
+@export_subgroup("Forwards-Backwards weapon bob")
+
+@export var Z_axis_bob_enabled: bool = true
+
+## This Z-axis bobbing moves the bobbing_node on the Z axis,
+## based on Player Input on the Z axis, limited by this length
+@export var Z_bob_length: float = 0.01
 
 
 @export_group("Jump Bob")
@@ -67,8 +66,12 @@ var step_interval: float = 6.0 * 2
 ## Enables bob for jumps made
 @export var jump_bob_enabled: bool = true
 
-## Resource that stores information from bob lerp jump
-#@export var timed_bob_curve: TimedBobCurve
+
+##
+@export_subgroup("Up-Down weapon bob")
+
+@export var Y_axis_bob_enabled: bool = true
+
 
 
 ###-------------------------------------------------------------------------###
@@ -99,14 +102,11 @@ func _physics_process(delta: float) -> void:
 		## This type of weaponbob is only applied if the Player is on the ground
 		if player.in_air == false:
 			## Calculate a new position for the bobbing_node
-			#bobbing_node.position += _do_weapon_bob(delta)
-			bobbing_node.position = bobbing_node.position.lerp(better_bob(delta), delta * bob_multiplier)
-			
-			print(bobbing_node.position.x)
+			bobbing_node.position = bobbing_node.position.lerp(do_weapon_bob(delta), bob_multiplier * delta)
 		
-		## When jumped, reset bob  ##HERE - temporary, do this for jump_bob_enabled
+		## When not on ground anymore, reset bob   ##HERE - temporary?
 		else:
-			bobbing_node.position = bobbing_node.position.lerp(original_position, delta * bob_multiplier)
+			bobbing_node.position = bobbing_node.position.lerp(original_position, bob_multiplier * delta)
 	
 	
 	
@@ -115,13 +115,9 @@ func _physics_process(delta: float) -> void:
 	if jump_bob_enabled:
 		## This type of weaponbob is only applied if the Player is in the air
 		if player.in_air == true:
-			if player.velocity.y > 0:
-				## The bobbing_node is moved down when going up
-				pass ## HERE - do this part
+			pass ## HERE - do this part
 			
 		
-	
-	
 	
 	
 	## Bobbing calculations are done, apply new_position to the bobbing_node
@@ -131,38 +127,8 @@ func _physics_process(delta: float) -> void:
 	#bobbing_node.position = new_position
 
 
-func _do_weapon_bob(delta: float) -> Vector3:
-	## As the name says, get Player's velocity Vector, but without the Y axis
-	## We use it to get tick_speed
-	var horizontal_velocity = Vector3(player.velocity.x, 0, player.velocity.z)
-	#var horizontal_velocity: Vector3 = player.velocity
-	
-	## Calculate the bobbing_node's new position as we move through the curve
-	var x_pos = (bob_curve.sample(cycle_position_x) * curve_multiplier.x * bob_range.x)
-	var y_pos = (bob_curve.sample(cycle_position_y) * curve_multiplier.y * bob_range.y)
-	var z_pos = (bob_curve.sample(cycle_position_z) * curve_multiplier.z * bob_range.z)
-	
-	## Move the cycle by tick_speed so that the _pos variables will move smoothly next frame
-	var tick_speed = (horizontal_velocity.length() * delta) / step_interval
-	
-	
-	cycle_position_x += tick_speed
-	cycle_position_y += tick_speed
-	cycle_position_z += tick_speed
-	
-	if(cycle_position_x > 1):
-		cycle_position_x -= 1
-	if(cycle_position_y > 1):
-		cycle_position_y -= 1
-	if(cycle_position_z > 1):
-		cycle_position_z -= 1
-	
-	## x_pos is left/right, y_pos is up/down, z_pos is forwards/backwards
-	return Vector3(x_pos, y_pos, z_pos)
-
-
-## 
-func better_bob(delta: float) -> Vector3:
+## Move bobbing_node on the X, Y and Z axes when the Player is moving
+func do_weapon_bob(delta: float) -> Vector3:
 	
 	## The position towards which the bobbing_node's position will be lerped
 	var new_pos: Vector3
@@ -173,33 +139,25 @@ func better_bob(delta: float) -> Vector3:
 	## Without the Y axis
 	var horizontal_velocity: Vector3 = Vector3(input_dir.x, 0, input_dir.y)
 	
-	## Weaponbob on the X axis only works when the Player is moving
+	## Weaponbob on the X axis only works when the Player is pressing horizontal Input buttons
 	## [and on the ground - check _physics_process]
 	if horizontal_velocity != Vector3.ZERO:
 		
 		## Make the bobbing_node move left and right
-		new_pos.x = original_position.x + sin(Time.get_ticks_msec() * bob_speed) * bob_width
+		new_pos.x = original_position.x + sin(Time.get_ticks_msec() \
+											* x_bob_frequency) * x_bob_amplitude
+		new_pos.z = original_position.z + horizontal_velocity.z * Z_bob_length
+		
 		## HERE - temporary
 		new_pos.y = original_position.y
-		new_pos.z = original_position.z
 		
 	## Otherwise, make the bobbing_node move towards its original_position
 	else:
 		
 		new_pos.x = original_position.x
+		new_pos.z = original_position.z
+		
 		## HERE - temporary
 		new_pos.y = original_position.y
-		new_pos.z = original_position.z
 	
 	return new_pos
-
-
-
-
-## Reset weaponbob step cycles
-func reset_head_bob_cycles(): ## HERE - not used
-	#cycle_position_x = 0
-	#cycle_position_y = 0
-	#cycle_position_z = 0
-	
-	pass
