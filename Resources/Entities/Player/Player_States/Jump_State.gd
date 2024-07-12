@@ -26,9 +26,6 @@ var speed_multiplier: float
 
 ## Timer, so that the ground isn't detected immediately after a jump
 @onready var ground_timer: Timer = $GroundTimer
-## Timer that allows to jump immediately if the jump button is pressed before hitting the ground
-## Keep this Timer's around 0.2s for a nice, responsive-feeling jump
-@onready var buffer_timer: Timer = $BufferTimer
 
 func enter() -> void:
 	super.enter()
@@ -45,9 +42,8 @@ func enter() -> void:
 func exit() -> void:
 	super.exit()
 	
-	## Restart timers
+	## Reset ground timer
 	ground_timer.stop()
-	buffer_timer.stop()
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:
@@ -62,7 +58,7 @@ func physics_process(delta) -> BasePlayerState:
 	## Prepare the jump input buffer
 	## just_pressed makes this Input require timing, but _pressed allows for hopping
 	if Input.is_action_just_pressed("input_jump"):
-		buffer_timer.start()
+		player.JumpBufferT.start()
 	
 	
 	## The direction of Player movement based on Input
@@ -112,25 +108,22 @@ func physics_process(delta) -> BasePlayerState:
 	## Apply gravity (which is the Globals gravity * multiplier)
 	player.velocity.y -= player.gravity
 	
+	
 	## A short time after the Raycast leaves the ground...
 	if ground_timer.is_stopped():
 		## Check if the Player is on floor
 		if player.check_for_floor():
-			print("ON FLOOR")
 			
 			## If the jump button has been pressed within the buffer time, allow for another jump
-			if buffer_timer.time_left > 0:
-				print("JUMP AGAIN")
+			if !player.JumpBufferT.is_stopped():
 				return jump_state
 			
 			## Otherwise...
 			## If the Player stops moving around, return to Idle state. The Y axis is ignored
-			if Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
-				print("IDLE")
+			elif Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
 				return idle_state
 			## Otherwise, keep on walking
 			else:
-				print("WALK")
 				return walk_state
 	
 	return null

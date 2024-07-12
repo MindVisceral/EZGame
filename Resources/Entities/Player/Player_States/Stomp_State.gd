@@ -1,15 +1,5 @@
 extends BasePlayerState
 
-@export_group("Movement")
-#
-## Time for the character to reach full speed
-@export var acceleration: float = 8
-## Time for the character to stop in place
-@export var deceleration: float = 10
-## Speed to be multiplied when active the ability
-@export var speed_multiplier: float = 1.2
-
-
 @export_group("States")
 #
 @export var idle_state: BasePlayerState
@@ -36,11 +26,23 @@ func input(event: InputEvent) -> BasePlayerState:
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
 func physics_process(delta) -> BasePlayerState:
 	
+	## Prepare the jump input buffer
+	## just_pressed makes this Input require timing, but _pressed, well, can just be pressed down
+	if Input.is_action_just_pressed("input_jump"):
+		player.JumpBufferT.start()
+	
+	
 	## Apply gravity (which is the Globals gravity * multiplier)
 	player.velocity.y -= player.gravity
 	
+	
 	## Check if the Player has reached the ground already
 	if player.check_for_floor():
-		return idle_state
+		
+		## If the jump button has been pressed within the buffer time, allow for an immediate jump
+		if !player.JumpBufferT.is_stopped():
+			return jump_state
+		else:
+			return idle_state
 	
 	return null

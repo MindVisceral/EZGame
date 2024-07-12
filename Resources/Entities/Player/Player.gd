@@ -125,12 +125,13 @@ class_name Player
 @onready var States: Node = $Scripts/StateManager
 @onready var UIcontroller: Node = $Scripts/UIController
 @onready var HeightAlternator: Node = $Scripts/HeightAlterator
+@onready var JumpBufferT: Timer = $Timers/JumpBufferTimer
 @onready var Collider: CollisionShape3D = $Collider
 @onready var FeetCollider: CollisionShape3D = $FeetCollider
 @onready var FloorCast: RayCast3D = $FloorCast
 @onready var Head: Marker3D = $Head
-@onready var TPMarker: Marker3D = $Head/TPMarker
 @onready var Camera: Camera3D = $Head/PlayerCamera
+@onready var TPMarker: Marker3D = $Head/TPMarker
 
 ## Flags
 var is_reloading: bool = false

@@ -74,11 +74,6 @@ process_callback = 0
 wait_time = 0.05
 one_shot = true
 
-[node name="BufferTimer" type="Timer" parent="Scripts/StateManager/Jump"]
-process_callback = 0
-wait_time = 0.2
-one_shot = true
-
 [node name="Fall" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "crouch_state", "stomp_state")]
 script = ExtResource("8_xbf4w")
 idle_state = NodePath("../Idle")
@@ -104,15 +99,31 @@ script = ExtResource("8_rgs2k")
 
 [node name="UIController" type="Node" parent="Scripts"]
 
+[node name="Timers" type="Node" parent="."]
+
+[node name="JumpBufferTimer" type="Timer" parent="Timers"]
+editor_description = "Timer that allows to jump immediately after hitting the ground, if the jump button is pressed within 0.2s before hitting that ground
+Keep this Timer's around 0.2s for a nice, lean and forgivable jump
+Never reset this Timer, at least not on state exit(). Causes a bug when jump_state is re-enter()-ed, thus not allowing for another jump - implementation issue, not planning on fixing it"
+wait_time = 0.2
+one_shot = true
+
 [node name="Collider" type="CollisionShape3D" parent="."]
+editor_description = "Main body Collider for the Player
+Its height can be changed through the HeightAlternator"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("15")
 
 [node name="FeetCollider" type="CollisionShape3D" parent="."]
+editor_description = "\"Feet\" collider for the Player
+Its height can be changed through the HeightAlternator
+The regualar Collider makes the Player fall off edges, and this collider prevents that"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 shape = SubResource("CylinderShape3D_hata5")
 
 [node name="FloorCast" type="RayCast3D" parent="."]
+editor_description = "A short RayCast3D placed at the very bottom of the Collider
+Activated for a single frame with check_for_floor() in the Player script"
 enabled = false
 target_position = Vector3(0, -0.25, 0)
 collision_mask = 2
@@ -122,14 +133,17 @@ debug_shape_thickness = 5
 
 [node name="Head" type="Marker3D" parent="."]
 editor_description = "Holds the Camera as its child
-Change it's Y position (height) to make the camera move along with it,
-ex.: crouching"
+Change it's Y position (height) through the HeightAlternator to make the camera move along with it,
+for example when crouching"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 
 [node name="PlayerCamera" type="Camera3D" parent="Head"]
+editor_description = "Main Player camera, typically placed at Head's (0, 0, 0) coordinate
+Its FOV can be changed through an exported variable in the Player node"
 current = true
 fov = 90.0
 
 [node name="TPMarker" type="Marker3D" parent="Head"]
-editor_description = "Marks the position of the Camera's third person view"
+editor_description = "Marks the position of the Camera's third person view
+Janky and not very developed. Could be expanded upon"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
