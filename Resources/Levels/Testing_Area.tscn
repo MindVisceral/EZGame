@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bg2u2fljqhcdk"]
+[gd_scene load_steps=15 format=3 uid="uid://bg2u2fljqhcdk"]
 
 [ext_resource type="Texture2D" uid="uid://dmjhoaedtxskg" path="res://Decal_tex.png" id="1"]
 [ext_resource type="Material" uid="uid://o0b4tbh6yup4" path="res://addons/character-controller/example/main/materials/rock.tres" id="2_2haa3"]
@@ -21,13 +21,22 @@ data = PackedVector3Array(-4, 2, 2, 4, 2, 2, -4, -2, 2, 4, 2, 2, 4, -2, 2, -4, -
 [sub_resource type="BoxMesh" id="BoxMesh_bepso"]
 size = Vector3(8, 4, 4)
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sghrv"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+
 [sub_resource type="Sky" id="15"]
+sky_material = SubResource("ProceduralSkyMaterial_sghrv")
 
 [sub_resource type="Environment" id="16"]
 background_mode = 1
 sky = SubResource("15")
-sky_custom_fov = 3.8
-sky_rotation = Vector3(0.685914, 0, 0)
+sky_rotation = Vector3(0.685914, -0.773181, 0)
+ambient_light_source = 2
+ambient_light_color = Color(0.486275, 0.486275, 0.486275, 1)
+reflected_light_source = 2
 fog_light_color = Color(0.12549, 0.141176, 0.164706, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o58sf"]
@@ -73,6 +82,8 @@ environment = SubResource("16")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.735019, -0.663464, -0.139866, 0.476284, 0.358383, 0.802941, -0.482597, -0.656793, 0.579416, 0, 0, 0)
 shadow_enabled = true
+shadow_normal_bias = 6.0
+shadow_opacity = 0.75
 
 [node name="Player" parent="." instance=ExtResource("6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6061, 5.39, -4.05668)

@@ -12,13 +12,12 @@ config_version=5
 
 config/name="Easy Fps"
 run/main_scene="res://Resources/Levels/Testing_Area.tscn"
-config/features=PackedStringArray("4.1")
+config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
 
 [autoload]
 
 Globals="*res://Globals.gd"
-BulletTraceGenerator="*res://Resources/Bullet_Trace_Generator.tscn"
 
 [editor_plugins]
 

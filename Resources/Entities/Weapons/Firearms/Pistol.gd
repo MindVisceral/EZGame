@@ -12,6 +12,9 @@ extends Firearm
 
 ## The point from which a bullet Trace will start
 @onready var bullet_start_point := $ModelHolder/gun1/Armature/Base_bone/Grip1/TraceSpawnPoint
+## We will instantiate this Node to make a line between the gun and the point the gun has shot at
+@onready var bullet_trail_emmiter: PackedScene = preload("res://Resources/Entities/Weapons/Bullet_Trail_Emmiter.tscn")
+
 
 
 ###-------------------------------------------------------------------------###
@@ -46,6 +49,8 @@ func secondary_action() -> void:
 ## #HERE - Could be remade into bullet holes. LATER
 var decal_insta = preload("res://test_decal.tscn")
 
+
+
 ## Create a Ray in Space, which will act as a bullet for this RayCast-type weapon
 func cast_bullet_ray() -> void:
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
@@ -75,20 +80,21 @@ func cast_bullet_ray() -> void:
 		get_tree().get_root().add_child(decal)
 		decal.position = result.position
 		
-		## Create a bullet Trace
-		## This should be called by the AnimationPlayer when the animation requires it
-		BulletTraceGenerator.draw_bullet_trace(bullet_start_point.global_position, result.position)
-		
 	else:
-		
-		## Create a bullet Trace
-		## This should be called by the AnimationPlayer when the animation requires it
-		BulletTraceGenerator.draw_bullet_trace(bullet_start_point.global_position, end_pos)
-		
-		print("shot at nothing!")
+		print("shot nothing!")
+	
+	## Either way, instantiate a trail
+	var trail = bullet_trail_emmiter.instantiate()
+	get_tree().get_root().add_child(trail)
+	
+	## This first variable is the trail's global_position and start_pos,
+	## the second one is where the trail will end up after some time
+	trail.init(bullet_start_point.global_position, end_pos)
 	
 	
-	
+#	print("Start position: ", trail.start_position)
+#	print("Global position: ", trail.global_position)
+#	print("End position: ", trail.end_position)
 	
 	
 	
