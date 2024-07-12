@@ -41,10 +41,8 @@ func enter() -> void:
 	## Start the timer
 	ground_timer.start()
 	
-	## Apply jump impulse; jump_height is added, and stomp_vertical_distance too
-	## (though it's limited), but only if this jump has been performed
-	## within StompJumpTimer's wait_time
-	
+	## Apply jump impulse; Either the Player jumps up by jump_height,
+	## or they go up by stomp_vertical_distance - IF this jump happens within a time after a Stomp
 	player.velocity.y += apply_jump_impulse()
 	
 	## We play the jump sound through the AudioManager autoload
@@ -99,18 +97,6 @@ func physics_process(delta) -> BasePlayerState:
 		temp_accel = acceleration
 	else:
 		temp_accel = deceleration
-	
-	## Control in the air is damped (or raised) while moving (horizontally)
-#	temp_accel *= player.air_control
-	
-	## Apply velocity, take speed_multiplier and acceleration into account
-	## But only on X and Z axes! The Y axis should be unrestrained by .speed and .multipliers
-	#player.velocity.x = lerp(player.velocity.x, \
-		#(player.direction.x * player.speed * speed_multiplier), \
-		#temp_accel * delta)
-	#player.velocity.z = lerp(player.velocity.z, \
-		#(player.direction.z * player.speed * speed_multiplier), \
-		#temp_accel * delta)
 	
 	## When the horizontal Input keys are pressed, make the Player move in that direction
 	## Otherwise, keep the momentum
@@ -177,16 +163,17 @@ func physics_process(delta) -> BasePlayerState:
 ## Calculates the jump's height
 func apply_jump_impulse() -> float:
 	
-	var returned_jump_height: float = 0.0
+	var impulse_jump_height: float = 0.0
 	
-	## If a Stomp has just been finished, we perform a StompJump
+	## If a Stomp has just been finished, we perform a Stomp-boosted jump
 	if !player.StompJumpT.is_stopped():
-		returned_jump_height += minf(player.stomp_vertical_distance, player.stomp_jump_height_limit)
+		## But a Stomp-boosted jump is limited to stomp_jump_height_limit
+		impulse_jump_height += minf(player.stomp_vertical_distance, player.stomp_jump_height_limit)
 	## Otherwise, we just do a regular jump
 	else:
-		returned_jump_height += player.jump_height
+		impulse_jump_height += player.jump_height
 	
-	## Either way, we reset the stomp_vertical_distance
+	## Either way, we must reset the stomp_vertical_distance
 	player.stomp_vertical_distance = 0.0
 	
-	return returned_jump_height
+	return impulse_jump_height

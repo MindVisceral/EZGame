@@ -91,7 +91,6 @@ func physics_process(delta) -> BasePlayerState:
 	## NOTE: maxf is used because velocity.y is negative when falling. So is stomp_speed.
 	player.velocity.y = maxf(player.velocity.y, player.stomp_speed)
 	
-	print(player.velocity.y)
 	
 	## Increase air_time - this is used to influence camera shake strength.
 	player.air_time += delta

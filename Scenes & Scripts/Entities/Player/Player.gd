@@ -67,7 +67,7 @@ extends CharacterBody3D
 @export_group("Jump")
 
 ## Jump impulse height in units. Applied once on enter()
-@export var jump_height: float = 17.5
+@export_range(1.0, 24.0, 0.1) var jump_height: float = 14.0
 
 
 @export_group("Stomp")
@@ -75,21 +75,20 @@ extends CharacterBody3D
 ## Stomp speed in meters per second - it's always constant. Applied once on enter()
 @export_range(-100, 0, 0.1) var stomp_speed: float = -50.0
 
-## The maximum height the Player may jump when performing a stomp jump
-## 230 meters is the limit, but setting this to (96.5 - jump_height) grants that desired height
-@export var stomp_jump_height_limit: float = 96.5
+## The maximum height the Player may reach when performing a stomp-boosted jump
+@export var stomp_jump_height_limit: float = 115.0
 
 
 @export_group("Wall-running, -jumping, -sliding")
 
 ## The vertical height of the jump from the wall
 ## NOTE: This is !added! to the Player's Y velocity
-@export var wall_jump_height: float = 14.0
+@export_range(1.0, 20.0, 0.1) var wall_jump_height: float = 10.0
 
 ## The horizontal power of the jump away from the wall
-## NOTE: This is !multiplied! by the wall's normal,
-## NOTE: which is fine because the normal is always either 0 or 1
-@export var wall_jump_distance: float = 17.0
+## NOTE: The wall's normal is !multiplied! by this!
+## NOTE: ...which is fine because the normal is always either 0 or 1
+@export_range(1.0, 20.0, 0.1) var wall_jump_distance: float = 12.0
 
 ## When the Player is on a wall, they fall down slower
 ## The lower the number, the slower they fall down.
