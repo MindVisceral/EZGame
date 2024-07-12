@@ -129,8 +129,9 @@ class_name Player
 @onready var FeetCollider: CollisionShape3D = $FeetCollider
 @onready var FloorCast: RayCast3D = $FloorCast
 @onready var Head: Marker3D = $Head
-@onready var Firearms: Marker3D = $Head/BobbingNode/Firearms
+#@onready var Firearms: Marker3D = $Head/BobbingNode/Firearms
 #@onready var Firearms: Marker3D = $Head/Firearms
+@onready var Firearms: Marker3D = $Firearms
 @onready var Camera: Camera3D = $Head/BobbingNode/PlayerCamera
 @onready var TPMarker: Marker3D = $Head/BobbingNode/TPMarker
 
@@ -186,6 +187,7 @@ var _last_is_on_floor: bool = false
 
 
 func _ready():
+	
 	## Passes a reference of the Player class to the states so that it can be used by them
 	States.init(self)
 	## Passes a reference of the Player and of the Firearms node

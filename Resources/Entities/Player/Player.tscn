@@ -131,10 +131,9 @@ bob_curve = SubResource("Curve_l27pf")
 movement_tilt_enabled = false
 movement_tilt_pitch = false
 
-[node name="WeaponBob" type="Node3D" parent="Scripts" node_paths=PackedStringArray("bobbing_node")]
+[node name="WeaponBob" type="Node" parent="Scripts" node_paths=PackedStringArray("bobbing_node")]
 script = ExtResource("12_4bkuj")
-bobbing_node = NodePath("../../Head/BobbingNode/Firearms")
-Y_bob_height = 0.003
+bobbing_node = NodePath("../../Firearms")
 
 [node name="UIController" type="Node" parent="Scripts"]
 
@@ -180,21 +179,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 editor_description = "This node is bobbed by the HeadBob script instead of the Head node
 Using the Head node for bobbing nullifies mouse movement, which also rotates the Head node"
 
-[node name="Firearms" type="Marker3D" parent="Head/BobbingNode"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.314, -0.301, -0.166)
-
-[node name="Pistol" parent="Head/BobbingNode/Firearms" node_paths=PackedStringArray("bullet_start_pos_node") instance=ExtResource("12_nnnx6")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
-bullet_start_pos_node = NodePath("../../PlayerCamera")
-bullet_collision_layer = 2
-
-[node name="Pistol2" parent="Head/BobbingNode/Firearms" node_paths=PackedStringArray("bullet_start_pos_node", "AnimPlayer") instance=ExtResource("12_nnnx6")]
-transform = Transform3D(-3.34849e-08, -2.80971e-08, -1, -0.642788, 0.766044, 0, 0.766044, 0.642788, -4.37114e-08, 0, 0, 0)
-visible = false
-bullet_start_pos_node = NodePath("../../PlayerCamera")
-AnimPlayer = NodePath("../Pistol/ModelHolder/gun1/AnimationPlayer")
-bullet_collision_layer = 2
-
 [node name="PlayerCamera" type="Camera3D" parent="Head/BobbingNode"]
 editor_description = "Main Player camera, typically placed at Head's (0, 0, 0) coordinate
 Its FOV can be changed through an exported variable in the Player node"
@@ -205,3 +189,23 @@ fov = 90.0
 editor_description = "Marks the position of the Camera's third person view
 Janky and not very developed. Could be expanded upon"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="FirearmRemote" type="RemoteTransform3D" parent="Head/BobbingNode"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.193442, -0.241313, -0.064748)
+remote_path = NodePath("../../../Firearms")
+
+[node name="Firearms" type="Marker3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.193442, 1.15869, -0.064748)
+
+[node name="Pistol" parent="Firearms" node_paths=PackedStringArray("bullet_start_pos_node") instance=ExtResource("12_nnnx6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+visible = false
+bullet_start_pos_node = NodePath("../../Head/BobbingNode/PlayerCamera")
+bullet_collision_layer = 2
+
+[node name="Pistol2" parent="Firearms" node_paths=PackedStringArray("bullet_start_pos_node", "AnimPlayer") instance=ExtResource("12_nnnx6")]
+transform = Transform3D(-3.34849e-08, -2.80971e-08, -1, -0.642788, 0.766044, 0, 0.766044, 0.642788, -4.37114e-08, 0, 0, 0)
+visible = false
+bullet_start_pos_node = NodePath("../../Head/BobbingNode/PlayerCamera")
+AnimPlayer = NodePath("../Pistol/ModelHolder/gun1/AnimationPlayer")
+bullet_collision_layer = 2

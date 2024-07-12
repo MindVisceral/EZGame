@@ -1,4 +1,4 @@
-extends Node3D
+extends Node
 
 
 ###-------------------------------------------------------------------------###
@@ -67,7 +67,7 @@ var step_interval: float = 6.0 * 2
 @export var Y_axis_bob_enabled: bool = true
 
 ## This heighht limits how far up/down the bobbing_node may move
-@export var Y_bob_height: float = 0.01
+@export var Y_bob_height: float = 0.003
 
 
 
@@ -94,13 +94,9 @@ func _process(delta: float) -> void:
 	## If bobbing is enabled...
 	if weapon_bob_enabled == true:
 		## Calculate a new position for the bobbing_node,
-		## and lerp the bobbing_node's position towards that point
-		#bobbing_node.position = bobbing_node.position.lerp(do_weapon_bob(delta), \
-									#bob_multiplier * delta)
-		
-		bobbing_node.position = bobbing_node.position.lerp(do_weapon_bob(delta), \
-									bob_multiplier * delta)
-	
+		## and tween the bobbing_node's position towards that point
+		var tween = get_tree().create_tween()
+		tween.tween_property(bobbing_node, "position", do_weapon_bob(delta), bob_multiplier * delta)
 
 
 ## Move bobbing_node on the X, Y and Z axes when the Player is moving
@@ -123,10 +119,10 @@ func do_weapon_bob(delta: float) -> Vector3:
 		
 		## NOTE: !player.in_air ensures that this only happens when the Player is not in the air
 		## Make the bobbing_node move left and right
-		new_pos.x = original_position.x + sin(Time.get_ticks_msec() \
-							* x_bob_frequency) * x_bob_amplitude * int(!player.in_air)
+		new_pos.x = original_position.x + (sin(Time.get_ticks_msec() \
+							* x_bob_frequency) * x_bob_amplitude * int(!player.in_air))
 		## Make the bobbing_node move fowards or backwards
-		new_pos.z = original_position.z + input_dir.y * Z_bob_length * int(!player.in_air)
+		new_pos.z = original_position.z + (input_dir.y * Z_bob_length * int(!player.in_air))
 		
 		
 	## Otherwise, make the bobbing_node return to its original_position
@@ -136,6 +132,6 @@ func do_weapon_bob(delta: float) -> Vector3:
 	
 	## Make the bobbing_node move up or down
 	## NOTE: player.in_air ensures that this only happens when the Player is in the air
-	new_pos.y = original_position.y + player.velocity.y * Y_bob_height * int(player.in_air)
+	new_pos.y = original_position.y + (player.velocity.y * Y_bob_height * int(player.in_air))
 	
 	return new_pos
