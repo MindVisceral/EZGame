@@ -17,7 +17,7 @@ func enter() -> void:
 	## Reset velocity, otherwise the momentum would persist
 	player.velocity = Vector3.ZERO
 	## Apply stomp impulse
-	player.velocity.y -= player.stomp_strength
+	player.velocity.y -= player.stomp_strength * player.gravity * BulletTime.time_scale
 
 func exit() -> void:
 	super.exit()
@@ -33,14 +33,15 @@ func input(event: InputEvent) -> BasePlayerState:
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
 func physics_process(delta) -> BasePlayerState:
 	
-	## Prepare to walk if a movement key is pressed
-	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
-	 "input_forwards", "input_backwards")
-	
 	## Prepare the jump input buffer
 	## just_pressed makes this Input require timing, but _pressed, well, can just be pressed down
 	if Input.is_action_just_pressed("input_jump"):
 		player.JumpBufferT.start()
+	
+	
+	## Prepare to walk if a movement key is pressed
+	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
+	 "input_forwards", "input_backwards")
 	
 	
 	## Apply gravity (which is the Globals gravity * multiplier)
@@ -49,13 +50,13 @@ func physics_process(delta) -> BasePlayerState:
 	
 	## Check if the Player has reached the ground already
 	## Stomp is unstoppable otherwise
-	if player.check_for_floor():
+	if player.check_for_floor() or player.is_on_floor():
 		
 		## If the jump button has been pressed within the buffer time, allow for an immediate jump
 		if !player.JumpBufferT.is_stopped():
 			return jump_state
 		
-		## Otherwise...
+		## Otherwise (if the Player doesn't take the opportunity to jump)...
 		## If a horizontal movement has been detected, return walk_state
 		elif input_dir != Vector2.ZERO:
 			return walk_state

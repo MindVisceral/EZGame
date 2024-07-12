@@ -36,7 +36,10 @@ height = 3.0
 collision_mask = 6
 input_ray_pickable = false
 script = ExtResource("1_kmike")
-gravity_multiplier = 0.05
+gravity_multiplier = 0.15
+jump_height = 55.0
+stomp_strength = 90.0
+wall_jump_distance = 35.0
 
 [node name="Scripts" type="Node" parent="."]
 
@@ -90,12 +93,14 @@ process_callback = 0
 wait_time = 0.05
 one_shot = true
 
-[node name="Fall" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "crouch_state", "stomp_state")]
+[node name="Fall" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "crouch_state", "stomp_state", "wallrun_state", "walljump_state")]
 script = ExtResource("8_xbf4w")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 crouch_state = NodePath("../Crouch")
 stomp_state = NodePath("../Stomp")
+wallrun_state = NodePath("../WallRun")
+walljump_state = NodePath("../WallJump")
 
 [node name="Stomp" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state")]
 script = ExtResource("8_fl03g")
@@ -103,16 +108,24 @@ idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 jump_state = NodePath("../Jump")
 
-[node name="WallRun" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "fall_state", "stomp_state", "walljump_state")]
+[node name="WallRun" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "fall_state", "stomp_state", "walljump_state")]
 script = ExtResource("9_encgj")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
+jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 stomp_state = NodePath("../Stomp")
 walljump_state = NodePath("../WallJump")
 
-[node name="WallJump" type="Node" parent="Scripts/StateManager"]
+[node name="WallJump" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
 script = ExtResource("10_gc6l4")
+speed_multiplier = 1.3
+idle_state = NodePath("../Idle")
+walk_state = NodePath("../Walk")
+jump_state = NodePath("../Jump")
+stomp_state = NodePath("../Stomp")
+wallrun_state = NodePath("../WallRun")
+walljump_state = NodePath(".")
 
 [node name="WeaponManager" type="Node" parent="Scripts"]
 script = ExtResource("9_cyjjp")

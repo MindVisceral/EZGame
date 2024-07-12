@@ -28,7 +28,7 @@ extends CharacterBody3D
 
 ## Player Gravity Multiplier
 ## The higher the number, the faster the Player will fall to the ground and 
-## the jump will be shorter.
+## the shorter the jump will be.
 @export var gravity_multiplier: float = 0.2
 
 ## Player base speed
@@ -99,9 +99,27 @@ extends CharacterBody3D
 
 @export_group("Wall-running, -jumping, -sliding")
 
+## The vertical height of the jump from the wall
+## NOTE: This is !added! to the Player's Y velocity
+@export var wall_jump_height: float = 55
+
+## The horizontal power of the jump away from the wall
+## NOTE: This is !multiplied! by the wall's normal,
+## NOTE: which is fine because the normal is always either 0 or 1
+@export var wall_jump_distance: float = 45
+
+## How much horizontal Player Input contributes to the jump distance (in %, between .8 and 1.25)
+## The lower the value, the less control the Player has over the wall jump
+@export_range(0.8, 4.0, 0.01) var walljump_input_contribution = 2.5
+
+## When the Player is on a wall, they fall down slower
+## The lower the number, the slower they fall down.
+@export var wall_sliding_deceleration: float = 0.3
+
 ## The distance of the edge of the WallDetection ShapeCast from the Player's center
 ## Limited by the Collider's radius. This can't be lower or equal to that.
 @export_range(0.1, 1.0, 0.1) var wall_detector_radius: float = 0.5
+
 
 @export_group("Fly")
 
@@ -115,6 +133,7 @@ extends CharacterBody3D
 ###-------------------------------------------------------------------------###
 
 ## Player's gravity
+## Same as Globals.global_gravity, but affected by the gravity_multiplier
 @onready var gravity = Globals.global_gravity * gravity_multiplier
 
 ## Player's children. Check a child's Editor Description to learn what it's used for
@@ -283,22 +302,23 @@ func check_for_floor() -> bool:
 #	print(FloorCast.is_colliding())
 	return FloorCast.is_colliding()
 
-func find_closest_wall() -> StaticBody3D:
+
+## Finds and returns the normal of the wall that is the closest to the Player;
+## The walls are detected by the WallDetection S-Cast and here is decided which one is the closest.
+func find_closest_wall_normal() -> Vector3:
+	## We need to turn this on really quick
+	WallDetection.force_shapecast_update()
+	
+	## The wall's normal
+	var wall_normal: Vector3 = Vector3.ZERO
+	
 	if WallDetection.is_colliding():
 		## First, we find the StaticBody wall that is the closest to the Player
 		## NOTE: Since almost all walls are probably made in TrenchBroom, most of them are part
 		## NOTE: of the same StaticBody. So this is a check we make just in case.
-		## NOTE: A wall's normal is more important to us.
 		
 		## INF on our first check in the loop, because there is no bigger distance than that
 		var distance_to_wall = INF
-		## I left this at Null, because we know that there is a closest Wall somewhere,
-		## because this function wouldn't be called otherwise.
-		var closest_wall: StaticBody3D
-		
-		
-		
-		print("DETECTED:     ", WallDetection.collision_result)
 		
 		## We loop through all the Walls that the WallDetection ShapeCast could find
 		## to find the Wall that is the closest to the Player
@@ -309,9 +329,10 @@ func find_closest_wall() -> StaticBody3D:
 			if new_distance < distance_to_wall:
 				## If so, we update these two variables
 				distance_to_wall = new_distance
-				closest_wall = result.collider
+				## Finally, we get the normal
+				wall_normal = result.normal
 				
 			
-		#print(closest_wall)
+		
 	
-	return
+	return wall_normal

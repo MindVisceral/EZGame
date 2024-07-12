@@ -4,16 +4,10 @@ extends BasePlayerState
 #
 ## Time for the character to reach full speed
 @export var acceleration: float = 8
-## Time for the character to stop in place
+## Time for the character to stop walking
 @export var deceleration: float = 10
-## If this is true, speed_multiplier from the previous state will be use instead of the default one
-@export var use_previous_state_speed_multiplier: bool = true
 ## Speed to be multiplied when active the ability
-@export var default_speed_multiplier: float = 1.2
-
-## Current speed multiplier, carried over from the previous state
-## If it doesn't exist in the previous state, default_speed_multiplier will be used
-var speed_multiplier: float ## Not needed, no other state has a higher multipier anyway
+@export var speed_multiplier: float = 1
 
 
 @export_group("States")
@@ -22,37 +16,36 @@ var speed_multiplier: float ## Not needed, no other state has a higher multipier
 @export var walk_state: BasePlayerState
 @export var jump_state: BasePlayerState
 @export var stomp_state: BasePlayerState
-
-## Timer, so that the ground isn't detected immediately after a jump
-## Check Editor description for an explanation
-@onready var ground_timer: Timer = $GroundTimer
+@export var wallrun_state: BasePlayerState
+@export var walljump_state: BasePlayerState
 
 func enter() -> void:
 	super.enter()
 	
 	player.in_air = true
+	## The Player may want to do wall-related movement while in the air
+	player.WallDetection.enabled = true
 	
-	## Check how fast we should go
-	speed_multiplier_check()
-	
-	## Start the timer
-	ground_timer.start()
-	
-	## Apply jump impulse
-	player.velocity.y += player.jump_height
+	## Calculate and apply jump impulse (depending on the wall's normal)
+	player.velocity += wall_normal_check()
 
 func exit() -> void:
 	super.exit()
 	
 	player.in_air = false
-	
-	## Reset ground timer
-	ground_timer.stop()
+	player.WallDetection.enabled = false
+
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:
+	## If the Player wants to stomp back to the ground...
 	if Input.is_action_just_pressed("input_crouch"):
 		return stomp_state
+	## If the Player wants to jump off the wall...
+	## NOTE: This has to be frame-perfect, because the wallrun_state is likely to trigger first
+	if Input.is_action_just_pressed("input_jump"):
+		if player.WallDetection.is_colliding():
+			return walljump_state
 	
 	return null
 
@@ -65,12 +58,13 @@ func physics_process(delta) -> BasePlayerState:
 		player.JumpBufferT.start()
 	
 	
-	## The direction of Player movement based on Input
+	## The direction the Player's movement based on Input
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
 	 "input_forwards", "input_backwards")
 	## We keep the Y axis the same, and place input_dir on the XZ axis
 	player.direction = (player.transform.basis * \
 		Vector3(input_dir.x, 0.0, input_dir.y).normalized())
+		
 	
 	## Decide if the Player going to accelerate or decelerate.
 	var temp_accel
@@ -80,34 +74,30 @@ func physics_process(delta) -> BasePlayerState:
 	else:
 		temp_accel = deceleration
 	
-	## Control in the air is damped (or raised) while moving horizontally
+	## Control in the air is damped (or raised) while moving (horizontally)
 #	temp_accel *= player.air_control
 	
 	## Apply velocity, take speed_multiplier and acceleration into account
 	## But only on X and Z axes! The Y axis should be unrestrained by .speed and .multipliers
-#	player.velocity.x = lerp(player.velocity.x, \
-#		(player.direction.x * player.speed * speed_multiplier), \
-#		temp_accel * delta)
-#	player.velocity.z = lerp(player.velocity.z, \
-#		(player.direction.z * player.speed * speed_multiplier), \
-#		temp_accel * delta)
+	#player.velocity.x = lerp(player.velocity.x, \
+		#(player.direction.x * player.speed * speed_multiplier), \
+		#temp_accel * delta)
+	#player.velocity.z = lerp(player.velocity.z, \
+		#(player.direction.z * player.speed * speed_multiplier), \
+		#temp_accel * delta)
 	
 	## When the horizontal Input keys are pressed, make the Player move in that direction
 	## Otherwise, keep the momentum
 	if player.direction.x != 0 and player.direction.z != 0:
 		player.velocity.x = lerp(player.velocity.x, \
-			(player.direction.x * player.speed * speed_multiplier), \
+			(player.direction.x * player.speed * speed_multiplier)  \
+			* (player.walljump_input_contribution), \
 			temp_accel * delta)
 		player.velocity.z = lerp(player.velocity.z, \
-			(player.direction.z * player.speed * speed_multiplier), \
+			(player.direction.z * player.speed * speed_multiplier)  \
+			* (player.walljump_input_contribution), \
 			temp_accel * delta)
-	
-#	player.velocity = Vector3(player.velocity.x, 0, player.velocity.z).lerp((player.direction \
-#		* player.speed * speed_multiplier), temp_accel * delta)
-	
-#	player.velocity.x += player.velocity.x + (player.direction.x * player.speed * speed_multiplier)
-#	player.velocity.z += player.velocity.z + (player.direction.z * player.speed * speed_multiplier)
-	
+		
 	
 	## Apply gravity (which is the Globals gravity * multiplier)
 	## No multipier used for now.
@@ -115,35 +105,45 @@ func physics_process(delta) -> BasePlayerState:
 	player.velocity.y -= player.gravity * BulletTime.time_scale
 	
 	
-	## A short time after the Raycast leaves the ground...
-	if ground_timer.is_stopped():
-		## Check if the Player is on floor
-		if player.check_for_floor():
-			
-			## If the jump button has been pressed within the buffer time, allow for another jump
-			if !player.JumpBufferT.is_stopped():
-				return jump_state
-			
-			## Otherwise...
-			## If the Player stops moving around, return to Idle state. The Y axis is ignored
-			elif Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
-				return idle_state
-			## Otherwise, keep on walking
-			else:
-				return walk_state
+	## Check if the Player is on floor...
+	if player.check_for_floor():
+		
+		## If the jump button has been pressed within the buffer time, allow for another jump
+		if !player.JumpBufferT.is_stopped():
+			return jump_state
+		
+		## Otherwise (if the Player doesn't take the opportunity to jump)...
+		## If the Player stops moving around, return to Idle state. The Y axis is ignored
+		elif Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
+			return idle_state
+		## Otherwise, keep on walking
+		else:
+			return walk_state
+		
+	## The Player isn't on the floor, so we check if they're near a wall...
+	elif player.WallDetection.is_colliding():
+		## The Player is near a wall, so we make them run on it.
+		return wallrun_state
+		
+	
+	
 	
 	return null
 
-## HERE - unnecessary, there is no state that has a higher multiplier than Jump
-## Check if this state should use the previous state's speed_multiplier
-func speed_multiplier_check() -> void:
-	## Set the multiplier to the default...
-	self.speed_multiplier = self.default_speed_multiplier
+## We want the Player to jump away from a wall.
+## We use the wall's normal to calculate which way the Player should be pushed.
+func wall_normal_check() -> Vector3:
+	## The direction in which the Player will jump away from the wall
+	var jump_direction: Vector3 = Vector3.ZERO
 	
-	## If we want the state_multiplier to change...
-	if use_previous_state_speed_multiplier == true:
-		## If the previous state has a speed_multiplier variable...
-		if previous_state.get("speed_multiplier") != null:
-			## If that variable is higher than the default...
-			if previous_state.speed_multiplier >= self.default_speed_multiplier:
-				self.speed_multiplier = previous_state.speed_multiplier
+	## Horizontal calculations;
+	## Multiplying is fine here, because the normal is always either 0 or 1
+	jump_direction.x = player.find_closest_wall_normal().x * player.wall_jump_distance
+	jump_direction.z = player.find_closest_wall_normal().z * player.wall_jump_distance
+	
+	
+	## Vertical impulse;
+	## We must add the height value and not multiply it
+	jump_direction.y += player.wall_jump_height
+	
+	return jump_direction

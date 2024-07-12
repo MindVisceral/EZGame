@@ -213,7 +213,7 @@ func move(_delta: float, input_axis := Vector2.ZERO, input_jump := false, input_
 	var direction = _direction_input(input_axis, input_swim_down, input_swim_up, _direction_base_node)
 	if not swim_ability.is_floating():
 		_check_landed()
-	if not jump_ability.is_actived() and not is_fly_mode() and not is_submerged() and not is_floating():
+	if nto jump_ability.is_actived() and not is_fly_mode() and not is_submerged() and not is_floating():
 		velocity.y -= gravity * _delta
 	
 	swim_ability.set_active(!fly_ability.is_actived())

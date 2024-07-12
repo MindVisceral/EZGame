@@ -14,6 +14,7 @@ extends BasePlayerState
 #
 @export var idle_state: BasePlayerState
 @export var walk_state: BasePlayerState
+@export var jump_state: BasePlayerState
 @export var fall_state: BasePlayerState
 @export var stomp_state: BasePlayerState
 @export var walljump_state: BasePlayerState
@@ -34,8 +35,10 @@ func exit() -> void:
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:
+	## If the Player wants ot jump off the wall...
 	if Input.is_action_just_pressed("input_jump"):
 		return walljump_state
+	## If the Player wants to stomp back to the ground...
 	if Input.is_action_just_pressed("input_crouch"):
 		return stomp_state
 	
@@ -44,7 +47,8 @@ func input(event: InputEvent) -> BasePlayerState:
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
 func physics_process(delta) -> BasePlayerState:
 	
-	player.find_closest_wall()
+	## We need the closest's wall's normal to make the Player run along it.
+	player.find_closest_wall_normal()
 	
 	## The direction of Player movement based on Input
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
@@ -65,10 +69,29 @@ func physics_process(delta) -> BasePlayerState:
 	temp_accel * delta)
 	
 	## Apply gravity (which is the Globals gravity * multiplier)
-	player.velocity.y -= player.gravity * BulletTime.time_scale
+	## Affected by running on the wall; falling is slowed down by that.
+	player.velocity.y -= player.gravity * player.wall_sliding_deceleration * BulletTime.time_scale
 	
-	## If the Player stops moving, make them slowly slide down the wall
-	if Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
-		pass
+	
+	## If the Player fell off the wall, they start to fall
+	if !player.WallDetection.is_colliding():
+		return fall_state
+		
+	## But if they're still clinging to the wall...
+	else:
+		## If they're on the wall, but they've reached the floor...
+		if player.check_for_floor():
+			## If the jump button has been pressed within the buffer time, allow for a (floor) jump
+			if !player.JumpBufferT.is_stopped():
+				return jump_state
+				
+			## Otherwise (if the Player doesn't take the opportunity to jump)...
+			## If the Player stops moving around, return to Idle state. The Y axis is ignored
+			elif Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
+				return idle_state
+			## Otherwise, start walking
+			else:
+				return walk_state
+	
 	
 	return null
