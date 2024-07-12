@@ -1,5 +1,9 @@
 extends BasePlayerState
 
+## Stomp causes Camera shaking of this value
+@export_range(0.0, 1.0, 0.05) var trauma_amount: float = 0.5
+
+
 @export_group("States")
 #
 @export var idle_state: BasePlayerState
@@ -21,9 +25,10 @@ func enter() -> void:
 
 func exit() -> void:
 	super.exit()
-	ScreenShake.add_trauma(0.09, 2)
 	
 	player.in_air = false
+	player.air_time = 0.0
+	
 	player.WallDetection.enabled = false
 
 ## When a movement button is pressed, change to a corresponding State node
@@ -48,10 +53,19 @@ func physics_process(delta) -> BasePlayerState:
 	## Apply gravity (which is the Globals' gravity * multiplier)
 	player.velocity.y -= player.gravity * BulletTime.time_scale * delta
 	
+	## Increase air_time - this is used to influence camera shake strength.
+	## NOTE: Notice that player.air_time_multiplier isn't used here - we want actual time in air
+	player.air_time += delta
 	
 	## Check if the Player has reached the ground already
 	## Stomp is unstoppable otherwise
 	if player.check_for_floor() or player.is_on_floor():
+		
+		## Stomp was successful, therefore landing causes Camera shaking;
+		## Player's air time makes the shaking stronger,
+		## but it is clamped to always be at the minimum of trauma_amount.
+		player.air_time = clampf(player.air_time, 1.0, 10.0)
+		player.PlayerShakeableCamera.add_trauma(trauma_amount * player.air_time)
 		
 		## If the jump button has been pressed within the buffer time, allow for an immediate jump
 		if !player.JumpBufferT.is_stopped():

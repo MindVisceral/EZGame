@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://lhlklylca50m"]
+[gd_scene load_steps=24 format=3 uid="uid://lhlklylca50m"]
 
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player.gd" id="1_kmike"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Player_States/State_Manager.gd" id="2_c5aqi"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Alterators/WeaponBob.gd" id="12_4bkuj"]
 [ext_resource type="PackedScene" uid="uid://b2fet7sg7ta7s" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Pistol.tscn" id="12_nnnx6"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Player/Alterators/InteractionManager.gd" id="13_qk48y"]
+[ext_resource type="PackedScene" uid="uid://bf3osgw1tg5x5" path="res://Scenes & Scripts/Entities/Cameras/ShakeableCamera.tscn" id="17_b5tqw"]
 
 [sub_resource type="CapsuleShape3D" id="15"]
 radius = 0.45
@@ -28,6 +29,14 @@ radius = 0.425
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bxcyr"]
 height = 0.35
 radius = 0.6
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hjmpv"]
+resource_local_to_scene = true
+fractal_octaves = 4
+fractal_lacunarity = 20.0
+fractal_gain = 0.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_m5j40"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oey6e"]
 radius = 0.15
@@ -168,10 +177,9 @@ bobbing_node = NodePath("../../Head/BobbingNode/Firearms")
 breath_frequency = 0.002
 breath_amplitude = 0.004
 
-[node name="InteractionManager" type="Node" parent="Scripts" node_paths=PackedStringArray("ray_start_pos_node")]
+[node name="InteractionManager" type="Node" parent="Scripts"]
 script = ExtResource("13_qk48y")
 InteractableCast_range = 10.0
-ray_start_pos_node = NodePath("../../Head/BobbingNode/PlayerCamera")
 
 [node name="UIController" type="Node" parent="Scripts"]
 
@@ -230,11 +238,11 @@ gizmo_extents = 0.1
 editor_description = "This node is bobbed by the HeadBob script instead of the Head node
 Using the Head node for bobbing nullifies mouse movement, which also rotates the Head node"
 
-[node name="PlayerCamera" type="Camera3D" parent="Head/BobbingNode"]
-editor_description = "Main Player camera, typically placed at Head's (0, 0, 0) coordinate
-Its FOV can be changed through an exported variable in the Player node"
-current = true
-fov = 90.0
+[node name="PlayerCamera" parent="Head/BobbingNode" instance=ExtResource("17_b5tqw")]
+noise = SubResource("FastNoiseLite_hjmpv")
+
+[node name="Collider" type="CollisionShape3D" parent="Head/BobbingNode/PlayerCamera"]
+shape = SubResource("SphereShape3D_m5j40")
 
 [node name="InteractableCast" type="ShapeCast3D" parent="Head/BobbingNode"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.5)
@@ -253,15 +261,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 [node name="Firearms" type="Marker3D" parent="Head/BobbingNode"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.315, -0.264, -0.106)
 
-[node name="Pistol" parent="Head/BobbingNode/Firearms" node_paths=PackedStringArray("bullet_start_pos_node") instance=ExtResource("12_nnnx6")]
+[node name="Pistol" parent="Head/BobbingNode/Firearms" instance=ExtResource("12_nnnx6")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 visible = false
-bullet_start_pos_node = NodePath("../../PlayerCamera")
 
-[node name="Pistol2" parent="Head/BobbingNode/Firearms" node_paths=PackedStringArray("bullet_start_pos_node") instance=ExtResource("12_nnnx6")]
+[node name="Pistol2" parent="Head/BobbingNode/Firearms" instance=ExtResource("12_nnnx6")]
 transform = Transform3D(-0.766044, -0.642788, 8.74228e-08, -0.642788, 0.766044, 0, -6.69697e-08, -5.61943e-08, -1, 0, 0, 0)
 visible = false
-bullet_start_pos_node = NodePath("../../PlayerCamera")
 
 [node name="GPUParticlesAttractorVectorField3D" type="GPUParticlesAttractorVectorField3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00488281, 0.808258, 0)

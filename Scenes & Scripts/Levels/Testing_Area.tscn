@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://bg2u2fljqhcdk"]
+[gd_scene load_steps=62 format=3 uid="uid://bg2u2fljqhcdk"]
 
 [ext_resource type="Script" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1_hxp6x"]
 [ext_resource type="Material" uid="uid://o0b4tbh6yup4" path="res://addons/character-controller/example/main/materials/rock.tres" id="2_2haa3"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://canaixmskh7hh" path="res://Scenes & Scripts/Textures/Bricks/brick_rough_blue.png" id="5_ebvex"]
 [ext_resource type="PackedScene" uid="uid://lhlklylca50m" path="res://Scenes & Scripts/Entities/Player/Player.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://c58jul0j3dxoj" path="res://Scenes & Scripts/Entities/InteractableObjects/Teleporter.tscn" id="10_jdp74"]
+[ext_resource type="PackedScene" uid="uid://bcs2syi8emeol" path="res://Scenes & Scripts/Entities/InteractableObjects/Tremor.tscn" id="11_2x63x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sghrv"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -448,49 +449,54 @@ material = SubResource("StandardMaterial3D_b3adf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9658, 1.81132, -1.61595)
 material = SubResource("StandardMaterial3D_sbhan")
 
-[node name="TeleporterBottom" parent="Map_elements" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="Teleporters" type="Node3D" parent="Map_elements"]
+
+[node name="TeleporterBottom" parent="Map_elements/Teleporters" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 30)
 teleport_target = NodePath("../TeleporterTop")
 
-[node name="TeleporterTop" parent="Map_elements" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="TeleporterTop" parent="Map_elements/Teleporters" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 256, 60)
 teleport_target = NodePath("../TeleporterBottom")
 effects_colour = Color(0.447059, 0.00392157, 0.85098, 1)
 
-[node name="TeleporterBottomer" parent="Map_elements" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="TeleporterBottomer" parent="Map_elements/Teleporters" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 30)
 teleport_target = NodePath("../TeleporterTopper")
 effects_colour = Color(0.858824, 0.811765, 1, 1)
 
-[node name="TeleporterTopper" parent="Map_elements" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="TeleporterTopper" parent="Map_elements/Teleporters" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 628, 60)
 teleport_target = NodePath("../TeleporterBottomer")
 effects_colour = Color(0.211765, 0, 0.423529, 1)
 
-[node name="Teleporter1Loop" parent="Map_elements" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="Teleporter1Loop" parent="Map_elements/Teleporters" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 77.928, 0, 32.1079)
 teleport_target = NodePath("../Teleporter2Loop")
 effects_colour = Color(0.831373, 0.0941176, 0.235294, 1)
 
-[node name="Teleporter2Loop" parent="Map_elements" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="Teleporter2Loop" parent="Map_elements/Teleporters" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.4062, 0, 32.1079)
 teleport_target = NodePath("../Teleporter1Loop")
 effects_colour = Color(0.988235, 0.368627, 0.411765, 1)
 
-[node name="TeleporterSelfLoop" parent="Map_elements" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="TeleporterSelfLoop" parent="Map_elements/Teleporters" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.4307, 0, 44.6259)
 teleport_target = NodePath(".")
 effects_colour = Color(0.486275, 0.745098, 0.231373, 1)
 
-[node name="TeleporterStairs" parent="Map_elements" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="TeleporterStairs" parent="Map_elements/Teleporters" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.9486, 0, 31.9903)
 teleport_target = NodePath("../TeleporterWalls")
 effects_colour = Color(0.027451, 0.772549, 0.956863, 1)
 
-[node name="TeleporterWalls" parent="Map_elements" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="TeleporterWalls" parent="Map_elements/Teleporters" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.877, 14.0149, -19.5246)
 teleport_target = NodePath("../TeleporterStairs")
 effects_colour = Color(0, 0.305882, 0.611765, 1)
+
+[node name="Tremor" parent="Map_elements" instance=ExtResource("11_2x63x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.2367, 0, 30.1397)
 
 [node name="Player" parent="." instance=ExtResource("6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.3081, 0, 36.2515)

@@ -20,7 +20,6 @@ config/icon="res://icon.png"
 
 Globals="*res://Scenes & Scripts/Autoloads/Globals.gd"
 BulletTime="*res://Scenes & Scripts/Autoloads/BulletTime.gd"
-ScreenShake="*res://Scenes & Scripts/Autoloads/ScreenShake.gd"
 
 [editor_plugins]
 
@@ -139,6 +138,8 @@ input_bullet_time={
 3d_physics/layer_5="Hurtbox"
 3d_physics/layer_6="Interactable"
 3d_physics/layer_7="Teleporter"
+3d_physics/layer_8="ShakeableCamera"
+3d_physics/layer_9="TraumaCauser"
 
 [physics]
 

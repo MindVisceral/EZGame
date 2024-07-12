@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bf3osgw1tg5x5"]
+
+[ext_resource type="Script" path="res://Scenes & Scripts/Entities/Cameras/ShakeableCamera.gd" id="1_tc0cd"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xwv1w"]
+resource_local_to_scene = true
+fractal_octaves = 4
+fractal_lacunarity = 20.0
+fractal_gain = 0.8
+
+[node name="ShakeableCamera" type="Area3D"]
+editor_description = "This is a special Area3D Node with an attached Camera, which allows us to make that Camera shake!
+The shake is played as a result of the Player's actions and various in-game situations.
+
+The shaking, besides being caused by a TraumaCauser-class node, may also be called through code - simply call add_trauma(trauma_amount: float)
+Important: a Collider must be added to this Area when it's instantiated! It won't work otherwise."
+collision_layer = 128
+collision_mask = 256
+input_ray_pickable = false
+script = ExtResource("1_tc0cd")
+noise = SubResource("FastNoiseLite_xwv1w")
+
+[node name="Camera" type="Camera3D" parent="."]

@@ -152,7 +152,10 @@ extends CharacterBody3D
 @onready var Firearms: Marker3D = $Head/BobbingNode/Firearms
 #@onready var Firearms: Marker3D = $Head/Firearms
 #@onready var Firearms: Marker3D = $Firearms
-@onready var Camera: Camera3D = $Head/BobbingNode/PlayerCamera
+## Node of class ShakeableCamera; a reference to this specifically is used to make the Camera shake
+@onready var PlayerShakeableCamera: ShakeableCamera = $Head/BobbingNode/PlayerCamera
+## Actual Camera Node itself; we need this to change the Camera's parameters
+@onready var Camera: Camera3D = PlayerShakeableCamera.Camera
 @onready var InteractableCast: ShapeCast3D = $Head/BobbingNode/InteractableCast
 @onready var TPMarker: Marker3D = $Head/BobbingNode/TPMarker
 
