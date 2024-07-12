@@ -76,97 +76,114 @@ func secondary_action() -> void:
 func cast_bullet_ray() -> void:
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
 	
+	##
 	## Parameters of the Ray;
+	##
 	#
-	## Starting position of the Ray, the point from which the bullets will come out of
+	## Starting position of the Ray, the point from which the bullets will come out of.
+	## NOTE: This is outside the 'for' loop, because we don't need to calculate it for every Bullet
 	var start_pos: Vector3 = bullet_start_pos_node.global_transform.origin
-	## End pos of the Ray; start_pos extended towards where the Player is looking,
-	## multiplied by FirearmBase @export-ed max_distance variable
-	var end_pos: Vector3 = start_pos - \
-		(bullet_start_pos_node.global_transform.basis.z * self.max_distance)
-	#
-	## NOTE: bullet_collision_mask is @exported from the FirearmBase class; change it in the editor.
-	## That makes this RayCast only detects objects on the same layers as this variable.
-	
-	## Set the above Ray parameters
-	var ray_param: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(start_pos, \
-		end_pos, bullet_collision_mask)
-	## We want it to detect HurtBoxes (which are Areas) too, not just bodies (like the Environment)
-	ray_param.collide_with_areas = true
-	## Finally, cast the Ray in space_state, with ray_param as its parameters
-	var result: Dictionary = space_state.intersect_ray(ray_param)
-	
-	## Instantiate a Shot Effect coming out of the gun's barrel,
-	## This is completely independent from the bullet stuff.
-	var shot_effect = shot_effect_emitter.instantiate()
-	get_tree().get_root().add_child(shot_effect)
-	## Set the shot_effect's transform to be the same as the bullet_start_point's
-	shot_effect.draw_effect(bullet_start_point.global_transform, Color.LIGHT_GRAY)
-	
-	## Instantiate a Fire Shot Effect coming out of the gun's barrel,
-	## This is completely independent from the bullet stuff.
-	var fire_shot_effect = shot_fire_effect.instantiate()
-	## NOTE: No need to set any Transforms since this effect will not be a child of root
-	bullet_start_point.add_child(fire_shot_effect)
 	
 	
-	## Instantiate a Trail, no matter if the bullet (RayCast) hit anything or not;
-	## but we will check if it did soon.
-	var trail = bullet_trail_emitter.instantiate()
-	get_tree().get_root().add_child(trail)
-	
-	## Now we may check results of this Ray we just cast.
-	#
-	## Options 1 & 2: The "bullet" hit something and returned a result.
-	if result:
+	## All the stuff that follows must be calculated separately for every Bullet.
+	for bullet in number_of_bullets:
 		
-		## Option 1: The "bullet" hit an Entity - we know that because it has a Hurtbox
-		## This necessitates damage calculations an an Entity-specific hit effect
-		if result.collider is Hurtbox:
-			## Create a new DamageData Resource, which will be passed to the Hurtbox, which
-			## will interpret it and pass on to the Entity
-			var damageData = DamageData.new()
+	## End pos of the Ray;
+		var end_pos: Vector3 = start_pos - \
+			## start_pos extended towards where the Player is looking,
+			## multiplied by FirearmBase @export-ed max_distance variable,
+			(bullet_start_pos_node.global_transform.basis.z * self.max_distance) + \
+			## and rotated by (up to) the value of bullet_spread (if that's 0, Ray goes straight)
+			Vector3(randi_range(-bullet_spread, bullet_spread), \
+			randi_range(-bullet_spread, bullet_spread), \
+			randi_range(-bullet_spread, bullet_spread))
+		#
+		## NOTE: bullet_collision_mask is @exported from the FirearmBase class; check in the Editor
+		## That makes this RayCast only detect objects on the same layers as this variable.
+		
+		
+		## Set the above Ray parameters
+		var ray_param: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(start_pos, \
+			end_pos, bullet_collision_mask)
+		## We want it to detect HurtBoxes (which are Areas) too, not just bodies (like the Environment)
+		ray_param.collide_with_areas = true
+		
+		## Finally, cast the Ray in space_state, with ray_param as its parameters
+		var result: Dictionary = space_state.intersect_ray(ray_param)
+		
+		## Instantiate a Shot Effect coming out of the gun's barrel,
+		## This is completely independent from the bullet stuff.
+		var shot_effect = shot_effect_emitter.instantiate()
+		get_tree().get_root().add_child(shot_effect)
+		## Set the shot_effect's transform to be the same as the bullet_start_point's
+		shot_effect.draw_effect(bullet_start_point.global_transform, Color.LIGHT_GRAY)
+		
+		## Instantiate a Fire Shot Effect coming out of the gun's barrel,
+		## This is completely independent from the bullet stuff.
+		var fire_shot_effect = shot_fire_effect.instantiate()
+		## NOTE: No need to set any Transforms since this effect will not be a child of root
+		bullet_start_point.add_child(fire_shot_effect)
+		
+		
+		## Instantiate a Trail, no matter if the bullet (RayCast) hit anything or not;
+		## but we will check if it did soon.
+		var trail = bullet_trail_emitter.instantiate()
+		get_tree().get_root().add_child(trail)
+		
+		print(bullet, "   ", trail)
+		
+		## Now we may check results of this Ray we just cast.
+		#
+		## Options 1 & 2: The "bullet" hit something and returned a result.
+		if result:
 			
-			## We give this Resource some data
-			damageData.damage_value = default_damage
-			damageData.hit_point = result.position
+			## Option 1: The "bullet" hit an Entity - we know that because it has a Hurtbox
+			## This necessitates damage calculations an an Entity-specific hit effect
+			if result.collider is Hurtbox:
+				## Create a new DamageData Resource, which will be passed to the Hurtbox, which
+				## will interpret it and pass on to the Entity
+				var damageData = DamageData.new()
+				
+				## We give this Resource some data
+				damageData.damage_value = default_damage
+				damageData.hit_point = result.position
+				
+				## With DamageData's data assigned,
+				## we pass this Resource on to the result.collider's Hurtbox
+				result.collider.pass_DamageData(damageData)
 			
-			## With DamageData's data assigned,
-			## we pass this Resource on to the result.collider's Hurtbox
-			result.collider.pass_DamageData(damageData)
-		
-		## Option 2: The "bullet" hit a part of the Environment. But we only assume that it did,
-		## because there was not Hurtbox.
-		## This necessitates the regular hit effect and an Environment decal 
-		elif result.collider:
-		
-			## Instantiate a decal...
-			var decal = bullet_hole_decal.instantiate()
-			get_tree().get_root().add_child(decal)
-			## The first parameter is the point at which the Decal is drawn,
-			## the second one is the result's normal;
-			## we use it to make the Decak face away from the hit object
-			decal.draw_decal(result.position, result.normal)
+			## Option 2: The "bullet" hit a part of the Environment. But we only assume that it did,
+			## because there was not Hurtbox.
+			## This necessitates the regular hit effect and an Environment decal 
+			elif result.collider:
 			
-			## Instantiate a regular Hit Effect
-			var hit_effect = hit_effect_emitter.instantiate()
-			get_tree().get_root().add_child(hit_effect)
-			## The first parameter is the point at which the Hit Effect is emitted,
-			## the second one is the result's normal;
-			## we use it to make the Particles emit at the proper angle to the hit object
-			hit_effect.draw_effect(result.position, result.normal)
+				## Instantiate a decal...
+				var decal = bullet_hole_decal.instantiate()
+				get_tree().get_root().add_child(decal)
+				## The first parameter is the point at which the Decal is drawn,
+				## the second one is the result's normal;
+				## we use it to make the Decak face away from the hit object
+				decal.draw_decal(result.position, result.normal)
+				
+				## Instantiate a regular Hit Effect
+				var hit_effect = hit_effect_emitter.instantiate()
+				get_tree().get_root().add_child(hit_effect)
+				## The first parameter is the point at which the Hit Effect is emitted,
+				## the second one is the result's normal;
+				## we use it to make the Particles emit at the proper angle to the hit object
+				hit_effect.draw_effect(result.position, result.normal)
+			
+			
+			## NOTE: No matter if the hit 'something' is an Entity or not, instantiate a trail.
+			## The first parameter is the point at which the Trail starts,
+			## the second one is where the Trail ends. In this case it's where the bullet ended up.
+			trail.draw_mesh(bullet_start_point.global_position, result.position)
+			
 		
-		
-		## NOTE: No matter if the hit 'something' is an Entity or not, instantiate a trail.
-		## The first parameter is the point at which the Trail starts,
-		## the second one is where the Trail ends. In this case it's where the bullet ended up.
-		trail.draw_mesh(bullet_start_point.global_position, result.position)
-		
-	
-	## Option 3: The "bullet" has not hit anything. 
-	## In this case we only instantiate the Trail. No need for any hit effects.
-	else:
-		## Since the Ray returned no results, the second parameter is just
-		## a Vector3 somewhere way off in the distance.
-		## This creates an illusion that the bullet went on beyond the Player's sight
-		trail.draw_mesh(bullet_start_point.global_position, end_pos)
+		## Option 3: The "bullet" has not hit anything. 
+		## In this case we only instantiate the Trail. No need for any hit effects.
+		else:
+			## Since the Ray returned no results, the second parameter is just
+			## a Vector3 somewhere way off in the distance.
+			## This creates an illusion that the bullet went on beyond the Player's sight
+			trail.draw_mesh(bullet_start_point.global_position, end_pos)

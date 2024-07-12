@@ -6,9 +6,10 @@
 [node name="LMB-21" node_paths=PackedStringArray("bullet_start_point") instance=ExtResource("1_fq3sh")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 bullet_start_point = NodePath("ModelHolder/LMB-21/TrailSpawnPoint")
-number_of_bullets = 9
+number_of_bullets = 15
+bullet_spread = 90.0
 shot_cooldown = 0.6
-max_distance = 2000.0
+max_distance = 800.0
 
 [node name="LMB-21" parent="ModelHolder" index="0" instance=ExtResource("2_a7a8p")]
 

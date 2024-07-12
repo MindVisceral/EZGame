@@ -26,7 +26,7 @@ var player: Player
 
 
 ###-------------------------------------------------------------------------###
-##### Variable storage
+##### Exported variables
 ###-------------------------------------------------------------------------###
 
 @export_group("Weapon parameters")
@@ -37,9 +37,9 @@ var player: Player
 @export_enum("Single-shot", "Automatic") var firing_mode: int = 0
 
 ## Number of bullets created in a single shot, in ex. shotguns.
-@export_range(0, 50, 1) var number_of_bullets: int = 1
+@export_range(0, 300, 1) var number_of_bullets: int = 1
 
-## Bullet spread in degrees.
+## Bullet spread (in degrees).
 @export_range(0, 90, 0.1) var bullet_spread: float = 0.0
 
 ## Time the weapon waits before the next individual shot can be fired, measured in seconds.
@@ -50,15 +50,20 @@ var player: Player
 @export_range(0, 20, 0.25) var default_damage: float = 1
 
 ## The maximum distance (in meters) the bullets may travel away from their starting point
-## (Used both for Hitscans and Projectiles, but Projectiles must be freed manually)
+## (Used both for Hitscans and Projectiles, but Projectiles must be freed manually, while
+## Hitscans just don't work past this value)
 @export var max_distance: float = 10000
 
-## Layer on which the bullet is; should be the Hitbox layer
-#@export_flags_3d_physics var bullet_collision_layer ## HERE - seems unneccessary ## HERE: Why?
-## Layers which the bullet can see, and therefore damage;
+## Layer on which the bullet :is:; should be the Hitbox layer
+#@export_flags_3d_physics var bullet_collision_layer ## HERE - seems unneccessary ## HERE: Why? forgot
+## Layers which the bullet can 'see', and therefore damage;
 ## should be the Hurtbox and Environment layers - to damage Entities and for effects to work.
 @export_flags_3d_physics var bullet_collision_mask
 
+
+###-------------------------------------------------------------------------###
+##### Variables/Flags
+###-------------------------------------------------------------------------###
 
 ## Whether or not the primary fire button is held down. Used for "Automatic" firing_mode weapons.
 ## Check _physics_process() for usage.
