@@ -238,24 +238,24 @@ func _ready():
 func _input(event: InputEvent) -> void:
 	if is_dead:
 		return
+
+func _unhandled_input(event: InputEvent) -> void:
 	
 	## Move the Head up/down and the whole Player right/left with mouse movement
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		Head.rotate_x(deg_to_rad(event.relative.y * MOUSE_SENSITIVITY * -1))
-		self.rotate_y(deg_to_rad(event.relative.x * MOUSE_SENSITIVITY * -1))
+		Head.rotate_x(deg_to_rad(-1 * event.relative.y * MOUSE_SENSITIVITY))
+		self.rotate_y(deg_to_rad(-1 * event.relative.x * MOUSE_SENSITIVITY))
 		
 		## Clamp Head's rotation. Otherwise we could turn up/down in a circle - that causes bugs
 		Head.rotation_degrees.x = clamp(Head.rotation_degrees.x, -89, 89)
-
-func _unhandled_input(event: InputEvent) -> void:
+	
+	
 	States.input(event)
 	Weapons.input(event)
 
 ###
 func _physics_process(delta) -> void:
 	
-	if Input.parse_input_event(InputEventMouseMotion):
-		print("movement")
 	
 	if !is_dead:
 #		process_input(delta)

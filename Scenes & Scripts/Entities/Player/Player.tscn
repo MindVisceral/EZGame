@@ -38,34 +38,9 @@ collision_layer = 2
 collision_mask = 7
 input_ray_pickable = false
 script = ExtResource("1_kmike")
-MOUSE_SENSITIVITY = null
-mouse_scroll_value = null
-MOUSE_SENSITIVITY_SCROLL_WHEEL = null
-camera_FOV = null
-first_person = null
 gravity_multiplier = 1.0
-air_time_multiplier = null
-speed = null
-air_control = null
-step_lengthen = null
-default_height = null
-crouch_height = null
-default_width = null
-default_head_height = null
-crouch_head_height = null
-default_feet_height = null
-crouch_feet_height = null
-default_FloorCast_height = null
-crouch_FloorCast_height = null
-crouch_speed = null
-jump_height = null
 stomp_strength = 4.0
-wall_jump_height = null
-wall_jump_distance = null
 wall_sliding_deceleration = 0.6
-fly_mode_speed_modifier = null
-MAX_HEALTH = null
-health = null
 
 [node name="Scripts" type="Node" parent="."]
 

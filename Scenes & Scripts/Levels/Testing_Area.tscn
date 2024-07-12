@@ -494,31 +494,6 @@ effects_colour = Color(0, 0.305882, 0.611765, 1)
 
 [node name="Player" parent="." instance=ExtResource("6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62.3081, 0, 36.2515)
-MOUSE_SENSITIVITY = null
-mouse_scroll_value = null
-MOUSE_SENSITIVITY_SCROLL_WHEEL = null
-camera_FOV = null
-first_person = null
-air_time_multiplier = null
-speed = null
-air_control = null
-step_lengthen = null
-default_height = null
-crouch_height = null
-default_width = null
-default_head_height = null
-crouch_head_height = null
-default_feet_height = null
-crouch_feet_height = null
-default_FloorCast_height = null
-crouch_FloorCast_height = null
-crouch_speed = null
-jump_height = null
-wall_jump_height = null
-wall_jump_distance = null
-fly_mode_speed_modifier = null
-MAX_HEALTH = null
-health = null
 
 [node name="Yellow Puppet" parent="." instance=ExtResource("4_23xl4")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
