@@ -82,21 +82,38 @@ func cast_bullet_ray() -> void:
 	#
 	## Starting position of the Ray, the point from which the bullets will come out of.
 	## NOTE: This is outside the 'for' loop, because we don't need to calculate it for every Bullet
-	var start_pos: Vector3 = bullet_start_pos_node.global_transform.origin
+	#var start_pos: Vector3 = bullet_start_pos_node.global_transform.origin
+	
 	
 	
 	## All the stuff that follows must be calculated separately for every Bullet.
 	for bullet in number_of_bullets:
 		
-	## End pos of the Ray;
-		var end_pos: Vector3 = start_pos - \
-			## start_pos extended towards where the Player is looking,
-			## multiplied by FirearmBase @export-ed max_distance variable,
-			(bullet_start_pos_node.global_transform.basis.z * self.max_distance) + \
-			## and rotated by (up to) the value of bullet_spread (if that's 0, Ray goes straight)
-			Vector3(randi_range(-bullet_spread, bullet_spread), \
-			randi_range(-bullet_spread, bullet_spread), \
+		
+		var vp_size = get_viewport().size
+		var start_pos: Vector3 = bullet_start_pos_node.project_ray_origin(vp_size * 0.5)
+		
+		
+		
+		## End pos of the Ray;
+		#var end_pos: Vector3 = start_pos - \
+			### start_pos extended towards where the Player is looking,
+			### multiplied by FirearmBase @export-ed max_distance variable,
+			#(bullet_start_pos_node.global_transform.basis.z * self.max_distance) + \
+			### and rotated by (up to) the value of bullet_spread (if that's 0, Ray goes straight)
+			#Vector3(randi_range(-bullet_spread, bullet_spread), \
+			#randi_range(-bullet_spread, bullet_spread),
+			#randi_range(-bullet_spread, bullet_spread))
+			
+			
+			
+		var extra = Vector2(randi_range(-bullet_spread, bullet_spread), \
 			randi_range(-bullet_spread, bullet_spread))
+		
+		var end_pos = bullet_start_pos_node.project_position(vp_size * 0.5 + extra, max_distance)
+			
+			
+			
 		#
 		## NOTE: bullet_collision_mask is @exported from the FirearmBase class; check in the Editor
 		## That makes this RayCast only detect objects on the same layers as this variable.
