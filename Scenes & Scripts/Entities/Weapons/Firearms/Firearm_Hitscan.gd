@@ -8,11 +8,11 @@ class_name FirearmHitscan
 ##### Hitscan-specific onready variables
 ###-------------------------------------------------------------------------###
 
-## The Node from which the bullets originate
-## NOTE: This should be the Player's First Person camera so the Player doesn't have to
+## The Player's Camera3D Node - the 'Bullets' 'come out' of it.
+## NOTE: Since we use a Camera, the Player doesn't have to
 ## NOTE: take the weapon's position into consideration for the weapons to not hit nearby obstacles.
 ## NOTE: As a result, the Player must see their target to hit it.
-@export var bullet_start_pos_node: Node3D
+@export var player_camera: Camera3D
 
 ## Bullet Trail effect variables!
 #
@@ -74,62 +74,47 @@ func secondary_action() -> void:
 
 ## Create a Ray in Space, which will act as a bullet for Hitscan weapons
 func cast_bullet_ray() -> void:
+	## We need the world's SpaceState3D to fire a Ray
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
-	
-	##
-	## Parameters of the Ray;
-	##
-	#
-	## Starting position of the Ray, the point from which the bullets will come out of.
-	## NOTE: This is outside the 'for' loop, because we don't need to calculate it for every Bullet
-	#var start_pos: Vector3 = bullet_start_pos_node.global_transform.origin
+
+	## We will use the Viewport's size to get the start and end points of the RayCast with a Camera
+	var vp_size = get_viewport().size
 	
 	
-	
-	## All the stuff that follows must be calculated separately for every Bullet.
+	## Everything that follows must be calculated separately for every Bullet.
 	for bullet in number_of_bullets:
 		
-		
-		var vp_size = get_viewport().size
-		var start_pos: Vector3 = bullet_start_pos_node.project_ray_origin(vp_size * 0.5)
-		
-		
-		
-		## End pos of the Ray;
-		#var end_pos: Vector3 = start_pos - \
-			### start_pos extended towards where the Player is looking,
-			### multiplied by FirearmBase @export-ed max_distance variable,
-			#(bullet_start_pos_node.global_transform.basis.z * self.max_distance) + \
-			### and rotated by (up to) the value of bullet_spread (if that's 0, Ray goes straight)
-			#Vector3(randi_range(-bullet_spread, bullet_spread), \
-			#randi_range(-bullet_spread, bullet_spread),
-			#randi_range(-bullet_spread, bullet_spread))
-			
-			
-			
-		var extra = Vector2(randi_range(-bullet_spread, bullet_spread), \
-			randi_range(-bullet_spread, bullet_spread))
-		
-		var end_pos = bullet_start_pos_node.project_position(vp_size * 0.5 + extra, max_distance)
-			
-			
-			
+		## We use the Camera3D's built-in project_ray_origin function to
+		## get the start point of the RayCast Bullet.
+		## NOTE: 'vp_size * 0.5' because we cast from the middle of the screen
+		var start_pos: Vector3 = player_camera.project_ray_origin(vp_size * 0.5)
 		#
+		## We will use this Vector2 to add some bullet spread to the RayCast Bullet
+		var final_spread = Vector2(randi_range(-bullet_spread.x, bullet_spread.x), \
+			randi_range(-bullet_spread.y, bullet_spread.y))
+		#
+		## Again, we use the Camera3D's built-in function to determine the end point of the Ray
+		## And we add final_spread to add vertical and horizontal bullet_spread
+		## NOTE: 'vp_size * 0.5' because we cast from the middle of the screen
+		var end_pos = player_camera.project_position((vp_size * 0.5) + final_spread, max_distance)
+		
+		
 		## NOTE: bullet_collision_mask is @exported from the FirearmBase class; check in the Editor
 		## That makes this RayCast only detect objects on the same layers as this variable.
-		
-		
-		## Set the above Ray parameters
+		#
+		## Set the Ray's parameters using above variables
 		var ray_param: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(start_pos, \
 			end_pos, bullet_collision_mask)
-		## We want it to detect HurtBoxes (which are Areas) too, not just bodies (like the Environment)
+		## We want it to detect HurtBoxes (which are Areas) too,
+		## not just bodies (like the Environment), which are on by default
 		ray_param.collide_with_areas = true
 		
 		## Finally, cast the Ray in space_state, with ray_param as its parameters
 		var result: Dictionary = space_state.intersect_ray(ray_param)
 		
-		## Instantiate a Shot Effect coming out of the gun's barrel,
-		## This is completely independent from the bullet stuff.
+		
+		## Instantiate a Shot Effect coming out of the gun's barrel.
+		## This is completely independent from the Bullet stuff.
 		var shot_effect = shot_effect_emitter.instantiate()
 		get_tree().get_root().add_child(shot_effect)
 		## Set the shot_effect's transform to be the same as the bullet_start_point's

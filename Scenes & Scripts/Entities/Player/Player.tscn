@@ -321,25 +321,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 [node name="Firearms" type="Marker3D" parent="Collider/Head/BobbingNode"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.315, -0.264, -0.106)
 
-[node name="SinglePistol" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("bullet_start_pos_node") instance=ExtResource("12_nnnx6")]
+[node name="SinglePistol" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("12_nnnx6")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0422868, 0.0040648, -0.167155)
 visible = false
-bullet_start_pos_node = NodePath("../../PlayerCamera")
+player_camera = NodePath("../../PlayerCamera")
 shot_cooldown = 1.2
 default_damage = 2.0
 
-[node name="AutoPistol" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("bullet_start_pos_node") instance=ExtResource("12_nnnx6")]
+[node name="AutoPistol" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("12_nnnx6")]
 transform = Transform3D(-0.906308, 0.422618, -8.74228e-08, 0.422618, 0.906308, 0, 7.92319e-08, -3.69465e-08, -1, -0.0307228, -0.0205753, -0.192714)
 visible = false
-bullet_start_pos_node = NodePath("../../PlayerCamera")
+player_camera = NodePath("../../PlayerCamera")
 firing_mode = 1
 shot_cooldown = 0.2
 default_damage = 0.5
 
-[node name="LMB-21" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("bullet_start_pos_node") instance=ExtResource("22_pkbhp")]
+[node name="LMB-21" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("22_pkbhp")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.00702256, 0.103284, -0.304065)
 visible = false
-bullet_start_pos_node = NodePath("../../PlayerCamera")
+player_camera = NodePath("../../PlayerCamera")
 
 [node name="Visuals" type="Node3D" parent="."]
 visible = false

@@ -1,15 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2fet7sg7ta7s"]
+[gd_scene load_steps=9 format=3 uid="uid://b2fet7sg7ta7s"]
 
 [ext_resource type="PackedScene" uid="uid://bn7y4wu56lcq0" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Firearm_Hitscan.tscn" id="1_k8jy2"]
 [ext_resource type="Script" path="res://Scenes & Scripts/Entities/Weapons/Firearms/Pistol.gd" id="2_ejjpi"]
 [ext_resource type="PackedScene" uid="uid://bvoqgew4r1sdh" path="res://Blender/Heft24Solid/Heft24Solid.gltf" id="3_ayanl"]
+[ext_resource type="PackedScene" uid="uid://bfset8kv0qt4r" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Bullet_Trail_Emitter.tscn" id="3_ppvp5"]
+[ext_resource type="PackedScene" uid="uid://drcgshfh4ln3v" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Shot_Effect_Emitter.tscn" id="4_a4bvq"]
+[ext_resource type="PackedScene" uid="uid://cta8h3tmvb3b0" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Shot_Fire_Effect.tscn" id="5_mwqir"]
+[ext_resource type="PackedScene" uid="uid://0clng625rshm" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Hit_Effect_Emitter.tscn" id="6_t44dv"]
+[ext_resource type="PackedScene" uid="uid://dmfqn2l3j8aoy" path="res://Scenes & Scripts/Entities/Weapons/Effects/Base_Bullet_Hole_Decal.tscn" id="7_18sox"]
 
 [node name="Pistol" node_paths=PackedStringArray("bullet_start_point") instance=ExtResource("1_k8jy2")]
 editor_description = ""
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("2_ejjpi")
 bullet_start_point = NodePath("ModelHolder/Heft24Solid/TrailSpawnPoint")
+bullet_trail_emitter = ExtResource("3_ppvp5")
+shot_effect_emitter = ExtResource("4_a4bvq")
+shot_fire_effect = ExtResource("5_mwqir")
+hit_effect_emitter = ExtResource("6_t44dv")
+bullet_hole_decal = ExtResource("7_18sox")
+firing_mode = 0
+number_of_bullets = 1
+bullet_spread = Vector2(0, 0)
 shot_cooldown = 1.6
+default_damage = 1.0
+max_distance = 10000.0
 
 [node name="Heft24Solid" parent="ModelHolder" index="0" instance=ExtResource("3_ayanl")]
 

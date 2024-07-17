@@ -39,8 +39,9 @@ var player: Player
 ## Number of bullets created in a single shot, in ex. shotguns.
 @export_range(0, 300, 1) var number_of_bullets: int = 1
 
-## Bullet spread (in degrees ???).
-@export_range(0, 2000, 1) var bullet_spread: float = 0.0
+## Bullet spread; X is horizontal spread, Y is vertical spread.
+## NOTE: Unknown units - just eye it.
+@export var bullet_spread: Vector2 = Vector2.ZERO
 
 ## Time the weapon waits before the next individual shot can be fired, measured in seconds.
 ## Attempting to fire before this time is up doesn't do anything.
