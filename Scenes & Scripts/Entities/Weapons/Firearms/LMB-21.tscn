@@ -9,7 +9,7 @@ bullet_start_point = NodePath("ModelHolder/LMB-21/TrailSpawnPoint")
 number_of_bullets = 15
 bullet_spread = Vector2(30, 30)
 shot_cooldown = 0.6
-max_distance = 800.0
+max_distance = 20.0
 
 [node name="LMB-21" parent="ModelHolder" index="0" instance=ExtResource("2_a7a8p")]
 

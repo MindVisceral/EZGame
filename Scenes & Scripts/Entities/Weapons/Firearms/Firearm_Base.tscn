@@ -8,7 +8,6 @@ random_pitch = 1.5
 random_volume_offset_db = 3.0
 streams_count = 1
 stream_0/stream = ExtResource("4_3dsx7")
-stream_0/weight = 1.0
 
 [node name="FirearmBase" type="Marker3D" node_paths=PackedStringArray("ShotCooldownTimer")]
 editor_description = "This is the Base Firearm Node! ALL the other weapons and weapon classes depend on it!
