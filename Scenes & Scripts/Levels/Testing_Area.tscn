@@ -1,7 +1,6 @@
-[gd_scene load_steps=150 format=4 uid="uid://bg2u2fljqhcdk"]
+[gd_scene load_steps=151 format=4 uid="uid://bg2u2fljqhcdk"]
 
 [ext_resource type="Script" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1_hxp6x"]
-[ext_resource type="Material" uid="uid://o0b4tbh6yup4" path="res://addons/character-controller/example/main/materials/rock.tres" id="2_2haa3"]
 [ext_resource type="Resource" uid="uid://c36hv0o6g0udo" path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" id="2_xdfwx"]
 [ext_resource type="PackedScene" uid="uid://nf1bgcn3f8w0" path="res://Scenes & Scripts/Entities/Entity Elements/Interactable.tscn" id="3_acpno"]
 [ext_resource type="Texture2D" uid="uid://c5svyq3efprhy" path="res://Scenes & Scripts/Textures/Concrete/concrete_11.jpg" id="3_gkic2"]
@@ -366,6 +365,18 @@ size = Vector3(30, 500, 5)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wnjms"]
 data = PackedVector3Array(-4, 2, 2, 4, 2, 2, -4, -2, 2, 4, 2, 2, 4, -2, 2, -4, -2, 2, 4, 2, -2, -4, 2, -2, 4, -2, -2, -4, 2, -2, -4, -2, -2, 4, -2, -2, 4, 2, 2, 4, 2, -2, 4, -2, 2, 4, 2, -2, 4, -2, -2, 4, -2, 2, -4, 2, -2, -4, 2, 2, -4, -2, -2, -4, 2, 2, -4, -2, 2, -4, -2, -2, 4, 2, 2, -4, 2, 2, 4, 2, -2, -4, 2, 2, -4, 2, -2, 4, 2, -2, -4, -2, 2, 4, -2, 2, -4, -2, -2, 4, -2, 2, 4, -2, -2, -4, -2, -2)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v1hec"]
+load_path = "res://.godot/imported/rock.png-81ea409133a1eaa0e4c552f470d9dcf1.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3wrk"]
+albedo_texture = SubResource("CompressedTexture2D_v1hec")
+metallic_specular = 0.0
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_bepso"]
 size = Vector3(8, 4, 4)
@@ -931,7 +942,7 @@ input_ray_pickable = false
 shape = SubResource("ConcavePolygonShape3D_wnjms")
 
 [node name="Cube4" type="MeshInstance3D" parent="Map_elements/Rock"]
-material_override = ExtResource("2_2haa3")
+material_override = SubResource("StandardMaterial3D_i3wrk")
 mesh = SubResource("BoxMesh_bepso")
 skeleton = NodePath("../..")
 
