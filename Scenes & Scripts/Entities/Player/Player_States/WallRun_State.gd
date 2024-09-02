@@ -46,7 +46,7 @@ func input(event: InputEvent) -> BasePlayerState:
 	return null
 
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
-func physics_process(delta) -> BasePlayerState:
+func physics_process(delta: float) -> BasePlayerState:
 	
 	## We need the closest's wall's normal to make the Player run along it.
 	#player.find_closest_wall_normal()
@@ -58,7 +58,7 @@ func physics_process(delta) -> BasePlayerState:
 	player.direction = (player.transform.basis * Vector3(input_dir.x, 0.0, input_dir.y).normalized())
 	
 	## Decide if the Player going to accelerate or decelerate.
-	var temp_accel
+	var temp_accel: float
 	## We use the dot product to see if the Player is facing the direction they are moving in
 	if player.direction.dot(Vector3(player.direction.x, 0.0, 0.0)) > 0:
 		temp_accel = acceleration
@@ -66,8 +66,12 @@ func physics_process(delta) -> BasePlayerState:
 		temp_accel = deceleration
 	
 	## Apply velocity, take speed_multiplier and acceleration into account
-	player.velocity = player.velocity.lerp((player.direction * player.speed * speed_multiplier), \
-	temp_accel * delta)
+	## NOTE: Lerping player.velocity itself would also impact vertical (y) velocity,
+	## NOTE: so we lerp X and Z separately instead.
+	player.velocity.x = lerpf(player.velocity.x, \
+		(player.direction.x * player.speed * speed_multiplier), temp_accel * delta)
+	player.velocity.z = lerpf(player.velocity.z, \
+		(player.direction.z * player.speed * speed_multiplier), temp_accel * delta)
 	
 	
 	## Apply gravity (which is the Globals' gravity * multiplier)

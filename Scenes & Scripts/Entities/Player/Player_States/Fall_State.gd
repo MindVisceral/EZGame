@@ -67,7 +67,7 @@ func input(event: InputEvent) -> BasePlayerState:
 
 
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
-func physics_process(delta) -> BasePlayerState:
+func physics_process(delta: float) -> BasePlayerState:
 	
 	## Prepare the jump input buffer
 	## just_pressed makes this Input require timing, but _pressed allows for hopping
@@ -83,7 +83,7 @@ func physics_process(delta) -> BasePlayerState:
 	
 	
 	## Decide if the Player going to accelerate or decelerate.
-	var temp_accel
+	var temp_accel: float
 	## We use the dot product to see if the Player is facing the direction they are moving in
 	if player.direction.dot(Vector3(player.direction.x, 0.0, 0.0)) > 0:
 		temp_accel = acceleration
@@ -96,11 +96,9 @@ func physics_process(delta) -> BasePlayerState:
 	## Otherwise, keep the momentum
 	if player.direction.x != 0 and player.direction.z != 0:
 		player.velocity.x = lerp(player.velocity.x, \
-			(player.direction.x * player.speed * speed_multiplier), \
-			temp_accel * delta)
+			(player.direction.x * player.speed * speed_multiplier), temp_accel * delta)
 		player.velocity.z = lerp(player.velocity.z, \
-			(player.direction.z * player.speed * speed_multiplier), \
-			temp_accel * delta)
+			(player.direction.z * player.speed * speed_multiplier), temp_accel * delta)
 		
 	
 	
@@ -111,7 +109,6 @@ func physics_process(delta) -> BasePlayerState:
 	## NOTE: maxf is used because velocity.y is negative when falling
 	player.velocity.y = maxf(player.velocity.y, player.falling_speed_limit)
 	
-	print(player.velocity.y)
 	
 	## Check if the Player has reached the ground already
 	if player.is_on_floor():

@@ -12,7 +12,7 @@ func _ready() -> void:
 	yaw = transform.basis.get_euler().y
 	pitch = transform.basis.get_euler().x
 
-func _process(delta):
+func _process(delta: float):
 	rotation = Vector3.ZERO
 	rotate(Vector3.RIGHT, pitch)
 	rotate(Vector3.UP, yaw)

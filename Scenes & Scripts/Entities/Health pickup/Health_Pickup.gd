@@ -21,7 +21,7 @@ func _ready():
 	kit_size_change_values(kit_size, true)
 
 
-func _physics_process(delta):
+func _physics_process(delta: float):
 	if respawn_timer > 0:
 		respawn_timer -= delta
 

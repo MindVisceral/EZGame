@@ -39,10 +39,16 @@ func input(event: InputEvent) -> BasePlayerState:
 	return null
 
 ## Velocity equasions for this specific state and physics. Unrelated to player Inputs
-func physics_process(delta) -> BasePlayerState:
+func physics_process(delta: float) -> BasePlayerState:
 	## If the Player is still moving, make them decelerate down to zero
-	player.velocity = player.velocity.lerp((player.direction * player.speed), \
-	deceleration * delta)
+	## NOTE: Lerping player.velocity itself would also impact vertical (y) velocity,
+	## NOTE: so we lerp X and Z separately instead.
+	player.velocity.x = lerpf(player.velocity.x, \
+		(player.direction.x * player.speed), deceleration * delta)
+	player.velocity.z = lerpf(player.velocity.z, \
+		(player.direction.z * player.speed), deceleration * delta)
+	
+	
 	
 	## Apply gravity (which is the Globals' gravity * multiplier)
 	player.velocity.y -= player.gravity * BulletTime.time_scale * delta

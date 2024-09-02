@@ -244,7 +244,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	Weapons.input(event)
 
 ###
-func _physics_process(delta) -> void:
+func _physics_process(delta: float) -> void:
 	
 	if !is_dead:
 #		process_input(delta)
@@ -259,7 +259,7 @@ func _physics_process(delta) -> void:
 		move_and_slide()
 		velocity = velocity
 
-func _process(delta) -> void:
+func _process(delta: float) -> void:
 	States.process(delta)
 
 

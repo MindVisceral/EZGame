@@ -50,7 +50,7 @@ func collided_with_body(body):
 		mode = RigidBody3D.FREEZE_MODE_STATIC
 
 
-func _process(delta):
+func _process(delta: float):
 
 	if attached == true:
 		if attach_point != null:

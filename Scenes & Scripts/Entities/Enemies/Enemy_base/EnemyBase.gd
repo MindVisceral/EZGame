@@ -97,7 +97,7 @@ func _ready() -> void:
 	apply_exported()
 
 ###
-func _physics_process(delta) -> void:
+func _physics_process(delta: float) -> void:
 	if !is_dead:
 		
 		##States
@@ -107,7 +107,7 @@ func _physics_process(delta) -> void:
 		move_and_slide()
 		velocity = velocity
 
-func _process(delta) -> void:
+func _process(delta: float) -> void:
 	States.process(delta)
 
 

@@ -73,14 +73,14 @@ func input(event: InputEvent) -> BasePlayerState:
 	return null
 
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
-func physics_process(delta) -> BasePlayerState:
+func physics_process(delta: float) -> BasePlayerState:
 	
 	## Normalize the direction here since calculate_slide_direction() doesn't do that by itself.
 	player.direction = player.direction.normalized()
 	
 	
 	## Decide if the Player going to accelerate or decelerate.
-	var temp_accel
+	var temp_accel: float
 	## We use the dot product to see if the Player is facing the direction they are moving in
 	if player.direction.dot(Vector3(player.direction.x, 0.0, 0.0)) > 0:
 		temp_accel = acceleration

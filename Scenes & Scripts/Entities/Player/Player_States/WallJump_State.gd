@@ -80,7 +80,7 @@ func input(event: InputEvent) -> BasePlayerState:
 	return null
 
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
-func physics_process(delta) -> BasePlayerState:
+func physics_process(delta: float) -> BasePlayerState:
 	
 	## Prepare the jump input buffer
 	## just_pressed makes this Input require timing, but _pressed allows for hopping
@@ -97,7 +97,7 @@ func physics_process(delta) -> BasePlayerState:
 		
 	
 	## Decide if the Player going to accelerate or decelerate.
-	var temp_accel
+	var temp_accel: float
 	## We use the dot product to see if the Player is facing the direction they are moving in
 	if player.direction.dot(Vector3(player.direction.x, 0.0, 0.0)) > 0:
 		temp_accel = acceleration
@@ -107,14 +107,13 @@ func physics_process(delta) -> BasePlayerState:
 	## Control in the air is damped (or raised) while moving (horizontally)
 	temp_accel *= player.air_control
 	
-	## Apply velocity, take speed_multiplier and acceleration into account
-	## But only on X and Z axes! The Y axis should be unrestrained by .speed and .multipliers
-	#player.velocity.x = lerp(player.velocity.x, \
-		#(player.direction.x * player.speed * speed_multiplier), \
-		#temp_accel * delta)
-	#player.velocity.z = lerp(player.velocity.z, \
-		#(player.direction.z * player.speed * speed_multiplier), \
-		#temp_accel * delta)
+	### Apply velocity, take speed_multiplier and acceleration into account
+	### NOTE: Lerping player.velocity itself would also impact vertical (y) velocity,
+	### NOTE: so we lerp X and Z separately instead.
+	#player.velocity.x = lerpf(player.velocity.x, \
+		#(player.direction.x * player.speed * speed_multiplier), temp_accel * delta)
+	#player.velocity.z = lerpf(player.velocity.z, \
+		#(player.direction.z * player.speed * speed_multiplier), temp_accel * delta)
 	
 	## When the horizontal Input keys are pressed, make the Player move in that direction
 	## Otherwise, keep the momentum

@@ -28,7 +28,7 @@ var trauma = 0.0
 @onready var initial_rotation: Vector3 = self.rotation_degrees
 
 
-func _process(delta):
+func _process(delta: float):
 	## Trauma decays over time
 	trauma = max(trauma - delta * trauma_decay_rate, 0.0)
 	

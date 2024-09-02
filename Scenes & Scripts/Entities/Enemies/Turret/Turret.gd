@@ -61,7 +61,7 @@ func _ready():
 	turret_health = MAX_TURRET_HEALTH
 
 
-func _physics_process(delta):
+func _physics_process(delta: float):
 
 	if is_active == true:
 

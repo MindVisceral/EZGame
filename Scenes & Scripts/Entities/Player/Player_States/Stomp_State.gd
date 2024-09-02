@@ -71,7 +71,7 @@ func input(event: InputEvent) -> BasePlayerState:
 	return null
 
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
-func physics_process(delta) -> BasePlayerState:
+func physics_process(delta: float) -> BasePlayerState:
 	
 	## Prepare the jump input buffer
 	## just_pressed makes this Input require timing, but _pressed allows for hopping

@@ -24,7 +24,7 @@ func _ready():
 	explosion_particles.emitting = false
 	explosion_particles.one_shot = true
 
-func _process(delta):
+func _process(delta: float):
 
 	if grenade_timer < GRENADE_TIME:
 		grenade_timer += delta
