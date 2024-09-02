@@ -59,6 +59,8 @@ func enter() -> void:
 		AudioManager.Type.NON_POSITIONAL,
 		player,
 		jump_sound)
+		
+	
 
 func exit() -> void:
 	super.exit()
@@ -73,24 +75,24 @@ func exit() -> void:
 	
 	## Reset ground timer
 	ground_timer.stop()
+	
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:
 	## If the Player wants to stomp back to the ground...
 	if Input.is_action_just_pressed("input_slide"):
 		return stomp_state
+		
 	## If the Player wants to jump off the wall...
 	if Input.is_action_just_pressed("input_jump"):
 		if player.WallDetection.is_colliding():
 			return walljump_state
+			
+		
 	
 	return null
 
 
-
-
-
-var last_frame_y_value: float = 0.0
 
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
 func physics_process(delta) -> BasePlayerState:
@@ -103,7 +105,7 @@ func physics_process(delta) -> BasePlayerState:
 	
 	## The direction the Player's movement based on Input
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
-	 "input_forwards", "input_backwards")
+		"input_forwards", "input_backwards")
 	## We ignore the Y axis, and place input_dir on the XZ axis
 	player.direction = (player.transform.basis * \
 		Vector3(input_dir.x, 0.0, input_dir.y).normalized())
@@ -116,6 +118,7 @@ func physics_process(delta) -> BasePlayerState:
 		temp_accel = acceleration
 	else:
 		temp_accel = deceleration
+		
 	
 	## When the horizontal Input keys are pressed, make the Player move in that direction
 	## Otherwise, keep the momentum

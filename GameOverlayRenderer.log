@@ -1,0 +1,88 @@
+Sun Sep 01 13:46:58 2024 UTC - Module file name: E:\Steam\gameoverlayrenderer64.dll
+Sun Sep 01 13:46:58 2024 UTC - GameID = 404790, OverlayGameID = 404790
+Sun Sep 01 13:46:58 2024 UTC - System page size: 4096
+Sun Sep 01 13:46:58 2024 UTC - Hooking SetCursorPos, GetCursorPos, ShowCursor, SetCursor, and GetCursor
+Sun Sep 01 13:46:58 2024 UTC - Game is using dxgi (dx10/dx11), preparing to hook.
+Sun Sep 01 13:46:58 2024 UTC - Game is using dinput8, preparing to hook.
+Sun Sep 01 13:46:58 2024 UTC - Modules at GameOverlayRenderer.dll attach
+Sun Sep 01 13:46:58 2024 UTC - 01: godot.windows.opt.tools.64.exe - (00007FF7BE4F0000 to 00007FF7C65A4000)
+Sun Sep 01 13:46:58 2024 UTC - 02: ntdll.dll - (00007FFEF9A50000 to 00007FFEF9C48000)
+Sun Sep 01 13:46:58 2024 UTC - 03: KERNEL32.DLL - (00007FFEF83B0000 to 00007FFEF8471000)
+Sun Sep 01 13:46:58 2024 UTC - 04: KERNELBASE.dll - (00007FFEF73E0000 to 00007FFEF76DD000)
+Sun Sep 01 13:46:58 2024 UTC - 05: ADVAPI32.dll - (00007FFEF8F90000 to 00007FFEF9040000)
+Sun Sep 01 13:46:58 2024 UTC - 06: msvcrt.dll - (00007FFEF96C0000 to 00007FFEF975E000)
+Sun Sep 01 13:46:58 2024 UTC - 07: sechost.dll - (00007FFEF8200000 to 00007FFEF82A0000)
+Sun Sep 01 13:46:58 2024 UTC - 08: RPCRT4.dll - (00007FFEF98E0000 to 00007FFEF9A03000)
+Sun Sep 01 13:46:58 2024 UTC - 09: bcrypt.dll - (00007FFEF7A50000 to 00007FFEF7A77000)
+Sun Sep 01 13:46:58 2024 UTC - 10: CRYPT32.dll - (00007FFEF7280000 to 00007FFEF73DE000)
+Sun Sep 01 13:46:58 2024 UTC - 11: ucrtbase.dll - (00007FFEF7730000 to 00007FFEF7830000)
+Sun Sep 01 13:46:58 2024 UTC - 12: GDI32.dll - (00007FFEF8F40000 to 00007FFEF8F6B000)
+Sun Sep 01 13:46:58 2024 UTC - 13: win32u.dll - (00007FFEF7250000 to 00007FFEF7272000)
+Sun Sep 01 13:46:58 2024 UTC - 14: gdi32full.dll - (00007FFEF7930000 to 00007FFEF7A47000)
+Sun Sep 01 13:46:58 2024 UTC - 15: msvcp_win.dll - (00007FFEF7100000 to 00007FFEF719D000)
+Sun Sep 01 13:46:58 2024 UTC - 16: USER32.dll - (00007FFEF7FD0000 to 00007FFEF816D000)
+Sun Sep 01 13:46:58 2024 UTC - 17: IMM32.dll - (00007FFEF8BF0000 to 00007FFEF8C1F000)
+Sun Sep 01 13:46:58 2024 UTC - 18: ole32.dll - (00007FFEF9170000 to 00007FFEF929B000)
+Sun Sep 01 13:46:58 2024 UTC - 19: dbghelp.dll - (00007FFEF5710000 to 00007FFEF58F4000)
+Sun Sep 01 13:46:58 2024 UTC - 20: combase.dll - (00007FFEF9300000 to 00007FFEF9653000)
+Sun Sep 01 13:46:58 2024 UTC - 21: OLEAUT32.dll - (00007FFEF9760000 to 00007FFEF982D000)
+Sun Sep 01 13:46:58 2024 UTC - 22: SHELL32.dll - (00007FFEF8480000 to 00007FFEF8BEF000)
+Sun Sep 01 13:46:58 2024 UTC - 23: SHLWAPI.dll - (00007FFEF7A80000 to 00007FFEF7AD5000)
+Sun Sep 01 13:46:58 2024 UTC - 24: DINPUT8.dll - (00007FFED10F0000 to 00007FFED1135000)
+Sun Sep 01 13:46:58 2024 UTC - 25: WS2_32.dll - (00007FFEF7F50000 to 00007FFEF7FBB000)
+Sun Sep 01 13:46:58 2024 UTC - 26: dwmapi.dll - (00007FFEF49D0000 to 00007FFEF49FF000)
+Sun Sep 01 13:46:58 2024 UTC - 27: DWrite.dll - (00007FFEE4D30000 to 00007FFEE4FAF000)
+Sun Sep 01 13:46:58 2024 UTC - 28: dxgi.dll - (00007FFEF5980000 to 00007FFEF5A76000)
+Sun Sep 01 13:46:58 2024 UTC - 29: IPHLPAPI.DLL - (00007FFEF6510000 to 00007FFEF654B000)
+Sun Sep 01 13:46:58 2024 UTC - 30: WINMM.dll - (00007FFEE50E0000 to 00007FFEE5107000)
+Sun Sep 01 13:46:58 2024 UTC - 31: WSOCK32.dll - (00007FFEE1240000 to 00007FFEE1249000)
+Sun Sep 01 13:46:58 2024 UTC - 32: AVRT.dll - (00007FFEF1FC0000 to 00007FFEF1FCA000)
+Sun Sep 01 13:46:58 2024 UTC - 33: bcryptPrimitives.dll - (00007FFEF7830000 to 00007FFEF78B2000)
+Sun Sep 01 13:46:58 2024 UTC - 34: gameoverlayrenderer64.dll - (00007FFEBD190000 to 00007FFEBD322000)
+Sun Sep 01 13:46:58 2024 UTC - 35: CFGMGR32.dll - (00007FFEF76E0000 to 00007FFEF772E000)
+Sun Sep 01 13:46:58 2024 UTC - 36: PSAPI.DLL - (00007FFEF7FC0000 to 00007FFEF7FC8000)
+Sun Sep 01 13:46:58 2024 UTC - ----------------------------
+Sun Sep 01 13:46:58 2024 UTC - hookCreateDXGIFactory1 called
+Sun Sep 01 13:46:58 2024 UTC - Hooking vtable for factory
+Sun Sep 01 13:46:58 2024 UTC - DXGIFactory2_CreateSwapChain already hooked via IDXGIFactory or IDXGIFactory1
+Sun Sep 01 13:46:59 2024 UTC - hookCreateDXGIFactory1 called
+Sun Sep 01 13:46:59 2024 UTC - Hooking vtable for factory
+Sun Sep 01 13:46:59 2024 UTC - DXGIFactory2_CreateSwapChain already hooked via IDXGIFactory or IDXGIFactory1
+Sun Sep 01 13:46:59 2024 UTC - hookCreateDXGIFactory1 called
+Sun Sep 01 13:46:59 2024 UTC - Hooking vtable for factory
+Sun Sep 01 13:46:59 2024 UTC - DXGIFactory2_CreateSwapChain already hooked via IDXGIFactory or IDXGIFactory1
+Sun Sep 01 13:46:59 2024 UTC - hookCreateDXGIFactory1 called
+Sun Sep 01 13:46:59 2024 UTC - Hooking vtable for factory
+Sun Sep 01 13:46:59 2024 UTC - DXGIFactory2_CreateSwapChain already hooked via IDXGIFactory or IDXGIFactory1
+Sun Sep 01 13:46:59 2024 UTC - hookCreateDXGIFactory1 called
+Sun Sep 01 13:46:59 2024 UTC - Hooking vtable for factory
+Sun Sep 01 13:46:59 2024 UTC - DXGIFactory2_CreateSwapChain already hooked via IDXGIFactory or IDXGIFactory1
+Sun Sep 01 13:46:59 2024 UTC - hookCreateDXGIFactory1 called
+Sun Sep 01 13:46:59 2024 UTC - Hooking vtable for factory
+Sun Sep 01 13:46:59 2024 UTC - DXGIFactory2_CreateSwapChain already hooked via IDXGIFactory or IDXGIFactory1
+Sun Sep 01 13:46:59 2024 UTC - hookCreateDXGIFactory1 called
+Sun Sep 01 13:46:59 2024 UTC - Hooking vtable for factory
+Sun Sep 01 13:46:59 2024 UTC - DXGIFactory2_CreateSwapChain already hooked via IDXGIFactory or IDXGIFactory1
+Sun Sep 01 13:46:59 2024 UTC - hookCreateDXGIFactory1 called
+Sun Sep 01 13:46:59 2024 UTC - Hooking vtable for factory
+Sun Sep 01 13:46:59 2024 UTC - DXGIFactory2_CreateSwapChain already hooked via IDXGIFactory or IDXGIFactory1
+Sun Sep 01 13:46:59 2024 UTC - hookCreateDXGIFactory1 called
+Sun Sep 01 13:46:59 2024 UTC - Hooking vtable for factory
+Sun Sep 01 13:46:59 2024 UTC - DXGIFactory2_CreateSwapChain already hooked via IDXGIFactory or IDXGIFactory1
+Sun Sep 01 13:46:59 2024 UTC - XInput Hooked XInputEnable Version 14
+Sun Sep 01 13:46:59 2024 UTC - XInput Hooked XInputGetAudioDeviceIds Version 14
+Sun Sep 01 13:46:59 2024 UTC - XInput Hooked XInputGetBatteryInformation Version 14
+Sun Sep 01 13:46:59 2024 UTC - XInput Hooked XInputGetCapabilities Version 14
+Sun Sep 01 13:46:59 2024 UTC - XInput Hooked XInputGetCapabilitiesEx Version 14
+Sun Sep 01 13:46:59 2024 UTC - XInput Hooked XInputGetKeystroke Version 14
+Sun Sep 01 13:46:59 2024 UTC - XInput Hooked XInputGetState Version 14
+Sun Sep 01 13:46:59 2024 UTC - XInput Hooked XInputGetStateEx Version 14
+Sun Sep 01 13:46:59 2024 UTC - XInput Hooked XInputSetState Version 14
+Sun Sep 01 13:46:59 2024 UTC - DirectInput8Create hook called, 000002598CDBB880
+Sun Sep 01 13:46:59 2024 UTC - Initializing Audio...
+Sun Sep 01 13:46:59 2024 UTC - Game is using opengl32.dll... hooking.
+Sun Sep 01 13:46:59 2024 UTC - Game is using opengl32.dll... hooking.
+Sun Sep 01 13:47:00 2024 UTC - Trying to setup input hook...
+Sun Sep 01 13:47:00 2024 UTC - Set input hook...
+Sun Sep 01 13:47:01 2024 UTC - Sending device notification
+Sun Sep 01 13:47:05 2024 UTC - DInput 000002598CDBB880 deleting

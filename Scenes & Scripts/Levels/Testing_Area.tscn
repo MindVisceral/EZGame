@@ -22,12 +22,12 @@ sky_horizon_color = Color(0, 0, 0, 1)
 ground_bottom_color = Color(0, 0, 0, 1)
 ground_horizon_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Sky" id="15"]
+[sub_resource type="Sky" id="Sky_m0xl2"]
 sky_material = SubResource("ProceduralSkyMaterial_sghrv")
 
 [sub_resource type="Environment" id="16"]
 background_mode = 1
-sky = SubResource("15")
+sky = SubResource("Sky_m0xl2")
 ambient_light_source = 2
 ambient_light_color = Color(0.733333, 0.733333, 0.733333, 1)
 reflected_light_source = 2

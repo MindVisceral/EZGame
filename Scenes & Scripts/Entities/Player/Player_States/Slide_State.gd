@@ -68,6 +68,7 @@ func input(event: InputEvent) -> BasePlayerState:
 	## When the Slide button isn't pressed anymore, we return to the idle_state
 	elif !Input.is_action_pressed("input_slide"):
 		return idle_state
+		
 	
 	return null
 
@@ -85,6 +86,7 @@ func physics_process(delta) -> BasePlayerState:
 		temp_accel = acceleration
 	else:
 		temp_accel = deceleration
+		
 	
 	
 	## Horizontal direction of Player movement based on Input
@@ -97,12 +99,21 @@ func physics_process(delta) -> BasePlayerState:
 	var sideways_velocity: Vector3 = player.transform.basis * \
 		Vector3(sideways_input_dir, 0.0, 0.0).normalized() * \
 		player.speed * sideways_speed_multiplier
+		
 	
+	
+	#player.velocity = player.velocity.lerp((player.direction * player.speed * speed_multiplier) +\
+		#sideways_velocity, acceleration * delta)
+		
 	
 	## Apply velocity, take speed_multiplier and acceleration into account
-	## and add sideways_velocity
-	player.velocity = player.velocity.lerp((player.direction * player.speed * speed_multiplier) +\
-		sideways_velocity, acceleration * delta)
+	## and add sideways_velocity.
+	## NOTE: Lerping player.velocity itself would also impact vertical (y) velocity,
+	## NOTE: so we lerp X and Z separately instead.
+	player.velocity.x = lerpf(player.velocity.x, (player.direction.x * player.speed * speed_multiplier) + \
+		sideways_velocity.x, acceleration * delta)
+	player.velocity.z = lerpf(player.velocity.z, (player.direction.z * player.speed * speed_multiplier) + \
+		sideways_velocity.z, acceleration * delta)
 	
 	
 	### We want sideways movement to influence Player's velocity in relation to the Camera;
@@ -116,11 +127,12 @@ func physics_process(delta) -> BasePlayerState:
 	
 	
 	## Apply gravity (which is the Globals' gravity * multiplier)
-	## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
+	## NOTE: Without BulletTime.time_scale, falling is inconsistent when BulletTime is activated
 	player.velocity.y -= player.gravity * BulletTime.time_scale * delta
 	## Clamp the velocity to be falling_speed_limit at most.
 	## NOTE: maxf is used because velocity.y is negative when falling
 	player.velocity.y = maxf(player.velocity.y, player.falling_speed_limit)
+	
 	
 	## Even if the Player slides off the floor, they still continue sliding
 	#if !player.is_on_floor():
@@ -129,6 +141,7 @@ func physics_process(delta) -> BasePlayerState:
 	## If the Player stops moving, return to Idle state. The Y axis is ignored.
 	if Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
 		return idle_state
+		
 	
 	## We check if the Player is near a wall
 	if player.WallDetection.is_colliding():
@@ -136,6 +149,8 @@ func physics_process(delta) -> BasePlayerState:
 		## If that is so, we stop the slide state.
 		if player.is_moving_at_wall(false, 0.7):
 			return idle_state
+			
+		
 	
 	return null
 
@@ -150,6 +165,7 @@ func calculate_slide_direction() -> Vector3:
 	## The direction of Player movement based on Input
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
 		"input_forwards", "input_backwards")
+		
 	
 	
 	## Input takes priority,
@@ -166,6 +182,7 @@ func calculate_slide_direction() -> Vector3:
 		## I guess sin and cos transform the rotation into the right Vector?
 		## NOTE: This Vector is NEGATIVE! This doesn't work otherwise.
 		return_vector = -Vector3(sin(player.rotation.y), 0, cos(player.rotation.y))
+		
 	
 	
 	## Return the Vector3 we just determined

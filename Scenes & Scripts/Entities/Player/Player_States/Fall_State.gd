@@ -38,6 +38,7 @@ func enter() -> void:
 	
 	## The Player may want to do wall-related movement while in the air
 	player.WallDetection.enabled = true
+	
 
 func exit() -> void:
 	super.exit()
@@ -45,6 +46,7 @@ func exit() -> void:
 	player.in_air = false
 	
 	player.WallDetection.enabled = false
+	
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:
@@ -71,10 +73,11 @@ func physics_process(delta) -> BasePlayerState:
 	## just_pressed makes this Input require timing, but _pressed allows for hopping
 	if Input.is_action_just_pressed("input_jump"):
 		player.JumpBufferT.start()
+		
 	
 	## The direction of Player movement based on Input
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
-	 "input_forwards", "input_backwards")
+		"input_forwards", "input_backwards")
 	## We ignore the Y axis, and place input_dir on the XZ axis
 	player.direction = (player.transform.basis * Vector3(input_dir.x, 0.0, input_dir.y).normalized())
 	
@@ -86,6 +89,7 @@ func physics_process(delta) -> BasePlayerState:
 		temp_accel = acceleration
 	else:
 		temp_accel = deceleration
+		
 	
 	
 	## When the horizontal Input keys are pressed, make the Player move in that direction
@@ -107,6 +111,7 @@ func physics_process(delta) -> BasePlayerState:
 	## NOTE: maxf is used because velocity.y is negative when falling
 	player.velocity.y = maxf(player.velocity.y, player.falling_speed_limit)
 	
+	print(player.velocity.y)
 	
 	## Check if the Player has reached the ground already
 	if player.is_on_floor():
@@ -114,6 +119,7 @@ func physics_process(delta) -> BasePlayerState:
 		## If the jump button has been pressed within the buffer time, allow for another jump
 		if !player.JumpBufferT.is_stopped():
 			return jump_state
+			
 		
 		## Otherwise (if the Player doesn't take the opportunity to jump)...
 		## If the Player stops moving around, return to Idle state. The Y axis is ignored
@@ -131,6 +137,7 @@ func physics_process(delta) -> BasePlayerState:
 		## The Player is near a wall, so we make them run on it.
 		## NOTE: WallJumping is detected on Input instead! This is only for WallRunning.
 		return wallrun_state
+		
 	
 	
 	return null
