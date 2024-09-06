@@ -1,0 +1,189 @@
+Renderer info: NVIDIA GeForce GTX 1050 Ti/PCIe/SSE2 version 4.6.0 NVIDIA 560.94 from NVIDIA Corporation
+Depth buffer bits: 24
+Multisampling enabled
+Adding file system path "E:/Programy/TrenchBroom\\defaults\\assets"
+Adding file system path "C:/Users/XPS/AppData/Roaming/TrenchBroom\\defaults\\assets"
+Adding file system path "E:/Pliki/Games/Easy_FPS/ScenesScripts\\."
+Loading document from E:\Pliki\Games\Easy_FPS\ScenesScripts\Levels\Trenchbroom\gameplay_test.map
+Adding file system path "E:/Programy/TrenchBroom\\defaults\\assets"
+Adding file system path "C:/Users/XPS/AppData/Roaming/TrenchBroom\\defaults\\assets"
+Adding file system path "E:/Pliki/Games/Easy_FPS/ScenesScripts\\."
+Adding file system path "E:/Pliki/Games/Easy_FPS/ScenesScripts\\Textures"
+Adding file system path "E:/Pliki/Games/Easy_FPS/ScenesScripts\\Levels"
+Loaded entity definition file Easy_FPS.fgd
+Loaded texture collection '"textures"'
+Loaded texture collection '"textures\\Art"'
+Loaded texture collection '"textures\\Books"'
+Loaded texture collection '"textures\\Books\\textures"'
+Loaded texture collection '"textures\\Boxes"'
+Loaded texture collection '"textures\\Bricks"'
+Loaded texture collection '"textures\\Buildings"'
+Loaded texture collection '"textures\\Buildings\\textures"'
+Loaded texture collection '"textures\\Concrete"'
+Loaded texture collection '"textures\\Doors"'
+Loaded texture collection '"textures\\Doors\\textures"'
+Loaded texture collection '"textures\\Electrical"'
+Loaded texture collection '"textures\\Floor"'
+Loaded texture collection '"textures\\Food"'
+Loaded texture collection '"textures\\Gems"'
+Loaded texture collection '"textures\\Ground"'
+Loaded texture collection '"textures\\Industrial"'
+Loaded texture collection '"textures\\Industrial\\textures"'
+Loaded texture collection '"textures\\Metal"'
+Loaded texture collection '"textures\\Misc"'
+Loaded texture collection '"textures\\Misc\\textures"'
+Loaded texture collection '"textures\\Nature"'
+Loaded texture collection '"textures\\Nature\\textures"'
+Loaded texture collection '"textures\\Panels"'
+Loaded texture collection '"textures\\Panels\\textures"'
+Loaded texture collection '"textures\\Papers"'
+Loaded texture collection '"textures\\Products"'
+Loaded texture collection '"textures\\Road"'
+Loaded texture collection '"textures\\Rocks"'
+Loaded texture collection '"textures\\Rocks\\textures"'
+Loaded texture collection '"textures\\Roof"'
+Loaded texture collection '"textures\\Shelves"'
+Loaded texture collection '"textures\\Signs"'
+Loaded texture collection '"textures\\Signs\\textures"'
+Loaded texture collection '"textures\\special"'
+Loaded texture collection '"textures\\Tiles"'
+Loaded texture collection '"textures\\Tools"'
+Loaded texture collection '"textures\\Tools\\textures"'
+Loaded texture collection '"textures\\Units"'
+Loaded texture collection '"textures\\Units\\textures"'
+Loaded texture collection '"textures\\Vehicles"'
+Loaded texture collection '"textures\\Vehicles\\textures"'
+Loaded texture collection '"textures\\Walls"'
+Loaded texture collection '"textures\\Walls\\textures"'
+Loaded texture collection '"textures\\Water"'
+Loaded texture collection '"textures\\Windows"'
+Loaded texture collection '"textures\\Windows\\textures"'
+Loaded texture collection '"textures\\Wood"'
+Loaded "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 510ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 10ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 10ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 10ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 22ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 10ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 17ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 10ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 24ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 17ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 10ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 21ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 16ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 29ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 10ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 27ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 22ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 9ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 15ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 10ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 24ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 10ms
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 25ms
+Reloading texture collections
+Loaded texture collection '"textures"'
+Loaded texture collection '"textures\\Art"'
+Loaded texture collection '"textures\\Books"'
+Loaded texture collection '"textures\\Books\\textures"'
+Loaded texture collection '"textures\\Boxes"'
+Loaded texture collection '"textures\\Bricks"'
+Loaded texture collection '"textures\\Buildings"'
+Loaded texture collection '"textures\\Buildings\\textures"'
+Loaded texture collection '"textures\\Concrete"'
+Loaded texture collection '"textures\\Doors"'
+Loaded texture collection '"textures\\Doors\\textures"'
+Loaded texture collection '"textures\\Electrical"'
+Loaded texture collection '"textures\\Floor"'
+Loaded texture collection '"textures\\Food"'
+Loaded texture collection '"textures\\Gems"'
+Loaded texture collection '"textures\\Ground"'
+Loaded texture collection '"textures\\Industrial"'
+Loaded texture collection '"textures\\Industrial\\textures"'
+Loaded texture collection '"textures\\Metal"'
+Loaded texture collection '"textures\\Misc"'
+Loaded texture collection '"textures\\Misc\\textures"'
+Loaded texture collection '"textures\\Nature"'
+Loaded texture collection '"textures\\Nature\\textures"'
+Loaded texture collection '"textures\\Panels"'
+Loaded texture collection '"textures\\Panels\\textures"'
+Loaded texture collection '"textures\\Papers"'
+Loaded texture collection '"textures\\Products"'
+Loaded texture collection '"textures\\Road"'
+Loaded texture collection '"textures\\Rocks"'
+Loaded texture collection '"textures\\Rocks\\textures"'
+Loaded texture collection '"textures\\Roof"'
+Loaded texture collection '"textures\\Shelves"'
+Loaded texture collection '"textures\\Signs"'
+Loaded texture collection '"textures\\Signs\\textures"'
+Loaded texture collection '"textures\\special"'
+Loaded texture collection '"textures\\Tiles"'
+Loaded texture collection '"textures\\Tools"'
+Loaded texture collection '"textures\\Tools\\textures"'
+Loaded texture collection '"textures\\Units"'
+Loaded texture collection '"textures\\Units\\textures"'
+Loaded texture collection '"textures\\Vehicles"'
+Loaded texture collection '"textures\\Vehicles\\textures"'
+Loaded texture collection '"textures\\Walls"'
+Loaded texture collection '"textures\\Walls\\textures"'
+Loaded texture collection '"textures\\Water"'
+Loaded texture collection '"textures\\Windows"'
+Loaded texture collection '"textures\\Windows\\textures"'
+Loaded texture collection '"textures\\Wood"'
+Reloading entity definitions
+Loaded entity definition file Easy_FPS.fgd
+Loaded entity definition file Easy_FPS.fgd
+Loaded entity definition file Easy_FPS.fgd
+Created autosave backup at "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\autosave\\gameplay_test.7.map"
+Saved "E:\\Pliki\\Games\\Easy_FPS\\ScenesScripts\\Levels\\Trenchbroom\\gameplay_test.map" in 24ms
+Reloading texture collections
+Loaded texture collection '"textures"'
+Loaded texture collection '"textures\\Art"'
+Loaded texture collection '"textures\\Books"'
+Loaded texture collection '"textures\\Books\\textures"'
+Loaded texture collection '"textures\\Boxes"'
+Loaded texture collection '"textures\\Bricks"'
+Loaded texture collection '"textures\\Buildings"'
+Loaded texture collection '"textures\\Buildings\\textures"'
+Loaded texture collection '"textures\\Concrete"'
+Loaded texture collection '"textures\\Doors"'
+Loaded texture collection '"textures\\Doors\\textures"'
+Loaded texture collection '"textures\\Electrical"'
+Loaded texture collection '"textures\\Floor"'
+Loaded texture collection '"textures\\Food"'
+Loaded texture collection '"textures\\Gems"'
+Loaded texture collection '"textures\\Ground"'
+Loaded texture collection '"textures\\Industrial"'
+Loaded texture collection '"textures\\Industrial\\textures"'
+Loaded texture collection '"textures\\Metal"'
+Loaded texture collection '"textures\\Misc"'
+Loaded texture collection '"textures\\Misc\\textures"'
+Loaded texture collection '"textures\\Nature"'
+Loaded texture collection '"textures\\Nature\\textures"'
+Loaded texture collection '"textures\\Panels"'
+Loaded texture collection '"textures\\Panels\\textures"'
+Loaded texture collection '"textures\\Papers"'
+Loaded texture collection '"textures\\Products"'
+Loaded texture collection '"textures\\Road"'
+Loaded texture collection '"textures\\Rocks"'
+Loaded texture collection '"textures\\Rocks\\textures"'
+Loaded texture collection '"textures\\Roof"'
+Loaded texture collection '"textures\\Shelves"'
+Loaded texture collection '"textures\\Signs"'
+Loaded texture collection '"textures\\Signs\\textures"'
+Loaded texture collection '"textures\\special"'
+Loaded texture collection '"textures\\Tiles"'
+Loaded texture collection '"textures\\Tools"'
+Loaded texture collection '"textures\\Tools\\textures"'
+Loaded texture collection '"textures\\Units"'
+Loaded texture collection '"textures\\Units\\textures"'
+Loaded texture collection '"textures\\Vehicles"'
+Loaded texture collection '"textures\\Vehicles\\textures"'
+Loaded texture collection '"textures\\Walls"'
+Loaded texture collection '"textures\\Walls\\textures"'
+Loaded texture collection '"textures\\Water"'
+Loaded texture collection '"textures\\Windows"'
+Loaded texture collection '"textures\\Windows\\textures"'
+Loaded texture collection '"textures\\Wood"'
+Reloading entity definitions

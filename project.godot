@@ -161,6 +161,7 @@ input_bullet_time={
 3d_physics/layer_7="Teleporter"
 3d_physics/layer_8="ShakeableCamera"
 3d_physics/layer_9="TraumaCauser"
+3d_physics/layer_10="Water"
 
 [physics]
 

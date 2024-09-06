@@ -1,1 +1,17 @@
-Smoke particles sprites - (CC0) - https://opengameart.org/content/smoke-aura
+# Credits
+
+## Tools used
+[Godot Engine](https://godotengine.org/) 4.3  
+[TrenchBroom](https://trenchbroom.github.io/)
+
+## Color Palettes
+
+
+## Fonts
+
+
+## Inspirations/References
+
+
+## Sprites
+[Smoke particles](https://opengameart.org/content/smoke-aura)
