@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="QodotFGDFile" load_steps=5 format=3 uid="uid://7gdvlsht5qjn"]
+
+[ext_resource type="Resource" uid="uid://c36hv0o6g0udo" path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" id="1_4esxv"]
+[ext_resource type="Script" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_file.gd" id="1_hbwyw"]
+[ext_resource type="Resource" uid="uid://ccwosedfa8v8d" path="res://addons/qodot/game_definitions/fgd/point_classes/light_point_class.tres" id="2_0von4"]
+[ext_resource type="Resource" uid="uid://by34pfgewp85i" path="res://Scenes & Scripts/Definitions/blockage.tres" id="3_svekq"]
+
+[resource]
+script = ExtResource("1_hbwyw")
+export_file = false
+target_folder = "E:/Pliki/Games/Easy_FPS/Scenes & Scripts/Definitions"
+fgd_name = "EasyFPS"
+base_fgd_files = Array[Resource]([ExtResource("1_4esxv")])
+entity_definitions = Array[Resource]([ExtResource("2_0von4"), ExtResource("3_svekq")])

@@ -1,0 +1,44 @@
+// Game: Generic
+// Format: Standard
+// entity 0
+{
+"classname" "worldspawn"
+"_tb_mod" "Textures;Levels"
+"_tb_textures" "textures;textures\Bricks;textures\Buildings;textures\Concrete;textures\Doors;textures\Floor;textures\Ground;textures\Industrial;textures\Metal;textures\Panels;textures\Road;textures\Roof;textures\Shelves;textures\Signs;textures\Tiles;textures\Walls;textures\Water;textures\Windows;textures\Wood"
+// brush 0
+{
+( -352 -64 0 ) ( -352 -64 1 ) ( -352 -65 0 ) Bricks/brick_medium_brown 0 0 0 1 1
+( -64 -80 0 ) ( -65 -80 0 ) ( -64 -80 1 ) Bricks/brick_medium_brown 0 0 0 1 1
+( 64 64 -32 ) ( 63 64 -32 ) ( 64 63 -32 ) Bricks/brick_medium_brown 0 0 0 1 1
+( -64 -64 0 ) ( -64 -65 0 ) ( -65 -64 0 ) Bricks/brick_medium_brown 0 0 0 1 1
+( 64 80 -32 ) ( 64 80 -31 ) ( 63 80 -32 ) Bricks/brick_medium_brown 0 0 0 1 1
+( 80 64 -32 ) ( 80 63 -32 ) ( 80 64 -31 ) Bricks/brick_medium_brown 0 0 0 1 1
+}
+// brush 1
+{
+( 64 -64 16 ) ( 64 -64 17 ) ( 64 -65 16 ) Bricks/brick_small_old 0 0 0 1 1
+( 64 -80 16 ) ( 63 -80 16 ) ( 64 -80 17 ) Bricks/brick_small_old 0 0 0 1 1
+( 80 64 0 ) ( 79 64 0 ) ( 80 63 0 ) Bricks/brick_small_old 0 0 0 1 1
+( 64 -64 96 ) ( 64 -65 96 ) ( 63 -64 96 ) Bricks/brick_small_old 0 0 0 1 1
+( 80 80 0 ) ( 80 80 1 ) ( 79 80 0 ) Bricks/brick_small_old 0 0 0 1 1
+( 80 64 0 ) ( 80 63 0 ) ( 80 64 1 ) Bricks/brick_small_old 0 0 0 1 1
+}
+// brush 2
+{
+( -64 -80 16 ) ( -64 -80 17 ) ( -64 -81 16 ) Bricks/brick_small_old 0 0 0 1 1
+( -64 -80 16 ) ( -65 -80 16 ) ( -64 -80 17 ) Bricks/brick_small_old 0 0 0 1 1
+( 64 -64 0 ) ( 63 -64 0 ) ( 64 -65 0 ) Bricks/brick_small_old 0 0 0 1 1
+( -64 -80 96 ) ( -64 -81 96 ) ( -65 -80 96 ) Bricks/brick_small_old 0 0 0 1 1
+( 64 -64 0 ) ( 64 -64 1 ) ( 63 -64 0 ) Bricks/brick_small_old 0 0 0 1 1
+( 64 -64 0 ) ( 64 -65 0 ) ( 64 -64 1 ) Bricks/brick_small_old 0 0 0 1 1
+}
+// brush 3
+{
+( -64 64 16 ) ( -64 64 17 ) ( -64 63 16 ) Bricks/brick_small_old 0 0 0 1 1
+( -64 64 16 ) ( -65 64 16 ) ( -64 64 17 ) Bricks/brick_small_old 0 0 0 1 1
+( 64 80 0 ) ( 63 80 0 ) ( 64 79 0 ) Bricks/brick_small_old 0 0 0 1 1
+( -64 64 96 ) ( -64 63 96 ) ( -65 64 96 ) Bricks/brick_small_old 0 0 0 1 1
+( 64 80 0 ) ( 64 80 1 ) ( 63 80 0 ) Bricks/brick_small_old 0 0 0 1 1
+( 64 80 0 ) ( 64 79 0 ) ( 64 80 1 ) Bricks/brick_small_old 0 0 0 1 1
+}
+}

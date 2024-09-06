@@ -101,11 +101,6 @@ func physics_process(delta: float) -> BasePlayerState:
 		player.speed * sideways_speed_multiplier
 		
 	
-	
-	#player.velocity = player.velocity.lerp((player.direction * player.speed * speed_multiplier) +\
-		#sideways_velocity, acceleration * delta)
-		
-	
 	## Apply velocity, take speed_multiplier and acceleration into account
 	## and add sideways_velocity.
 	## NOTE: Lerping player.velocity itself would also impact vertical (y) velocity,
@@ -145,9 +140,11 @@ func physics_process(delta: float) -> BasePlayerState:
 	
 	## We check if the Player is near a wall
 	if player.WallDetection.is_colliding():
+		print("wall detected")
 		## We check if the Player is moving up against the wall
 		## If that is so, we stop the slide state.
 		if player.is_moving_at_wall(false, 0.7):
+			print("MOVED AT WALL AT >0.7")
 			return idle_state
 			
 		

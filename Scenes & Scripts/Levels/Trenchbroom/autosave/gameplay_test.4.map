@@ -1,0 +1,268 @@
+// Game: Generic
+// Format: Standard
+// entity 0
+{
+"classname" "worldspawn"
+"_tb_textures" "textures;textures\Bricks;textures\Buildings;textures\Concrete;textures\Doors;textures\Floor;textures\Ground;textures\Industrial;textures\Metal;textures\Panels;textures\Road;textures\Roof;textures\Shelves;textures\Signs;textures\Tiles;textures\Walls;textures\Water;textures\Windows;textures\Wood"
+// brush 0
+{
+( -64 -64 0 ) ( -64 -64 1 ) ( -64 -65 0 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( -64 -80 0 ) ( -65 -80 0 ) ( -64 -80 1 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( 64 64 -16 ) ( 63 64 -16 ) ( 64 63 -16 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( -64 -64 0 ) ( -64 -65 0 ) ( -65 -64 0 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( 64 48 -32 ) ( 64 48 -31 ) ( 63 48 -32 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( 80 64 -32 ) ( 80 63 -32 ) ( 80 64 -31 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+}
+// brush 1
+{
+( 64 -64 16 ) ( 64 -64 17 ) ( 64 -65 16 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 64 -80 16 ) ( 63 -80 16 ) ( 64 -80 17 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 80 64 0 ) ( 79 64 0 ) ( 80 63 0 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 64 -64 20 ) ( 64 -65 20 ) ( 63 -64 20 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 80 48 0 ) ( 80 48 1 ) ( 79 48 0 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 80 64 0 ) ( 80 63 0 ) ( 80 64 1 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+}
+// brush 2
+{
+( -64 -80 16 ) ( -64 -80 17 ) ( -64 -81 16 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -64 -80 16 ) ( -65 -80 16 ) ( -64 -80 17 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 64 -64 0 ) ( 63 -64 0 ) ( 64 -65 0 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -64 -80 20 ) ( -64 -81 20 ) ( -65 -80 20 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 64 -64 0 ) ( 64 -64 1 ) ( 63 -64 0 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 64 -64 0 ) ( 64 -65 0 ) ( 64 -64 1 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+}
+// brush 3
+{
+( -496 -80 -96 ) ( -496 -79 -96 ) ( -496 -80 -95 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -368 -80 -96 ) ( -368 -80 -95 ) ( -367 -80 -96 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -368 -80 -96 ) ( -367 -80 -96 ) ( -368 -79 -96 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -224 -64 -76 ) ( -224 -63 -76 ) ( -223 -64 -76 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -224 -64 -80 ) ( -223 -64 -80 ) ( -224 -64 -79 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -224 -64 -80 ) ( -224 -64 -79 ) ( -224 -63 -80 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+}
+// brush 4
+{
+( -64 -80 16 ) ( -64 -79 16 ) ( -64 -80 17 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -80 -80 16 ) ( -80 -80 17 ) ( -79 -80 16 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -80 -80 20 ) ( -79 -80 20 ) ( -80 -79 20 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 80 -64 56 ) ( 80 -63 56 ) ( 81 -64 56 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 80 -64 32 ) ( 81 -64 32 ) ( 80 -64 33 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 64 -64 32 ) ( 64 -64 33 ) ( 64 -63 32 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+}
+// brush 5
+{
+( 64 -80 16 ) ( 64 -79 16 ) ( 64 -80 17 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -64 -80 16 ) ( -64 -80 17 ) ( -63 -80 16 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -64 -80 20 ) ( -63 -80 20 ) ( -64 -79 20 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 96 -64 56 ) ( 96 -63 56 ) ( 97 -64 56 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 96 48 32 ) ( 97 48 32 ) ( 96 48 33 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 80 -64 32 ) ( 80 -64 33 ) ( 80 -63 32 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+}
+// brush 6
+{
+( -496 -80 -80 ) ( -496 -79 -80 ) ( -496 -80 -79 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -368 -80 -80 ) ( -368 -80 -79 ) ( -367 -80 -80 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -368 -80 -76 ) ( -367 -80 -76 ) ( -368 -79 -76 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -208 -64 -40 ) ( -208 -63 -40 ) ( -207 -64 -40 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -208 -64 -64 ) ( -207 -64 -64 ) ( -208 -64 -63 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -224 -64 -64 ) ( -224 -64 -63 ) ( -224 -63 -64 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+}
+// brush 7
+{
+( -496 -64 -96 ) ( -496 -64 -95 ) ( -496 -65 -96 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( -224 -80 -96 ) ( -225 -80 -96 ) ( -224 -80 -95 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( -176 80 -112 ) ( -177 80 -112 ) ( -176 79 -112 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( -224 -64 -96 ) ( -224 -65 -96 ) ( -225 -64 -96 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( -176 48 -112 ) ( -176 48 -111 ) ( -177 48 -112 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( -224 -80 -96 ) ( -224 48 -128 ) ( -224 -80 -128 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+}
+// brush 8
+{
+( -224 -80 -96 ) ( -224 -80 -128 ) ( -224 48 -128 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( -64 80 0 ) ( -224 -48 -96 ) ( -224 80 -96 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( -80 -80 0 ) ( -81 -80 0 ) ( -80 -80 1 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( -64 48 -16 ) ( -64 48 -15 ) ( -65 48 -16 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( -71.05882352941177 -80 -20.235294117647058 ) ( -231.05882352941177 48 -116.23529411764706 ) ( -231.05882352941177 -80 -116.23529411764706 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( -64 80 -16 ) ( -64 79 -16 ) ( -64 80 -15 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+}
+// brush 9
+{
+( -224 -64 -80 ) ( -224 -80 -80 ) ( -224 -80 -96 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -225.76470588235293 -64 -77.05882352941177 ) ( -65.76470588235293 -64 18.941176470588236 ) ( -65.76470588235293 -80 18.941176470588236 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -224 -80 -80 ) ( -64 -80 16 ) ( -64 -80 0 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -64 -64 0 ) ( -64 -64 16 ) ( -224 -64 -80 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -64 -80 0 ) ( -64 -64 0 ) ( -224 -64 -96 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -64 -80 16 ) ( -64 -64 16 ) ( -64 -64 0 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+}
+// brush 10
+{
+( -224 -64 -48 ) ( -224 -80 -48 ) ( -224 -80 -80 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -227.52941176470588 -64 -42.11764705882352 ) ( -67.52941176470588 -64 53.88235294117648 ) ( -67.52941176470588 -80 53.88235294117648 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -224 -80 -48 ) ( -64 -80 48 ) ( -64 -80 16 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -64 -64 16 ) ( -64 -64 48 ) ( -224 -64 -48 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -225.76470588235296 -64 -77.05882352941177 ) ( -225.76470588235296 -80 -77.05882352941177 ) ( -65.76470588235296 -80 18.941176470588232 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -64 -80 48 ) ( -64 -64 48 ) ( -64 -64 16 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+}
+// brush 11
+{
+( -64 -64 56 ) ( -64 -63 56 ) ( -64 -64 57 ) Ground/gravel_02 0 0 0 0.4 0.4
+( -64 -80 56 ) ( -64 -80 57 ) ( -63 -80 56 ) Ground/gravel_02 0 0 0 0.4 0.4
+( -64 -64 56 ) ( -63 -64 56 ) ( -64 -63 56 ) Ground/gravel_02 0 0 0 0.4 0.4
+( 96 -48 72 ) ( 96 -47 72 ) ( 97 -48 72 ) Ground/gravel_02 0 0 0 0.4 0.4
+( 96 48 72 ) ( 97 48 72 ) ( 96 48 73 ) Ground/gravel_02 0 0 0 0.4 0.4
+( 80 -48 72 ) ( 80 -48 73 ) ( 80 -47 72 ) Ground/gravel_02 0 0 0 0.4 0.4
+}
+// brush 12
+{
+( -496 -64 -40 ) ( -496 -63 -40 ) ( -496 -64 -39 ) Ground/gravel_02 0 0 0 0.4 0.4
+( -368 -80 -40 ) ( -368 -80 -39 ) ( -367 -80 -40 ) Ground/gravel_02 0 0 0 0.4 0.4
+( -368 -64 -40 ) ( -367 -64 -40 ) ( -368 -63 -40 ) Ground/gravel_02 0 0 0 0.4 0.4
+( -208 -48 -24 ) ( -208 -47 -24 ) ( -207 -48 -24 ) Ground/gravel_02 0 0 0 0.4 0.4
+( -208 48 -24 ) ( -207 48 -24 ) ( -208 48 -23 ) Ground/gravel_02 0 0 0 0.4 0.4
+( -224 -48 -24 ) ( -224 -48 -23 ) ( -224 -47 -24 ) Ground/gravel_02 0 0 0 0.4 0.4
+}
+// brush 13
+{
+( -224 48 -24 ) ( -224 -80 -24 ) ( -224 -80 -40 ) Ground/gravel_02 0 0 0 0.4 0.4
+( -224 48 -24 ) ( -64 48 72 ) ( -64 -80 72 ) Ground/gravel_02 0 0 0 0.4 0.4
+( -224 -80 -24 ) ( -64 -80 72 ) ( -64 -80 56 ) Ground/gravel_02 0 0 0 0.4 0.4
+( -64 48 56 ) ( -64 48 72 ) ( -224 48 -24 ) Ground/gravel_02 0 0 0 0.4 0.4
+( -64 -80 56 ) ( -64 48 56 ) ( -224 48 -40 ) Ground/gravel_02 0 0 0 0.4 0.4
+( -64 -80 72 ) ( -64 48 72 ) ( -64 48 56 ) Ground/gravel_02 0 0 0 0.4 0.4
+}
+// brush 14
+{
+( -496 32 -80 ) ( -496 33 -80 ) ( -496 32 -79 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -368 32 -80 ) ( -368 32 -79 ) ( -367 32 -80 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -368 32 -76 ) ( -367 32 -76 ) ( -368 33 -76 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -208 48 -40 ) ( -208 49 -40 ) ( -207 48 -40 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -208 48 -64 ) ( -207 48 -64 ) ( -208 48 -63 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -224 48 -64 ) ( -224 48 -63 ) ( -224 49 -64 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+}
+// brush 15
+{
+( -496 32 -96 ) ( -496 33 -96 ) ( -496 32 -95 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -368 32 -96 ) ( -368 32 -95 ) ( -367 32 -96 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -368 32 -96 ) ( -367 32 -96 ) ( -368 33 -96 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -224 48 -76 ) ( -224 49 -76 ) ( -223 48 -76 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -224 48 -80 ) ( -223 48 -80 ) ( -224 48 -79 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -224 48 -80 ) ( -224 48 -79 ) ( -224 49 -80 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+}
+// brush 16
+{
+( -224 48 -48 ) ( -224 32 -48 ) ( -224 32 -80 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -227.52941176470588 48 -42.11764705882352 ) ( -67.52941176470588 48 53.88235294117648 ) ( -67.52941176470588 32 53.88235294117648 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -224 32 -48 ) ( -64 32 48 ) ( -64 32 16 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -64 48 16 ) ( -64 48 48 ) ( -224 48 -48 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -225.76470588235296 48 -77.05882352941177 ) ( -225.76470588235296 32 -77.05882352941177 ) ( -65.76470588235296 32 18.941176470588232 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -64 32 48 ) ( -64 48 48 ) ( -64 48 16 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+}
+// brush 17
+{
+( -224 48 -80 ) ( -224 32 -80 ) ( -224 32 -96 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -225.76470588235293 48 -77.05882352941177 ) ( -65.76470588235293 48 18.941176470588236 ) ( -65.76470588235293 32 18.941176470588236 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -224 32 -80 ) ( -64 32 16 ) ( -64 32 0 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -64 48 0 ) ( -64 48 16 ) ( -224 48 -80 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -64 32 0 ) ( -64 48 0 ) ( -224 48 -96 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -64 32 16 ) ( -64 48 16 ) ( -64 48 0 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+}
+// brush 18
+{
+( -64 32 16 ) ( -64 32 17 ) ( -64 31 16 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -64 32 16 ) ( -65 32 16 ) ( -64 32 17 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 64 48 0 ) ( 63 48 0 ) ( 64 47 0 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -64 32 20 ) ( -64 31 20 ) ( -65 32 20 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 64 40 0 ) ( 64 40 1 ) ( 63 40 0 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -8 48 0 ) ( -8 47 0 ) ( -8 48 1 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+}
+// brush 19
+{
+( -64 32 16 ) ( -64 33 16 ) ( -64 32 17 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -80 32 16 ) ( -80 32 17 ) ( -79 32 16 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -80 32 20 ) ( -79 32 20 ) ( -80 33 20 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 80 48 56 ) ( 80 49 56 ) ( 81 48 56 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 80 40 32 ) ( 81 40 32 ) ( 80 40 33 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -8 48 32 ) ( -8 48 33 ) ( -8 49 32 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+}
+// brush 20
+{
+( 24 32 16 ) ( 24 32 17 ) ( 24 31 16 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 16 32 16 ) ( 15 32 16 ) ( 16 32 17 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 144 48 0 ) ( 143 48 0 ) ( 144 47 0 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 16 32 20 ) ( 16 31 20 ) ( 15 32 20 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 144 40 0 ) ( 144 40 1 ) ( 143 40 0 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 64 48 0 ) ( 64 47 0 ) ( 64 48 1 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+}
+// brush 21
+{
+( 24 32 16 ) ( 24 33 16 ) ( 24 32 17 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 0 32 16 ) ( 0 32 17 ) ( 1 32 16 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 0 32 20 ) ( 1 32 20 ) ( 0 33 20 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 160 48 56 ) ( 160 49 56 ) ( 161 48 56 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 160 40 32 ) ( 161 40 32 ) ( 160 40 33 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 64 48 32 ) ( 64 48 33 ) ( 64 49 32 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+}
+// brush 22
+{
+( -8 32 16 ) ( -8 33 16 ) ( -8 32 17 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -48 32 16 ) ( -48 32 17 ) ( -47 32 16 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -48 32 48 ) ( -47 32 48 ) ( -48 33 48 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 112 48 56 ) ( 112 49 56 ) ( 113 48 56 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 112 40 32 ) ( 113 40 32 ) ( 112 40 33 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 24 48 32 ) ( 24 48 33 ) ( 24 49 32 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+}
+// brush 23
+{
+( -48 64 0 ) ( -48 64 1 ) ( -48 63 0 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( -64 48 0 ) ( -65 48 0 ) ( -64 48 1 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( 64 192 -16 ) ( 63 192 -16 ) ( 64 191 -16 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( -64 64 0 ) ( -64 63 0 ) ( -65 64 0 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( 64 736 -32 ) ( 64 736 -31 ) ( 63 736 -32 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+( 64 192 -32 ) ( 64 191 -32 ) ( 64 192 -31 ) Bricks/brick_medium_brown 0 0 0 0.4 0.4
+}
+// brush 24
+{
+( 48 48 16 ) ( 48 49 16 ) ( 48 48 17 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -64 40 16 ) ( -64 40 17 ) ( -63 40 16 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -64 48 20 ) ( -63 48 20 ) ( -64 49 20 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 96 64 56 ) ( 96 65 56 ) ( 97 64 56 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 96 736 32 ) ( 97 736 32 ) ( 96 736 33 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( 64 64 32 ) ( 64 64 33 ) ( 64 65 32 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+}
+// brush 25
+{
+( 48 64 16 ) ( 48 64 17 ) ( 48 63 16 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 64 40 16 ) ( 63 40 16 ) ( 64 40 17 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 80 192 0 ) ( 79 192 0 ) ( 80 191 0 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 64 64 20 ) ( 64 63 20 ) ( 63 64 20 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 80 736 0 ) ( 80 736 1 ) ( 79 736 0 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( 64 192 0 ) ( 64 191 0 ) ( 64 192 1 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+}
+// brush 26
+{
+( -48 80 56 ) ( -48 81 56 ) ( -48 80 57 ) Ground/gravel_02 0 0 0 0.4 0.4
+( -64 48 56 ) ( -64 48 57 ) ( -63 48 56 ) Ground/gravel_02 0 0 0 0.4 0.4
+( -64 80 56 ) ( -63 80 56 ) ( -64 81 56 ) Ground/gravel_02 0 0 0 0.4 0.4
+( 96 96 72 ) ( 96 97 72 ) ( 97 96 72 ) Ground/gravel_02 0 0 0 0.4 0.4
+( 96 736 72 ) ( 97 736 72 ) ( 96 736 73 ) Ground/gravel_02 0 0 0 0.4 0.4
+( 64 96 72 ) ( 64 96 73 ) ( 64 97 72 ) Ground/gravel_02 0 0 0 0.4 0.4
+}
+// brush 27
+{
+( -48 48 16 ) ( -48 49 16 ) ( -48 48 17 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -192 40 16 ) ( -192 40 17 ) ( -191 40 16 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -192 48 20 ) ( -191 48 20 ) ( -192 49 20 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -32 64 56 ) ( -32 65 56 ) ( -31 64 56 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -32 736 32 ) ( -31 736 32 ) ( -32 736 33 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+( -32 64 32 ) ( -32 64 33 ) ( -32 65 32 ) Bricks/brick_small_old 0 0 0 0.4 0.4
+}
+// brush 28
+{
+( -48 64 16 ) ( -48 64 17 ) ( -48 63 16 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -64 40 16 ) ( -65 40 16 ) ( -64 40 17 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -48 192 0 ) ( -49 192 0 ) ( -48 191 0 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -64 64 20 ) ( -64 63 20 ) ( -65 64 20 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -48 736 0 ) ( -48 736 1 ) ( -49 736 0 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+( -32 192 0 ) ( -32 191 0 ) ( -32 192 1 ) Metal/metal_painted_blue_01 0 0 0 0.4 0.4
+}
+}
