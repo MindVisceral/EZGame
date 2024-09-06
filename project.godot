@@ -34,7 +34,7 @@ window/vsync/vsync_mode=3
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/qodot/plugin.cfg")
+enabled=PackedStringArray("res://addons/func_godot/plugin.cfg")
 
 [filesystem]
 
