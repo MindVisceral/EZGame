@@ -1,0 +1,356 @@
+[gd_scene load_steps=33 format=3 uid="uid://lhlklylca50m"]
+
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player.gd" id="1_kmike"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/State_Manager.gd" id="2_c5aqi"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/Idle_State.gd" id="3_f5lbm"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/Walk_State.gd" id="4_fu07a"]
+[ext_resource type="AudioStream" uid="uid://uwe5gj4gp3ot" path="res://ScenesScripts/Audio/Sounds/landed_sound.wav" id="4_lkchw"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/Slide_State.gd" id="5_pecq6"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/Crouch_State.gd" id="6_ib15b"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/Jump_State.gd" id="7_b1yw5"]
+[ext_resource type="AudioStream" uid="uid://cnpcbiobbqaqs" path="res://ScenesScripts/Audio/Sounds/jump_sound.wav" id="7_na2xp"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/Stomp_State.gd" id="8_fl03g"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/Fall_State.gd" id="8_xbf4w"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Alterators/WeaponManager.gd" id="9_cyjjp"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/WallRun_State.gd" id="9_encgj"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Alterators/HeadBop.gd" id="10_6kxr3"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/WallJump_State.gd" id="10_gc6l4"]
+[ext_resource type="AudioStream" uid="uid://6t4qgn4shsqh" path="res://ScenesScripts/Audio/Sounds/stomp_sound.wav" id="11_txwo3"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Alterators/WeaponBob.gd" id="12_4bkuj"]
+[ext_resource type="PackedScene" uid="uid://b2fet7sg7ta7s" path="res://ScenesScripts/Entities/Weapons/Firearms/Pistol.tscn" id="12_nnnx6"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Alterators/InteractionManager.gd" id="13_qk48y"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Alterators/HeightAlternator.gd" id="16_e4sa7"]
+[ext_resource type="PackedScene" uid="uid://bf3osgw1tg5x5" path="res://ScenesScripts/Entities/Cameras/ShakeableCamera.tscn" id="17_b5tqw"]
+[ext_resource type="PackedScene" uid="uid://cl8fqu8ewudby" path="res://ScenesScripts/Entities/Player/Player_Model/HanMurstan_model.tscn" id="22_3fsrc"]
+[ext_resource type="PackedScene" uid="uid://dfekoydtlmwum" path="res://ScenesScripts/Entities/Weapons/Firearms/LMB-21.tscn" id="22_pkbhp"]
+
+[sub_resource type="CapsuleShape3D" id="15"]
+radius = 0.15
+height = 1.6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8ft6d"]
+radius = 0.15
+height = 1.6
+radial_segments = 16
+rings = 4
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hata5"]
+height = 0.01
+radius = 0.2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bxcyr"]
+height = 0.35
+radius = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2p0f"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.235294)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4ktjy"]
+material = SubResource("StandardMaterial3D_e2p0f")
+radius = 0.2
+height = 0.4
+radial_segments = 16
+rings = 8
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hjmpv"]
+resource_local_to_scene = true
+fractal_octaves = 4
+fractal_lacunarity = 20.0
+fractal_gain = 0.8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7uouk"]
+radius = 1.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oey6e"]
+radius = 0.15
+height = 3.0
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 7
+input_ray_pickable = false
+script = ExtResource("1_kmike")
+stomp_jump_height_limit = 90.0
+
+[node name="Scripts" type="Node" parent="."]
+
+[node name="StateManager" type="Node" parent="Scripts" node_paths=PackedStringArray("starting_state", "states")]
+editor_description = "Manages Player states;
+Stores the starting (default) State; the state that the Player is spawned in
+Stores all the States, in case the current_state has to be changed by a Node/script that isn't the StateManager
+Can change the current_state on behest of an individual State"
+script = ExtResource("2_c5aqi")
+starting_state = NodePath("Idle")
+states = [NodePath("Idle"), NodePath("Walk"), NodePath("Slide"), NodePath("Crouch"), NodePath("Jump"), NodePath("Fall"), NodePath("Stomp"), NodePath("WallRun"), NodePath("WallJump")]
+
+[node name="Idle" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("walk_state", "slide_state", "crouch_state", "jump_state", "fall_state")]
+script = ExtResource("3_f5lbm")
+walk_state = NodePath("../Walk")
+slide_state = NodePath("../Slide")
+crouch_state = NodePath("../Crouch")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
+
+[node name="Walk" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "slide_state", "crouch_state", "jump_state", "fall_state")]
+script = ExtResource("4_fu07a")
+idle_state = NodePath("../Idle")
+slide_state = NodePath("../Slide")
+crouch_state = NodePath("../Crouch")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
+
+[node name="Slide" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "fall_state")]
+script = ExtResource("5_pecq6")
+idle_state = NodePath("../Idle")
+walk_state = NodePath("../Walk")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
+
+[node name="Crouch" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "fall_state")]
+script = ExtResource("6_ib15b")
+idle_state = NodePath("../Idle")
+walk_state = NodePath("../Walk")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
+
+[node name="Jump" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "slide_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
+script = ExtResource("7_b1yw5")
+idle_state = NodePath("../Idle")
+walk_state = NodePath("../Walk")
+slide_state = NodePath("../Slide")
+jump_state = NodePath(".")
+stomp_state = NodePath("../Stomp")
+wallrun_state = NodePath("../WallRun")
+walljump_state = NodePath("../WallJump")
+jump_sound = ExtResource("7_na2xp")
+landing_sound = ExtResource("4_lkchw")
+
+[node name="GroundTimer" type="Timer" parent="Scripts/StateManager/Jump"]
+editor_description = "The FloorCast is used to check for a floor beneath the Player,
+but when the Player jumps, there's a tiny window of time for the FloorCast to detect a floor,
+which immediately disables the jump.
+This Timer is used as a workaround to that problem - we wait until this Timer is finished to check if there's a floor beneath the Player."
+process_callback = 0
+wait_time = 0.05
+one_shot = true
+
+[node name="Fall" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "slide_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
+script = ExtResource("8_xbf4w")
+idle_state = NodePath("../Idle")
+walk_state = NodePath("../Walk")
+slide_state = NodePath("../Slide")
+jump_state = NodePath("../Jump")
+stomp_state = NodePath("../Stomp")
+wallrun_state = NodePath("../WallRun")
+walljump_state = NodePath("../WallJump")
+landing_sound = ExtResource("4_lkchw")
+
+[node name="Stomp" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "slide_state", "jump_state", "walljump_state")]
+script = ExtResource("8_fl03g")
+idle_state = NodePath("../Idle")
+walk_state = NodePath("../Walk")
+slide_state = NodePath("../Slide")
+jump_state = NodePath("../Jump")
+walljump_state = NodePath("../WallJump")
+stomp_sound = ExtResource("11_txwo3")
+
+[node name="WallRun" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "fall_state", "stomp_state", "walljump_state")]
+script = ExtResource("9_encgj")
+idle_state = NodePath("../Idle")
+walk_state = NodePath("../Walk")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
+stomp_state = NodePath("../Stomp")
+walljump_state = NodePath("../WallJump")
+
+[node name="WallJump" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "slide_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
+script = ExtResource("10_gc6l4")
+idle_state = NodePath("../Idle")
+walk_state = NodePath("../Walk")
+slide_state = NodePath("../Slide")
+jump_state = NodePath("../Jump")
+stomp_state = NodePath("../Stomp")
+wallrun_state = NodePath("../WallRun")
+walljump_state = NodePath(".")
+jump_sound = ExtResource("7_na2xp")
+landing_sound = ExtResource("4_lkchw")
+
+[node name="WallTimer" type="Timer" parent="Scripts/StateManager/WallJump"]
+editor_description = "The WallDetection ShapeCast is used to check for a wall near the Player,
+but when the Player walljumps, there's a tiny window of time for the WallDetection to detect a wall,
+which immediately disables the jump (by triggering the WallRun_state)
+This Timer is used as a workaround to that problem - we wait until this Timer is finished to check if there's a wall near the Player."
+process_callback = 0
+wait_time = 0.05
+one_shot = true
+
+[node name="WeaponManager" type="Node" parent="Scripts"]
+script = ExtResource("9_cyjjp")
+
+[node name="HeightAlternator" type="Node" parent="Scripts"]
+script = ExtResource("16_e4sa7")
+
+[node name="HeadBob" type="Node" parent="Scripts" node_paths=PackedStringArray("bobbing_node")]
+editor_description = "Makes the chosen bopped_node - the Head or the Camera:
+-bop right and left as the Player walks
+-tilt to the side when moving  left or right
+-tilt down or up when moving forwards or backwards
+-tilt up when jumping
+-tilt down while falling
+
+
+Done for better immersion and responsivity"
+script = ExtResource("10_6kxr3")
+bobbing_node = NodePath("../../Collider/Head/BobbingNode")
+
+[node name="WeaponBob" type="Node" parent="Scripts" node_paths=PackedStringArray("bobbing_node")]
+script = ExtResource("12_4bkuj")
+bobbing_node = NodePath("../../Collider/Head/BobbingNode/Firearms")
+breath_frequency = 0.002
+breath_amplitude = 0.004
+
+[node name="InteractionManager" type="Node" parent="Scripts"]
+script = ExtResource("13_qk48y")
+InteractableCast_range = 10.0
+
+[node name="UIController" type="Node" parent="Scripts"]
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="JumpBufferTimer" type="Timer" parent="Timers"]
+editor_description = "Timer that allows to jump immediately after hitting the ground, if the jump button is pressed within wait_time before hitting that ground.
+Keep this Timer's around 0.2s for a nice, lean and forgivable jump.
+
+This Timer should be universal, as in, it should be independent from any states.
+Never reset this Timer, at least not on state exit(). Causes a bug when jump_state is re-enter()-ed, thus not allowing for another jump - implementation issue with how the Jump_state check for the ground; not planning on fixing it."
+wait_time = 0.2
+one_shot = true
+
+[node name="CoyoteTimeTimer" type="Timer" parent="Timers"]
+editor_description = "Timer that allows to jump soon after leaving the ground, if the jump button is pressed within wait_time right after leaving that ground.
+Keep this Timer's around 0.15s for a nice, but not jarring, coyote time jump.
+
+## NOTE: I don't know if this is an issue, this wasn't tested with this specific feature.
+Never reset this Timer, at least not on state exit(). Causes a bug when jump_state is re-enter()-ed, thus not allowing for another jump - implementation issue with how the Jump_state check for the ground, not planning on fixing it."
+wait_time = 0.15
+one_shot = true
+
+[node name="StompJumpTimer" type="Timer" parent="Timers"]
+editor_description = "Timer that allows the jump to be much higher if it's performed very soon after exiting the Stomp state.
+Keep this Timer's around 0.2s for forgivable stomp jump timing; should probably be similiar to JumpBufferTimer's wait_time.
+
+This Timer should be universal, as in, it should be independent from any states.
+
+## NOTE: This is untested, no idea.
+Never reset this Timer, at least not on state exit(). Causes a bug when jump_state is re-enter()-ed, thus not allowing for another jump - implementation issue with how the Jump_state check for the ground; not planning on fixing it."
+wait_time = 0.2
+one_shot = true
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+editor_description = "Main body Collider for the Player
+Its height can be changed through the HeightAlternator"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("15")
+
+[node name="capsulemesh" type="MeshInstance3D" parent="Collider"]
+visible = false
+mesh = SubResource("CapsuleMesh_8ft6d")
+
+[node name="FeetCollider" type="CollisionShape3D" parent="Collider"]
+editor_description = "\"Feet\" collider for the Player
+Its height can be changed through the HeightAlternator
+The regular Collider is rounded on the bottom and that makes the Player fall off edges - this collider prevents that"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
+shape = SubResource("CylinderShape3D_hata5")
+disabled = true
+
+[node name="WallDetectionCast" type="ShapeCast3D" parent="Collider"]
+editor_description = "This ShapeCast detects walls that are within reach of the Player.
+It's located at about the halfway point of the Player's height and its radius is dependant on the Collider's default_width.
+It's used in the WallRunning State script to allow for wall-running, wall-jumping and sliding down walls.
+Many RayCasts could be used instead, but that seems very annoying to work with.
+
+Disabled by defailt, enabled (by a state) while in the air"
+visible = false
+shape = SubResource("CylinderShape3D_bxcyr")
+target_position = Vector3(0, 0, 0)
+max_results = 8
+debug_shape_custom_color = Color(0.49, 0.7, 0, 1)
+
+[node name="Head" type="Marker3D" parent="Collider"]
+editor_description = "Holds the Camera as its child
+Change it's Y position (height) through the HeightAlternator to make the camera move along with it,
+for example when crouching"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+gizmo_extents = 0.1
+
+[node name="circlemesh" type="MeshInstance3D" parent="Collider/Head"]
+visible = false
+mesh = SubResource("SphereMesh_4ktjy")
+skeleton = NodePath("../..")
+
+[node name="BobbingNode" type="Node3D" parent="Collider/Head"]
+editor_description = "This node is bobbed by the HeadBob script instead of the Head node
+Using the Head node for bobbing nullifies mouse movement, which also rotates the Head node"
+
+[node name="PlayerCamera" parent="Collider/Head/BobbingNode" instance=ExtResource("17_b5tqw")]
+noise = SubResource("FastNoiseLite_hjmpv")
+
+[node name="TraumaDetectionArea" parent="Collider/Head/BobbingNode/PlayerCamera" index="0"]
+visible = false
+
+[node name="Collider" type="CollisionShape3D" parent="Collider/Head/BobbingNode/PlayerCamera/TraumaDetectionArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.65, 0)
+shape = SubResource("SphereShape3D_7uouk")
+
+[node name="InteractableCast" type="ShapeCast3D" parent="Collider/Head/BobbingNode"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.5)
+shape = SubResource("CapsuleShape3D_oey6e")
+target_position = Vector3(0, -1.5, 0)
+max_results = 8
+collision_mask = 32
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="TPMarker" type="Marker3D" parent="Collider/Head/BobbingNode"]
+editor_description = "Marks the position of the Camera's third person view
+Janky and not very developed. Could be expanded upon"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="Firearms" type="Marker3D" parent="Collider/Head/BobbingNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.315, -0.264, -0.106)
+
+[node name="SinglePistol" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("12_nnnx6")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0422868, 0.0040648, -0.167155)
+visible = false
+player_camera = NodePath("../../PlayerCamera")
+shot_cooldown = 1.2
+default_damage = 2.0
+
+[node name="AutoPistol" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("12_nnnx6")]
+transform = Transform3D(-0.906308, 0.422618, -8.74228e-08, 0.422618, 0.906308, 0, 7.92319e-08, -3.69465e-08, -1, -0.0307228, -0.0205753, -0.192714)
+visible = false
+player_camera = NodePath("../../PlayerCamera")
+firing_mode = 1
+shot_cooldown = 0.2
+default_damage = 0.5
+
+[node name="LMB-21" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("22_pkbhp")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.00702256, 0.103284, -0.304065)
+visible = false
+player_camera = NodePath("../../PlayerCamera")
+
+[node name="Visuals" type="Node3D" parent="."]
+visible = false
+
+[node name="HanMurstan_model" parent="Visuals" instance=ExtResource("22_3fsrc")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="GPUParticlesAttractorVectorField3D" type="GPUParticlesAttractorVectorField3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00488281, 0.808258, 0)
+visible = false
+size = Vector3(1.6, 2.4, 1.6)
+
+[editable path="Collider/Head/BobbingNode/PlayerCamera"]
+[editable path="Visuals/HanMurstan_model"]

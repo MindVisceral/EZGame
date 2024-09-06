@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://d4oaewjrymxs"
+path="res://.godot/imported/gameplay_test.6.map-90a0dc7171e5da33005f36a8598c75ad.tres"
+
+[deps]
+
+source_file="res://ScenesScripts/Levels/Trenchbroom/autosave/gameplay_test.6.map"
+dest_files=["res://.godot/imported/gameplay_test.6.map-90a0dc7171e5da33005f36a8598c75ad.tres"]
+
+[params]
+

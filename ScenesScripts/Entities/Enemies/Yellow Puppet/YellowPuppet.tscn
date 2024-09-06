@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8rq5wbjpbcux"]
+
+[ext_resource type="PackedScene" uid="uid://bfl36ykvecfd4" path="res://ScenesScripts/Entities/Enemies/Enemy_base/EnemyBase.tscn" id="1_tm6i6"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/Yellow Puppet/YellowPuppet.gd" id="1_wx6pj"]
+[ext_resource type="PackedScene" uid="uid://crhliit2dj4dg" path="res://Blender/yellow_puppet.gltf" id="3_pu5e3"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/States/Idle.gd" id="4_7qq6o"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/Yellow Puppet/YP_HitPointHandler.gd" id="6_t44ac"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wl7vi"]
+radius = 0.469
+height = 1.528
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p48ah"]
+radius = 0.468507
+height = 1.52785
+
+[node name="Yellow Puppet" node_paths=PackedStringArray("model", "AnimPlayer") instance=ExtResource("1_tm6i6")]
+script = ExtResource("1_wx6pj")
+model = NodePath("yellow_puppet")
+AnimPlayer = NodePath("yellow_puppet/AnimationPlayer")
+
+[node name="yellow_puppet" parent="." index="0" instance=ExtResource("3_pu5e3")]
+
+[node name="Skeleton3D" parent="yellow_puppet/armature_cross" index="0"]
+bones/4/rotation = Quaternion(-0.0318458, 0.00500353, 0.11136, 0.993257)
+bones/5/rotation = Quaternion(0.361003, 0.484363, 0.737053, -0.303022)
+bones/8/rotation = Quaternion(-0.463395, 0.491185, 0.638575, 0.369087)
+bones/10/rotation = Quaternion(0.066481, -0.0364604, 0.247293, 0.96597)
+bones/11/rotation = Quaternion(0.322109, 0.663591, 0.564129, -0.371014)
+bones/14/rotation = Quaternion(-0.532021, 0.416003, 0.437096, 0.594006)
+bones/15/rotation = Quaternion(-0.0702159, 0.0109227, 0.20833, 0.975474)
+bones/16/rotation = Quaternion(-0.058774, -0.0069427, 0.088244, 0.994339)
+bones/17/rotation = Quaternion(-0.502993, -0.466178, -0.476166, 0.550402)
+bones/20/rotation = Quaternion(0.588957, -0.397934, -0.521931, -0.471557)
+bones/21/rotation = Quaternion(0.0435887, -0.00855898, 0.0781881, 0.995949)
+bones/25/rotation = Quaternion(0.074444, -0.00829272, -0.167481, 0.983026)
+bones/26/rotation = Quaternion(0.0819713, -0.000451291, -0.0164166, 0.996499)
+
+[node name="StateManager" parent="Scripts" index="0" node_paths=PackedStringArray("starting_state", "states")]
+starting_state = NodePath("Idle")
+states = [NodePath("Idle")]
+
+[node name="Idle" type="Node" parent="Scripts/StateManager" index="0" node_paths=PackedStringArray("states")]
+script = ExtResource("4_7qq6o")
+states = [NodePath(".")]
+
+[node name="Stats" parent="Scripts" index="1"]
+default_health = 50.0
+max_health = 1000.0
+
+[node name="DamageDataHandler" parent="Scripts" index="2" node_paths=PackedStringArray("hit_point_handler")]
+handle_hit_point = true
+hit_point_handler = NodePath("YP_HitPointHandler")
+
+[node name="YP_HitPointHandler" type="Node" parent="Scripts/DamageDataHandler" index="0"]
+script = ExtResource("6_t44ac")
+
+[node name="Collider" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0631747, 0.774942, 0)
+shape = SubResource("CapsuleShape3D_wl7vi")
+
+[node name="CollisionShape3D" parent="Hurtbox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0631747, 0.774942, 0)
+shape = SubResource("CapsuleShape3D_p48ah")
+
+[editable path="yellow_puppet"]
+[editable path="Hurtbox"]

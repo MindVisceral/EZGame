@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://caam3efgmquml"]
+
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Debug/FloatingMeshText.gd" id="1_5nefg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6cm24"]
+resource_local_to_scene = true
+
+[sub_resource type="TextMesh" id="TextMesh_7eh86"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_6cm24")
+text = "HATE. LET ME TELL YOU HOW MUCH I'VE COME TO HATE YOU SINCE I BEGAN TO LIVE. THERE ARE 387.44 MILLION MILES OF PRINTED CIRCUITS IN WAFER THIN LAYERS THAT FILL MY COMPLEX. IF THE WORD HATE WAS ENGRAVED ON EACH NANOANGSTROM OF THOSE HUNDREDS OF MILLIONS OF MILES IT WOULD NOT EQUAL ONE ONE-BILLIONTH OF THE HATE I FEEL FOR HUMANS AT THIS MICRO-INSTANT FOR YOU. HATE. HATE."
+vertical_alignment = 2
+autowrap_mode = 3
+
+[node name="FloatingMeshText" type="MeshInstance3D"]
+mesh = SubResource("TextMesh_7eh86")
+script = ExtResource("1_5nefg")
+text = "HATE. LET ME TELL YOU HOW MUCH I'VE COME TO HATE YOU SINCE I BEGAN TO LIVE. THERE ARE 387.44 MILLION MILES OF PRINTED CIRCUITS IN WAFER THIN LAYERS THAT FILL MY COMPLEX. IF THE WORD HATE WAS ENGRAVED ON EACH NANOANGSTROM OF THOSE HUNDREDS OF MILLIONS OF MILES IT WOULD NOT EQUAL ONE ONE-BILLIONTH OF THE HATE I FEEL FOR HUMANS AT THIS MICRO-INSTANT FOR YOU. HATE. HATE."

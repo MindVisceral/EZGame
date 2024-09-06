@@ -1,0 +1,114 @@
+[gd_scene load_steps=10 format=3 uid="uid://cta8h3tmvb3b0"]
+
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Weapons/Effects/Base_Shot_Fire_Effect.gd" id="1_fmi5n"]
+[ext_resource type="Texture2D" uid="uid://cq8b8g5gqgse7" path="res://ScenesScripts/Entities/Weapons/Effects/smoke.png" id="2_ca05p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmfpc"]
+atlas = ExtResource("2_ca05p")
+region = Rect2(1280, 765, 256, 255)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kodx6"]
+atlas = ExtResource("2_ca05p")
+region = Rect2(512, 765, 256, 255)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0iffo"]
+atlas = ExtResource("2_ca05p")
+region = Rect2(1280, 510, 256, 255)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jjqw8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmfpc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kodx6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0iffo")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 3.0
+}]
+
+[sub_resource type="Animation" id="Animation_x15mt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fire"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FireSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_sbvxt"]
+resource_name = "animation"
+length = 0.05
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fire"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FireSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w1x5d"]
+_data = {
+"RESET": SubResource("Animation_x15mt"),
+"animation": SubResource("Animation_sbvxt")
+}
+
+[node name="Base_Shot_Fire_Effect" type="Node3D"]
+script = ExtResource("1_fmi5n")
+
+[node name="FireSprite" type="AnimatedSprite3D" parent="."]
+cast_shadow = 0
+modulate = Color(0.971516, 0.404465, 0.286756, 0.964706)
+axis = 0
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_jjqw8")
+animation = &"fire"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_w1x5d")
+}
+autoplay = "animation"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

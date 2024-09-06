@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dfg5rcmoasv08"]
 
-[ext_resource type="PackedScene" uid="uid://nf1bgcn3f8w0" path="res://Scenes & Scripts/Entities/Entity Elements/Interactable.tscn" id="1_0hf3u"]
+[ext_resource type="PackedScene" uid="uid://nf1bgcn3f8w0" path="res://ScenesScripts/Entities/Entity Elements/Interactable.tscn" id="1_0hf3u"]
 [ext_resource type="Script" path="res://lamp_test.gd" id="1_psx1e"]
 [ext_resource type="Shader" path="res://outline.gdshader" id="1_rbn4i"]
 

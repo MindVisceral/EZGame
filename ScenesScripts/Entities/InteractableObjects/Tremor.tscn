@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://bcs2syi8emeol"]
+
+[ext_resource type="Script" path="res://ScenesScripts/Entities/InteractableObjects/Tremor.gd" id="1_lajy7"]
+[ext_resource type="PackedScene" uid="uid://dk7i1lealdie5" path="res://ScenesScripts/Entities/Entity Elements/CameraTraumaCauser.tscn" id="1_y2qo7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xnhbm"]
+resource_local_to_scene = true
+radius = 3.0
+
+[sub_resource type="Gradient" id="Gradient_etcmu"]
+offsets = PackedFloat32Array(0, 0.324468, 0.696809, 0.898936, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.574468, 0.574468, 0.574468, 1, 0.41437, 0.41437, 0.41437, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sgs10"]
+gradient = SubResource("Gradient_etcmu")
+
+[sub_resource type="Curve" id="Curve_fv4xd"]
+_data = [Vector2(0, 0), 0.0, 0.6, 0, 0, Vector2(0.5, 0.989011), -0.6, 0.6, 0, 0, Vector2(1, 0), -0.6, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_rhtiv"]
+curve = SubResource("Curve_fv4xd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lt8j5"]
+resource_local_to_scene = true
+lifetime_randomness = 0.35
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -0.2
+linear_accel_max = 0.2
+radial_accel_min = -0.3
+radial_accel_max = 0.3
+scale_curve = SubResource("CurveTexture_rhtiv")
+color = Color(0.764706, 0.764706, 0.764706, 1)
+color_ramp = SubResource("GradientTexture1D_sgs10")
+hue_variation_min = -0.01
+hue_variation_max = 0.01
+turbulence_noise_strength = 0.05
+turbulence_noise_scale = 1.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jx7f7"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.513726, 0.513726, 0.513726, 1)
+disable_receive_shadows = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_k5xvc"]
+material = SubResource("StandardMaterial3D_jx7f7")
+radius = 0.05
+height = 0.1
+radial_segments = 8
+rings = 4
+
+[node name="Tremor" type="Node3D"]
+script = ExtResource("1_lajy7")
+
+[node name="CameraTraumaCauser" parent="." instance=ExtResource("1_y2qo7")]
+trauma_amount = 0.3
+
+[node name="Collider" type="CollisionShape3D" parent="CameraTraumaCauser"]
+shape = SubResource("SphereShape3D_xnhbm")
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+amount = 16
+lifetime = 6.5
+collision_base_size = 0.05
+visibility_aabb = AABB(-3, -3, -3, 6, 6, 6)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_lt8j5")
+draw_pass_1 = SubResource("SphereMesh_k5xvc")
+
+[connection signal="area_entered" from="CameraTraumaCauser" to="." method="_on_camera_trauma_causer_area_entered"]
+[connection signal="area_exited" from="CameraTraumaCauser" to="." method="_on_camera_trauma_causer_area_exited"]

@@ -11,20 +11,20 @@ config_version=5
 [application]
 
 config/name="Easy Fps"
-run/main_scene="res://Scenes & Scripts/Levels/Testing_Area.tscn"
+run/main_scene="res://ScenesScripts/Levels/Testing_Area.tscn"
 config/features=PackedStringArray("4.3")
 run/max_fps=60
 config/icon="res://icon.png"
 
 [audio]
 
-buses/default_bus_layout="res://Scenes & Scripts/Audio/default_bus_layout.tres"
+buses/default_bus_layout="res://ScenesScripts/Audio/default_bus_layout.tres"
 
 [autoload]
 
-Globals="*res://Scenes & Scripts/Autoloads/Globals.gd"
-AudioManager="*res://Scenes & Scripts/Autoloads/AudioManager.gd"
-BulletTime="*res://Scenes & Scripts/Autoloads/BulletTime.gd"
+Globals="*res://ScenesScripts/Autoloads/Globals.gd"
+AudioManager="*res://ScenesScripts/Autoloads/AudioManager.gd"
+BulletTime="*res://ScenesScripts/Autoloads/BulletTime.gd"
 
 [display]
 

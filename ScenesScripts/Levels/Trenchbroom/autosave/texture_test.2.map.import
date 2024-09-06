@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://dup215kicexfu"
+path="res://.godot/imported/texture_test.2.map-e75d260e97038cf665d7fd3230a30f07.tres"
+
+[deps]
+
+source_file="res://ScenesScripts/Levels/Trenchbroom/autosave/texture_test.2.map"
+dest_files=["res://.godot/imported/texture_test.2.map-e75d260e97038cf665d7fd3230a30f07.tres"]
+
+[params]
+
