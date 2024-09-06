@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://be8byn1ev1xvm"]
+
+[ext_resource type="Texture2D" uid="uid://kqnsby1dm303" path="res://ScenesScripts/Textures/Ground/ice_06.jpg" id="1_76uqx"]
+
+[resource]
+albedo_texture = ExtResource("1_76uqx")
+metallic_specular = 0.0
+texture_filter = 2

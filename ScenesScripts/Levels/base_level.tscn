@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dps31ep48fejk"]
+[gd_scene load_steps=7 format=3 uid="uid://dps31ep48fejk"]
 
-[ext_resource type="Script" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1_kjp4e"]
-[ext_resource type="Resource" path="res://addons/qodot/game_definitions/fgd/qodot_fgd.tres" id="2_26b2t"]
+[ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_wimpj"]
+[ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_v5ppi"]
 [ext_resource type="PackedScene" uid="uid://lhlklylca50m" path="res://ScenesScripts/Entities/Player/Player.tscn" id="3_n2dqw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kwbq0"]
@@ -33,17 +33,13 @@ volumetric_fog_sky_affect = 0.03
 adjustment_enabled = true
 adjustment_saturation = 1.3
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_guapf"]
-
 [node name="BaseLevel" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_o6rxd")
 
-[node name="QodotMap" type="Node3D" parent="."]
-script = ExtResource("1_kjp4e")
-entity_fgd = ExtResource("2_26b2t")
-texture_file_extensions = PackedStringArray("png", "jpg", "jpeg", "bmp")
-default_material = SubResource("StandardMaterial3D_guapf")
+[node name="FuncGodotMap" type="Node3D" parent="."]
+script = ExtResource("1_wimpj")
+map_settings = ExtResource("2_v5ppi")
 
 [node name="Player" parent="." instance=ExtResource("3_n2dqw")]

@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://2st0ulypvydl"]
+
+[ext_resource type="Texture2D" uid="uid://cnd27em00qv0k" path="res://ScenesScripts/Textures/Ground/gravel_02.png" id="1_223ue"]
+
+[resource]
+albedo_texture = ExtResource("1_223ue")
+metallic_specular = 0.0
+texture_filter = 2

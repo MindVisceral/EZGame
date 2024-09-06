@@ -21,21 +21,21 @@ class_name FirearmHitscan
 
 ## This Node creates a Trail effect, we will instantiate one to create the effect.
 @export var bullet_trail_emitter: PackedScene = \
-	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Base_Bullet_Trail_Emitter.tscn")
+	preload("res://ScenesScripts/Entities/Weapons/Effects/Base_Bullet_Trail_Emitter.tscn")
 
 @export var shot_effect_emitter: PackedScene = \
-	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Base_Shot_Effect_Emitter.tscn")
+	preload("res://ScenesScripts/Entities/Weapons/Effects/Base_Shot_Effect_Emitter.tscn")
 
 @export var shot_fire_effect: PackedScene = \
-	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Base_Shot_Fire_Effect.tscn")
+	preload("res://ScenesScripts/Entities/Weapons/Effects/Base_Shot_Fire_Effect.tscn")
 
 ## This Node creates the Hit Effect, we will instantiate it at the bullet end hit point.
 @export var hit_effect_emitter: PackedScene = \
-	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Base_Hit_Effect_Emitter.tscn")
+	preload("res://ScenesScripts/Entities/Weapons/Effects/Base_Hit_Effect_Emitter.tscn")
 
 ## This Node creates a decal, we will instantiate it at the bullet end hit point.
 @export var bullet_hole_decal: PackedScene = \
-	preload("res://Scenes & Scripts/Entities/Weapons/Effects/Base_Bullet_Hole_Decal.tscn")
+	preload("res://ScenesScripts/Entities/Weapons/Effects/Base_Bullet_Hole_Decal.tscn")
 
 
 ###-------------------------------------------------------------------------###

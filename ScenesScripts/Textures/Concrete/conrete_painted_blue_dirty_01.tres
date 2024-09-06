@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bmyg1y4w1lyop"]
+
+[ext_resource type="Texture2D" uid="uid://ci4s4xv4mmsug" path="res://ScenesScripts/Textures/Concrete/conrete_painted_blue_dirty_01.png" id="1_qu1bn"]
+
+[resource]
+albedo_texture = ExtResource("1_qu1bn")
+metallic_specular = 0.0
+texture_filter = 2
