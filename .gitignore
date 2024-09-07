@@ -1,2 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
+Blender/
+ScenesScripts/Textures/
+ScenesScripts/Levels/Trenchbroom/autosave/

@@ -3,7 +3,7 @@
 // entity 0
 {
 "classname" "worldspawn"
-"_tb_textures" "textures;textures\Bricks;textures\Buildings;textures\Buildings\textures;textures\Concrete;textures\Doors;textures\Doors\textures;textures\Ground;textures\Industrial;textures\Industrial\textures;textures\Metal;textures\Panels;textures\Panels\textures;textures\Rocks;textures\Tiles;textures\Walls;textures\Walls\textures;textures\Water;textures\Windows;textures\Wood;textures\special"
+"_tb_textures" "textures;textures\Bricks;textures\Buildings;textures\Buildings\textures;textures\Concrete;textures\Doors;textures\Doors\textures;textures\Ground;textures\Industrial;textures\Industrial\textures;textures\Metal;textures\Panels;textures\Panels\textures;textures\Rocks;textures\Tiles;textures\Walls;textures\Walls\textures;textures\Water;textures\Windows;textures\Wood;textures\fluids;textures\special"
 "_tb_mod" "Textures;Levels"
 "_tb_def" "builtin:Easy_FPS.fgd"
 // brush 0
@@ -583,30 +583,72 @@
 ( -512 184 -80 ) ( -512 184 -79 ) ( -513 184 -80 ) special/clip -32 0 180 0.4 -0.4
 ( -496 40 -96 ) ( -496 40 -95 ) ( -496 41 -96 ) special/clip 4 0 0 0.4 0.4
 }
+// brush 64
+{
+( -608 0 -96 ) ( -608 0 -95 ) ( -608 -1 -96 ) Metal/metal_threads_02 -8 -32 180 1 -1
+( -604 -32 -92 ) ( -604 -32 -91 ) ( -603 -32 -92 ) Metal/metal_threads_02 4 -32 0 1 1
+( -608 0 -96 ) ( -608 -1 -96 ) ( -607 0 -96 ) Metal/metal_threads_02 -8 -4 270 1 1
+( -604 -32 -52 ) ( -603 -32 -52 ) ( -604 -33 -52 ) Metal/metal_threads_02 -8 -4 270 1 1
+( -608 0 -96 ) ( -607 0 -96 ) ( -608 0 -95 ) Metal/metal_threads_02 4 -32 0 1 1
+( -604 -32 -92 ) ( -604 -33 -92 ) ( -604 -32 -91 ) Metal/metal_threads_02 -8 -32 180 1 -1
+}
+// brush 65
+{
+( -556 -64 -96 ) ( -556 -63 -96 ) ( -556 -64 -95 ) Metal/metal_threads_02 -28 -32 0 1 1
+( -556 -64 -96 ) ( -556 -64 -95 ) ( -555 -64 -96 ) Metal/metal_threads_02 -28 -32 0 1 1
+( -556 -64 -96 ) ( -555 -64 -96 ) ( -556 -63 -96 ) Metal/metal_threads_02 -28 28 0 1 1
+( -524 -60 -52 ) ( -524 -59 -52 ) ( -523 -60 -52 ) Metal/metal_threads_02 -28 28 0 1 1
+( -524 -60 -92 ) ( -523 -60 -92 ) ( -524 -60 -91 ) Metal/metal_threads_02 -28 -32 0 1 1
+( -524 -60 -92 ) ( -524 -60 -91 ) ( -524 -59 -92 ) Metal/metal_threads_02 -28 -32 0 1 1
+}
 }
 // entity 1
 {
-"classname" "water"
-// brush 0
-{
-( -608 -48 -32 ) ( -608 -47 -32 ) ( -608 -48 -31 ) __TB_empty 0 0 0 1 1
-( -144 -64 -32 ) ( -144 -64 -31 ) ( -143 -64 -32 ) __TB_empty 16 0 0 1 1
-( -144 -48 -96 ) ( -143 -48 -96 ) ( -144 -47 -96 ) __TB_empty 16 0 0 1 1
-( -96 0 -60 ) ( -96 1 -60 ) ( -95 0 -60 ) __TB_empty 16 0 0 1 1
-( -96 32 -16 ) ( -95 32 -16 ) ( -96 32 -15 ) __TB_empty 16 0 0 1 1
-( -80 0 -16 ) ( -80 0 -15 ) ( -80 1 -16 ) __TB_empty 0 0 0 1 1
-}
+"classname" "func_group"
+"_tb_type" "_tb_layer"
+"_tb_name" "Water Layer"
+"_tb_id" "2"
+"_tb_layer_sort_index" "0"
 }
 // entity 2
 {
 "classname" "water"
+"_tb_layer" "2"
 // brush 0
 {
-( -608 104 -32 ) ( -608 105 -32 ) ( -608 104 -31 ) __TB_empty -24 0 0 1 1
-( -144 32 -32 ) ( -144 32 -31 ) ( -143 32 -32 ) __TB_empty 16 0 0 1 1
-( -144 104 -96 ) ( -143 104 -96 ) ( -144 105 -96 ) __TB_empty 16 24 0 1 1
-( -96 152 -60 ) ( -96 153 -60 ) ( -95 152 -60 ) __TB_empty 16 24 0 1 1
-( -96 184 -16 ) ( -95 184 -16 ) ( -96 184 -15 ) __TB_empty 16 0 0 1 1
-( -512 152 -16 ) ( -512 152 -15 ) ( -512 153 -16 ) __TB_empty -24 0 0 1 1
+( -608 -48 -32 ) ( -608 -47 -32 ) ( -608 -48 -31 ) special/clip 0 0 0 0.4 0.4
+( -144 -64 -32 ) ( -144 -64 -31 ) ( -143 -64 -32 ) special/clip 0 0 0 0.4 0.4
+( -144 -48 -96 ) ( -143 -48 -96 ) ( -144 -47 -96 ) special/clip 0 0 0 0.4 0.4
+( -96 0 -60 ) ( -96 1 -60 ) ( -95 0 -60 ) fluids/water 0 0 0 0.4 0.4
+( -96 32 -16 ) ( -95 32 -16 ) ( -96 32 -15 ) special/clip 0 0 0 0.4 0.4
+( -160 0 -16 ) ( -160 0 -15 ) ( -160 1 -16 ) special/clip 0 0 0 0.4 0.4
+}
+}
+// entity 3
+{
+"classname" "water"
+"_tb_layer" "2"
+// brush 0
+{
+( -608 104 -32 ) ( -608 105 -32 ) ( -608 104 -31 ) special/clip 0 0 0 0.4 0.4
+( -144 32 -32 ) ( -144 32 -31 ) ( -143 32 -32 ) special/clip 0 0 0 0.4 0.4
+( -144 104 -96 ) ( -143 104 -96 ) ( -144 105 -96 ) special/clip 0 0 0 0.4 0.4
+( -96 152 -60 ) ( -96 153 -60 ) ( -95 152 -60 ) fluids/water 0 0 0 0.4 0.4
+( -96 184 -16 ) ( -95 184 -16 ) ( -96 184 -15 ) special/clip 0 0 0 0.4 0.4
+( -512 152 -16 ) ( -512 152 -15 ) ( -512 153 -16 ) special/clip 0 0 0 0.4 0.4
+}
+}
+// entity 4
+{
+"classname" "water"
+"_tb_layer" "2"
+// brush 0
+{
+( -1312 176 -112 ) ( -1312 177 -112 ) ( -1312 176 -111 ) special/clip 0 0 0 0.4 0.4
+( -1312 176 -112 ) ( -1312 176 -111 ) ( -1311 176 -112 ) special/clip 0 0 0 0.4 0.4
+( -1312 176 -448 ) ( -1311 176 -448 ) ( -1312 177 -448 ) special/clip 0 0 0 0.4 0.4
+( -496 880 -96 ) ( -496 881 -96 ) ( -495 880 -96 ) fluids/water 0 0 0 0.4 0.4
+( -496 880 -96 ) ( -495 880 -96 ) ( -496 880 -95 ) special/clip 0 0 0 0.4 0.4
+( -496 880 -96 ) ( -496 880 -95 ) ( -496 881 -96 ) special/clip 0 0 0 0.4 0.4
 }
 }
