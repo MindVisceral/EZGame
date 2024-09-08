@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDModelPointClass" load_steps=3 format=3 uid="uid://4f5536a2hgih"]
+
+[ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_model_point_class.gd" id="1_r86bg"]
+[ext_resource type="PackedScene" uid="uid://dkqgap3nt7cow" path="res://ScenesScripts/Levels/Trenchbroom/customFGDs/Props/Lights/test_light.tscn" id="1_wfnoo"]
+
+[resource]
+script = ExtResource("1_r86bg")
+target_map_editor = 1
+models_sub_folder = "E:/Pliki/Games/Easy_FPS/ScenesScripts/Levels/Trenchbroom/Models"
+scale_expression = ""
+generate_size_property = false
+generate_gd_ignore_file = false
+scene_file = ExtResource("1_wfnoo")
+apply_rotation_on_map_build = false
+classname = "test_light"
+description = "A test light."
+func_godot_internal = false
+base_classes = Array[Resource]([])
+class_properties = {}
+class_property_descriptions = {}
+meta_properties = {
+"color": Color(0.8, 0.8, 0.8, 1),
+"model": "\"E:/Pliki/Games/Easy_FPS/ScenesScripts/Levels/Trenchbroom/Models/E:/Pliki/Games/Easy_FPS/ScenesScripts/Levels/Trenchbroom/Models/test_light.glb\"",
+"size": AABB(-8, -8, -8, 8, 8, 8)
+}
+node_class = "SpotLight3D"
+name_property = ""

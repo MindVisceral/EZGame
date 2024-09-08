@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=4 format=3 uid="uid://majieb7e2r5h"]
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=5 format=3 uid="uid://majieb7e2r5h"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="1_bhdbp"]
 [ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="1_yr1u2"]
 [ext_resource type="Resource" uid="uid://crq6dseknjpp0" path="res://ScenesScripts/Levels/Trenchbroom/customFGDs/Water/water_FGD.tres" id="2_exp3x"]
+[ext_resource type="Resource" uid="uid://4f5536a2hgih" path="res://ScenesScripts/Levels/Trenchbroom/customFGDs/Props/Lights/test_light.tres" id="3_owjcc"]
 
 [resource]
 script = ExtResource("1_bhdbp")
@@ -10,4 +11,4 @@ export_file = false
 model_key_word_supported = true
 fgd_name = "Easy_FPS"
 base_fgd_files = Array[Resource]([ExtResource("1_yr1u2")])
-entity_definitions = Array[Resource]([ExtResource("2_exp3x")])
+entity_definitions = Array[Resource]([ExtResource("2_exp3x"), ExtResource("3_owjcc")])
