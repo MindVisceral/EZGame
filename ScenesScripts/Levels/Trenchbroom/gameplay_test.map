@@ -695,7 +695,7 @@
 // entity 1
 {
 "classname" "test_light"
-"origin" "8 8 48"
+"origin" "8 -16 48"
 }
 // entity 2
 {
@@ -738,16 +738,12 @@
 }
 // entity 5
 {
-"classname" "func_group"
-"_tb_type" "_tb_layer"
-"_tb_name" "Water Layer"
-"_tb_id" "2"
-"_tb_layer_sort_index" "0"
+"classname" "test_light"
+"origin" "-152 -16 -8"
 }
 // entity 6
 {
-"classname" "water"
-"_tb_layer" "2"
+"classname" "fluids_water"
 // brush 0
 {
 ( -608 -48 -32 ) ( -608 -47 -32 ) ( -608 -48 -31 ) special/clip 0 0 0 0.4 0.4
@@ -760,8 +756,7 @@
 }
 // entity 7
 {
-"classname" "water"
-"_tb_layer" "2"
+"classname" "fluids_water"
 // brush 0
 {
 ( -608 104 -32 ) ( -608 105 -32 ) ( -608 104 -31 ) special/clip 0 0 0 0.4 0.4
@@ -774,12 +769,20 @@
 }
 // entity 8
 {
+"classname" "func_group"
+"_tb_type" "_tb_layer"
+"_tb_name" "Water Layer"
+"_tb_id" "2"
+"_tb_layer_sort_index" "0"
+}
+// entity 9
+{
 "classname" "water"
 "_tb_layer" "2"
 // brush 0
 {
 ( -1312 176 -112 ) ( -1312 177 -112 ) ( -1312 176 -111 ) special/clip 0 0 0 0.4 0.4
-( -1312 176 -112 ) ( -1312 176 -111 ) ( -1311 176 -112 ) special/clip 0 0 0 0.4 0.4
+( -1312 208 -112 ) ( -1312 208 -111 ) ( -1311 208 -112 ) special/clip 0 0 0 0.4 0.4
 ( -1312 176 -448 ) ( -1311 176 -448 ) ( -1312 177 -448 ) special/clip 0 0 0 0.4 0.4
 ( -496 880 -96 ) ( -496 881 -96 ) ( -495 880 -96 ) fluids/water 0 0 0 0.4 0.4
 ( -496 880 -96 ) ( -495 880 -96 ) ( -496 880 -95 ) special/clip 0 0 0 0.4 0.4

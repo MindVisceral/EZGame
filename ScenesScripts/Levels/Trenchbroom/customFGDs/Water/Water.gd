@@ -6,6 +6,15 @@ extends Area3D
 
 
 ###-------------------------------------------------------------------------###
+##### Variables
+###-------------------------------------------------------------------------###
+
+## Water grants the Player with the "Cold" Status Effect
+@onready var status_effect: BaseStatusEffect = \
+	preload("res://ScenesScripts/Entities/StatusEffects/StatusEffect_cold.tres")
+
+
+###-------------------------------------------------------------------------###
 ##### Setup
 ###-------------------------------------------------------------------------###
 
@@ -43,6 +52,7 @@ func _on_body_entered(body: Node3D) -> void:
 	## We're only really looking for the Player and Enemies.
 	if body is Player:
 		print("Player entered!")
+		body.StatusEffects.add_status_effect(status_effect)
 	
 
 ## When a body exits this Water...
@@ -50,5 +60,5 @@ func _on_body_exited(body: Node3D) -> void:
 	## We're only really looking for the Player and Enemies.
 	if body is Player:
 		print("Player exited!")
-		
+		body.StatusEffects.remove_status_effect(status_effect)
 	

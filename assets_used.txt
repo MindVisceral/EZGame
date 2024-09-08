@@ -15,3 +15,7 @@
 
 ## Sprites
 [Smoke particles](https://opengameart.org/content/smoke-aura)
+
+
+## Shaders
+[Water shader with depth](https://www.youtube.com/watch?v=F7nR35XERh0) by [Code It All](https://www.youtube.com/@Code_It_All)

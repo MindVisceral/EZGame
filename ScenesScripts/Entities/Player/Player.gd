@@ -116,12 +116,13 @@ extends CharacterBody3D
 
 ## Player's children. Check a child's Editor Description to learn what it's used for
 @onready var States: PlayerStateManager = $Scripts/StateManager
+@onready var StatusEffects: PlayerStatusEffectManager = $Scripts/StatusEffectManager
 @onready var Weapons: PlayerWeaponManager = $Scripts/WeaponManager
 @onready var HeightAlternator: PlayerHeightAlternator = $Scripts/HeightAlternator
 @onready var HeadBob: PlayerHeadbobHandler = $Scripts/HeadBob
 @onready var WeaponBob: PlayerWeaponbobHandler = $Scripts/WeaponBob
 @onready var InteractionManager: PlayerInteractionManager = $Scripts/InteractionManager
-@onready var UIcontroller: Node = $Scripts/UIController
+@onready var UImanager: UIManager = $Scripts/UIManager
 @onready var JumpBufferT: Timer = $Timers/JumpBufferTimer
 @onready var CoyoteTimeT: Timer = $Timers/CoyoteTimeTimer
 @onready var StompJumpT: Timer = $Timers/StompJumpTimer
@@ -209,6 +210,7 @@ func _ready():
 	
 	## Passes a reference of the Player class to the states so that it can be used by them
 	States.init(self)
+	StatusEffects.init(self)
 	## Passes a reference of the Player and of the Firearms node
 	## to the WeaponManager, so it can find the Weapons
 	Weapons.init(self, Firearms)
@@ -216,7 +218,7 @@ func _ready():
 	HeadBob.init(self)
 	WeaponBob.init(self)
 	InteractionManager.init(self)
-	#UIcontroller.init(self)
+	UImanager.init(self)
 	
 	
 	## Apply exported variables to the Player
