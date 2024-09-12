@@ -9,3 +9,4 @@ extends Area3D
 ## which is now passed to the Entity which can handle it
 func pass_DamageData(damageData: DamageData) -> void:
 	Entity.receive_DamageData(damageData)
+	

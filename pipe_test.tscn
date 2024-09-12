@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://berarccjhlcwh"]
+
+[ext_resource type="PackedScene" uid="uid://lhlklylca50m" path="res://ScenesScripts/Entities/Player/Player.tscn" id="1_qsknr"]
+
+[sub_resource type="Curve3D" id="Curve3D_133ak"]
+_data = {
+"points": PackedVector3Array(0.173254, 0.0968761, -0.666991, -0.173254, -0.0968761, 0.666991, -6.66367, -1.18199, 0.0465698, -7.84186, -2.46087, 3.03414, 7.84186, 2.46087, -3.03414, 4.45516, 6.26587, -10.815, -5.81634, 3.10741, -8.35018, 5.81634, -3.10741, 8.35018, 22.0395, 1.45616, -8.35424, 5.84638, -5.57938, -4.79311, -5.84638, 5.57938, 4.79311, 18.0263, 10.7682, 11.5957, 1.07485, -0.207195, 3.24721, -1.07485, 0.207195, -3.24721, -0.849015, 19.6675, 7.37905),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="Environment" id="Environment_x7hpg"]
+
+[node name="Path3D" type="Node3D"]
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+use_collision = true
+collision_mask = 6
+polygon = PackedVector2Array(0, 0, 3, 0, 4, 2, 3, 4, 0, 4, -1, 2)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 1
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_133ak")
+
+[node name="Player" parent="." instance=ExtResource("1_qsknr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.31188, 3.90728, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_x7hpg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.767825, 0.458281, -0.447686, 0, 0.69879, 0.715327, 0.640659, -0.549246, 0.536549, 0, 0, 0)

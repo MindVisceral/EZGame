@@ -230,6 +230,8 @@ func _ready():
 func _input(event: InputEvent) -> void:
 	if is_dead:
 		return
+		
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	
@@ -240,10 +242,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		## Clamp Head's rotation. Otherwise we could turn up/down in a circle - that causes bugs
 		Head.rotation_degrees.x = clamp(Head.rotation_degrees.x, -89, 89)
-	
+		
 	
 	States.input(event)
 	Weapons.input(event)
+	
 
 ###
 func _physics_process(delta: float) -> void:
@@ -360,6 +363,9 @@ func is_moving_at_wall(process_input: bool = true, dot_product_value: float = 0.
 		## NOTE: The dot_product is negative when the Player is up against a wall, hence the "-"
 		if dot_product <= -dot_product_value:
 			return true
+			
+		
+	
 	## Otherwise, (in both cases,) we return false.
 	return false
 
@@ -374,4 +380,20 @@ func play_landing_sound(landing_sound) -> void:
 		AudioManager.Type.NON_POSITIONAL,
 		self,
 		landing_sound)
+		
+	
+#endregion
+
+#region 
+
+###-------------------------------------------------------------------------###
+##### Health and Death
+###-------------------------------------------------------------------------###
+
+func take_damage(amount: float) -> void:
+	health -= amount
+	
+	UImanager.update_health_UI()
+
+
 #endregion

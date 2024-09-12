@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cg6ru7erjontr"]
+
+[ext_resource type="Script" path="res://ScenesScripts/Entities/StatusEffects/StatusEffect_in-water.gd" id="1_eqcpo"]
+
+[resource]
+script = ExtResource("1_eqcpo")
+time_until_damage = 1.5
+damage_per_tick = 2.5
+ticks_per_second = 4
+status_effect_name = ""

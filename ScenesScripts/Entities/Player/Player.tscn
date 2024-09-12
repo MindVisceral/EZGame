@@ -21,15 +21,11 @@
 [ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Alterators/InteractionManager.gd" id="13_qk48y"]
 [ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Alterators/StatusEffectManager.gd" id="15_mvdi6"]
 [ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Alterators/HeightAlternator.gd" id="16_e4sa7"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/StatusEffects/StatusEffect_base.gd" id="16_rkfmq"]
 [ext_resource type="PackedScene" uid="uid://bf3osgw1tg5x5" path="res://ScenesScripts/Entities/Cameras/ShakeableCamera.tscn" id="17_b5tqw"]
 [ext_resource type="PackedScene" uid="uid://cl8fqu8ewudby" path="res://ScenesScripts/Entities/Player/Player_Model/HanMurstan_model.tscn" id="22_3fsrc"]
 [ext_resource type="PackedScene" uid="uid://dfekoydtlmwum" path="res://ScenesScripts/Entities/Weapons/Firearms/LMB-21.tscn" id="22_pkbhp"]
 [ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Alterators/UIManager.gd" id="22_u6o61"]
-
-[sub_resource type="Resource" id="Resource_sxmg6"]
-script = ExtResource("16_rkfmq")
-status_effect_name = "one"
+[ext_resource type="PackedScene" uid="uid://dn7v48k265lpr" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/Flamethrower.tscn" id="23_4c8na"]
 
 [sub_resource type="CapsuleShape3D" id="15"]
 radius = 0.15
@@ -68,6 +64,9 @@ fractal_gain = 0.8
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7uouk"]
 radius = 1.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_73tix"]
+radius = 0.25
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oey6e"]
 radius = 0.15
@@ -203,7 +202,6 @@ one_shot = true
 
 [node name="StatusEffectManager" type="Node" parent="Scripts"]
 script = ExtResource("15_mvdi6")
-status_effects = Array[ExtResource("16_rkfmq")]([SubResource("Resource_sxmg6")])
 
 [node name="WeaponManager" type="Node" parent="Scripts"]
 script = ExtResource("9_cyjjp")
@@ -301,6 +299,20 @@ target_position = Vector3(0, 0, 0)
 max_results = 8
 debug_shape_custom_color = Color(0.49, 0.7, 0, 1)
 
+[node name="PlayerLight" type="SpotLight3D" parent="Collider"]
+editor_description = "Player has a small light always shining in front of them. It's so they can always see where they're going."
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.293622, 0)
+light_energy = 2.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+shadow_enabled = true
+shadow_normal_bias = 2.0
+shadow_blur = 0.4
+spot_range = 6.0
+spot_attenuation = 1.8
+spot_angle = 80.0
+spot_angle_attenuation = 0.9
+
 [node name="Head" type="Marker3D" parent="Collider"]
 editor_description = "Holds the Camera as its child
 Change it's Y position (height) through the HeightAlternator to make the camera move along with it,
@@ -327,6 +339,15 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.65, 0)
 shape = SubResource("SphereShape3D_7uouk")
 
+[node name="HeadWaterDetectionArea" type="Area3D" parent="Collider/Head/BobbingNode"]
+collision_layer = 0
+collision_mask = 512
+input_ray_pickable = false
+monitorable = false
+
+[node name="Collider" type="CollisionShape3D" parent="Collider/Head/BobbingNode/HeadWaterDetectionArea"]
+shape = SubResource("SphereShape3D_73tix")
+
 [node name="InteractableCast" type="ShapeCast3D" parent="Collider/Head/BobbingNode"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.5)
 shape = SubResource("CapsuleShape3D_oey6e")
@@ -343,6 +364,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
 [node name="Firearms" type="Marker3D" parent="Collider/Head/BobbingNode"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.315, -0.264, -0.106)
+
+[node name="Flamethrower" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("23_4c8na")]
+visible = false
+player_camera = NodePath("../../PlayerCamera")
 
 [node name="SinglePistol" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("12_nnnx6")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0422868, 0.0040648, -0.167155)
@@ -602,6 +627,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_2wob3")
+
+[node name="temp_healthUI" type="RichTextLabel" parent="PlayerUI/UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.882
+anchor_right = 0.18
+anchor_bottom = 1.0
+offset_left = 74.0
+offset_top = -31.04
+offset_right = 74.6
+offset_bottom = -31.0
+grow_vertical = 0
 
 [editable path="Collider/Head/BobbingNode/PlayerCamera"]
 [editable path="Visuals/HanMurstan_model"]

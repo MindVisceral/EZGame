@@ -2,6 +2,7 @@
 
 ## Tools used
 [Godot Engine](https://godotengine.org/) 4.3  
+[Godot Jolt](https://github.com/godot-jolt/godot-jolt) for Godot 4.3
 [TrenchBroom](https://trenchbroom.github.io/)
 
 ## Color Palettes

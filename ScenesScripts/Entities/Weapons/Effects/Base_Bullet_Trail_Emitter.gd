@@ -20,3 +20,4 @@ func draw_mesh(start_pos: Vector3, end_pos: Vector3) -> void:
 	TrailMesh.mesh.height = start_pos.distance_to(end_pos)
 	## We also have to move it to the halfway point. Otherwise it wouldn't reach the end_pos.
 	TrailMesh.position.z -= start_pos.distance_to(end_pos) / 2
+	

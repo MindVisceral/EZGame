@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcd67a7ua7bka"]
+
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/Fire.gd" id="1_jv4ms"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_chvhb"]
+resource_local_to_scene = true
+radius = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_13cqw"]
+resource_local_to_scene = true
+radius = 0.2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lwl5e"]
+gravity = Vector3(0, -1, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_bdi51"]
+radius = 0.05
+height = 0.1
+
+[node name="Fire" type="RigidBody3D" node_paths=PackedStringArray("collider", "hitbox_collider")]
+collision_layer = 1024
+collision_mask = 1543
+mass = 0.1
+linear_damp = 1.0
+angular_damp = 100.0
+script = ExtResource("1_jv4ms")
+collider = NodePath("Collider")
+hitbox_collider = NodePath("Hitbox/Collider")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_chvhb")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 16
+
+[node name="Collider" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("SphereShape3D_13cqw")
+
+[node name="FireParticles" type="GPUParticles3D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_lwl5e")
+draw_pass_1 = SubResource("SphereMesh_bdi51")

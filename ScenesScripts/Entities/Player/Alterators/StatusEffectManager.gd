@@ -56,14 +56,26 @@ func add_status_effect(status_effect: BaseStatusEffect) -> void:
 	## A copy of this status_effect couldn't be found in the status_effects Array,
 	## so we can safely add it to that Array.
 	status_effects.append(status_effect)
-	print("Player is ", status_effect.status_effect_name, " now!")
+	## And pass on a reference to the Player. It will need that.
+	status_effect.entity = player
+	## And now we maycall this new status_effect's unique effect function.
+	status_effect.activate_unique_effect()
 	
 	player_status_effects_changed.emit()
 
 ## Some Status Effect don't expire on their own, so they must be removed manually.
 func remove_status_effect(status_effect: BaseStatusEffect) -> void:
-	status_effects.erase(status_effect)
-	
 	print("Player is ", status_effect.status_effect_name, " no longer!")
 	
+	status_effect.entity = null
+	status_effects.erase(status_effect)
+	
+	print("status_effects Array: ", status_effects)
+	
 	player_status_effects_changed.emit()
+
+## Some scripts, like the UIManager, need to know if there are any Status Effect on the Player.
+## Returns true if there are any Status Effects connected to the Player.
+func check_for_status_effects() -> bool:
+	return !status_effects.is_empty()
+	

@@ -37,18 +37,22 @@ func init(player: Player) -> void:
 	## Every time a Status Effect is gained or lost, make sure the Status Effect Overalay
 	## UI element is updated.
 	player.StatusEffects.player_status_effects_changed.connect(toggle_status_effect_overlay)
+	
+	##
+	update_health_UI()
 
 
 ###-------------------------------------------------------------------------###
 ##### Functions
 ###-------------------------------------------------------------------------###
 
-## Enable the Status Effect Overlay; some Status Effects make us of it to show that they're active
+## Enable or disable the Status Effect Overlay, depening on if the right Status Effect is on;
+## some Status Effects make use of it to show that they're active
 func toggle_status_effect_overlay() -> void:
-	if StatusEffect_overlay.visible == true:
-		StatusEffect_overlay.visible = false
-		
-	else:
-		StatusEffect_overlay.visible = true
-		
+	StatusEffect_overlay.visible = player.StatusEffects.check_for_status_effects()
 	
+
+
+## HERE: TEMPORARY - UI is not finalized
+func update_health_UI() -> void:
+	$"../../PlayerUI/UI/temp_healthUI".text = str(player.health)

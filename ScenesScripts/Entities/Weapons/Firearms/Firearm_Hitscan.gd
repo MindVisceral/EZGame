@@ -76,7 +76,7 @@ func secondary_action() -> void:
 func cast_bullet_ray() -> void:
 	## We need the world's SpaceState3D to fire a Ray
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
-
+	
 	## We will use the Viewport's size to get the start and end points of the RayCast with a Camera
 	var vp_size = get_viewport().size
 	
