@@ -45,7 +45,7 @@ var player: Player
 
 ## Time the weapon waits before the next individual shot can be fired, measured in seconds.
 ## Attempting to fire before this time is up doesn't do anything.
-@export_range(0.01, 3.0, 0.01) var shot_cooldown: float = 0.15
+@export_range(0.01, 3.0, 0.005) var shot_cooldown: float = 0.15
 
 ## Default damage done by the Firearm
 @export_range(0, 20, 0.25) var default_damage: float = 1

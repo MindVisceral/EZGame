@@ -11,8 +11,8 @@ extends FirearmBase
 ## The Player's Camera3D Node. Used to get the direction in which the Player is looking.
 @export var player_camera: Camera3D
 
-## Reference to the Fire "bullet" - Flamethrower fires these RigidBodies; they serve as Bullets.
-@export var fire_bullet: PackedScene
+## Reference to the Flame "bullet" - Flamethrower fires these RigidBodies; they serve as Bullets.
+@export var flame_bullet: PackedScene
 
 ## fire_bullet "Bullets" come out of this Marker
 @export var nuzzle: Marker3D
@@ -54,7 +54,7 @@ func primary_action() -> void:
 	
 	
 	## Instantiate the Fire first
-	var fire_instance: FireBullet = fire_bullet.instantiate()
+	var flame_instance: FireBullet = flame_bullet.instantiate()
 	
 	## The Fire "bullet" is fired from the nuzzle Marker3D, that will be our starting point.
 	var start_pos: Vector3 = nuzzle.global_position
@@ -68,12 +68,12 @@ func primary_action() -> void:
 	var end_pos: Vector3 = player_camera.project_position((vp_size * 0.5), max_distance)
 	
 	## To get the direction, we just get the difference between these two Vector3s
-	fire_instance.direction = (end_pos - start_pos)
+	flame_instance.direction = (end_pos - start_pos)
 	## And make sure the Fire is fired from the nuzzle
-	fire_instance.global_position = start_pos
+	flame_instance.global_position = start_pos
 	
-	get_tree().get_root().add_child(fire_instance)
-	print("fire fired")
+	get_tree().get_root().add_child(flame_instance)
+	print("flame fired")
 	
 #
 ## Called when the secondary_action button is pressed

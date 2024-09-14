@@ -1,6 +1,7 @@
-[gd_scene load_steps=140 format=4 uid="uid://bg2u2fljqhcdk"]
+[gd_scene load_steps=141 format=4 uid="uid://bg2u2fljqhcdk"]
 
 [ext_resource type="PackedScene" uid="uid://dps31ep48fejk" path="res://ScenesScripts/Levels/base_level.tscn" id="1_o0fs5"]
+[ext_resource type="Environment" uid="uid://cyvyet4krcbj3" path="res://default_env.tres" id="2_osqti"]
 [ext_resource type="Material" uid="uid://c7ju81cuyl0ql" path="res://ScenesScripts/Textures/Concrete/concrete_11.tres" id="2_uf5wj"]
 [ext_resource type="Material" uid="uid://bmyg1y4w1lyop" path="res://ScenesScripts/Textures/Concrete/conrete_painted_blue_dirty_01.tres" id="3_5m0nl"]
 [ext_resource type="PackedScene" uid="uid://nf1bgcn3f8w0" path="res://ScenesScripts/Entities/Entity Elements/Interactable.tscn" id="3_acpno"]
@@ -615,13 +616,18 @@ autowrap_mode = 3
 
 [node name="testing_area" instance=ExtResource("1_o0fs5")]
 
+[node name="WorldEnvironment" parent="." index="0"]
+environment = ExtResource("2_osqti")
+
 [node name="WorldReflectionProbe" type="ReflectionProbe" parent="." index="1"]
 size = Vector3(500, 500, 500)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="2"]
 transform = Transform3D(0.735019, -0.663464, -0.139866, 0.476284, 0.358383, 0.802941, -0.482597, -0.656793, 0.579416, 0, 0, 0)
-light_energy = 0.8
+light_energy = 0.7
 light_volumetric_fog_energy = 1.2
+light_angular_distance = 1.0
+light_bake_mode = 1
 shadow_enabled = true
 shadow_bias = 0.03
 shadow_opacity = 0.75

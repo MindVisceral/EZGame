@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://hhro2ud3a651"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sdkca"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0, 0, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_ixku6"]
+sky_material = SubResource("ProceduralSkyMaterial_sdkca")
+
+[sub_resource type="Environment" id="Environment_mlqtd"]
+background_mode = 2
+background_energy_multiplier = 1.93
+sky = SubResource("Sky_ixku6")
+ambient_light_source = 3
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+
+[sub_resource type="FogMaterial" id="FogMaterial_t6wam"]
+density = 8.0
+albedo = Color(0.764412, 1.85785e-05, 0.530363, 1)
+emission = Color(0.462291, 0.462291, 0.462291, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6pw7d"]
+size = Vector3(10, 1, 10)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mlqtd")
+
+[node name="FogVolume" type="FogVolume" parent="."]
+material = SubResource("FogMaterial_t6wam")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.3863, 0)
+mesh = SubResource("BoxMesh_6pw7d")

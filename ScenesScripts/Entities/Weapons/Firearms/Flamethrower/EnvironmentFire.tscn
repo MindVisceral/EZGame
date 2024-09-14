@@ -1,0 +1,163 @@
+[gd_scene load_steps=16 format=3 uid="uid://dllg2ily2gjqf"]
+
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/EnvironmentFire.gd" id="1_y0nwj"]
+[ext_resource type="Texture2D" uid="uid://jcsdrmrk5ihy" path="res://fire_placeholder.png" id="2_oxjke"]
+
+[sub_resource type="Curve" id="Curve_67wti"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rqngk"]
+curve = SubResource("Curve_67wti")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x5mca"]
+emission_shape = 1
+emission_sphere_radius = 0.3
+velocity_pivot = Vector3(0, 1, 0)
+direction = Vector3(0, 1, 0)
+spread = 20.0
+gravity = Vector3(0, 1, 0)
+linear_accel_min = -0.200002
+linear_accel_max = 0.199998
+scale_min = 0.8
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_rqngk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w0fmk"]
+shading_mode = 0
+specular_mode = 2
+disable_ambient_light = true
+albedo_color = Color(0.59053, 0.14422, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_22sx0"]
+material = SubResource("StandardMaterial3D_w0fmk")
+radius = 0.05
+height = 0.1
+radial_segments = 12
+rings = 6
+
+[sub_resource type="Curve" id="Curve_qal1l"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ulm56"]
+curve = SubResource("Curve_qal1l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s4rc8"]
+emission_shape = 1
+emission_sphere_radius = 0.3
+velocity_pivot = Vector3(0, 1, 0)
+direction = Vector3(0, 1, 0)
+spread = 20.0
+gravity = Vector3(0, 1, 0)
+linear_accel_min = -0.200002
+linear_accel_max = 0.199998
+scale_min = 0.8
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_ulm56")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xg51"]
+shading_mode = 0
+specular_mode = 2
+disable_ambient_light = true
+albedo_color = Color(0.13, 0.13, 0.13, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hbl3b"]
+material = SubResource("StandardMaterial3D_3xg51")
+radius = 0.05
+height = 0.1
+radial_segments = 12
+rings = 6
+
+[sub_resource type="Animation" id="Animation_tfoqq"]
+resource_name = "Fire_sprite_animation"
+length = 3.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 124]
+}
+
+[sub_resource type="Animation" id="Animation_xyppl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jf68o"]
+_data = {
+"Fire_sprite_animation": SubResource("Animation_tfoqq"),
+"RESET": SubResource("Animation_xyppl")
+}
+
+[node name="EnvironmentFire" type="Node3D" node_paths=PackedStringArray("fire_particles", "fire_light")]
+script = ExtResource("1_y0nwj")
+fire_color = Color(0.59053, 0.14422, 0, 1)
+fire_particles = NodePath("FireParticles")
+fire_light = NodePath("FireOmniLight")
+
+[node name="FireSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52779, 0)
+cast_shadow = 0
+modulate = Color(1, 0.56, 0.56, 1)
+pixel_size = 0.015
+billboard = 2
+double_sided = false
+texture_filter = 0
+texture = ExtResource("2_oxjke")
+hframes = 12
+vframes = 11
+region_rect = Rect2(0.31, 0, 0, 0)
+
+[node name="FireParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.188041, 0)
+cast_shadow = 0
+amount = 32
+lifetime = 1.8
+explosiveness = 0.1
+visibility_aabb = AABB(-0.5, -0.2, -0.5, 1, 1, 1)
+process_material = SubResource("ParticleProcessMaterial_x5mca")
+draw_pass_1 = SubResource("SphereMesh_22sx0")
+
+[node name="SmokeParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.188041, 0)
+cast_shadow = 0
+amount = 32
+lifetime = 1.8
+explosiveness = 0.1
+visibility_aabb = AABB(-0.5, -0.2, -0.5, 1, 1, 1)
+process_material = SubResource("ParticleProcessMaterial_s4rc8")
+draw_pass_1 = SubResource("SphereMesh_hbl3b")
+
+[node name="FireOmniLight" type="OmniLight3D" parent="."]
+light_color = Color(0.59053, 0.14422, 0, 1)
+light_volumetric_fog_energy = 0.5
+light_bake_mode = 1
+shadow_enabled = true
+distance_fade_enabled = true
+omni_range = 1.0
+omni_attenuation = 1.5
+omni_shadow_mode = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jf68o")
+}
+autoplay = "Fire_sprite_animation"

@@ -152,6 +152,7 @@ input_bullet_time={
 
 [layer_names]
 
+3d_render/layer_10="FireParticles"
 3d_physics/layer_1="Environment"
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Enemy"
@@ -176,5 +177,5 @@ textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method.mobile="forward_plus"
 textures/decals/filter=0
 textures/light_projectors/filter=0
-environment/defaults/default_environment="res://default_env.tres"
+environment/defaults/default_environment="res://new_environment.tres"
 quality/filters/msaa=3

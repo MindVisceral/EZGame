@@ -1,8 +1,26 @@
-[gd_resource type="Environment" load_steps=2 format=3 uid="uid://cyvyet4krcbj3"]
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://cyvyet4krcbj3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n50ld"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.140096, 0.144502, 0.151458, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
+sun_angle_max = 0.0
 
 [sub_resource type="Sky" id="1"]
+sky_material = SubResource("ProceduralSkyMaterial_n50ld")
 radiance_size = 4
 
 [resource]
 background_mode = 2
 sky = SubResource("1")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_white = 1.2
+glow_enabled = true
+glow_normalized = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.003
+adjustment_enabled = true
+adjustment_saturation = 1.2

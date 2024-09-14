@@ -4,18 +4,19 @@
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_v5ppi"]
 [ext_resource type="PackedScene" uid="uid://lhlklylca50m" path="res://ScenesScripts/Entities/Player/Player.tscn" id="3_n2dqw"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kwbq0"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8t3d4"]
 sky_top_color = Color(0, 0, 0, 1)
 sky_horizon_color = Color(0, 0, 0, 1)
 ground_bottom_color = Color(0, 0, 0, 1)
 ground_horizon_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Sky" id="15"]
-sky_material = SubResource("ProceduralSkyMaterial_kwbq0")
+[sub_resource type="Sky" id="Sky_jw5ex"]
+sky_material = SubResource("ProceduralSkyMaterial_8t3d4")
 
-[sub_resource type="Environment" id="Environment_6k4yx"]
+[sub_resource type="Environment" id="Environment_2boyr"]
+resource_local_to_scene = true
 background_mode = 1
-sky = SubResource("15")
+sky = SubResource("Sky_jw5ex")
 ambient_light_source = 2
 ambient_light_color = Color(0.733333, 0.733333, 0.733333, 1)
 reflected_light_source = 2
@@ -36,7 +37,7 @@ adjustment_saturation = 1.3
 [node name="BaseLevel" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_6k4yx")
+environment = SubResource("Environment_2boyr")
 
 [node name="FuncGodotMap" type="Node3D" parent="."]
 script = ExtResource("1_wimpj")

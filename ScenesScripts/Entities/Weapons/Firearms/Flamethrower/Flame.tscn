@@ -1,0 +1,155 @@
+[gd_scene load_steps=16 format=3 uid="uid://dcd67a7ua7bka"]
+
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/Flame.gd" id="1_2m2ur"]
+[ext_resource type="PackedScene" uid="uid://dllg2ily2gjqf" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/EnvironmentFire.tscn" id="2_eq72y"]
+[ext_resource type="Texture2D" uid="uid://jcsdrmrk5ihy" path="res://fire_placeholder.png" id="3_ygpkv"]
+
+[sub_resource type="Curve" id="Curve_eo2v6"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wvwhh"]
+curve = SubResource("Curve_eo2v6")
+
+[sub_resource type="Curve" id="Curve_wn6yw"]
+_data = [Vector2(0, 0), 0.0, 3.31148, 0, 1, Vector2(0.30198, 1), 3.31148, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_p8gb4"]
+curve = SubResource("Curve_wn6yw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lwl5e"]
+resource_local_to_scene = true
+direction = Vector3(0, 0, 1)
+spread = 20.0
+initial_velocity_min = 0.6
+initial_velocity_max = 1.0
+gravity = Vector3(0, -0.3, 0)
+scale_min = 0.8
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_wvwhh")
+turbulence_enabled = true
+turbulence_influence_over_life = SubResource("CurveTexture_p8gb4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_udqgn"]
+shading_mode = 0
+disable_ambient_light = true
+albedo_color = Color(0.672466, 0.169506, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_bdi51"]
+material = SubResource("StandardMaterial3D_udqgn")
+radius = 0.05
+height = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_chvhb"]
+resource_local_to_scene = true
+radius = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_13cqw"]
+resource_local_to_scene = true
+radius = 0.2
+
+[sub_resource type="Animation" id="Animation_tfoqq"]
+resource_name = "Fire_sprite_animation"
+length = 3.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 124]
+}
+
+[sub_resource type="Animation" id="Animation_xyppl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jf68o"]
+_data = {
+"Fire_sprite_animation": SubResource("Animation_tfoqq"),
+"RESET": SubResource("Animation_xyppl")
+}
+
+[node name="Flame" type="RigidBody3D" node_paths=PackedStringArray("flame_particles", "flame_light", "collider", "hitbox_collider")]
+collision_layer = 1024
+collision_mask = 519
+input_ray_pickable = false
+mass = 0.01
+sleeping = true
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
+linear_damp = 1.0
+angular_damp = 100.0
+script = ExtResource("1_2m2ur")
+environment_fire = ExtResource("2_eq72y")
+flame_particles = NodePath("FlameParticles")
+flame_light = NodePath("FlameOmniLight")
+collider = NodePath("Collider")
+hitbox_collider = NodePath("Hitbox/Collider")
+flame_color = Color(0.672466, 0.169506, 0, 1)
+
+[node name="FireSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.229359, -0.04521)
+cast_shadow = 0
+modulate = Color(1, 0.56, 0.56, 1)
+pixel_size = 0.008
+billboard = 2
+double_sided = false
+texture_filter = 0
+texture = ExtResource("3_ygpkv")
+hframes = 12
+vframes = 11
+region_rect = Rect2(0.31, 0, 0, 0)
+
+[node name="FlameParticles" type="GPUParticles3D" parent="."]
+cast_shadow = 0
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_lwl5e")
+draw_pass_1 = SubResource("SphereMesh_bdi51")
+
+[node name="FlameOmniLight" type="OmniLight3D" parent="."]
+light_color = Color(0.672466, 0.169506, 0, 1)
+light_energy = 2.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 0.5
+light_cull_mask = 4294966783
+shadow_enabled = true
+distance_fade_enabled = true
+omni_range = 0.6
+omni_shadow_mode = 0
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_chvhb")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 16
+
+[node name="Collider" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("SphereShape3D_13cqw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jf68o")
+}
+autoplay = "Fire_sprite_animation"
+
+[connection signal="body_entered" from="." to="." method="_on_collision"]
