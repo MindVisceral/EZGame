@@ -1,7 +1,43 @@
-[gd_scene load_steps=16 format=3 uid="uid://dllg2ily2gjqf"]
+[gd_scene load_steps=28 format=3 uid="uid://dllg2ily2gjqf"]
 
 [ext_resource type="Script" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/EnvironmentFire.gd" id="1_y0nwj"]
 [ext_resource type="Texture2D" uid="uid://jcsdrmrk5ihy" path="res://fire_placeholder.png" id="2_oxjke"]
+
+[sub_resource type="Curve" id="Curve_ilviq"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -4.27073, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5e4j3"]
+curve = SubResource("Curve_ilviq")
+
+[sub_resource type="Gradient" id="Gradient_okngo"]
+offsets = PackedFloat32Array(0, 0.17284, 0.62963, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.144063, 0.144063, 0.144063, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ucb8y"]
+gradient = SubResource("Gradient_okngo")
+
+[sub_resource type="Curve" id="Curve_34xm7"]
+
+[sub_resource type="Curve" id="Curve_emgpg"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_un7mu"]
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_u344g"]
+curve_x = SubResource("Curve_34xm7")
+curve_y = SubResource("Curve_emgpg")
+curve_z = SubResource("Curve_un7mu")
+
+[sub_resource type="Curve" id="Curve_nexo7"]
+min_value = -50.0
+max_value = 50.0
+_data = [Vector2(0, 11.5385), 0.0, 0.0, 0, 0, Vector2(0.505263, -11.5385), 0.0, 0.0, 0, 0, Vector2(1, 19.2308), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_gkf7h"]
+curve = SubResource("Curve_nexo7")
 
 [sub_resource type="Curve" id="Curve_67wti"]
 _data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
@@ -11,23 +47,36 @@ point_count = 2
 curve = SubResource("Curve_67wti")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x5mca"]
+lifetime_randomness = 0.5
 emission_shape = 1
 emission_sphere_radius = 0.3
+angle_min = -4.99999
+angle_max = 5.00001
 velocity_pivot = Vector3(0, 1, 0)
 direction = Vector3(0, 1, 0)
-spread = 20.0
-gravity = Vector3(0, 1, 0)
-linear_accel_min = -0.200002
+spread = 35.0
+directional_velocity_min = 1.0
+directional_velocity_max = 1.0
+directional_velocity_curve = SubResource("CurveXYZTexture_u344g")
+gravity = Vector3(0, 1.4, 0)
+linear_accel_min = -0.100002
 linear_accel_max = 0.199998
+linear_accel_curve = SubResource("CurveTexture_gkf7h")
 scale_min = 0.8
 scale_max = 1.2
 scale_curve = SubResource("CurveTexture_rqngk")
+color_ramp = SubResource("GradientTexture1D_ucb8y")
+alpha_curve = SubResource("CurveTexture_5e4j3")
+hue_variation_min = -0.1
+hue_variation_max = 0.05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w0fmk"]
+transparency = 1
 shading_mode = 0
 specular_mode = 2
 disable_ambient_light = true
-albedo_color = Color(0.59053, 0.14422, 0, 1)
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.640791, 0.159731, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_22sx0"]
 material = SubResource("StandardMaterial3D_w0fmk")
@@ -35,6 +84,13 @@ radius = 0.05
 height = 0.1
 radial_segments = 12
 rings = 6
+
+[sub_resource type="Curve" id="Curve_m5ovl"]
+_data = [Vector2(0, 1), 0.0, -0.56044, 0, 1, Vector2(1, 0.43956), -0.56044, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dmr4j"]
+curve = SubResource("Curve_m5ovl")
 
 [sub_resource type="Curve" id="Curve_qal1l"]
 _data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
@@ -55,17 +111,20 @@ linear_accel_max = 0.199998
 scale_min = 0.8
 scale_max = 1.2
 scale_curve = SubResource("CurveTexture_ulm56")
+alpha_curve = SubResource("CurveTexture_dmr4j")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xg51"]
+transparency = 1
 shading_mode = 0
 specular_mode = 2
 disable_ambient_light = true
+vertex_color_use_as_albedo = true
 albedo_color = Color(0.13, 0.13, 0.13, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_hbl3b"]
 material = SubResource("StandardMaterial3D_3xg51")
-radius = 0.05
-height = 0.1
+radius = 0.03
+height = 0.06
 radial_segments = 12
 rings = 6
 
@@ -107,15 +166,16 @@ _data = {
 "RESET": SubResource("Animation_xyppl")
 }
 
-[node name="EnvironmentFire" type="Node3D" node_paths=PackedStringArray("fire_particles", "fire_light")]
+[node name="EnvironmentFire" type="Node3D" node_paths=PackedStringArray("fire_sprite", "fire_particles", "fire_light")]
 script = ExtResource("1_y0nwj")
-fire_color = Color(0.59053, 0.14422, 0, 1)
+fire_color = Color(0.640791, 0.159731, 0, 1)
+fire_sprite = NodePath("FireSprite")
 fire_particles = NodePath("FireParticles")
 fire_light = NodePath("FireOmniLight")
 
 [node name="FireSprite" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52779, 0)
 cast_shadow = 0
+offset = Vector2(0, 40)
 modulate = Color(1, 0.56, 0.56, 1)
 pixel_size = 0.015
 billboard = 2
@@ -132,6 +192,7 @@ cast_shadow = 0
 amount = 32
 lifetime = 1.8
 explosiveness = 0.1
+randomness = 0.15
 visibility_aabb = AABB(-0.5, -0.2, -0.5, 1, 1, 1)
 process_material = SubResource("ParticleProcessMaterial_x5mca")
 draw_pass_1 = SubResource("SphereMesh_22sx0")
@@ -147,13 +208,13 @@ process_material = SubResource("ParticleProcessMaterial_s4rc8")
 draw_pass_1 = SubResource("SphereMesh_hbl3b")
 
 [node name="FireOmniLight" type="OmniLight3D" parent="."]
-light_color = Color(0.59053, 0.14422, 0, 1)
+light_color = Color(0.640791, 0.159731, 0, 1)
 light_volumetric_fog_energy = 0.5
 light_bake_mode = 1
 shadow_enabled = true
 distance_fade_enabled = true
-omni_range = 1.0
-omni_attenuation = 1.5
+omni_range = 3.2
+omni_attenuation = 1.6
 omni_shadow_mode = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

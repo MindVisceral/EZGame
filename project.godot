@@ -177,5 +177,4 @@ textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method.mobile="forward_plus"
 textures/decals/filter=0
 textures/light_projectors/filter=0
-environment/defaults/default_environment="res://new_environment.tres"
 quality/filters/msaa=3

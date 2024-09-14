@@ -1,8 +1,24 @@
-[gd_scene load_steps=16 format=3 uid="uid://dcd67a7ua7bka"]
+[gd_scene load_steps=20 format=3 uid="uid://dcd67a7ua7bka"]
 
 [ext_resource type="Script" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/Flame.gd" id="1_2m2ur"]
 [ext_resource type="PackedScene" uid="uid://dllg2ily2gjqf" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/EnvironmentFire.tscn" id="2_eq72y"]
 [ext_resource type="Texture2D" uid="uid://jcsdrmrk5ihy" path="res://fire_placeholder.png" id="3_ygpkv"]
+
+[sub_resource type="Curve" id="Curve_tfq60"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_syngx"]
+curve = SubResource("Curve_tfq60")
+
+[sub_resource type="Curve" id="Curve_tiog6"]
+min_value = -1.0
+max_value = 2.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_358ul"]
+curve = SubResource("Curve_tiog6")
 
 [sub_resource type="Curve" id="Curve_eo2v6"]
 _data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
@@ -28,12 +44,18 @@ gravity = Vector3(0, -0.3, 0)
 scale_min = 0.8
 scale_max = 1.2
 scale_curve = SubResource("CurveTexture_wvwhh")
+alpha_curve = SubResource("CurveTexture_syngx")
+hue_variation_min = -0.05
+hue_variation_max = 0.18
+hue_variation_curve = SubResource("CurveTexture_358ul")
 turbulence_enabled = true
 turbulence_influence_over_life = SubResource("CurveTexture_p8gb4")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_udqgn"]
+transparency = 1
 shading_mode = 0
 disable_ambient_light = true
+vertex_color_use_as_albedo = true
 albedo_color = Color(0.672466, 0.169506, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_bdi51"]
@@ -107,8 +129,9 @@ hitbox_collider = NodePath("Hitbox/Collider")
 flame_color = Color(0.672466, 0.169506, 0, 1)
 
 [node name="FireSprite" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.229359, -0.04521)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.045)
 cast_shadow = 0
+offset = Vector2(0, 40)
 modulate = Color(1, 0.56, 0.56, 1)
 pixel_size = 0.008
 billboard = 2
@@ -133,7 +156,8 @@ light_volumetric_fog_energy = 0.5
 light_cull_mask = 4294966783
 shadow_enabled = true
 distance_fade_enabled = true
-omni_range = 0.6
+omni_range = 2.5
+omni_attenuation = 1.9
 omni_shadow_mode = 0
 
 [node name="Collider" type="CollisionShape3D" parent="."]
