@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dn7v48k265lpr"]
+[gd_scene load_steps=8 format=3 uid="uid://dn7v48k265lpr"]
 
 [ext_resource type="PackedScene" uid="uid://dv5fcfhevw1fe" path="res://ScenesScripts/Entities/Weapons/Firearms/Firearm_Base.tscn" id="1_iy5rc"]
 [ext_resource type="Script" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/Flamethrower.gd" id="2_slqel"]
 [ext_resource type="PackedScene" uid="uid://dcd67a7ua7bka" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/Flame.tscn" id="3_085k1"]
+[ext_resource type="PackedScene" uid="uid://dtwdyx71pw3un" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/NozzleFlame.tscn" id="4_onjsc"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8w8d6"]
 size = Vector3(0.2, 0.2, 0.8)
@@ -20,7 +21,7 @@ gravity = Vector3(0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2_slqel")
 flame_bullet = ExtResource("3_085k1")
-nuzzle = NodePath("Nuzzle")
+nuzzle = NodePath("Nozzle")
 firing_mode = 1
 shot_cooldown = 0.025
 
@@ -41,5 +42,7 @@ lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_w65v6")
 draw_pass_1 = SubResource("SphereMesh_wx0xm")
 
-[node name="Nuzzle" type="Marker3D" parent="." index="4"]
+[node name="Nozzle" type="Marker3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.418683)
+
+[node name="NozzleFlame" parent="Nozzle" index="0" instance=ExtResource("4_onjsc")]

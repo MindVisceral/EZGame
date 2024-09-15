@@ -141,4 +141,3 @@ func _on_collision(body: Node) -> void:
 	get_tree().get_root().add_child(fire_instance)
 	
 	queue_free()
-	

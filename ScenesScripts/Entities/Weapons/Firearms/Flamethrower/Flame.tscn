@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://dcd67a7ua7bka"]
+[gd_scene load_steps=21 format=3 uid="uid://dcd67a7ua7bka"]
 
 [ext_resource type="Script" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/Flame.gd" id="1_2m2ur"]
 [ext_resource type="PackedScene" uid="uid://dllg2ily2gjqf" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/EnvironmentFire.tscn" id="2_eq72y"]
 [ext_resource type="Texture2D" uid="uid://jcsdrmrk5ihy" path="res://fire_placeholder.png" id="3_ygpkv"]
+[ext_resource type="Texture2D" uid="uid://b4ssi3riwa5c0" path="res://fire_frame_placeholder.png" id="4_e4wli"]
 
 [sub_resource type="Curve" id="Curve_tfq60"]
 _data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
@@ -51,17 +52,21 @@ hue_variation_curve = SubResource("CurveTexture_358ul")
 turbulence_enabled = true
 turbulence_influence_over_life = SubResource("CurveTexture_p8gb4")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_udqgn"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fbkhl"]
 transparency = 1
 shading_mode = 0
 disable_ambient_light = true
-vertex_color_use_as_albedo = true
 albedo_color = Color(0.672466, 0.169506, 0, 1)
+albedo_texture = ExtResource("4_e4wli")
+texture_filter = 0
+texture_repeat = false
+disable_receive_shadows = true
+billboard_mode = 1
+billboard_keep_scale = true
 
-[sub_resource type="SphereMesh" id="SphereMesh_bdi51"]
-material = SubResource("StandardMaterial3D_udqgn")
-radius = 0.05
-height = 0.1
+[sub_resource type="QuadMesh" id="QuadMesh_pi0qu"]
+material = SubResource("StandardMaterial3D_fbkhl")
+size = Vector2(0.1, 0.1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_chvhb"]
 resource_local_to_scene = true
@@ -146,7 +151,7 @@ region_rect = Rect2(0.31, 0, 0, 0)
 cast_shadow = 0
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_lwl5e")
-draw_pass_1 = SubResource("SphereMesh_bdi51")
+draw_pass_1 = SubResource("QuadMesh_pi0qu")
 
 [node name="FlameOmniLight" type="OmniLight3D" parent="."]
 light_color = Color(0.672466, 0.169506, 0, 1)

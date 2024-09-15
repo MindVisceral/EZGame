@@ -56,7 +56,7 @@ func primary_action() -> void:
 	## Instantiate the Fire first
 	var flame_instance: FireBullet = flame_bullet.instantiate()
 	
-	## The Fire "bullet" is fired from the nuzzle Marker3D, that will be our starting point.
+	## The Fire "bullet" is fired from the nozzle Marker3D, that will be our starting point.
 	var start_pos: Vector3 = nuzzle.global_position
 	#
 	## We will use the Viewport's size to get 

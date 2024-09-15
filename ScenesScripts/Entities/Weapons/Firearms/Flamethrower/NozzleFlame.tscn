@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://dtwdyx71pw3un"]
+
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/NozzleFlame.gd" id="1_13qv6"]
+[ext_resource type="PackedScene" uid="uid://parwqkvc3prk" path="res://Blender/temp_nozzle_flame.glb" id="1_ogwqd"]
+[ext_resource type="Shader" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/NozzleFlameShader.gdshader" id="3_vvwmp"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mogbs"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_m8q73"]
+height = 256
+noise = SubResource("FastNoiseLite_mogbs")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bnjso"]
+render_priority = 0
+shader = ExtResource("3_vvwmp")
+shader_parameter/y_offset = 0.25
+shader_parameter/flame_speed = 0.54
+shader_parameter/flame_color = Color(1, 0.280667, 0.17, 1)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_m8q73")
+
+[node name="NozzleFlame" type="Node3D" node_paths=PackedStringArray("flame_mesh")]
+script = ExtResource("1_13qv6")
+flame_mesh = NodePath("temp_nozzle_flame/FlameConeMesh")
+
+[node name="temp_nozzle_flame" parent="." instance=ExtResource("1_ogwqd")]
+
+[node name="FlameConeMesh" parent="temp_nozzle_flame" index="0"]
+material_override = SubResource("ShaderMaterial_bnjso")
+cast_shadow = 0
+
+[editable path="temp_nozzle_flame"]
