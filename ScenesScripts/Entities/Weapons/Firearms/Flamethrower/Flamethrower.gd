@@ -15,7 +15,11 @@ extends FirearmBase
 @export var flame_bullet: PackedScene
 
 ## fire_bullet "Bullets" come out of this Marker
-@export var nuzzle: Marker3D
+@export var nozzle: Marker3D
+
+## Reference to the 'Flames' Node. This is turned on when the Player turns on their Flamethrower.
+@export var nozzle_flame: NozzleFlame
+
 
 ###-------------------------------------------------------------------------###
 ##### Exported variables
@@ -44,20 +48,42 @@ func input(event: InputEvent) -> void:
 	super(event)
 
 ## Only used for "Automatic" firing_mode weapons
+## Only used for "Automatic" firing_mode weapons
 func _physics_process(delta: float) -> void:
-	super(delta)
+	
+	## Mostly copied over from FirearmBase!
+	#
+	## Having the firing_mode set to "Automatic" requires this code to run in _physics_process()
+	if firing_mode == 1:
+			## If the weapon is ready to fire...
+			if ShotCooldownTimer.is_stopped():
+				## If the primary firing button is held down, fire away.
+				if primary_fire_is_held == true:
+					## Enable Flames coming out of the Nozzle
+					nozzle_flame.turn_flames_on()
+					
+					primary_action()
+					ShotCooldownTimer.start()
+					
+				
+				## Disable Flames coming out of the Nozzle
+				else:
+					nozzle_flame.turn_flames_off()
+				
+			
+		
+	
 
 
 ## Called when the primary_action button is pressed; fire a 'Fire' "bullet"
 func primary_action() -> void:
 	super()
 	
-	
 	## Instantiate the Fire first
 	var flame_instance: FireBullet = flame_bullet.instantiate()
 	
 	## The Fire "bullet" is fired from the nozzle Marker3D, that will be our starting point.
-	var start_pos: Vector3 = nuzzle.global_position
+	var start_pos: Vector3 = nozzle.global_position
 	#
 	## We will use the Viewport's size to get 
 	var vp_size: Vector2 = get_viewport().size
@@ -69,11 +95,10 @@ func primary_action() -> void:
 	
 	## To get the direction, we just get the difference between these two Vector3s
 	flame_instance.direction = (end_pos - start_pos)
-	## And make sure the Fire is fired from the nuzzle
+	## And make sure the Fire is fired from the nozzle
 	flame_instance.global_position = start_pos
 	
 	get_tree().get_root().add_child(flame_instance)
-	print("flame fired")
 	
 #
 ## Called when the secondary_action button is pressed

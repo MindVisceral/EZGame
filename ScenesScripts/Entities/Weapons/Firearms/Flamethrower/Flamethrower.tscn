@@ -17,13 +17,18 @@ gravity = Vector3(0, 0, 0)
 
 [sub_resource type="SphereMesh" id="SphereMesh_wx0xm"]
 
-[node name="Flamethrower" node_paths=PackedStringArray("nuzzle") instance=ExtResource("1_iy5rc")]
+[node name="Flamethrower" node_paths=PackedStringArray("nozzle", "nozzle_flame") instance=ExtResource("1_iy5rc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("2_slqel")
 flame_bullet = ExtResource("3_085k1")
-nuzzle = NodePath("Nozzle")
+nozzle = NodePath("Nozzle")
+nozzle_flame = NodePath("Nozzle/NozzleFlame")
 firing_mode = 1
+number_of_bullets = null
+bullet_spread = null
 shot_cooldown = 0.025
+default_damage = null
+max_distance = null
 
 [node name="temp_model" type="MeshInstance3D" parent="ModelHolder" index="0"]
 mesh = SubResource("BoxMesh_8w8d6")

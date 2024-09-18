@@ -39,6 +39,8 @@ var stomp_boosted: bool = false
 ## The distance remaining for the Player to travel before the boost is over and gravity kicks in
 var remaining_boost_distance: float = 0.0
 
+var boost_distance: float = 0.0
+
 
 func enter() -> void:
 	super.enter()
@@ -64,6 +66,11 @@ func enter() -> void:
 
 func exit() -> void:
 	super.exit()
+	
+	
+	
+	boost_distance = 0.0
+	
 	
 	## Reset!
 	stomp_boosted = false
@@ -147,19 +154,19 @@ func physics_process(delta: float) -> BasePlayerState:
 		
 		
 	if (stomp_boosted == true):
-		if (remaining_boost_distance > 0.0):
-			
+		if ((remaining_boost_distance / boost_distance) > 0.5):
 			
 			## Make the Player go up
-			player.velocity.y += player.gravity * BulletTime.time_scale * delta * acceleration
+			player.velocity.y += (player.gravity * (1.0 - (remaining_boost_distance / boost_distance))) * \
+				BulletTime.time_scale * delta
 			## Clamp the velocity to be jump_speed_limit at most
-			player.velocity.y = minf(player.velocity.y, player.jump_speed_limit)
+			#player.velocity.y = minf(player.velocity.y, player.jump_speed_limit)
 			
 			## This is the actual timer part.
 			## It determines when the Player has finished travelling the stomp-boosted distance
 			remaining_boost_distance -= player.velocity.y * BulletTime.time_scale * delta
 		else:
-			player.velocity.y -= player.gravity * BulletTime.time_scale * delta * deceleration
+			player.velocity.y -= player.gravity * BulletTime.time_scale * delta
 			player.velocity.y = maxf(player.velocity.y, player.falling_speed_limit)
 	
 	
@@ -190,6 +197,7 @@ func physics_process(delta: float) -> BasePlayerState:
 				return jump_state
 			
 			## Otherwise (if the Player doesn't take the opportunity to jump)...
+			#
 			## If the Player stops moving around, return to Idle state. The Y axis is ignored
 			elif Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
 				player.play_landing_sound(landing_sound)
@@ -201,7 +209,7 @@ func physics_process(delta: float) -> BasePlayerState:
 			
 		
 		
-		## The Player isn't on the floor, so we check if they're near a wall...
+		## The Player isn't on the floor, so we check if they're near a wall maybe...
 		elif player.WallDetection.is_colliding():
 			## We check if the Player is moving up against the wall
 			if player.is_moving_at_wall(true):
@@ -217,37 +225,41 @@ func physics_process(delta: float) -> BasePlayerState:
 	return null
 
 
-## Calculates the jump's height
+## Calculates this jump's height
 func apply_jump_impulse() -> float:
 	
 	var impulse_jump_height: float = 0.0
 	
-	## If a Stomp has just been finished, we perform a Stomp-boosted jump
+	## If a Stomp has just been finished, this is a Stomp-boosted jump,
+	## so we will 
 	if !player.StompJumpT.is_stopped():
 		
 		## This jump will be stomp-boosted!
 		stomp_boosted = true
-		## So we don't apply an impulse like we do with a regualr jump.
-		## This jump's guts take place in _physics_process() - this is just setup
-		#impulse_jump_height = 0.0
-		impulse_jump_height = 50
-		
+		## Sometimes the Player seems to move during a Stomp-boosted jump without Input, so...
+		player.velocity.x = 0.0
+		player.velocity.z = 0.0
 		
 		## We will need the distance between the stomp's start and end points.
 		## NOTE: The jump will be limited to stomp_jump_height_limit value at most!
-		remaining_boost_distance = minf(player.stomp_vertical_distance, player.stomp_jump_height_limit)
+		boost_distance = minf(player.stomp_vertical_distance, player.stomp_jump_height_limit)
+		remaining_boost_distance = boost_distance
 		
-		
+		## Apply an impulse - this *is* the jump, effectively
+		#impulse_jump_height = boost_distance
+		## The jump impulse should either be the size of the boost, or the regular jump height,
+		## whichever is bigger
+		impulse_jump_height = maxf(boost_distance, player.jump_height)
 		
 		
 		## But a Stomp-boosted jump is limited to stomp_jump_height_limit
 		#impulse_jump_height += minf(player.stomp_vertical_distance, player.stomp_jump_height_limit)
 		
-
-		
+	
 	## Otherwise, we just do a regular jump
 	else:
 		impulse_jump_height += player.jump_height
+		
 	
 	## Either way, we must reset the stomp_vertical_distance
 	player.stomp_vertical_distance = 0.0

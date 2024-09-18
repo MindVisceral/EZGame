@@ -171,7 +171,7 @@ var air_time: float = 0.0
 
 ## The distance between the point from which the Player started a stomp, and the ground they hit.
 ## Set in the stomp script, used in the jump script to make the very next jump after a stomp
-## reach the stomp's start height.
+## reach the stomp's start height. Unfortunately, has to be stored here.
 ## Limited by stomp_jump_height_limit in the jump state script on enter()
 var stomp_vertical_distance: float = 0.0
 

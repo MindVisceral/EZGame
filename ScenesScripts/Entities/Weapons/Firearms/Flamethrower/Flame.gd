@@ -19,6 +19,9 @@ extends RigidBody3D
 
 @export_group("References")
 
+## Reference to this Fire's Sprite3D Node.
+@export var flame_sprite: Sprite3D
+
 ## Reference to this Fire's GPUParticles3D Node.
 @export var flame_particles: GPUParticles3D
 
@@ -48,6 +51,17 @@ extends RigidBody3D
 
 ## Speed at which this "Bullet" moves through space in direction
 @export_range(0.1, 999.0, 0.1) var speed: float = 40.0
+
+
+@export_group("Sprite size")
+
+## How big should the Flame's Sprite be by the time the Flame is at its biggest?
+## (in meters/pixel size); keep at a very low number
+@export_range(0.001, 1.0, 0.001) var max_sprite_size: float = 0.03
+
+## How much time must pass until the Flame's Sprite is at its biggest?
+## (in seconds)
+@export_range(0.1, 50.0, 0.1) var time_until_max_sprite_size: float = 1.5
 
 
 @export_group("Collider size")
@@ -108,9 +122,15 @@ func _ready() -> void:
 		## Normalize the direction and make it move at 'speed' velocity.
 		linear_velocity = direction.normalized() * speed
 		
-		## The Fire's Hitbox's and Collider's sizes should increase over time,
+		## The Fire's Sprite, Hitbox, and Collider sizes should increase over time,
 		## because IRL fire burns through the fluid and the flames rise with heat;
 		## in result, the Flame gets bigger with time.
+		#
+		## Just the Sprite size
+		var sprite_tween: Tween = get_tree().create_tween()
+		sprite_tween.tween_property(self.flame_sprite, "pixel_size", \
+			max_sprite_size, time_until_max_sprite_size)
+			
 		#
 		## Just the RigidBody Collider
 		var collider_tween: Tween = get_tree().create_tween()

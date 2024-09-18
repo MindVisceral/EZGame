@@ -114,7 +114,7 @@ _data = {
 "RESET": SubResource("Animation_xyppl")
 }
 
-[node name="Flame" type="RigidBody3D" node_paths=PackedStringArray("flame_particles", "flame_light", "collider", "hitbox_collider")]
+[node name="Flame" type="RigidBody3D" node_paths=PackedStringArray("flame_sprite", "flame_particles", "flame_light", "collider", "hitbox_collider")]
 collision_layer = 1024
 collision_mask = 519
 input_ray_pickable = false
@@ -127,6 +127,7 @@ linear_damp = 1.0
 angular_damp = 100.0
 script = ExtResource("1_2m2ur")
 environment_fire = ExtResource("2_eq72y")
+flame_sprite = NodePath("FireSprite")
 flame_particles = NodePath("FlameParticles")
 flame_light = NodePath("FlameOmniLight")
 collider = NodePath("Collider")
@@ -138,8 +139,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.045)
 cast_shadow = 0
 offset = Vector2(0, 40)
 modulate = Color(1, 0.56, 0.56, 1)
-pixel_size = 0.008
-billboard = 2
+pixel_size = 0.001
+billboard = 1
 double_sided = false
 texture_filter = 0
 texture = ExtResource("3_ygpkv")

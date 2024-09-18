@@ -98,10 +98,13 @@ func input(event: InputEvent) -> void:
 	## NOTE: This is only used for "Automatic" firing_mode weapons
 	if Input.is_action_just_released("primary_action"):
 		primary_fire_is_held = false
+		
 	
 	## secondary_action input check
 	if Input.is_action_just_pressed("secondary_action"):
 		secondary_action()
+		
+	
 
 ## Only used for "Automatic" firing_mode weapons
 func _physics_process(delta: float) -> void:
