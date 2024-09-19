@@ -185,8 +185,6 @@ func physics_process(delta: float) -> BasePlayerState:
 		player.velocity.y = maxf(player.velocity.y, player.falling_speed_limit)
 		
 	
-	print(player.velocity.y)
-	
 	## A short time after the Raycast leaves the ground...
 	if ground_timer.is_stopped():
 		## Check if the Player is on floor...
@@ -245,15 +243,10 @@ func apply_jump_impulse() -> float:
 		boost_distance = minf(player.stomp_vertical_distance, player.stomp_jump_height_limit)
 		remaining_boost_distance = boost_distance
 		
-		## Apply an impulse - this *is* the jump, effectively
-		#impulse_jump_height = boost_distance
-		## The jump impulse should either be the size of the boost, or the regular jump height,
-		## whichever is bigger
+		## The jump impulse should be either the size of the boost, or the regular jump height,
+		## whichever is bigger.
 		impulse_jump_height = maxf(boost_distance, player.jump_height)
 		
-		
-		## But a Stomp-boosted jump is limited to stomp_jump_height_limit
-		#impulse_jump_height += minf(player.stomp_vertical_distance, player.stomp_jump_height_limit)
 		
 	
 	## Otherwise, we just do a regular jump

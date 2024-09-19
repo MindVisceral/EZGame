@@ -336,13 +336,13 @@ func is_moving_at_wall(process_input: bool = true, dot_product_value: float = 0.
 	
 	## Check if the Player is pressing any horizontal input keys.
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
-											"input_forwards", "input_backwards")
+		"input_forwards", "input_backwards")
 	
 	## If it doesn't matter if the Player is pressing anything, just proceed.
 	if (process_input == false) or \
 	## But if the Player must be pressing something for this to work,
 	## only proceed if process_input is TRUE
-	(process_input == true and input_dir != Vector2.ZERO):
+			(process_input == true and input_dir != Vector2.ZERO):
 		
 		## Prepare the nearest wall's normal for comparison
 		var temp_wall_normal: Vector3 = find_closest_wall_normal()

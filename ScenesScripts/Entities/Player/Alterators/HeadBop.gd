@@ -37,8 +37,8 @@ var original_rotation: Vector3
 @export var step_bob_enabled: bool = true
 
 ## How fast the bob lerps between positions;
-## how fast it returns to original_position from new_pos
-@export var bob_speed: float = 12.0
+## how fast it returns to original_position from new_pos (in seconds)
+@export var bob_speed: float = 0.1
 
 
 ## X-axis bobbing is based on a sine wave
@@ -77,8 +77,10 @@ var original_rotation: Vector3
 ## NOTE: Done with an Input.get_vector()
 @export_group("Movement Tilt (Quake Like)")
 
-## Speed at which the bobbing_node tilts
-@export var rotation_speed: float =  4.0
+## Speed at which the bobbing_node tilts ()
+## How long it takes for the bobbing_node to fully tilt to one direction,
+## or return to default position (in seconds)
+@export var rotation_speed: float =  0.1
 
 ## As the Player moves horizontally, tilt them the way they're moving;
 ## E.g.: moving forwards - tilt down; moving right - tilt to the right
@@ -108,6 +110,7 @@ func _ready():
 	## we will be editing that to make bobs happen.
 	original_position = bobbing_node.position
 	original_rotation = bobbing_node.rotation
+	
 
 
 ###-------------------------------------------------------------------------###
@@ -125,11 +128,13 @@ func _process(delta: float) -> void:
 		## NOTE: BulletTime.time_scale multiplication happens in the do_head_bob() function
 		var bob_tween = get_tree().create_tween()
 		bob_tween.tween_property(bobbing_node, "position", do_head_bob(), \
-										bob_speed * BulletTime.time_scale * delta)
+			bob_speed * BulletTime.time_scale)
+		
 	
 	## If air bobbing is enabled...
 	if air_bob_enabled == true:
 		pass
+		
 	
 	## If movement tilt is enabled...
 	if movement_tilt_enabled == true:
@@ -137,7 +142,10 @@ func _process(delta: float) -> void:
 		## and tween the bobbing_node's rotation towards that value
 		var tilt_tween = get_tree().create_tween()
 		tilt_tween.tween_property(bobbing_node, "rotation", movement_tilt(), \
-										rotation_speed * BulletTime.time_scale * delta)
+			rotation_speed * BulletTime.time_scale)
+			
+		
+	
 
 
 ## Takes X and Z of input_dir (the horizontal direction the Player is moving in),
@@ -149,21 +157,44 @@ func movement_tilt() -> Vector3:
 	
 	## The direction of Player movement based on Input
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
-	 "input_forwards", "input_backwards")
+		"input_forwards", "input_backwards")
 	
 	
 	## We multiply the input_dir (if there's movement) by tilt pitch and roll booleans;
 	## "roll" is tilting left/right, "pitch" is tilting forwards/backwards
 	#
 	## 0.0, because we're ignoring the Y axis. That would be head *turning*
-	## 
-	new_rot = Vector3( \
-	input_dir.y * float(movement_tilt_pitch) * angle_limit_for_tilt, \
-	0.0, \
-	-input_dir.x * float(movement_tilt_roll) * angle_limit_for_tilt)
-	
+	new_rot = Vector3(
+		input_dir.y * float(movement_tilt_pitch) * angle_limit_for_tilt, \
+		0.0, \
+		-input_dir.x * float(movement_tilt_roll) * angle_limit_for_tilt)
+		
 	
 	return new_rot
+
+## Very similiar to regular movement_tilt(), but called by States (from outside of this Script)
+func external_movement_tilt(direction: Vector2) -> void:
+	
+	## The rotation towards which the bobbing_node's rotation will be tweened
+	var new_rot: Vector3 = original_rotation
+	
+	## We multiply the passed direction by tilt pitch and roll booleans;
+	## "roll" is tilting left/right, "pitch" is tilting forwards/backwards
+	#
+	## 0.0, because we're ignoring the Y axis. That would be head *turning*.
+	new_rot = Vector3(
+		direction.y * float(movement_tilt_pitch) * angle_limit_for_tilt, \
+		0.0, \
+		-direction.x * float(movement_tilt_roll) * angle_limit_for_tilt)
+		
+	
+	## Calculate a new rotation for the bobbing_node,
+	## and tween the bobbing_node's rotation towards that value.
+	## NOTE: This normally happens in _process()...
+	var tilt_tween = get_tree().create_tween()
+	tilt_tween.tween_property(bobbing_node, "rotation", new_rot, \
+		rotation_speed * BulletTime.time_scale)
+	
 
 
 ## Move bobbing_node on the X, Y and Z axes depending on Player Input or velocity
@@ -177,7 +208,7 @@ func do_head_bob() -> Vector3:
 	## Get IF the Player is moving based on Input.
 	## Could be done with many Input.is_button_pressed()-s, but this is cleaner.
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
-	 "input_forwards", "input_backwards")
+		"input_forwards", "input_backwards")
 	
 	## HeadBob on the X axis only works when the Player is pressing horizontal Input buttons...
 	if input_dir != Vector2.ZERO:
@@ -188,17 +219,23 @@ func do_head_bob() -> Vector3:
 		if X_axis_bob_enabled == true:
 			## Make the bobbing_node move left and right
 			new_pos.x = original_position.x + (sin(Time.get_ticks_msec() * BulletTime.time_scale \
-						* x_bob_frequency) * x_bob_amplitude * \
-						int(!player.in_air) * int(!player.on_wall)) * int(player.headbob_active)
+				* x_bob_frequency) * x_bob_amplitude * \
+				int(!player.in_air) * int(!player.on_wall)) * int(player.headbob_active)
+				
+			
 		
 		## If bobbing on Y axis is enabled...
 		if Y_axis_bob_enabled == true:
 			## Make the bobbing_node move up and down
 			new_pos.y = original_position.y + (sin(Time.get_ticks_msec() * BulletTime.time_scale \
-						* y_bob_frequency) * y_bob_amplitude * \
-						int(!player.in_air) * int(!player.on_wall)) * int(player.headbob_active)
+				* y_bob_frequency) * y_bob_amplitude * \
+				int(!player.in_air) * int(!player.on_wall)) * int(player.headbob_active)
+				
+			
+		
 	
-	
+	## HERE: This proves annoying. Code segment is prime for removal.
+	#
 	### NOTE: This happens no matter if the Player is on the ground or in the air
 	### If bobbing on Z axis is enabled...
 	#if Z_axis_bob_enabled == true:

@@ -26,12 +26,14 @@ func enter() -> void:
 	
 	player.WallDetection.enabled = true
 	player.on_wall = true
+	
 
 func exit() -> void:
 	super.exit()
 	
 	player.WallDetection.enabled = false
 	player.on_wall = false
+	
 
 
 ## When a movement button is pressed, change to a corresponding State node
@@ -48,12 +50,21 @@ func input(event: InputEvent) -> BasePlayerState:
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
 func physics_process(delta: float) -> BasePlayerState:
 	
+	
+	## Tilt the Camera away from the Wall a little when WallRunning.
+	## Check HeadBob Node for details.
+	
+	print("                 wall normal: ", player.find_closest_wall_normal())
+	
+	player.HeadBob.external_movement_tilt(Vector2(player.find_closest_wall_normal().x, \
+		player.find_closest_wall_normal().y))
+	
 	## We need the closest's wall's normal to make the Player run along it.
 	#player.find_closest_wall_normal()
 	
 	## The direction of Player movement based on Input
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
-	 "input_forwards", "input_backwards")
+		"input_forwards", "input_backwards")
 	## We ignore the Y axis, and place input_dir on the XZ axis
 	player.direction = (player.transform.basis * Vector3(input_dir.x, 0.0, input_dir.y).normalized())
 	
@@ -64,6 +75,7 @@ func physics_process(delta: float) -> BasePlayerState:
 		temp_accel = acceleration
 	else:
 		temp_accel = deceleration
+		
 	
 	## Apply velocity, take speed_multiplier and acceleration into account
 	## NOTE: Lerping player.velocity itself would also impact vertical (y) velocity,
@@ -72,13 +84,14 @@ func physics_process(delta: float) -> BasePlayerState:
 		(player.direction.x * player.speed * speed_multiplier), temp_accel * delta)
 	player.velocity.z = lerpf(player.velocity.z, \
 		(player.direction.z * player.speed * speed_multiplier), temp_accel * delta)
+		
 	
 	
 	## Apply gravity (which is the Globals' gravity * multiplier)
 	## Affected by running on the wall; falling is slowed down by that.
 	## NOTE: Without BulletTime.time_scale, jumping is inconsistent when BulletTime is activated
-	player.velocity.y -= player.gravity * player.wall_sliding_deceleration \
-						* BulletTime.time_scale * delta
+	player.velocity.y -= player.gravity * player.wall_sliding_deceleration * \
+						BulletTime.time_scale * delta
 	## Clamp the velocity to be falling_speed_limit at most.
 	## NOTE: maxf is used because velocity.y is negative when falling
 	player.velocity.y = maxf(player.velocity.y, player.falling_speed_limit)
@@ -86,6 +99,7 @@ func physics_process(delta: float) -> BasePlayerState:
 	
 	## If the Player isn't clinging to a wall, they start to fall
 	if !player.WallDetection.is_colliding() or !player.is_moving_at_wall(true):
+		print("wallrun failed")
 		return fall_state
 		
 	## But if they're still clinging to the wall...
