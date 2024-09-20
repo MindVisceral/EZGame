@@ -49,7 +49,6 @@ func physics_process(delta: float) -> BasePlayerState:
 		(player.direction.z * player.speed), deceleration * delta)
 	
 	
-	
 	## Apply gravity (which is the Globals' gravity * multiplier)
 	player.velocity.y -= player.gravity * BulletTime.time_scale * delta
 	## Clamp the velocity to be falling_speed_limit at most.

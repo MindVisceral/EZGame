@@ -237,7 +237,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	## Move the Head up/down and the whole Player right/left with mouse movement
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		## Up/Down
 		Head.rotate_x(deg_to_rad(-1 * event.relative.y * MOUSE_SENSITIVITY))
+		## Left/Right
 		self.rotate_y(deg_to_rad(-1 * event.relative.x * MOUSE_SENSITIVITY))
 		
 		## Clamp Head's rotation. Otherwise we could turn up/down in a circle - that causes bugs
@@ -293,6 +295,41 @@ func process_view_input(delta):
 
 #region  ## Wall-running, -jumping, and -sliding
 
+## Finds and returns the collision point of the wall that is the closest to the Player;
+## The walls are detected by the WallDetection S-Cast, the closest wall
+## and the collision point with that wall is determined here.
+func find_closest_wall_collision_point() -> Vector3:
+	## We need to turn this on really quick
+	WallDetection.force_shapecast_update()
+	
+	## The returned collision point in global coordinates
+	var collision_point: Vector3 = Vector3.ZERO
+	
+	if WallDetection.is_colliding():
+		## First, we find the StaticBody wall that is the closest to the Player
+		## NOTE: Since almost all walls are (probably) made in TrenchBroom, most of them are part
+		## NOTE: of the same StaticBody. So this is a check we make just in case.
+		
+		## INF on our first check in the loop, because there is no bigger distance than that
+		var distance_to_wall = INF
+		
+		## We loop through all the Walls that the WallDetection ShapeCast could find
+		## to find the Wall that is the closest to the Player
+		for result in WallDetection.collision_result:
+			## We get the distance between this wall's collision point and the Player's origin point
+			var new_distance = result.point.distance_to(self.global_position)
+			## ...and check if this distance is smaller than the last distance...
+			if new_distance < distance_to_wall:
+				## If so, we update these two variables
+				distance_to_wall = new_distance
+				## Finally, we get the normal
+				collision_point = result.point
+				
+			
+		
+	
+	return collision_point
+
 ## Finds and returns the normal of the wall that is the closest to the Player;
 ## The walls are detected by the WallDetection S-Cast and here is decided which one is the closest.
 func find_closest_wall_normal() -> Vector3:
@@ -304,7 +341,7 @@ func find_closest_wall_normal() -> Vector3:
 	
 	if WallDetection.is_colliding():
 		## First, we find the StaticBody wall that is the closest to the Player
-		## NOTE: Since almost all walls are probably made in TrenchBroom, most of them are part
+		## NOTE: Since almost all walls are (probably) made in TrenchBroom, most of them are part
 		## NOTE: of the same StaticBody. So this is a check we make just in case.
 		
 		## INF on our first check in the loop, because there is no bigger distance than that
@@ -313,8 +350,8 @@ func find_closest_wall_normal() -> Vector3:
 		## We loop through all the Walls that the WallDetection ShapeCast could find
 		## to find the Wall that is the closest to the Player
 		for result in WallDetection.collision_result:
-			## We get this Wall's distance to the Player's origin point
-			var new_distance = result.collider.global_position.distance_to(self.global_position)
+			## We get the distance between this wall's collision point and the Player's origin point
+			var new_distance = result.point.distance_to(self.global_position)
 			## ...and check if this distance is smaller than the last distance...
 			if new_distance < distance_to_wall:
 				## If so, we update these two variables
@@ -356,7 +393,7 @@ func is_moving_at_wall(process_input: bool = true, dot_product_value: float = 0.
 		## Now we calculate the dot product between Player velocity and the wall's normal
 		var dot_product: float = temp_velocity.dot(wall_normal_vector2)
 		
-		print("DOT: ", dot_product)
+		#print("DOT: ", dot_product)
 		
 		## If the dot_product is over the arbitrary value of dot_product_value (0.11 by default),
 		## we consider the Player to be rubbing against the wall. We return true.

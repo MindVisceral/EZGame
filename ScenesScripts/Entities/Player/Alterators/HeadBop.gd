@@ -172,8 +172,10 @@ func movement_tilt() -> Vector3:
 	
 	return new_rot
 
-## Very similiar to regular movement_tilt(), but called by States (from outside of this Script)
-func external_movement_tilt(direction: Vector2) -> void:
+## Very similiar to regular movement_tilt(), but called by States (from outside of this Script).
+## tilt_direction - X value is roll (left/right), Y value is pitch (up/down).
+## NOTE: When passing this variable, X and Y must always be either -1, 0, or 1! 
+func external_movement_tilt(tilt_direction: Vector2 = Vector2.ZERO) -> void:
 	
 	## The rotation towards which the bobbing_node's rotation will be tweened
 	var new_rot: Vector3 = original_rotation
@@ -183,9 +185,9 @@ func external_movement_tilt(direction: Vector2) -> void:
 	#
 	## 0.0, because we're ignoring the Y axis. That would be head *turning*.
 	new_rot = Vector3(
-		direction.y * float(movement_tilt_pitch) * angle_limit_for_tilt, \
+		tilt_direction.y * float(movement_tilt_pitch) * angle_limit_for_tilt, \
 		0.0, \
-		-direction.x * float(movement_tilt_roll) * angle_limit_for_tilt)
+		-tilt_direction.x * float(movement_tilt_roll) * angle_limit_for_tilt)
 		
 	
 	## Calculate a new rotation for the bobbing_node,
@@ -194,7 +196,9 @@ func external_movement_tilt(direction: Vector2) -> void:
 	var tilt_tween = get_tree().create_tween()
 	tilt_tween.tween_property(bobbing_node, "rotation", new_rot, \
 		rotation_speed * BulletTime.time_scale)
+		
 	
+
 
 
 ## Move bobbing_node on the X, Y and Z axes depending on Player Input or velocity
