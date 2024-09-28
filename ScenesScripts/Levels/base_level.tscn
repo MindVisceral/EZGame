@@ -39,7 +39,9 @@ adjustment_saturation = 1.3
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2boyr")
 
-[node name="FuncGodotMap" type="Node3D" parent="."]
+[node name="NavigationRegion" type="NavigationRegion3D" parent="."]
+
+[node name="FuncGodotMap" type="Node3D" parent="NavigationRegion"]
 script = ExtResource("1_wimpj")
 map_settings = ExtResource("2_v5ppi")
 

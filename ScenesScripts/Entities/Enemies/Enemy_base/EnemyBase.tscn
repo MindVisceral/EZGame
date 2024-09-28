@@ -1,13 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfl36ykvecfd4"]
+[gd_scene load_steps=8 format=3 uid="uid://bfl36ykvecfd4"]
 
 [ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/Enemy_base/EnemyBase.gd" id="1_mglqm"]
 [ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/States/EnemyStateManager.gd" id="2_ofog0"]
 [ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/Enemy_base/Stats.gd" id="3_0kcgh"]
 [ext_resource type="PackedScene" uid="uid://yj1henetlw1f" path="res://ScenesScripts/Entities/Entity Elements/Hurtbox.tscn" id="3_bl2ki"]
 [ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/Enemy_base/AnimationHandler.gd" id="5_t7vsf"]
+[ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/Enemy_base/AIHandler.gd" id="6_i20a6"]
 [ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/Enemy_base/DamageDataHandler.gd" id="7_npa2a"]
 
-[node name="BaseEnemy" type="CharacterBody3D" node_paths=PackedStringArray("States", "stats", "DamageData_Handler", "Animation_Handler", "Collider", "FloorCast", "hurtbox")]
+[node name="BaseEnemy" type="CharacterBody3D" node_paths=PackedStringArray("States", "stats", "DamageData_Handler", "Animation_Handler", "AI_Handler", "Collider", "FloorCast", "Navigation", "NodeHolder", "hurtbox", "EntityDetectionArea") groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_mglqm")
@@ -15,9 +16,13 @@ States = NodePath("Scripts/StateManager")
 stats = NodePath("Scripts/Stats")
 DamageData_Handler = NodePath("Scripts/DamageDataHandler")
 Animation_Handler = NodePath("Scripts/AnimationHandler")
+AI_Handler = NodePath("Scripts/AIHandler")
 Collider = NodePath("Collider")
 FloorCast = NodePath("FloorCast")
-hurtbox = NodePath("Hurtbox")
+Navigation = NodePath("NavigationAgent")
+NodeHolder = NodePath("NodeHolder")
+hurtbox = NodePath("NodeHolder/Hurtbox")
+EntityDetectionArea = NodePath("NodeHolder/EntityDetectionArea")
 
 [node name="Scripts" type="Node" parent="."]
 
@@ -38,6 +43,9 @@ script = ExtResource("7_npa2a")
 [node name="AnimationHandler" type="Node" parent="Scripts"]
 script = ExtResource("5_t7vsf")
 
+[node name="AIHandler" type="Node" parent="Scripts"]
+script = ExtResource("6_i20a6")
+
 [node name="Collider" type="CollisionShape3D" parent="."]
 
 [node name="FloorCast" type="RayCast3D" parent="."]
@@ -50,5 +58,19 @@ hit_from_inside = true
 debug_shape_custom_color = Color(1, 1, 1, 1)
 debug_shape_thickness = 5
 
-[node name="Hurtbox" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("3_bl2ki")]
-Entity = NodePath("..")
+[node name="NodeHolder" type="Node3D" parent="."]
+
+[node name="Hurtbox" parent="NodeHolder" node_paths=PackedStringArray("Entity") instance=ExtResource("3_bl2ki")]
+Entity = NodePath("../..")
+
+[node name="EntityDetectionArea" type="Area3D" parent="NodeHolder"]
+collision_layer = 0
+collision_mask = 6
+monitorable = false
+
+[node name="Collider" type="CollisionShape3D" parent="NodeHolder/EntityDetectionArea"]
+
+[node name="NavigationAgent" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+
+[editable path="NodeHolder/Hurtbox"]

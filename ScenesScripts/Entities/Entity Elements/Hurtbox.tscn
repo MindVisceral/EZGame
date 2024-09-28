@@ -11,4 +11,4 @@ input_ray_pickable = false
 monitoring = false
 script = ExtResource("1_a88k8")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Collider" type="CollisionShape3D" parent="."]

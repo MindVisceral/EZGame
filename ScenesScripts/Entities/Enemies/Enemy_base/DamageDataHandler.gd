@@ -37,6 +37,8 @@ func init(enemy: EnemyBase) -> void:
 	## If HitPointHandler is present...
 	if hit_point_handler:
 		hit_point_handler.enemy = enemy
+		
+	
 
 
 ## Receive the DamageData Resource, read its values, pass them onto Nodes that can handle them.
@@ -47,6 +49,8 @@ func receive_DamageData(damageData: DamageData) -> void:
 		## ...if the Stats Node exists
 		if enemy.stats:
 			enemy.stats.lower_health(damageData.damage_value)
+			
+		
 	
 	## This is Enemy-specific, so the Enemy must have a Script which can handle this data.
 	## NOTE: That script MUST extend HitPointHandler class to work!
@@ -55,3 +59,6 @@ func receive_DamageData(damageData: DamageData) -> void:
 		## ...if the HitPointHandler exists
 		if hit_point_handler:
 			hit_point_handler.handle_hit_point(damageData.hit_point)
+			
+		
+	

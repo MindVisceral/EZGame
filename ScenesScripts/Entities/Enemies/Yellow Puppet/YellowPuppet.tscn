@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8rq5wbjpbcux"]
+[gd_scene load_steps=7 format=3 uid="uid://c8rq5wbjpbcux"]
 
 [ext_resource type="PackedScene" uid="uid://bfl36ykvecfd4" path="res://ScenesScripts/Entities/Enemies/Enemy_base/EnemyBase.tscn" id="1_tm6i6"]
 [ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/Yellow Puppet/YellowPuppet.gd" id="1_wx6pj"]
@@ -9,10 +9,6 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wl7vi"]
 radius = 0.469
 height = 1.528
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p48ah"]
-radius = 0.468507
-height = 1.52785
 
 [node name="Yellow Puppet" node_paths=PackedStringArray("model", "AnimPlayer") instance=ExtResource("1_tm6i6")]
 script = ExtResource("1_wx6pj")
@@ -59,9 +55,11 @@ script = ExtResource("6_t44ac")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0631747, 0.774942, 0)
 shape = SubResource("CapsuleShape3D_wl7vi")
 
-[node name="CollisionShape3D" parent="Hurtbox" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0631747, 0.774942, 0)
-shape = SubResource("CapsuleShape3D_p48ah")
+[node name="NavigationAgent" parent="." index="4"]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
+path_max_distance = 0.01
+navigation_layers = 0
 
 [editable path="yellow_puppet"]
 [editable path="Hurtbox"]
