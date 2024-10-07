@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgpejmnpxwhel"]
+[gd_scene load_steps=11 format=3 uid="uid://bgpejmnpxwhel"]
 
 [ext_resource type="PackedScene" uid="uid://bfl36ykvecfd4" path="res://ScenesScripts/Entities/Enemies/Enemy_base/EnemyBase.tscn" id="1_wkc01"]
 [ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/States/Idle.gd" id="2_vqty0"]
@@ -23,6 +23,10 @@ height = 0.75
 radial_segments = 8
 rings = 4
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_b8v87"]
+radius = 0.05
+height = 0.25
+
 [node name="TestEnemy" instance=ExtResource("1_wkc01")]
 speed = 2.0
 
@@ -35,6 +39,7 @@ script = ExtResource("2_vqty0")
 
 [node name="Navigate" type="Node" parent="Scripts/StateManager" index="1"]
 script = ExtResource("3_rn7c7")
+rotation_speed = 6.28319
 
 [node name="Attack" type="Node" parent="Scripts/StateManager" index="2"]
 script = ExtResource("2_vqty0")
@@ -49,7 +54,6 @@ enemy_AI = NodePath("TestEnemyAI")
 script = ExtResource("5_c3abr")
 navigate_state = NodePath("../../StateManager/Navigate")
 attack_state = NodePath("../../StateManager/Attack")
-ideal_distance_to_target = 4.01
 
 [node name="temp" type="Node" parent="Scripts/AIHandler" index="1"]
 script = ExtResource("4_nk623")
@@ -76,5 +80,9 @@ skeleton = NodePath("../..")
 
 [node name="NavigationAgent" parent="." index="4"]
 path_desired_distance = 0.25
+
+[node name="DebugDirection" type="MeshInstance3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, -0.00195472, -0.999998, 0, 0.999998, -0.00195472, 0, 0.57365, 0.212131)
+mesh = SubResource("CapsuleMesh_b8v87")
 
 [editable path="NodeHolder/Hurtbox"]

@@ -61,6 +61,15 @@ extends CharacterBody3D
 
 
 ###-------------------------------------------------------------------------###
+##### References
+###-------------------------------------------------------------------------###
+
+## Most Enemies make use of Targets - pathfinding, targetting, attacking, following, etc.
+## This would, typically, be a Player.
+var target: CharacterBody3D = null
+
+
+###-------------------------------------------------------------------------###
 ##### Variable storage
 ###-------------------------------------------------------------------------###
 

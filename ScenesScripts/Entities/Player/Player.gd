@@ -265,9 +265,12 @@ func _physics_process(delta: float) -> void:
 		set_velocity(velocity)
 		move_and_slide()
 		velocity = velocity
+		
+	
 
 func _process(delta: float) -> void:
 	States.process(delta)
+	
 
 
 ## On ready, apply exported variables like this: 
@@ -280,6 +283,7 @@ func apply_exported() -> void:
 		PlayerCamera.position = Vector3.ZERO
 	else:
 		PlayerCamera.position = TPMarker.position
+		
 	
 	## Instantly alter Collider dimensions
 	Collider.shape.height = standing_height
@@ -342,8 +346,8 @@ func is_moving_at_wall(process_input: bool = true, dot_product_value: float = 0.
 	
 	## If it doesn't matter if the Player is pressing anything, just proceed.
 	if (process_input == false) or \
-	## But if the Player must be pressing something for this to work,
-	## only proceed if process_input is TRUE
+			## But if the Player must be pressing something for this to work,
+			## only proceed if process_input is TRUE
 			(process_input == true and input_dir != Vector2.ZERO):
 		
 		## Prepare the nearest wall's normal for comparison

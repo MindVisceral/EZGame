@@ -11,10 +11,10 @@ extends EnemyAIBase
 
 @export_group("References")
 
-## Reference to the Navigate State. It handles all movement towards the Target.
+## Reference to the Navigate State. It handles all movement towards the target.
 @export var navigate_state: BaseEnemyState
 
-## Reference to the Navigate State. It handles all movement towards the Target.
+## Reference to the Navigate State. It handles all movement towards the target.
 @export var attack_state: BaseEnemyState
 
 
@@ -25,15 +25,7 @@ extends EnemyAIBase
 @export_group("Exported variables")
 
 ## How close this Enemy can get to the Player before they stop to attack (in meters).
-@export_range(0.01, 100.0, 0.1) var ideal_distance_to_target: float = 1.0
-
-
-###-------------------------------------------------------------------------###
-##### Regular variables
-###-------------------------------------------------------------------------###
-
-## This Enemy's target. It can only Target Player, so this variable is either Player Node on null.
-var target: Player = null
+@export_range(0.01, 100.0, 0.1) var ideal_distance_to_enemy: float = 1.0
 
 
 ###-------------------------------------------------------------------------###
@@ -64,36 +56,36 @@ func update_AI() -> void:
 	
 	## Check if the Player is within range of EntityDetectionArea
 	var overlaps: Array = enemy.EntityDetectionArea.get_overlapping_bodies()
-	## If an overlapping body within EntityDetectionArea is a Player, make them the AI's Target.
+	## If an overlapping body within EntityDetectionArea is a Player, make them the AI's target.
 	for body in overlaps:
 		if body is Player:
-			target = body
+			enemy.target = body
 			## Player is found, no need to loop through this Array anymore.
 			break
 			
 		
 		## Player not found, target remains null.
-		target = null
+		enemy.target = null
 		
 	
 	
 	## If this Enemy's target is the Player...
-	if target != null:
+	if enemy.target != null:
 		## When not currently attacking...
 		if enemy.States.current_state != attack_state:
-			## Find, find a path to the Target's pos, and Navigate towards it with the correct State.
-			AI_handler.find_path_to(target.global_position)
+			## Find, find a path to the target's pos, and Navigate towards it with the correct State.
+			AI_handler.find_path_to(enemy.target.global_position)
 			#
 			enemy.States.change_state(navigate_state)
 			
 		
 		
-		## This AI is responsible for knowing when the Enemy is within range to attack the Target.
+		## This AI is responsible for knowing when the Enemy is within range to attack the target.
 		#
 		## Calculate distance.
-		var distance_to_target: float = enemy.global_position.distance_to(target.global_position)
+		var distance_to_enemy: float = enemy.global_position.distance_to(enemy.target.global_position)
 		## Check if the distance is right...
-		if distance_to_target <= ideal_distance_to_target:
+		if distance_to_enemy <= ideal_distance_to_enemy:
 			## Reset pathfinding, it's not needed right now.
 			AI_handler.reset_path()
 			
