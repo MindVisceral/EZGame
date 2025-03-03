@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://c58jul0j3dxoj"]
 
-[ext_resource type="Script" path="res://ScenesScripts/Entities/InteractableObjects/Teleporter.gd" id="1_7qitw"]
+[ext_resource type="Script" uid="uid://coi812xro3qwk" path="res://ScenesScripts/Entities/InteractableObjects/Teleporter.gd" id="1_7qitw"]
 [ext_resource type="PackedScene" uid="uid://djxwsoyuoscmc" path="res://Blender/Teleporter.gltf" id="2_ibd7n"]
 [ext_resource type="AudioStream" uid="uid://b5wbw8g0k1pog" path="res://ScenesScripts/Audio/Sounds/teleporter_sound.wav" id="3_4cxde"]
 
@@ -31,6 +31,7 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
 emission_ring_radius = 1.0
 emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
 gravity = Vector3(0, 0, 0)
 radial_accel_min = -2.0
 radial_accel_max = 1.0
@@ -105,8 +106,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_888p4"]
 _data = {
-"RESET": SubResource("Animation_soa1d"),
-"spin": SubResource("Animation_blsm1")
+&"RESET": SubResource("Animation_soa1d"),
+&"spin": SubResource("Animation_blsm1")
 }
 
 [node name="Teleporter" type="StaticBody3D"]

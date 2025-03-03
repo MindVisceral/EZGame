@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dfg5rcmoasv08"]
 
 [ext_resource type="PackedScene" uid="uid://nf1bgcn3f8w0" path="res://ScenesScripts/Entities/Entity Elements/Interactable.tscn" id="1_0hf3u"]
-[ext_resource type="Script" path="res://lamp_test.gd" id="1_psx1e"]
-[ext_resource type="Shader" path="res://outline.gdshader" id="1_rbn4i"]
+[ext_resource type="Script" uid="uid://csobbsb2nbvhn" path="res://lamp_test.gd" id="1_psx1e"]
+[ext_resource type="Shader" uid="uid://cxpj5edsm3gpx" path="res://outline.gdshader" id="1_rbn4i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1khk6"]
 resource_local_to_scene = true
@@ -11,13 +11,13 @@ shader = ExtResource("1_rbn4i")
 shader_parameter/border_width = 0.0
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/pattern = false
-shader_parameter/line_number = null
-shader_parameter/line_sharpness = null
-shader_parameter/pulse = null
-shader_parameter/pulse_speed = null
-shader_parameter/line_movement = null
-shader_parameter/line_movement_speed = null
-shader_parameter/wave = null
+shader_parameter/line_number = 0.0
+shader_parameter/line_sharpness = 0.0
+shader_parameter/pulse = false
+shader_parameter/pulse_speed = 0.0
+shader_parameter/line_movement = false
+shader_parameter/line_movement_speed = 0.0
+shader_parameter/wave = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kxqo7"]
 resource_local_to_scene = true

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bfset8kv0qt4r"]
 
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Weapons/Effects/Base_Bullet_Trail_Emitter.gd" id="1_b5mfj"]
-[ext_resource type="Shader" path="res://Test_Trail.gdshader" id="2_aklup"]
+[ext_resource type="Script" uid="uid://dh0hc437vfybi" path="res://ScenesScripts/Entities/Weapons/Effects/Base_Bullet_Trail_Emitter.gd" id="1_b5mfj"]
+[ext_resource type="Shader" uid="uid://d32tlusg0xsnj" path="res://Test_Trail.gdshader" id="2_aklup"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mnggm"]
 render_priority = 0
@@ -60,7 +60,7 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2otdo"]
 _data = {
-"animation": SubResource("Animation_4ff0d")
+&"animation": SubResource("Animation_4ff0d")
 }
 
 [node name="BulletTrailEmitter" type="Node3D"]

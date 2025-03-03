@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://nf1bgcn3f8w0"]
 
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Entity Elements/Interactable.gd" id="1_p5jh7"]
+[ext_resource type="Script" uid="uid://dck1bfges6gq0" path="res://ScenesScripts/Entities/Entity Elements/Interactable.gd" id="1_p5jh7"]
 
 [node name="Interactable" type="Area3D"]
 editor_description = "This node is added to objects that are supposed to be interactable; doors, switches, etc.

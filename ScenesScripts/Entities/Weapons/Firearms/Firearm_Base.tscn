@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dv5fcfhevw1fe"]
 
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Weapons/Firearms/Firearm_Base.gd" id="1_10xiy"]
+[ext_resource type="Script" uid="uid://dt08voaq21l3b" path="res://ScenesScripts/Entities/Weapons/Firearms/Firearm_Base.gd" id="1_10xiy"]
 [ext_resource type="AudioStream" uid="uid://b5wbw8g0k1pog" path="res://ScenesScripts/Audio/Sounds/teleporter_sound.wav" id="4_3dsx7"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_t0uga"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://dllg2ily2gjqf"]
 
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/EnvironmentFire.gd" id="1_y0nwj"]
+[ext_resource type="Script" uid="uid://xhusg48qtcq8" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/EnvironmentFire.gd" id="1_y0nwj"]
 [ext_resource type="Texture2D" uid="uid://jcsdrmrk5ihy" path="res://fire_placeholder.png" id="2_oxjke"]
 [ext_resource type="Texture2D" uid="uid://b4ssi3riwa5c0" path="res://fire_frame_placeholder.png" id="3_gob4o"]
 
@@ -32,8 +32,7 @@ curve_y = SubResource("Curve_emgpg")
 curve_z = SubResource("Curve_un7mu")
 
 [sub_resource type="Curve" id="Curve_nexo7"]
-min_value = -50.0
-max_value = 50.0
+_limits = [-50.0, 50.0, 0.0, 1.0]
 _data = [Vector2(0, 11.5385), 0.0, 0.0, 0, 0, Vector2(0.505263, -11.5385), 0.0, 0.0, 0, 0, Vector2(1, 19.2308), 0.0, 0.0, 0, 0]
 point_count = 3
 
@@ -158,8 +157,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jf68o"]
 _data = {
-"Fire_sprite_animation": SubResource("Animation_tfoqq"),
-"RESET": SubResource("Animation_xyppl")
+&"Fire_sprite_animation": SubResource("Animation_tfoqq"),
+&"RESET": SubResource("Animation_xyppl")
 }
 
 [node name="EnvironmentFire" type="Node3D" node_paths=PackedStringArray("fire_sprite", "fire_particles", "fire_light")]

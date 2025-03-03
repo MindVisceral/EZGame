@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://bgpejmnpxwhel"]
 
 [ext_resource type="PackedScene" uid="uid://bfl36ykvecfd4" path="res://ScenesScripts/Entities/Enemies/Enemy_base/EnemyBase.tscn" id="1_wkc01"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/States/Idle.gd" id="2_vqty0"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/States/Navigate.gd" id="3_rn7c7"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/Enemy_base/AIBase.gd" id="4_nk623"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/Test_enemy/TestEnemyAI.gd" id="5_c3abr"]
+[ext_resource type="Script" uid="uid://dpt07ctw2gmbc" path="res://ScenesScripts/Entities/Enemies/States/Idle.gd" id="2_vqty0"]
+[ext_resource type="Script" uid="uid://brj1qjwulwlcw" path="res://ScenesScripts/Entities/Enemies/States/Navigate.gd" id="3_rn7c7"]
+[ext_resource type="Script" uid="uid://4w5gqhur4aa1" path="res://ScenesScripts/Entities/Enemies/Enemy_base/AIBase.gd" id="4_nk623"]
+[ext_resource type="Script" uid="uid://dmjmywawcxdrs" path="res://ScenesScripts/Entities/Enemies/Test_enemy/TestEnemyAI.gd" id="5_c3abr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_43eno"]
 radius = 0.17
@@ -28,7 +28,7 @@ radius = 0.05
 height = 0.25
 
 [node name="TestEnemy" instance=ExtResource("1_wkc01")]
-speed = 2.0
+speed = 4.0
 
 [node name="StateManager" parent="Scripts" index="0" node_paths=PackedStringArray("starting_state", "states")]
 starting_state = NodePath("Idle")

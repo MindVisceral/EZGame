@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dtwdyx71pw3un"]
 
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/NozzleFlame.gd" id="1_13qv6"]
-[ext_resource type="Shader" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/NozzleFlameShader.gdshader" id="3_vvwmp"]
+[ext_resource type="Script" uid="uid://d2xb06spam5vo" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/NozzleFlame.gd" id="1_13qv6"]
+[ext_resource type="Shader" uid="uid://cxkw6lw2j2i2s" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/NozzleFlameShader.gdshader" id="3_vvwmp"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_gtql7"]
 
@@ -188,9 +188,9 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hijha"]
 _data = {
-"RESET": SubResource("Animation_dm3fi"),
-"turn_off": SubResource("Animation_qv206"),
-"turn_on": SubResource("Animation_k7aq6")
+&"RESET": SubResource("Animation_dm3fi"),
+&"turn_off": SubResource("Animation_qv206"),
+&"turn_on": SubResource("Animation_k7aq6")
 }
 
 [node name="NozzleFlame" type="Node3D" node_paths=PackedStringArray("anim_player")]

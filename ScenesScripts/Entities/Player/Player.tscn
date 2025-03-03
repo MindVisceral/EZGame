@@ -1,30 +1,30 @@
 [gd_scene load_steps=39 format=3 uid="uid://lhlklylca50m"]
 
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player.gd" id="1_kmike"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/State_Manager.gd" id="2_c5aqi"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/Idle_State.gd" id="3_f5lbm"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/Walk_State.gd" id="4_fu07a"]
+[ext_resource type="Script" uid="uid://cn57dnnpkobr3" path="res://ScenesScripts/Entities/Player/Player.gd" id="1_kmike"]
+[ext_resource type="Script" uid="uid://dt8fo176shxom" path="res://ScenesScripts/Entities/Player/Player_States/State_Manager.gd" id="2_c5aqi"]
+[ext_resource type="Script" uid="uid://cc0o140r3jhui" path="res://ScenesScripts/Entities/Player/Player_States/Idle_State.gd" id="3_f5lbm"]
+[ext_resource type="Script" uid="uid://b0he2tscnk82b" path="res://ScenesScripts/Entities/Player/Player_States/Walk_State.gd" id="4_fu07a"]
 [ext_resource type="AudioStream" uid="uid://uwe5gj4gp3ot" path="res://ScenesScripts/Audio/Sounds/landed_sound.wav" id="4_lkchw"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/Slide_State.gd" id="5_pecq6"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/Crouch_State.gd" id="6_ib15b"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/Jump_State.gd" id="7_b1yw5"]
+[ext_resource type="Script" uid="uid://batk3s6011y1b" path="res://ScenesScripts/Entities/Player/Player_States/Slide_State.gd" id="5_pecq6"]
+[ext_resource type="Script" uid="uid://j5havl12rpfx" path="res://ScenesScripts/Entities/Player/Player_States/Crouch_State.gd" id="6_ib15b"]
+[ext_resource type="Script" uid="uid://c8bl5n1tuhuvf" path="res://ScenesScripts/Entities/Player/Player_States/Jump_State.gd" id="7_b1yw5"]
 [ext_resource type="AudioStream" uid="uid://cnpcbiobbqaqs" path="res://ScenesScripts/Audio/Sounds/jump_sound.wav" id="7_na2xp"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/Stomp_State.gd" id="8_fl03g"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/Fall_State.gd" id="8_xbf4w"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Alterators/WeaponManager.gd" id="9_cyjjp"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/WallRun_State.gd" id="9_encgj"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Alterators/HeadBop.gd" id="10_6kxr3"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Player_States/WallJump_State.gd" id="10_gc6l4"]
+[ext_resource type="Script" uid="uid://6gnosko50pm4" path="res://ScenesScripts/Entities/Player/Player_States/Stomp_State.gd" id="8_fl03g"]
+[ext_resource type="Script" uid="uid://cin77sccpgxwl" path="res://ScenesScripts/Entities/Player/Player_States/Fall_State.gd" id="8_xbf4w"]
+[ext_resource type="Script" uid="uid://l41b7s7r7i61" path="res://ScenesScripts/Entities/Player/Alterators/WeaponManager.gd" id="9_cyjjp"]
+[ext_resource type="Script" uid="uid://bl23ihomcu8b0" path="res://ScenesScripts/Entities/Player/Player_States/WallRun_State.gd" id="9_encgj"]
+[ext_resource type="Script" uid="uid://d36edh4vl6av8" path="res://ScenesScripts/Entities/Player/Alterators/HeadBop.gd" id="10_6kxr3"]
+[ext_resource type="Script" uid="uid://bgbpmie6xnxpy" path="res://ScenesScripts/Entities/Player/Player_States/WallJump_State.gd" id="10_gc6l4"]
 [ext_resource type="AudioStream" uid="uid://6t4qgn4shsqh" path="res://ScenesScripts/Audio/Sounds/stomp_sound.wav" id="11_txwo3"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Alterators/WeaponBob.gd" id="12_4bkuj"]
+[ext_resource type="Script" uid="uid://bt5onr4v6e04f" path="res://ScenesScripts/Entities/Player/Alterators/WeaponBob.gd" id="12_4bkuj"]
 [ext_resource type="PackedScene" uid="uid://b2fet7sg7ta7s" path="res://ScenesScripts/Entities/Weapons/Firearms/Pistol.tscn" id="12_nnnx6"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Alterators/InteractionManager.gd" id="13_qk48y"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Alterators/StatusEffectManager.gd" id="15_mvdi6"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Alterators/HeightAlternator.gd" id="16_e4sa7"]
+[ext_resource type="Script" uid="uid://dxiifrjvkd7e0" path="res://ScenesScripts/Entities/Player/Alterators/InteractionManager.gd" id="13_qk48y"]
+[ext_resource type="Script" uid="uid://4iry4khoe7ht" path="res://ScenesScripts/Entities/Player/Alterators/StatusEffectManager.gd" id="15_mvdi6"]
+[ext_resource type="Script" uid="uid://b3rnoekadk656" path="res://ScenesScripts/Entities/Player/Alterators/HeightAlternator.gd" id="16_e4sa7"]
 [ext_resource type="PackedScene" uid="uid://bf3osgw1tg5x5" path="res://ScenesScripts/Entities/Cameras/ShakeableCamera.tscn" id="17_b5tqw"]
 [ext_resource type="PackedScene" uid="uid://cl8fqu8ewudby" path="res://ScenesScripts/Entities/Player/Player_Model/HanMurstan_model.tscn" id="22_3fsrc"]
 [ext_resource type="PackedScene" uid="uid://dfekoydtlmwum" path="res://ScenesScripts/Entities/Weapons/Firearms/LMB-21.tscn" id="22_pkbhp"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Player/Alterators/UIManager.gd" id="22_u6o61"]
+[ext_resource type="Script" uid="uid://8kyqh21hfhlh" path="res://ScenesScripts/Entities/Player/Alterators/UIManager.gd" id="22_u6o61"]
 [ext_resource type="PackedScene" uid="uid://dn7v48k265lpr" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/Flamethrower.tscn" id="23_4c8na"]
 
 [sub_resource type="CapsuleShape3D" id="15"]
@@ -396,6 +396,213 @@ visible = false
 
 [node name="HanMurstan_model" parent="Visuals" instance=ExtResource("22_3fsrc")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="FingerThumb2R" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="0"]
+transform = Transform3D(1, -2.98023e-08, -3.98426e-07, 1.39698e-07, 1, -9.18517e-08, 3.16919e-07, -1.02445e-08, 1, -0.919045, 1.40257, 0.0730957)
+
+[node name="FingerThumb1R" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="1"]
+transform = Transform3D(1, 2.79397e-08, -2.39961e-07, -3.72529e-09, 1, 1.08033e-07, 2.68396e-07, -2.16067e-07, 1, -0.888981, 1.404, 0.0316209)
+
+[node name="FingerIndex3R" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, -2.19792e-07, -1.88447e-07, 2.30968e-07, 1, -6.0536e-09, 1.12283e-07, 4.65661e-09, 0.999999, -0.993691, 1.40201, 0.0342042)
+
+[node name="FingerIndex2R" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="3"]
+transform = Transform3D(1, -1.02445e-07, -1.25487e-07, 1.34576e-07, 1, 1.92551e-07, 4.00614e-08, -1.54367e-07, 0.999999, -0.972485, 1.40201, 0.0300014)
+
+[node name="FingerIndex1R" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="4"]
+transform = Transform3D(1, -1.09251e-07, 1.49012e-07, 2.39857e-07, 1, -2.16999e-07, -8.9407e-08, 1.5398e-07, 0.999999, -0.931014, 1.40201, 0.0217826)
+
+[node name="FingerMiddle3R" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="5"]
+transform = Transform3D(1, 5.96046e-08, -1.12897e-07, 1.56462e-07, 1, -5.36675e-08, 2.22848e-07, 2.97441e-08, 0.999999, -1.00203, 1.40201, 0.00362693)
+
+[node name="FingerMiddle2R" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="6"]
+transform = Transform3D(1, 1.27591e-07, -9.24455e-08, 3.63216e-08, 1, -9.48276e-08, 2.92623e-07, -7.52043e-08, 0.999999, -0.976078, 1.40201, 0.00324477)
+
+[node name="FingerMiddle1R" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="7"]
+transform = Transform3D(1, -2.52156e-07, 1.00345e-07, 2.15834e-07, 1, -1.1038e-07, -1.47693e-07, 1.48422e-07, 1, -0.933806, 1.40201, 0.00262242)
+
+[node name="FingerRing3R" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="8"]
+transform = Transform3D(1, 7.07805e-08, -3.23897e-07, 1.04308e-07, 1, -1.18744e-07, 3.42261e-07, 1.28988e-07, 1, -0.993212, 1.40201, -0.0228694)
+
+[node name="FingerRing2R" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="9"]
+transform = Transform3D(1, -7.17574e-08, 7.45058e-08, 1.11581e-07, 1, 2.00074e-07, -5.96046e-08, -2.28717e-07, 1, -0.968268, 1.40201, -0.0194311)
+
+[node name="FingerRing1R" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="10"]
+transform = Transform3D(1, -3.72529e-09, -9.37725e-08, 5.21541e-08, 1, 5.44824e-08, 1.13658e-07, -4.33065e-08, 1, -0.929624, 1.40201, -0.0141042)
+
+[node name="FingerPinky3R" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="11"]
+transform = Transform3D(1, 0, -2.2864e-07, 8.9407e-08, 1, 1.00583e-07, 1.58325e-08, -1.45286e-07, 0.999999, -0.97268, 1.40201, -0.0560899)
+
+[node name="FingerPinky2R" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="12"]
+transform = Transform3D(1, 3.07336e-08, -3.25164e-07, 1.30851e-07, 1, -2.67755e-08, 6.19693e-08, -7.89296e-08, 1, -0.953333, 1.40201, -0.0463152)
+
+[node name="FingerPinky1R" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="13"]
+transform = Transform3D(1, 4.88944e-08, -2.18604e-07, 1.90921e-08, 1, -7.59028e-08, 1.98916e-07, 6.70552e-08, 1, -0.922322, 1.40201, -0.0306472)
+
+[node name="HandR" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="14"]
+transform = Transform3D(1, 4.84288e-08, -1.6539e-07, -5.58794e-08, 1, 3.94648e-08, 1.63764e-07, -2.45636e-08, 1, -0.836549, 1.40365, -9.06345e-05)
+
+[node name="ForearmOneR" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="15"]
+transform = Transform3D(1, -6.33299e-08, 1.53668e-08, 1.71363e-07, 1, -2.18861e-07, 3.0006e-08, 1.97673e-07, 0.999999, -0.523367, 1.41267, -0.0259052)
+
+[node name="ArmR" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="16"]
+transform = Transform3D(0.999999, 0.0011787, 0.000476716, -0.00119826, 0.99905, 0.0435622, -0.000424763, -0.0435628, 0.99905, -0.15778, 1.40958, -0.0155778)
+
+[node name="ShoulderR" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="17"]
+transform = Transform3D(1, 0.000199268, 0.00018358, -0.000206991, 0.999049, 0.0436081, -0.000174657, -0.0436082, 0.999049, -0.15778, 1.40958, -0.0155778)
+
+[node name="EyeL" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="18"]
+transform = Transform3D(1, -2.44732e-07, -2.91778e-08, 2.7722e-07, 0.999999, 3.8743e-07, -6.64184e-09, -4.17233e-07, 0.999999, 0.0306093, 1.68707, 0.137819)
+
+[node name="EyeLCable" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="19"]
+transform = Transform3D(1, -2.44732e-07, -2.91778e-08, 2.7722e-07, 0.999999, 3.8743e-07, -6.64184e-09, -4.17233e-07, 0.999999, 0.0566088, 1.69826, 0.132361)
+
+[node name="EyeR" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="20"]
+transform = Transform3D(1, -2.44732e-07, -2.91778e-08, 2.7722e-07, 0.999999, 3.8743e-07, -6.64184e-09, -4.17233e-07, 0.999999, -0.032922, 1.68643, 0.10883)
+
+[node name="EyeRCable" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="21"]
+transform = Transform3D(1, -2.44732e-07, -2.91778e-08, 2.7722e-07, 0.999999, 3.8743e-07, -6.64184e-09, -4.17233e-07, 0.999999, -0.0209196, 1.69381, 0.111685)
+
+[node name="Skull_2" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="22"]
+transform = Transform3D(1, -2.44732e-07, -2.91778e-08, 2.7722e-07, 0.999999, 3.8743e-07, -6.64184e-09, -4.17233e-07, 0.999999, -6.29375e-09, 1.67404, 0.0431517)
+
+[node name="NeckJoint_2" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="23"]
+transform = Transform3D(1, -6.45206e-08, -2.29383e-07, 7.46342e-08, 0.999999, 2.38419e-07, 2.29133e-07, -2.98023e-07, 0.999999, 1.34934e-08, 1.59939, -0.0183841)
+
+[node name="TopNeckTube" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="24"]
+transform = Transform3D(1, -6.45206e-08, -2.29383e-07, 7.46342e-08, 0.999999, 2.38419e-07, 2.29133e-07, -2.98023e-07, 0.999999, 1.34934e-08, 1.59939, -0.0183841)
+
+[node name="BottomNeckTube" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="25"]
+transform = Transform3D(1, 2.61692e-08, -3.25031e-07, -3.48918e-08, 0.999999, 1.19209e-07, 2.07829e-07, -1.63913e-07, 0.999999, 6.64977e-09, 1.49063, 0.00535644)
+
+[node name="NeckSpinner_2" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="26"]
+transform = Transform3D(1, 1.11889e-08, -4.40114e-07, -5.78014e-09, 1, 7.35745e-08, 4.32844e-07, -1.02911e-07, 1, 3.43763e-09, 1.50291, 0.00509332)
+
+[node name="FingerThumb2L" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="27"]
+transform = Transform3D(0.999999, 2.67601e-06, 3.57628e-07, -2.52555e-06, 0.999999, -0.000319676, -2.98023e-07, 0.000319733, 1, 0.975548, 1.38938, 0.0875829)
+
+[node name="FingerThumb1L" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="28"]
+transform = Transform3D(0.999999, 2.8275e-06, 4.17233e-07, -2.67848e-06, 0.999999, -0.000319678, -3.8743e-07, 0.000319768, 1, 0.946483, 1.3976, 0.0461442)
+
+[node name="FingerIndex3L" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="29"]
+transform = Transform3D(1, 2.85357e-06, 5.06639e-07, -2.79397e-06, 0.999999, -0.000319652, -1.49012e-07, 0.000319591, 1, 1.11531, 1.3821, 0.118097)
+
+[node name="FingerIndex2L" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="30"]
+transform = Transform3D(1, 2.82377e-06, 4.47035e-07, -2.76137e-06, 0.999999, -0.000319699, -2.68221e-07, 0.000319665, 1, 1.07118, 1.38249, 0.0960082)
+
+[node name="FingerIndex1L" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="31"]
+transform = Transform3D(0.999999, 2.49129e-06, 4.47035e-07, -2.52388e-06, 0.999999, -0.000319717, -2.68221e-07, 0.000319657, 1, 1.02638, 1.38251, 0.0734812)
+
+[node name="FingerMiddle3L" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="32"]
+transform = Transform3D(0.999999, 2.72878e-06, 7.45058e-07, -2.77534e-06, 0.999999, -0.000319442, -3.27826e-07, 0.000319405, 1, 1.1225, 1.3831, 0.104493)
+
+[node name="FingerMiddle2L" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="33"]
+transform = Transform3D(1, 2.6701e-06, 7.45058e-07, -2.64216e-06, 0.999999, -0.000319773, -5.06639e-07, 0.000319701, 1, 1.07837, 1.38349, 0.0824049)
+
+[node name="FingerMiddle1L" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="34"]
+transform = Transform3D(0.999999, 2.81725e-06, 5.66244e-07, -2.86987e-06, 0.999999, -0.000319812, -3.27826e-07, 0.000319754, 1, 1.03357, 1.38352, 0.0598779)
+
+[node name="FingerRing3L" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="35"]
+transform = Transform3D(1, 3.13576e-06, 4.76837e-07, -3.08175e-06, 0.999999, -0.000319656, -3.27826e-07, 0.000319663, 1, 1.12809, 1.3831, 0.0902835)
+
+[node name="FingerRing2L" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="36"]
+transform = Transform3D(1, 2.90386e-06, 4.76837e-07, -2.91597e-06, 0.999999, -0.000319662, -2.08616e-07, 0.000319621, 1, 1.08396, 1.38349, 0.0681949)
+
+[node name="FingerRing1L" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="37"]
+transform = Transform3D(1, 2.76789e-06, 7.15256e-07, -2.78186e-06, 0.999999, -0.000319837, -3.8743e-07, 0.000319816, 1, 1.03916, 1.38352, 0.0456678)
+
+[node name="FingerPinky3L" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="38"]
+transform = Transform3D(0.999999, 2.95509e-06, 5.06639e-07, -2.90014e-06, 0.999999, -0.000319656, -2.68221e-07, 0.000319639, 1, 1.13431, 1.38311, 0.0762331)
+
+[node name="FingerPinky2L" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="39"]
+transform = Transform3D(0.999999, 2.92156e-06, 4.47035e-07, -2.85171e-06, 0.999999, -0.000319788, -1.19209e-07, 0.000319749, 1, 1.09019, 1.3835, 0.0541445)
+
+[node name="FingerPinky1L" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="40"]
+transform = Transform3D(1, 2.63099e-06, 4.76837e-07, -2.6105e-06, 0.999999, -0.000319647, -1.78814e-07, 0.000319643, 1, 1.04539, 1.38353, 0.0316174)
+
+[node name="HandL" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="41"]
+transform = Transform3D(0.999999, -2.94298e-07, 2.98023e-07, 2.84985e-07, 0.999999, 1.93715e-07, -5.96046e-08, -2.30968e-07, 1, 0.974886, 1.39127, 0.0211344)
+
+[node name="WristL" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="42"]
+transform = Transform3D(0.999999, -2.94298e-07, 2.98023e-07, 2.84985e-07, 0.999999, 1.93715e-07, -5.96046e-08, -2.30968e-07, 1, 0.929779, 1.40198, -0.00366167)
+
+[node name="ElbowL" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="43"]
+transform = Transform3D(1, -1.7602e-07, 0, 2.10013e-07, 0.999999, 1.9744e-07, 4.47035e-08, -2.16067e-07, 1, 0.658281, 1.41923, -0.0721815)
+
+[node name="ForearmL" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="44"]
+transform = Transform3D(1, -1.7602e-07, 0, 2.10013e-07, 0.999999, 1.9744e-07, 4.47035e-08, -2.16067e-07, 1, 0.658281, 1.41923, -0.0721815)
+
+[node name="ArmL" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="45"]
+transform = Transform3D(1, 6.49597e-08, -1.19209e-07, -6.18747e-08, 1, 9.31323e-09, 1.3411e-07, -1.11759e-08, 1, 0.467842, 1.41925, -0.039361)
+
+[node name="ShoulderGudgeonL" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="46"]
+transform = Transform3D(1, 6.49597e-08, -1.19209e-07, -6.18747e-08, 1, 9.31323e-09, 1.3411e-07, -1.11759e-08, 1, 0.304397, 1.40601, -0.012433)
+
+[node name="ShoulderCyllinderL" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="47"]
+transform = Transform3D(1, -3.40453e-07, -3.72529e-08, 3.21928e-07, 1, 2.93367e-08, 2.98023e-08, -2.88128e-08, 1, 0.162947, 1.40596, -0.00244309)
+
+[node name="ShoulderPintleL" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="48"]
+transform = Transform3D(1, -3.40453e-07, -3.72529e-08, 3.21928e-07, 1, 2.93367e-08, 2.98023e-08, -2.88128e-08, 1, 0.232655, 1.40608, -0.00735875)
+
+[node name="ShoulderCapL" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="49"]
+transform = Transform3D(1, -9.9645e-07, 3.72529e-08, 9.35994e-07, 1, 2.44472e-09, -2.98023e-08, 2.67755e-09, 1, 0.118582, 1.40638, 0.000694164)
+
+[node name="Chest_2" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="50"]
+transform = Transform3D(1, 8.88178e-16, 2.84217e-14, 2.22045e-16, 1, 9.68575e-08, -1.77636e-14, -1.04308e-07, 1, 7.82311e-07, 1.22769, 0.068566)
+
+[node name="Diaphragm_2" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="51"]
+transform = Transform3D(1, 1.33227e-15, 1.42109e-14, -1.55431e-15, 1, 1.11759e-07, -1.42109e-14, -1.15484e-07, 1, 1.33723e-14, 1.17275, 0.0161027)
+
+[node name="MidriffTop_2" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="52"]
+transform = Transform3D(1, 2.66454e-15, 6.39488e-14, -3.55271e-15, 1, 8.9407e-08, -5.68434e-14, -8.9407e-08, 1, 1.53152e-14, 1.10368, 0.0324004)
+
+[node name="MidriffBottom_2" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="53"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.93378e-15, 1.04469, 0.0369687)
+
+[node name="Tail_2" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="54"]
+transform = Transform3D(1, 8.01137e-13, -5.00222e-12, 2.66454e-13, 1, -3.53158e-06, -4.88853e-12, -3.57628e-06, 1, 1.2468e-14, 0.923925, 0.010503)
+
+[node name="Pelvis_2" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="55"]
+transform = Transform3D(1, 1.62002e-28, 2.95381e-16, 3.11272e-35, 1, 1.13999e-14, -2.95381e-16, -1.13999e-14, 1, 1.19967e-14, 0.981169, 0.0254182)
+
+[node name="HeelR" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="56"]
+transform = Transform3D(1, -3.83297e-07, -2.06754e-07, 4.62314e-07, 1, -1.98277e-07, 2.42144e-07, 2.4016e-07, 1, -0.0766291, 0.00835042, 0.00900589)
+
+[node name="FootR" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="57"]
+transform = Transform3D(1, 1.53878e-06, 4.88944e-08, -1.47813e-06, 1, 1.69576e-07, -1.44355e-08, -1.39472e-07, 1, -0.0769846, 0.0233333, 0.0857654)
+
+[node name="AnkleR" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="58"]
+transform = Transform3D(1, 2.58442e-08, 3.07336e-08, 3.62634e-08, 1, -2.61364e-07, -5.7742e-08, 3.16319e-07, 0.999999, -0.078911, 0.044363, 0.0322129)
+
+[node name="KneeR" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="59"]
+transform = Transform3D(1, -5.96046e-08, -8.3819e-08, 1.2666e-07, 1, -1.4843e-07, 1.41561e-07, 2.01864e-07, 1, -0.10409, 0.455803, 0.0185407)
+
+[node name="ShinR" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="60"]
+transform = Transform3D(1, -5.96046e-08, -8.3819e-08, 1.2666e-07, 1, -1.4843e-07, 1.41561e-07, 2.01864e-07, 1, -0.10409, 0.401283, -0.0129387)
+
+[node name="ThighR" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="61"]
+transform = Transform3D(1, -3.35276e-08, -7.03149e-08, 9.68575e-08, 1, -1.82714e-07, 1.4808e-07, 2.36818e-07, 1, -0.080761, 0.911922, 0.0316346)
+
+[node name="HeelL" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="62"]
+transform = Transform3D(1, -1.4028e-08, -5.33648e-07, 4.59549e-08, 1, 4.35192e-07, 3.56697e-07, -2.16413e-07, 1, 0.0766293, 0.00835097, 0.00901004)
+
+[node name="FootL" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="63"]
+transform = Transform3D(1, -1.54634e-06, -3.40398e-07, 1.43488e-06, 1, -3.17941e-08, 2.82656e-07, 1.28341e-07, 1, 0.0769851, 0.0233372, 0.0857688)
+
+[node name="AnkleL" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="64"]
+transform = Transform3D(1, 1.60246e-07, -3.81377e-07, -2.30619e-07, 1, 3.4639e-07, 2.95229e-07, -2.61873e-07, 1, 0.0789109, 0.044363, 0.032213)
+
+[node name="KneeL" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="65"]
+transform = Transform3D(1, 1.56462e-07, -6.51926e-08, -2.01166e-07, 0.999999, 3.45462e-07, 4.19095e-08, -2.60421e-07, 1, 0.10409, 0.455803, 0.0185251)
+
+[node name="ShinL" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="66"]
+transform = Transform3D(1, 1.56462e-07, -6.51926e-08, -2.01166e-07, 0.999999, 3.45462e-07, 4.19095e-08, -2.60421e-07, 1, 0.10409, 0.401283, -0.012952)
+
+[node name="ThighL" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="67"]
+transform = Transform3D(1, 2.27243e-07, 3.46452e-07, -2.57045e-07, 1, 3.57861e-07, -4.56814e-07, -2.74536e-07, 0.999999, 0.080761, 0.911922, 0.0316346)
+
+[node name="Pelvis_true" parent="Visuals/HanMurstan_model/Armature/Skeleton3D" index="68"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.17621e-14, 0.981169, 0.0254182)
 
 [node name="GPUParticlesAttractorVectorField3D" type="GPUParticlesAttractorVectorField3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00488281, 0.808258, 0)

@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://bfl36ykvecfd4"]
 
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/Enemy_base/EnemyBase.gd" id="1_mglqm"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/States/EnemyStateManager.gd" id="2_ofog0"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/Enemy_base/Stats.gd" id="3_0kcgh"]
+[ext_resource type="Script" uid="uid://bl6yaxfq57gpr" path="res://ScenesScripts/Entities/Enemies/Enemy_base/EnemyBase.gd" id="1_mglqm"]
+[ext_resource type="Script" uid="uid://vqtsloyn7aia" path="res://ScenesScripts/Entities/Enemies/States/EnemyStateManager.gd" id="2_ofog0"]
+[ext_resource type="Script" uid="uid://bseyxk4ajjfpy" path="res://ScenesScripts/Entities/Enemies/Enemy_base/Stats.gd" id="3_0kcgh"]
 [ext_resource type="PackedScene" uid="uid://yj1henetlw1f" path="res://ScenesScripts/Entities/Entity Elements/Hurtbox.tscn" id="3_bl2ki"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/Enemy_base/AnimationHandler.gd" id="5_t7vsf"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/Enemy_base/AIHandler.gd" id="6_i20a6"]
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Enemies/Enemy_base/DamageDataHandler.gd" id="7_npa2a"]
+[ext_resource type="Script" uid="uid://jfg8jecokavy" path="res://ScenesScripts/Entities/Enemies/Enemy_base/AnimationHandler.gd" id="5_t7vsf"]
+[ext_resource type="Script" uid="uid://f1tuukaegvsp" path="res://ScenesScripts/Entities/Enemies/Enemy_base/AIHandler.gd" id="6_i20a6"]
+[ext_resource type="Script" uid="uid://cm7kljedlsmnv" path="res://ScenesScripts/Entities/Enemies/Enemy_base/DamageDataHandler.gd" id="7_npa2a"]
 
 [node name="BaseEnemy" type="CharacterBody3D" node_paths=PackedStringArray("States", "stats", "DamageData_Handler", "Animation_Handler", "AI_Handler", "Collider", "FloorCast", "Navigation", "NodeHolder", "hurtbox", "EntityDetectionArea") groups=["Enemy"]]
 collision_layer = 4

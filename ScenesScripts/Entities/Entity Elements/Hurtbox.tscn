@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://yj1henetlw1f"]
 
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Entity Elements/Hurtbox.gd" id="1_a88k8"]
+[ext_resource type="Script" uid="uid://bpybno44xu0un" path="res://ScenesScripts/Entities/Entity Elements/Hurtbox.gd" id="1_a88k8"]
 
 [node name="Hurtbox" type="Area3D"]
 editor_description = "Detects intersections with Hitboxes,

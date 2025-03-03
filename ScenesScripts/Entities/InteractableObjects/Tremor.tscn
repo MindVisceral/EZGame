@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bcs2syi8emeol"]
 
-[ext_resource type="Script" path="res://ScenesScripts/Entities/InteractableObjects/Tremor.gd" id="1_lajy7"]
+[ext_resource type="Script" uid="uid://def23sc763umd" path="res://ScenesScripts/Entities/InteractableObjects/Tremor.gd" id="1_lajy7"]
 [ext_resource type="PackedScene" uid="uid://dk7i1lealdie5" path="res://ScenesScripts/Entities/Entity Elements/CameraTraumaCauser.tscn" id="1_y2qo7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xnhbm"]

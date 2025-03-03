@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://drcgshfh4ln3v"]
 
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Weapons/Effects/Base_Shot_Effect_Emitter.gd" id="1_mhiph"]
+[ext_resource type="Script" uid="uid://bxmyuhlm0e0sn" path="res://ScenesScripts/Entities/Weapons/Effects/Base_Shot_Effect_Emitter.gd" id="1_mhiph"]
 [ext_resource type="Texture2D" uid="uid://cq8b8g5gqgse7" path="res://ScenesScripts/Entities/Weapons/Effects/smoke.png" id="2_gq3l8"]
 
 [sub_resource type="Curve" id="Curve_e4c1a"]

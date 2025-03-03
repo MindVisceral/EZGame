@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ch6nll7x5w2mr"]
 
-[ext_resource type="Script" path="res://ScenesScripts/Levels/Trenchbroom/customFGDs/Water/Water.gd" id="1_mishm"]
+[ext_resource type="Script" uid="uid://dt7recqjqy0ap" path="res://ScenesScripts/Levels/Trenchbroom/customFGDs/Water/Water.gd" id="1_mishm"]
 
 [node name="Water" type="Area3D"]
 collision_layer = 512

@@ -86,6 +86,7 @@ func update_AI() -> void:
 		var distance_to_enemy: float = enemy.global_position.distance_to(enemy.target.global_position)
 		## Check if the distance is right...
 		if distance_to_enemy <= ideal_distance_to_enemy:
+			
 			## Reset pathfinding, it's not needed right now.
 			AI_handler.reset_path()
 			

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" load_steps=3 format=3 uid="uid://crq6dseknjpp0"]
 
-[ext_resource type="Script" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_tbhho"]
-[ext_resource type="Script" path="res://ScenesScripts/Levels/Trenchbroom/customFGDs/Water/Water.gd" id="2_78dad"]
+[ext_resource type="Script" uid="uid://dts43s6bdjj8i" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_tbhho"]
+[ext_resource type="Script" uid="uid://dt7recqjqy0ap" path="res://ScenesScripts/Levels/Trenchbroom/customFGDs/Water/Water.gd" id="2_78dad"]
 
 [resource]
 script = ExtResource("1_tbhho")

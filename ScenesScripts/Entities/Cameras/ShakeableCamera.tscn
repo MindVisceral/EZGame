@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bf3osgw1tg5x5"]
 
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Cameras/ShakeableCamera.gd" id="1_tc0cd"]
+[ext_resource type="Script" uid="uid://d27dc0c0bhgtc" path="res://ScenesScripts/Entities/Cameras/ShakeableCamera.gd" id="1_tc0cd"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_xwv1w"]
 resource_local_to_scene = true

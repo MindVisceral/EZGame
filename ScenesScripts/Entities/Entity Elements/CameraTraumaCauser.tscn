@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dk7i1lealdie5"]
 
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Entity Elements/CameraTraumaCauser.gd" id="1_md7ko"]
+[ext_resource type="Script" uid="uid://bjlw85tblxmco" path="res://ScenesScripts/Entities/Entity Elements/CameraTraumaCauser.gd" id="1_md7ko"]
 
 [node name="CameraTraumaCauser" type="Area3D"]
 editor_description = "This is a special Node used to make any nearby ShakeableCamera-class nodes shake, when such an Area3D enters this node's range.

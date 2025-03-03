@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://0clng625rshm"]
 
-[ext_resource type="Script" path="res://ScenesScripts/Entities/Weapons/Effects/Base_Hit_Effect_Emitter.gd" id="1_cwjcx"]
+[ext_resource type="Script" uid="uid://kpf4rqmyey6t" path="res://ScenesScripts/Entities/Weapons/Effects/Base_Hit_Effect_Emitter.gd" id="1_cwjcx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yp13h"]
 transparency = 1

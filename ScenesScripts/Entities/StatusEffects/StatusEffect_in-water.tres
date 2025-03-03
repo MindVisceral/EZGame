@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=2 format=3 uid="uid://cg6ru7erjontr"]
 
-[ext_resource type="Script" path="res://ScenesScripts/Entities/StatusEffects/StatusEffect_in-water.gd" id="1_eqcpo"]
+[ext_resource type="Script" uid="uid://biuq64l5ownqu" path="res://ScenesScripts/Entities/StatusEffects/StatusEffect_in-water.gd" id="1_eqcpo"]
 
 [resource]
 script = ExtResource("1_eqcpo")

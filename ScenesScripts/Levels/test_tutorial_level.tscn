@@ -10,7 +10,7 @@
 [ext_resource type="Material" uid="uid://bjh1g4egna4xk" path="res://ScenesScripts/Textures/fluids/water.tres" id="7_yylgl"]
 [ext_resource type="Material" uid="uid://dcq1dorjh2bv" path="res://ScenesScripts/Textures/Buildings/textures/wood_planks_2.tres" id="8_5fjp3"]
 [ext_resource type="PackedScene" uid="uid://dkqgap3nt7cow" path="res://ScenesScripts/Levels/Trenchbroom/customFGDs/Props/Lights/test_light.tscn" id="8_m0yee"]
-[ext_resource type="Script" path="res://ScenesScripts/Levels/Trenchbroom/customFGDs/Water/Water.gd" id="9_0mq6n"]
+[ext_resource type="Script" uid="uid://dt7recqjqy0ap" path="res://ScenesScripts/Levels/Trenchbroom/customFGDs/Water/Water.gd" id="9_0mq6n"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_5eawn"]
 _surfaces = [{
