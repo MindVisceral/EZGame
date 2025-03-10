@@ -370,6 +370,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.315, -0.264, -0.106)
 [node name="Flamethrower" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("23_4c8na")]
 visible = false
 player_camera = NodePath("../../PlayerCamera")
+number_of_bullets = 1
+bullet_spread = Vector2(0, 0)
+default_damage = 1.0
+max_distance = 10000.0
 
 [node name="SinglePistol" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("12_nnnx6")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0422868, 0.0040648, -0.167155)
