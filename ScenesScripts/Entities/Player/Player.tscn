@@ -395,6 +395,15 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.007
 visible = false
 player_camera = NodePath("../../PlayerCamera")
 
+[node name="StairsAheadRayCast" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.480533, -0.332139)
+target_position = Vector3(0, -0.55, 0)
+
+[node name="StairsBelowRayCast" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+target_position = Vector3(0, -0.75, 0)
+
 [node name="Visuals" type="Node3D" parent="."]
 visible = false
 

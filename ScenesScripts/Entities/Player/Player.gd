@@ -45,6 +45,17 @@ extends CharacterBody3D
 @export var air_control: float = 0.3
 
 
+### Stairs movement variables
+@export_group("Stairs movement")
+
+## Maximum step height
+## When the Player wants to move up a surface, this variable determines how high that surface
+## may be before it becomes unstepable;
+## the Player won't be snapped up a surface if it's higher than this number
+@export var MAX_STEP_HEIGHT: float = 0.5	
+
+
+### Head bob footsteps????? not head bob?
 @export_group("Footsteps")
 
 ## Maximum counter value to be computed one step
@@ -165,6 +176,12 @@ var current_weapon = null
 ## Direction of movement calculated from Input in a State
 var direction: Vector3 = Vector3()
 
+## Whether or not the Player snapped down to the stairs on the previous frame
+var _snapped_to_stairs_last_frame: bool = false
+## The number of the frame (since the Engine started counting)
+## at which the Player was most recently on floor
+var _last_frame_was_on_floor: int = -INF
+
 ## How long the Player has been in the air.
 ## Used in the Stomp state to determine camera shake strength. Longer in air = stronger shake.
 var air_time: float = 0.0
@@ -187,27 +204,7 @@ var consecutive_walljumps: int = 0
 ###-------------------------------------------------------------------------###
 
 
-
-
-
-#HERE unneccessary
-## Stores the current height
-@onready var current_height: float = standing_height
-
-#HERE unneccessary
-## Character controller horizontal speed.
-var horizontal_velocity
-
-#HERE unneccessary
-## True if in the last frame it was on the ground
-var _last_is_on_floor: bool = false
-
-
-
-
-
 func _ready():
-	
 	## Passes a reference of the Player class to the states so that it can be used by them
 	States.init(self)
 	StatusEffects.init(self)
@@ -258,12 +255,16 @@ func _physics_process(delta: float) -> void:
 		process_view_input(delta)
 #		process_movement(delta)
 		
+		## If the Player is on floor this frame, record the frame number
+		if is_on_floor(): _last_frame_was_on_floor = Engine.get_physics_frames()
 		
 		##States
 		States.physics_process(delta)
 		## Player's movement itself, dictated by the current_state in StateManager
 		set_velocity(velocity)
 		move_and_slide()
+		## Check if the Player should snap down the stairs and do that if necessary
+		_snap_down_to_stairs_check()
 		velocity = velocity
 		
 	
@@ -374,6 +375,67 @@ func is_moving_at_wall(process_input: bool = true, dot_product_value: float = 0.
 	
 	## Otherwise, (in both cases,) we return false.
 	return false
+
+#endregion
+
+#region Stairs-Handling utility functions (the last two can be moved elsewhere, but this is fine)
+
+## Check if the Player should be snapped down the stairs this frame;
+## That's when they're currently flying off the stairs, typically
+func _snap_down_to_stairs_check() -> void:
+	## Did the Player snap down the stair due to this check?
+	## Used to update _snapped_to_stairs_last_frame
+	var did_snap: bool = false
+	
+	## Was the Player on the floor last frame?
+	## Which frame was it (counting since the engine started)?
+	#
+	## If this is the frame right after Player flew off the stairs, we will try to snap them down
+	var was_on_floor_last_frame: int = \
+		(Engine.get_physics_frames() - _last_frame_was_on_floor == 1)
+	
+	## We will only snap down the stairs in these conditions...
+	## not on floor, falling down, is ineed going down the stairs (as known from last frame)
+	if (not is_on_floor() and velocity.y <= 0 and \
+			(was_on_floor_last_frame or _snapped_to_stairs_last_frame)):
+		## The conditions check out;
+		## Make the check down to see if there's a surface there
+		var body_test_result = PhysicsTestMotionResult3D.new()
+		if _run_body_test_motion(self.global_transform, Vector3(0, -MAX_STEP_HEIGHT, 0), body_test_result):
+			## Surface found - there's a step below the Player;
+			## this is the exact position a little above the step
+			var translate_y = body_test_result.get_travel().y
+			## Snap the Player down
+			self.position.y += translate_y
+			apply_floor_snap() ## Update to make absolutely sure the Player is on floor
+			did_snap = true
+			
+		
+	
+	_snapped_to_stairs_last_frame = did_snap;
+
+## When snapping the Player down to the floor, we must know if the surface
+## we're snapping down to isn't too steep.
+## Passed 'normal' Vector3 is the normal of the surface we're snapping to.
+func is_surface_too_steep(normal: Vector3) -> bool:
+	return (normal.angle_to(Vector3.UP) > self.floor_max_angle)
+
+## we'll use PhysicsServer3D's TestMotion for this
+## 'from' variable is the original position of the Player when TestMotion is tested
+## 'motion' in this case is directly down;
+## but typically, the direction in which the check will be performed from 'from' position
+## 'result' variable holds the results of this check
+func _run_body_test_motion(from: Transform3D, motion: Vector3, result = null) -> bool:
+	## Null result, we make a new one
+	if not result: result = PhysicsTestMotionParameters3D.new()
+	
+	## Defining parameters for PhysicsServer3D to use
+	var params = PhysicsTestMotionParameters3D.new()
+	params.from = from
+	params.motion = motion
+	
+	## Perform the check, we'll use 'results' to get the position where the Player will be snapped
+	return PhysicsServer3D.body_test_motion(self.get_rid(), params, result)
 
 #endregion
 
