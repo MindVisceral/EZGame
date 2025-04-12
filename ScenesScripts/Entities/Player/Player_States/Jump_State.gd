@@ -188,7 +188,7 @@ func physics_process(delta: float) -> BasePlayerState:
 	## A short time after the Raycast leaves the ground...
 	if ground_timer.is_stopped():
 		## Check if the Player is on floor...
-		if player.is_on_floor():
+		if player.is_player_on_floor():
 			
 			## If the jump button has been pressed within the buffer time, jump immediately
 			if !player.JumpBufferT.is_stopped():

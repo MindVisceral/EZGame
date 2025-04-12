@@ -55,7 +55,7 @@ func physics_process(delta: float) -> BasePlayerState:
 	## NOTE: maxf is used because velocity.y is negative when falling
 	player.velocity.y = maxf(player.velocity.y, player.falling_speed_limit)
 	
-	if !player.is_on_floor():
+	if !player.is_player_on_floor():
 		return fall_state
 	
 	return null

@@ -157,7 +157,7 @@ func physics_process(delta: float) -> BasePlayerState:
 	## But if they're still clinging to the wall...
 	else:
 		## If they're on the wall, but they've reached the floor...
-		if player.is_on_floor():
+		if player.is_player_on_floor():
 			## If the jump button has been pressed within the buffer time, allow for a (floor) jump
 			if !player.JumpBufferT.is_stopped():
 				return jump_state

@@ -130,7 +130,7 @@ func physics_process(delta: float) -> BasePlayerState:
 	
 	
 	## Even if the Player slides off the floor, they still continue sliding
-	#if !player.is_on_floor():
+	#if !player.is_player_on_floor():
 		#return fall_state
 	
 	## If the Player stops moving, return to Idle state. The Y axis is ignored.

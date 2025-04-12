@@ -1434,7 +1434,7 @@ shape = SubResource("ConvexPolygonShape3D_hvvu1")
 shape = SubResource("ConvexPolygonShape3D_80n26")
 
 [node name="Player" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 0, 36)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 1.11654, 36)
 
 [node name="Map_elements" type="Node3D" parent="." index="5"]
 

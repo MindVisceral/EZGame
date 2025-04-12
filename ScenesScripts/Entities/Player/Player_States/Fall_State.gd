@@ -111,7 +111,7 @@ func physics_process(delta: float) -> BasePlayerState:
 	
 	
 	## Check if the Player has reached the ground already
-	if player.is_on_floor():
+	if player.is_player_on_floor():
 		
 		## If the jump button has been pressed within the buffer time, allow for another jump
 		if !player.JumpBufferT.is_stopped():

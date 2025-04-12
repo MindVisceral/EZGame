@@ -97,7 +97,7 @@ func physics_process(delta: float) -> BasePlayerState:
 	
 	## Check if the Player has reached the ground already
 	## Stomp is unstoppable otherwise
-	if player.is_on_floor():
+	if player.is_player_on_floor():
 		
 		## Stomp was successful, therefore landing causes Camera shaking;
 		## Player's air_time makes the shaking stronger,

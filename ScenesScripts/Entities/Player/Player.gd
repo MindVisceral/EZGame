@@ -258,13 +258,19 @@ func _physics_process(delta: float) -> void:
 		## If the Player is on floor this frame, record the frame number
 		if is_on_floor(): _last_frame_was_on_floor = Engine.get_physics_frames()
 		
+		
 		##States
 		States.physics_process(delta)
+		
 		## Player's movement itself, dictated by the current_state in StateManager
 		set_velocity(velocity)
-		move_and_slide()
-		## Check if the Player should snap down the stairs and do that if necessary
-		_snap_down_to_stairs_check()
+		
+		## Attempt to snap the Player up the stairs - if that fails, proceed normally
+		if (not _snap_up_to_stairs_check(delta)):
+			move_and_slide()
+			## Check if the Player should snap down the stairs and do that if necessary
+			_snap_down_to_stairs_check()
+			
 		velocity = velocity
 		
 	
@@ -378,7 +384,81 @@ func is_moving_at_wall(process_input: bool = true, dot_product_value: float = 0.
 
 #endregion
 
-#region Stairs-Handling utility functions (the last two can be moved elsewhere, but this is fine)
+#region Stairs-Handling functions
+## NOTE: (the last two are utility and can be moved elsewhere, but this is fine)
+
+## Due to the changes made by the Stairs-handling system, this function should be used
+## instead of just player.is_on_floor()
+func is_player_on_floor() -> bool:
+	return (is_on_floor() or _snapped_to_stairs_last_frame)
+
+## Check if the Player should be snapped up the stairs this frame;
+## Used when the Player goes up the stairs, obviously.
+func _snap_up_to_stairs_check(delta) -> bool:
+	## This function will only be run if the Player is on floor at the moment
+	if (not is_on_floor() and not _snapped_to_stairs_last_frame): return false
+	## If the Player is moving up on the Y axis (jumping)
+	## or they're not pressing any directional buttons, then also don't perform this function
+	if (self.velocity.y > 0 or direction.length() == 0): return false
+	
+	## The position at which we expect the Player to be next frame;
+	## Only X and Y axes matter
+	var expected_move_motion: Vector3 = self.velocity * Vector3(1, 0, 1) * delta
+	
+	## BodyTestMotion's starting position;
+	## a bit in the direction the Player is moving and two steps higher then the Player
+	## (higher - to see if something is blocking the Player)
+	var step_pos_with_clearance: Transform3D = \
+		self.global_transform.translated(expected_move_motion + Vector3(0, MAX_STEP_HEIGHT * 2, 0))
+	
+	## We use TestMotion to move the 'dummy' Player down to check where to snap them
+	var down_check_result: PhysicsTestMotionResult3D = PhysicsTestMotionResult3D.new()
+	
+	## Run the check down from the granted position;
+	## if it returns something and the collision's result is a surface...
+	if (_run_body_test_motion(step_pos_with_clearance, \
+		Vector3(0, -MAX_STEP_HEIGHT * 2, 0), down_check_result) \
+		and \
+		(down_check_result.get_collider().is_class("StaticBody3D") or \
+		down_check_result.get_collider().is_class("CSGShape3D"))):
+			## Check how far up we must move the Player to correctly snap them to the step
+			var step_height = ((step_pos_with_clearance.origin + down_check_result.get_travel()) - \
+			self.global_position).y
+			
+			## If it's too high for the Player to step up, or the step is too small to matter,
+			## then we return false and don't do snap the Player;
+			## NOTE: (step_height <= 0.01) seems to prevent glitches, apparently.
+			## NOTE: The third 'or' is to check if the Player's 'feet' are at the correct position;
+			## I.e. the Player's origin point MUST ALWAYS be located at the bottom of the Collider
+			if ((step_height > MAX_STEP_HEIGHT) or (step_height <= 0.01) or \
+			((down_check_result.get_collision_point() - self.global_position).y > MAX_STEP_HEIGHT)):
+				return false 
+			
+			## Everyting seems fine, we can now snap the Player to the step.
+			
+			## Place the StairsAheadRaycast3D to the check's collision point
+			## and up by MAX_STEP_HEIGHT,
+			## and a bit in the direction of the Player's expected movement ;
+			## This should hit the flat part of the stairs
+			%StairsAheadRayCast.global_position = down_check_result.get_collision_point() + \
+				Vector3(0, MAX_STEP_HEIGHT, 0) + expected_move_motion.normalized() * 0.1
+			## Now we check if this RayCast finds a valid step
+			%StairsAheadRayCast.force_raycast_update()
+			if (%StairsAheadRayCast.is_colliding() \
+			and not is_surface_too_steep(%StairsAheadRayCast.get_collision_normal())):
+				## And move the Player a bit above the surface
+				self.global_position = step_pos_with_clearance.origin + \
+				down_check_result.get_travel();
+				
+				## Snap the Playey down to the surface. Done!
+				apply_floor_snap() ## Update to make absolutely sure the Player is on floor
+				_snapped_to_stairs_last_frame = true
+				return true
+			
+		
+	
+	## If the snap didn't happen, return false (by default)
+	return false
 
 ## Check if the Player should be snapped down the stairs this frame;
 ## That's when they're currently flying off the stairs, typically
@@ -387,24 +467,28 @@ func _snap_down_to_stairs_check() -> void:
 	## Used to update _snapped_to_stairs_last_frame
 	var did_snap: bool = false
 	
+	## If the surface-detecting RayCast below the Player detects a surface,
+	## and that surface isn't too steep, then we can snap the Player down.
+	var floor_below: bool = %StairsBelowRayCast.is_colliding() \
+		and not is_surface_too_steep(%StairsBelowRayCast.get_collision_normal())
+	
 	## Was the Player on the floor last frame?
-	## Which frame was it (counting since the engine started)?
-	#
-	## If this is the frame right after Player flew off the stairs, we will try to snap them down
-	var was_on_floor_last_frame: int = \
+	## If the current frame is right after Player flew off the stairs, we will try to snap them down
+	var was_on_floor_last_frame: bool = \
 		(Engine.get_physics_frames() - _last_frame_was_on_floor == 1)
 	
 	## We will only snap down the stairs in these conditions...
-	## not on floor, falling down, is ineed going down the stairs (as known from last frame)
-	if (not is_on_floor() and velocity.y <= 0 and \
+	## not on floor, falling down, valid surface below the Player, and
+	## Player is indeed going down the stairs (as known from last frame)...
+	if (not is_on_floor() and velocity.y <= 0 and floor_below and\
 			(was_on_floor_last_frame or _snapped_to_stairs_last_frame)):
 		## The conditions check out;
 		## Make the check down to see if there's a surface there
-		var body_test_result = PhysicsTestMotionResult3D.new()
+		var body_test_result: PhysicsTestMotionResult3D = PhysicsTestMotionResult3D.new()
 		if _run_body_test_motion(self.global_transform, Vector3(0, -MAX_STEP_HEIGHT, 0), body_test_result):
 			## Surface found - there's a step below the Player;
 			## this is the exact position a little above the step
-			var translate_y = body_test_result.get_travel().y
+			var translate_y: float = body_test_result.get_travel().y
 			## Snap the Player down
 			self.position.y += translate_y
 			apply_floor_snap() ## Update to make absolutely sure the Player is on floor
@@ -430,7 +514,7 @@ func _run_body_test_motion(from: Transform3D, motion: Vector3, result = null) ->
 	if not result: result = PhysicsTestMotionParameters3D.new()
 	
 	## Defining parameters for PhysicsServer3D to use
-	var params = PhysicsTestMotionParameters3D.new()
+	var params: PhysicsTestMotionParameters3D = PhysicsTestMotionParameters3D.new()
 	params.from = from
 	params.motion = motion
 	
