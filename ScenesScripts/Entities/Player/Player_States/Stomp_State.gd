@@ -103,7 +103,7 @@ func physics_process(delta: float) -> BasePlayerState:
 		## Player's air_time makes the shaking stronger,
 		## but it is clamped to always be at least the same as trauma_amount.
 		player.air_time = clampf(player.air_time, 1.0, 10.0)
-		player.PlayerCamera.add_trauma(trauma_amount * player.air_time)
+		player.shake_camera(trauma_amount * player.air_time)
 		
 		## If the jump button has been pressed within the buffer time, jump immediately
 		if !player.JumpBufferT.is_stopped():

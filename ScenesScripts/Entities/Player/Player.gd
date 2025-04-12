@@ -18,6 +18,7 @@ extends CharacterBody3D
 
 ## Default camera FOV
 @export_range(5, 170, 0.1) var camera_FOV: int = 90
+
 ## Decides if the Camera is in the first person view (true), or the third person view (false)
 ## FP position is same as Head position, TP position is same as TPMarker's position
 @export var first_person: bool = true
@@ -52,7 +53,12 @@ extends CharacterBody3D
 ## When the Player wants to move up a surface, this variable determines how high that surface
 ## may be before it becomes unstepable;
 ## the Player won't be snapped up a surface if it's higher than this number
-@export var MAX_STEP_HEIGHT: float = 0.5	
+@export var MAX_STEP_HEIGHT: float = 0.5
+
+## Turn camera smoothing during stairs snapping on or off
+## Makes the Camera lag behind the Player a bit to smooth out the Player's motions when snapping
+## up or down the stairs
+@export var camera_smoothing: bool = true
 
 
 ### Head bob footsteps????? not head bob?
@@ -141,13 +147,11 @@ extends CharacterBody3D
 @onready var FeetCollider: CollisionShape3D = $Collider/FeetCollider
 @onready var WallDetection: ShapeCast3D = $Collider/WallDetectionCast
 @onready var Head: Marker3D = $Collider/Head
-@onready var Firearms: Marker3D = $Collider/Head/BobbingNode/Firearms
+@onready var Firearms: Marker3D = $Collider/Head/CameraSmoothing/BobbingNode/Firearms
 #@onready var Firearms: Marker3D = $Head/Firearms
 #@onready var Firearms: Marker3D = $Firearms
-## A special ShakeableCamera; this reference is used to make the Camera shake by Player scripts
-@onready var PlayerCamera: ShakeableCamera = $Collider/Head/BobbingNode/PlayerCamera
-@onready var InteractableCast: ShapeCast3D = $Collider/Head/BobbingNode/InteractableCast
-@onready var TPMarker: Marker3D = $Collider/Head/BobbingNode/TPMarker
+@onready var InteractableCast: ShapeCast3D = $Collider/Head/CameraSmoothing/BobbingNode/InteractableCast
+@onready var TPMarker: Marker3D = $Collider/Head/CameraSmoothing/BobbingNode/TPMarker
 
 ## Player stats
 @export_group("Stats")
@@ -283,13 +287,13 @@ func _process(delta: float) -> void:
 ## On ready, apply exported variables like this: 
 func apply_exported() -> void:
 	## Change PlayerCamera's FOV to the set value
-	PlayerCamera.fov = camera_FOV
+	%PlayerCamera.fov = camera_FOV
 	
 	## Change the Camera's position to make it first or third person
 	if first_person == true:
-		PlayerCamera.position = Vector3.ZERO
+		%PlayerCamera.position = Vector3.ZERO
 	else:
-		PlayerCamera.position = TPMarker.position
+		%PlayerCamera.position = TPMarker.position
 		
 	
 	## Instantly alter Collider dimensions
@@ -442,7 +446,7 @@ func _snap_up_to_stairs_check(delta) -> bool:
 			## This should hit the flat part of the stairs
 			%StairsAheadRayCast.global_position = down_check_result.get_collision_point() + \
 				Vector3(0, MAX_STEP_HEIGHT, 0) + expected_move_motion.normalized() * 0.1
-			## Now we check if this RayCast finds a valid step
+			## Now we check if this RayCast finds a valid step, and if it does, apply snapping
 			%StairsAheadRayCast.force_raycast_update()
 			if (%StairsAheadRayCast.is_colliding() \
 			and not is_surface_too_steep(%StairsAheadRayCast.get_collision_normal())):
@@ -483,7 +487,7 @@ func _snap_down_to_stairs_check() -> void:
 	if (not is_on_floor() and velocity.y <= 0 and floor_below and\
 			(was_on_floor_last_frame or _snapped_to_stairs_last_frame)):
 		## The conditions check out;
-		## Make the check down to see if there's a surface there
+		## Make the check down to see if there's a surface there, and if there is, apply snapping
 		var body_test_result: PhysicsTestMotionResult3D = PhysicsTestMotionResult3D.new()
 		if _run_body_test_motion(self.global_transform, Vector3(0, -MAX_STEP_HEIGHT, 0), body_test_result):
 			## Surface found - there's a step below the Player;
@@ -520,6 +524,15 @@ func _run_body_test_motion(from: Transform3D, motion: Vector3, result = null) ->
 	
 	## Perform the check, we'll use 'results' to get the position where the Player will be snapped
 	return PhysicsServer3D.body_test_motion(self.get_rid(), params, result)
+
+#endregion
+
+#region ## Player Camera functions, Camera Smoothing
+
+## Makes the PlayerCamera (of ShakeableCamera class) shake with given trauma_value
+func shake_camera(trauma_value) -> void:
+	%PlayerCamera.add_trauma(trauma_value)
+	
 
 #endregion
 

@@ -220,12 +220,12 @@ editor_description = "Makes the chosen bopped_node - the Head or the Camera:
 
 Done for better immersion and responsivity"
 script = ExtResource("10_6kxr3")
-bobbing_node = NodePath("../../Collider/Head/BobbingNode")
+bobbing_node = NodePath("../../Collider/Head/CameraSmoothing/BobbingNode")
 movement_tilt_enabled = false
 
 [node name="WeaponBob" type="Node" parent="Scripts" node_paths=PackedStringArray("bobbing_node")]
 script = ExtResource("12_4bkuj")
-bobbing_node = NodePath("../../Collider/Head/BobbingNode/Firearms")
+bobbing_node = NodePath("../../Collider/Head/CameraSmoothing/BobbingNode/Firearms")
 breath_frequency = 0.002
 breath_amplitude = 0.004
 
@@ -276,7 +276,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("15")
 
 [node name="capsulemesh" type="MeshInstance3D" parent="Collider"]
-visible = false
 mesh = SubResource("CapsuleMesh_8ft6d")
 
 [node name="FeetCollider" type="CollisionShape3D" parent="Collider"]
@@ -317,8 +316,8 @@ spot_angle_attenuation = 0.9
 
 [node name="Head" type="Marker3D" parent="Collider"]
 editor_description = "Holds the Camera as its child
-Change it's Y position (height) through the HeightAlternator to make the camera move along with it,
-for example when crouching"
+Change it's Y position (height) through the HeightAlternator to make the camera move along with it, e.g. when crouching.
+This must be a child of the Collider for the HeightAlternator to work properly!"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 gizmo_extents = 0.1
 
@@ -327,30 +326,34 @@ visible = false
 mesh = SubResource("SphereMesh_4ktjy")
 skeleton = NodePath("../..")
 
-[node name="BobbingNode" type="Node3D" parent="Collider/Head"]
+[node name="CameraSmoothing" type="Node3D" parent="Collider/Head"]
+unique_name_in_owner = true
+
+[node name="BobbingNode" type="Node3D" parent="Collider/Head/CameraSmoothing"]
 editor_description = "This node is bobbed by the HeadBob script instead of the Head node
 Using the Head node for bobbing nullifies mouse movement, which also rotates the Head node"
 
-[node name="PlayerCamera" parent="Collider/Head/BobbingNode" instance=ExtResource("17_b5tqw")]
+[node name="PlayerCamera" parent="Collider/Head/CameraSmoothing/BobbingNode" instance=ExtResource("17_b5tqw")]
+unique_name_in_owner = true
 noise = SubResource("FastNoiseLite_hjmpv")
 
-[node name="TraumaDetectionArea" parent="Collider/Head/BobbingNode/PlayerCamera" index="0"]
+[node name="TraumaDetectionArea" parent="Collider/Head/CameraSmoothing/BobbingNode/PlayerCamera" index="0"]
 visible = false
 
-[node name="Collider" type="CollisionShape3D" parent="Collider/Head/BobbingNode/PlayerCamera/TraumaDetectionArea" index="0"]
+[node name="Collider" type="CollisionShape3D" parent="Collider/Head/CameraSmoothing/BobbingNode/PlayerCamera/TraumaDetectionArea" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.65, 0)
 shape = SubResource("SphereShape3D_7uouk")
 
-[node name="HeadWaterDetectionArea" type="Area3D" parent="Collider/Head/BobbingNode"]
+[node name="HeadWaterDetectionArea" type="Area3D" parent="Collider/Head/CameraSmoothing/BobbingNode"]
 collision_layer = 0
 collision_mask = 512
 input_ray_pickable = false
 monitorable = false
 
-[node name="Collider" type="CollisionShape3D" parent="Collider/Head/BobbingNode/HeadWaterDetectionArea"]
+[node name="Collider" type="CollisionShape3D" parent="Collider/Head/CameraSmoothing/BobbingNode/HeadWaterDetectionArea"]
 shape = SubResource("SphereShape3D_73tix")
 
-[node name="InteractableCast" type="ShapeCast3D" parent="Collider/Head/BobbingNode"]
+[node name="InteractableCast" type="ShapeCast3D" parent="Collider/Head/CameraSmoothing/BobbingNode"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.5)
 shape = SubResource("CapsuleShape3D_oey6e")
 target_position = Vector3(0, -1.5, 0)
@@ -359,15 +362,15 @@ collision_mask = 32
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="TPMarker" type="Marker3D" parent="Collider/Head/BobbingNode"]
+[node name="TPMarker" type="Marker3D" parent="Collider/Head/CameraSmoothing/BobbingNode"]
 editor_description = "Marks the position of the Camera's third person view
 Janky and not very developed. Could be expanded upon"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
-[node name="Firearms" type="Marker3D" parent="Collider/Head/BobbingNode"]
+[node name="Firearms" type="Marker3D" parent="Collider/Head/CameraSmoothing/BobbingNode"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.315, -0.264, -0.106)
 
-[node name="Flamethrower" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("23_4c8na")]
+[node name="Flamethrower" parent="Collider/Head/CameraSmoothing/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("23_4c8na")]
 visible = false
 player_camera = NodePath("../../PlayerCamera")
 number_of_bullets = 1
@@ -375,14 +378,14 @@ bullet_spread = Vector2(0, 0)
 default_damage = 1.0
 max_distance = 10000.0
 
-[node name="SinglePistol" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("12_nnnx6")]
+[node name="SinglePistol" parent="Collider/Head/CameraSmoothing/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("12_nnnx6")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0422868, 0.0040648, -0.167155)
 visible = false
 player_camera = NodePath("../../PlayerCamera")
 shot_cooldown = 1.2
 default_damage = 2.0
 
-[node name="AutoPistol" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("12_nnnx6")]
+[node name="AutoPistol" parent="Collider/Head/CameraSmoothing/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("12_nnnx6")]
 transform = Transform3D(-0.906308, 0.422618, -8.74228e-08, 0.422618, 0.906308, 0, 7.92319e-08, -3.69465e-08, -1, -0.0307228, -0.0205753, -0.192714)
 visible = false
 player_camera = NodePath("../../PlayerCamera")
@@ -390,7 +393,7 @@ firing_mode = 1
 shot_cooldown = 0.2
 default_damage = 0.5
 
-[node name="LMB-21" parent="Collider/Head/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("22_pkbhp")]
+[node name="LMB-21" parent="Collider/Head/CameraSmoothing/BobbingNode/Firearms" node_paths=PackedStringArray("player_camera") instance=ExtResource("22_pkbhp")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.00702256, 0.103284, -0.304065)
 visible = false
 player_camera = NodePath("../../PlayerCamera")
@@ -655,5 +658,5 @@ offset_right = 74.6
 offset_bottom = -31.0
 grow_vertical = 0
 
-[editable path="Collider/Head/BobbingNode/PlayerCamera"]
+[editable path="Collider/Head/CameraSmoothing/BobbingNode/PlayerCamera"]
 [editable path="Visuals/HanMurstan_model"]
