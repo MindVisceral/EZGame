@@ -99,7 +99,7 @@ script = ExtResource("1_fmi5n")
 
 [node name="FireSprite" type="AnimatedSprite3D" parent="."]
 cast_shadow = 0
-modulate = Color(0.971516, 0.404465, 0.286756, 0.964706)
+modulate = Color(0.976369, 0.435475, 0.322044, 0.964706)
 axis = 0
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_jjqw8")
@@ -107,7 +107,7 @@ animation = &"fire"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_w1x5d")
+&"": SubResource("AnimationLibrary_w1x5d")
 }
 autoplay = "animation"
 
