@@ -259,7 +259,8 @@ func _physics_process(delta: float) -> void:
 		process_view_input(delta)
 #		process_movement(delta)
 		
-		## If the Player is on floor this frame, record the frame number
+		## If the Player is on floor this frame, record the frame number;
+		## used for stair snapping
 		if is_on_floor(): _last_frame_was_on_floor = Engine.get_physics_frames()
 		
 		
@@ -383,7 +384,7 @@ func is_moving_at_wall(process_input: bool = true, dot_product_value: float = 0.
 			
 		
 	
-	## Otherwise, (in both cases,) we return false.
+	## Otherwise (in both cases) we return false.
 	return false
 
 #endregion
@@ -457,6 +458,8 @@ func _snap_up_to_stairs_check(delta) -> bool:
 				## Snap the Playey down to the surface. Done!
 				apply_floor_snap() ## Update to make absolutely sure the Player is on floor
 				_snapped_to_stairs_last_frame = true
+				
+				print("WORKING!")
 				return true
 			
 		

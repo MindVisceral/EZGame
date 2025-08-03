@@ -4,6 +4,11 @@
 class_name NetRadiantCustomGamePackConfig
 extends Resource
 
+enum NetRadiantCustomMapType {
+	QUAKE_1,
+	QUAKE_3
+}
+
 ## Button to export / update this gamepack's configuration in the NetRadiant Custom Gamepacks Folder.
 @export var export_file: bool:
 	get:
@@ -28,7 +33,8 @@ extends Resource
 ## [NetRadiantCustomShader] resources for shader file generation.
 @export var netradiant_custom_shaders : Array[Resource] = [
 	preload("res://addons/func_godot/game_config/netradiant_custom/netradiant_custom_shader_clip.tres"),
-	preload("res://addons/func_godot/game_config/netradiant_custom/netradiant_custom_shader_skip.tres")
+	preload("res://addons/func_godot/game_config/netradiant_custom/netradiant_custom_shader_skip.tres"),
+	preload("res://addons/func_godot/game_config/netradiant_custom/netradiant_custom_shader_origin.tres")
 ]
 
 ## Supported texture file types.
@@ -48,6 +54,25 @@ extends Resource
 
 ## Skip texture path that gets applied to caulk and nodrawnonsolid shaders.
 @export var skip_texture: String = "textures/special/skip"
+
+## Quake map type NetRadiant will filter the map for.
+## By default, will specify Quake 1 limitations. This will remove patches.
+## mapq3 will allow saving patches. 
+## @warning Toggling this option may be destructive!
+@export var map_type: NetRadiantCustomMapType = NetRadiantCustomMapType.QUAKE_1
+
+## Variables to include in the exported gamepack's [code]default_build_menu.xml[/code].[br][br]
+## Each [String] key defines a variable name, and its corresponding [String] value as the literal command-line string to execute in place of this variable identifier[br][br]
+## Entries may be referred to by key in [member default_build_menu_commands] values.
+@export var default_build_menu_variables: Dictionary
+
+## Commands to include in the exported gamepack's [code]default_build_menu.xml[/code].[br][br]
+## Keys, specified as a [String], define the build option name as you want it to appear in Radiant.[br][br]
+## Values represent commands taken within each option.[br][br]They may be either a [String] or an
+## [Array] of [String] elements that will be used as the full command-line text issued by each command [i]within[/i]
+## its associated build option key. [br][br]They may reference entries in [member default_build_menu_variables]
+## by using brackets: [code][variable key name][/code]
+@export var default_build_menu_commands: Dictionary
 
 ## Generates completed text for a .shader file.
 func build_shader_text() -> String:
@@ -78,6 +103,13 @@ func build_gamepack_text() -> String:
 		soundtypes_str += sound_type
 		if sound_type != sound_types[-1]:
 			soundtypes_str += " "
+
+	var maptype_str: String
+
+	if map_type == NetRadiantCustomMapType.QUAKE_3:
+		maptype_str = "mapq3"
+	else:
+		maptype_str = "mapq1"
 	
 	var gamepack_text: String = """<?xml version="1.0"?>
 <game
@@ -96,7 +128,7 @@ func build_gamepack_text() -> String:
   texturetypes="%s"
   modeltypes="%s"
   soundtypes="%s"
-  maptypes="mapq1"
+  maptypes="%s"
   shaders="quake3"
   entityclass="halflife"
   entityclasstype="fgd"
@@ -126,6 +158,7 @@ func build_gamepack_text() -> String:
 		texturetypes_str,
 		modeltypes_str,
 		soundtypes_str,
+		maptype_str,
 		default_scale,
 		clip_texture,
 		skip_texture,
@@ -135,7 +168,8 @@ func build_gamepack_text() -> String:
 
 ## Exports or updates a folder in the /games directory, with an icon, .cfg, and all accompanying FGDs.
 func do_export_file() -> void:
-	if (FuncGodotLocalConfig.get_setting(FuncGodotLocalConfig.PROPERTY.MAP_EDITOR_GAME_PATH) as String).is_empty():
+	var game_path: String = FuncGodotLocalConfig.get_setting(FuncGodotLocalConfig.PROPERTY.MAP_EDITOR_GAME_PATH) as String
+	if game_path.is_empty():
 		printerr("Skipping export: Map Editor Game Path not set in Project Configuration")
 		return
 	
@@ -158,7 +192,8 @@ func do_export_file() -> void:
 	var gamepack_dir_paths: Array = [
 		gamepacks_folder + "/" + gamepack_name + ".game",
 		gamepacks_folder + "/" + gamepack_name + ".game/" + base_game_path,
-		gamepacks_folder + "/" + gamepack_name + ".game/scripts"
+		gamepacks_folder + "/" + gamepack_name + ".game/scripts",
+		game_path + "/scripts"
 	]
 	var err: Error
 	
@@ -184,18 +219,44 @@ func do_export_file() -> void:
 		printerr("Error: Could not modify " + target_file_path)
 	
 	# .shader
+	# NOTE: To work properly, this should go in the game path. For now, I'm leaving the export to NRC as well, so it can easily
+	# be repackaged for distribution. However, I believe in the end, it shouldn't exist there. 
+	# We'll need to make a decision for this. - Vera
+	var shader_text: String = build_shader_text()
+	
+	# build to <gamepack path>/scripts/
 	target_file_path = gamepacks_folder + "/" + gamepack_name + ".game/scripts/" + gamepack_name + ".shader"
-	print("Exporting NetRadiant Custom Shader to ", target_file_path)
+	print("Exporting NetRadiant Custom shader definitions to ", target_file_path)
 	file = FileAccess.open(target_file_path, FileAccess.WRITE)
 	if file != null:
-		file.store_string(build_shader_text())
+		file.store_string(shader_text)
+		file.close()
+	else:
+		printerr("Error: Could not modify " + target_file_path)
+
+	# build to <game path>/scripts/	
+	target_file_path = game_path.path_join("scripts/%s.shader" % gamepack_name) 
+	print("Exporting NetRadiant Custom shader definitions to ", target_file_path)
+	file = FileAccess.open(target_file_path, FileAccess.WRITE)
+	if file != null:
+		file.store_string(shader_text)
+		file.close()
+	else:
+		printerr("Error: could not modify " + target_file_path)
+	
+	# shaderlist.txt - see above NOTE regarding duplication 
+	target_file_path = gamepacks_folder + "/" + gamepack_name + ".game/scripts/shaderlist.txt"
+	print("Exporting NetRadiant Custom shader list to ", target_file_path)
+	file = FileAccess.open(target_file_path, FileAccess.WRITE)
+	if file != null:
+		file.store_string(gamepack_name)
 		file.close()
 	else:
 		printerr("Error: Could not modify " + target_file_path)
 	
-	# shaderlist.txt
-	target_file_path = gamepacks_folder + "/" + gamepack_name + ".game/scripts/shaderlist.txt"
-	print("Exporting NetRadiant Custom Default Buld Menu to ", target_file_path)
+	# game path/scripts/shaderlist.txt
+	target_file_path = game_path.path_join("scripts/shaderlist.txt")
+	print("Exporting NetRadiant Custom shader list to ", target_file_path)
 	file = FileAccess.open(target_file_path, FileAccess.WRITE)
 	if file != null:
 		file.store_string(gamepack_name)
@@ -205,15 +266,56 @@ func do_export_file() -> void:
 	
 	# default_build_menu.xml
 	target_file_path = gamepacks_folder + "/" + gamepack_name + ".game/default_build_menu.xml"
-	print("Exporting NetRadiant Custom Default Buld Menu to ", target_file_path)
+	print("Exporting NetRadiant Custom default build menu to ", target_file_path)
 	file = FileAccess.open(target_file_path, FileAccess.WRITE)
+	
 	if file != null:
-		file.store_string("<?xml version=\"1.0\"?><project version=\"2.0\"></project>")
-		file.close()
-	else:
-		printerr("Error: Could not modify " + target_file_path)
+		file.store_string("<?xml version=\"1.0\"?>\n<project version=\"2.0\">\n")
+		
+		for key in default_build_menu_variables.keys():
+			if key is String:
+				if default_build_menu_variables[key] is String:
+					file.store_string('\t<var name="%s">%s</var>\n' % [key, default_build_menu_variables[key]])
+				
+				else:
+					push_error(
+						"Variable key '%s' value '%s' is invalid type: %s; should be: String" % [
+						key, default_build_menu_variables[key], 
+						type_string(typeof(default_build_menu_variables[key]))
+						])
+			else:
+				push_error(
+					"Variable '%s' is an invalid key type: %s; should be: String" % [
+						key, type_string(typeof(key))
+						])
+			
+			
+		for key in default_build_menu_commands.keys():
+			if key is String:
+				file.store_string('\t<build name="%s">\n' % key)
+				
+				if default_build_menu_commands[key] is String:
+					file.store_string('\t\t<command>%s</command>\n\t</build>\n' % default_build_menu_commands[key])
+				
+				elif default_build_menu_commands[key] is Array:
+					for command in default_build_menu_commands[key]:
+						if command is String:
+							file.store_string('\t\t<command>%s</command>\n' % command)
+						else:
+							push_error("Build option '%s' has invalid command: %s with type: %s; should be: String" % [
+								key, command, type_string(typeof(command))
+								])	
+						
+					file.store_string('\t</build>\n')
+			
+			else:
+				push_error("Build option '%s' is an invalid type: %s; should be: String" % [
+					key, type_string(typeof(key))
+					])
+		
+		file.store_string("</project>")
 	
 	# FGD
 	var export_fgd : FuncGodotFGDFile = fgd_file.duplicate()
-	export_fgd.do_export_file(true, gamepacks_folder + "/" + gamepack_name + ".game/" + base_game_path)
+	export_fgd.do_export_file(FuncGodotFGDFile.FuncGodotTargetMapEditors.NET_RADIANT_CUSTOM, gamepacks_folder + "/" + gamepack_name + ".game/" + base_game_path)
 	print("NetRadiant Custom Gamepack export complete\n")

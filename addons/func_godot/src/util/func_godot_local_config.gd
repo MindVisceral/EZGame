@@ -15,7 +15,8 @@ enum PROPERTY {
 	DEFAULT_INVERSE_SCALE
 }
 
-@export var export_func_godot_settings: bool: set = _save_settings
+@export_tool_button("Export func_godot settings", "Save") var export_func_godot_settings = _save_settings
+@export_tool_button("Reload func_godot settings", "Reload") var reload_func_godot_settings = _load_settings
 
 const CONFIG_PROPERTIES: Array[Dictionary] = [
 	{
@@ -108,17 +109,20 @@ func _get_config_property(name: StringName) -> Variant:
 func _load_settings() -> void:
 	loaded = true
 	var path = _get_path()
-	if not FileAccess.file_exists(path): return
+	if not FileAccess.file_exists(path):
+		return
 	var settings = FileAccess.get_file_as_string(path)
 	settings_dict = {}
-	if not settings or settings.is_empty(): return
+	if not settings or settings.is_empty():
+		return
 	settings = JSON.parse_string(settings)
 	for key in settings.keys():
 		settings_dict[key] = settings[key]
 	notify_property_list_changed()
 
 func _try_loading() -> void:
-	if not loaded: _load_settings()
+	if not loaded: 
+		_load_settings()
 
 func _save_settings(_s = null) -> void:
 	if settings_dict.size() == 0: 

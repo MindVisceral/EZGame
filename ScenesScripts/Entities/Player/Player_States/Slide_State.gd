@@ -133,6 +133,10 @@ func physics_process(delta: float) -> BasePlayerState:
 	#if !player.is_player_on_floor():
 		#return fall_state
 	
+	if !player.is_player_on_floor():
+		return self
+	
+	
 	## If the Player stops moving, return to Idle state. The Y axis is ignored.
 	if Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
 		return idle_state
@@ -140,11 +144,11 @@ func physics_process(delta: float) -> BasePlayerState:
 	
 	## We check if the Player is near a wall
 	if player.WallDetection.is_colliding():
-		print("wall detected")
+		#print("wall detected")
 		## We check if the Player is moving up against the wall
 		## If that is so, we stop the slide state.
 		if player.is_moving_at_wall(false, 0.7):
-			print("MOVED AT WALL AT >0.7")
+			#print("MOVED AT WALL AT >0.7")
 			return idle_state
 			
 		
