@@ -435,9 +435,24 @@ func _snap_up_to_stairs_check(delta) -> bool:
 			## NOTE: (step_height <= 0.01) seems to prevent glitches, apparently.
 			## NOTE: The third 'or' is to check if the Player's 'feet' are at the correct position;
 			## I.e. the Player's origin point MUST ALWAYS be located at the bottom of the Collider
-			if ((step_height > MAX_STEP_HEIGHT) or (step_height <= 0.01) or \
-			((down_check_result.get_collision_point() - self.global_position).y > MAX_STEP_HEIGHT)):
+			#if ((step_height > MAX_STEP_HEIGHT) or (step_height <= 0.01) or \
+			#((down_check_result.get_collision_point() - self.global_position).y > MAX_STEP_HEIGHT)):
+				#return false 
+			
+			if ((step_height > MAX_STEP_HEIGHT) or (step_height <= 0.001) or \
+			((down_check_result.get_collision_point() - %Feet.global_position).y > MAX_STEP_HEIGHT)):
+				print("ERROR LIES HERE! 0")
 				return false 
+			
+			#
+			#if ((step_height > MAX_STEP_HEIGHT) or (step_height <= 0.01)):
+				#print("ERROR LIES HERE! 1")
+				#return false
+			#if ((down_check_result.get_collision_point() - %Feet.global_position).y > MAX_STEP_HEIGHT):
+				#print("ERROR LIES HERE! 2")
+				#return false 
+			
+			
 			
 			## Everyting seems fine, we can now snap the Player to the step.
 			
@@ -459,7 +474,7 @@ func _snap_up_to_stairs_check(delta) -> bool:
 				apply_floor_snap() ## Update to make absolutely sure the Player is on floor
 				_snapped_to_stairs_last_frame = true
 				
-				print("WORKING!")
+				#print("WORKING!")
 				return true
 			
 		

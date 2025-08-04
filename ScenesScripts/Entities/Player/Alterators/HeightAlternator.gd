@@ -60,37 +60,15 @@ func alter_collider_height(new_height: float = player.standing_height) -> void:
 		head_tween.tween_property(player.Head, "position", height_vector, player.crouch_speed)
 
 ## Vertical positions of both snapping casts must also be moved
-## for snapping to work correctly when Player height is altered
+## for snapping to work correctly when Player height is altered.
+## They are both parented to %Feet Marker3D Node
 func alter_snapping_casts_heights(new_height: float) -> void:
-	## Tweens for both casts
-	#var ahead_cast_tween := get_tree().create_tween()
-	#var below_cast_tween := get_tree().create_tween()
-	
+	## Tween
 	var feet_tween := get_tree().create_tween()
+	## Original positon
 	var feet_tween_position: Vector3 = %Feet.position
+	## New position vector
 	var feet_height_vector: Vector3 = Vector3(feet_tween_position.x, 0, feet_tween_position.z)
 	feet_height_vector.y = -(new_height / 2)
+	## Finally, tween the position
 	feet_tween.tween_property(%Feet, "position", feet_height_vector, player.crouch_speed)
-	
-	
-	## Original cast positions
-	#var ahead_cast_position: Vector3 = %StairsAheadRayCast.position
-	#var below_cast_position: Vector3 = %StairsBelowRayCast.position
-	
-	## New height vectors
-	#var ahead_cast_height_vector: Vector3 = Vector3(ahead_cast_position.x, 0, ahead_cast_position.z)
-	#var below_cast_height_vector: Vector3 = Vector3(below_cast_position.x, 0, below_cast_position.z)
-	
-	
-	## Now we can modify the Casts' Y positions.
-	## Each cast is always 'cast_bot_dist' units away from the very top of the Collider
-	#ahead_cast_height_vector.y = (new_height / 2) - ahead_cast_bot_dist
-	#below_cast_height_vector.y = (new_height / 2) - below_cast_bot_dist
-	
-	## Clamped - we don't want the casts to go into the floor or to go higher than the Collider.
-	#ahead_cast_height_vector.y = clampf(ahead_cast_bot_dist, ahead_cast_height_vector.y, new_height / 2)
-	#below_cast_height_vector.y = clampf(below_cast_bot_dist, below_cast_height_vector.y, new_height / 2)
-	
-	## Finally, we may Tween the cast's position
-	#ahead_cast_tween.tween_property(%StairsAheadRayCast, "position", ahead_cast_height_vector, player.crouch_speed)
-	#below_cast_tween.tween_property(%StairsBelowRayCast, "position", below_cast_height_vector, player.crouch_speed)

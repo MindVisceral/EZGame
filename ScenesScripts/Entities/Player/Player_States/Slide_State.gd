@@ -25,6 +25,16 @@ extends BasePlayerState
 ## Set by calculate_slide_direction()
 var slide_direction: Vector3 = Vector3.ZERO
 
+## Wall detection timer vars;
+## the slide must stop if the Player is sliding into a wall for too many frames in a row
+##
+## Number of frames the Player must be sliding into a wall in a row for the idle state to trigger
+var default_wall_frames: int = 10
+## Remaining frames until the Player is switched to idle state - de facto timer
+var wall_frames_remaining: int = default_wall_frames
+## Boolean necessary for this timer to work
+var slid_into_wall_previous_frame: bool = false
+
 
 func enter() -> void:
 	super.enter()
@@ -71,6 +81,7 @@ func input(event: InputEvent) -> BasePlayerState:
 		
 	
 	return null
+
 
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
 func physics_process(delta: float) -> BasePlayerState:
@@ -130,28 +141,48 @@ func physics_process(delta: float) -> BasePlayerState:
 	
 	
 	## Even if the Player slides off the floor, they still continue sliding
-	#if !player.is_player_on_floor():
-		#return fall_state
-	
 	if !player.is_player_on_floor():
-		return self
+		pass
 	
 	
 	## If the Player stops moving, return to Idle state. The Y axis is ignored.
 	if Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
+		print("VELOCITY WAS 0")
 		return idle_state
 		
 	
+	## Sliding into a wall; if the Player slides directly into a wall for too many frames in a row,
+	## they're switched back to the Idle state
+	
+	## Timer and resetter, depending on the previous frame's state
+	if slid_into_wall_previous_frame == true:
+		wall_frames_remaining -= 1
+	else:
+		wall_frames_remaining = default_wall_frames
+	
 	## We check if the Player is near a wall
 	if player.WallDetection.is_colliding():
-		#print("wall detected")
 		## We check if the Player is moving up against the wall
 		## If that is so, we stop the slide state.
 		if player.is_moving_at_wall(false, 0.7):
 			#print("MOVED AT WALL AT >0.7")
-			return idle_state
+			
+			if (slid_into_wall_previous_frame and wall_frames_remaining <= 0):
+				print("RETURNED TO IDLE STATE")
+				slid_into_wall_previous_frame = false
+				wall_frames_remaining = default_wall_frames
+				return idle_state
+				
+			
+			slid_into_wall_previous_frame = true
 			
 		
+		else:
+			slid_into_wall_previous_frame = false
+			
+		
+	
+	print("WALL FRAMES REMAINING: ", wall_frames_remaining)
 	
 	return null
 
