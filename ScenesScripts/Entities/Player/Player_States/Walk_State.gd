@@ -72,7 +72,7 @@ func physics_process(delta: float) -> BasePlayerState:
 		return fall_state
 	
 	## If the Player stops moving, return to Idle state. The Y axis is ignored
-	if Vector3(player.velocity.x, 0.0, player.velocity.z) == Vector3.ZERO:
+	if Vector3(player.velocity.x, 0.0, player.velocity.z).is_zero_approx():
 		return idle_state
 	
 	return null

@@ -360,7 +360,7 @@ func is_moving_at_wall(process_input: bool = true, dot_product_value: float = 0.
 	if (process_input == false) or \
 			## But if the Player must be pressing something for this to work,
 			## only proceed if process_input is TRUE
-			(process_input == true and input_dir != Vector2.ZERO):
+			(process_input == true and !input_dir.is_zero_approx()):
 		
 		## Prepare the nearest wall's normal for comparison
 		var temp_wall_normal: Vector3 = find_closest_wall_normal()

@@ -120,7 +120,7 @@ func physics_process(delta: float) -> BasePlayerState:
 		
 		## Otherwise (if the Player doesn't take the opportunity to jump)...
 		## If the Player stops moving around, return to Idle state. The Y axis is ignored
-		elif Vector3(player.velocity.x, 0, player.velocity.z) == Vector3.ZERO:
+		elif Vector3(player.velocity.x, 0, player.velocity.z).is_zero_approx():
 			player.play_landing_sound(landing_sound)
 			return idle_state
 		## Otherwise, get to walking

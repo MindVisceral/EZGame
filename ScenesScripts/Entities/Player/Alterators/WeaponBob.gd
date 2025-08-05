@@ -138,7 +138,7 @@ func do_weapon_bob() -> Vector3:
 	 "input_forwards", "input_backwards")
 	
 	## WeaponBob on the X axis only works when the Player is pressing horizontal Input buttons...
-	if input_dir != Vector2.ZERO:
+	if !input_dir.is_zero_approx():
 		## NOTE: !player.in_air ensures that this only happens when the Player is NOT in the air
 		## If bobbing on X axis is enabled...
 		if X_axis_bob_enabled == true:

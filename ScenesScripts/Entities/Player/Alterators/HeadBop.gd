@@ -215,7 +215,7 @@ func do_head_bob() -> Vector3:
 		"input_forwards", "input_backwards")
 	
 	## HeadBob on the X axis only works when the Player is pressing horizontal Input buttons...
-	if input_dir != Vector2.ZERO:
+	if !input_dir.is_zero_approx():
 		## NOTE: !player.in_air ensures that this only happens when the Player is NOT in the air
 		## NOTE: !player.on_wall ensures that this only happens when the Player is NOT on a wall
 		

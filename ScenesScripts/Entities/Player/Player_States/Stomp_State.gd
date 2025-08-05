@@ -111,7 +111,7 @@ func physics_process(delta: float) -> BasePlayerState:
 		
 		## Otherwise (if the Player doesn't take the opportunity to jump)...
 		## If a horizontal movement has been detected, return walk_state
-		elif input_dir != Vector2.ZERO:
+		elif input_dir.is_zero_approx():
 			return walk_state
 		else:
 			return idle_state
