@@ -82,6 +82,7 @@ collision_layer = 2
 collision_mask = 519
 input_ray_pickable = false
 script = ExtResource("1_kmike")
+jump_height = 14.0
 stomp_jump_height_limit = 50.0
 
 [node name="Scripts" type="Node" parent="."]

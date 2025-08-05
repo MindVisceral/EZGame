@@ -270,6 +270,10 @@ func _physics_process(delta: float) -> void:
 		##States
 		States.physics_process(delta)
 		
+		
+		print("Y VELOCITY: ", self.velocity.y)
+		
+		
 		## Player's movement itself, dictated by the current_state in StateManager
 		set_velocity(velocity)
 		

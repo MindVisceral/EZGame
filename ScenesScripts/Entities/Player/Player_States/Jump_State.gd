@@ -77,11 +77,18 @@ func input(event: InputEvent) -> BasePlayerState:
 	if Input.is_action_just_pressed("input_slide"):
 		return stomp_state
 		
-	## If the Player wants to jump off the wall...
+	## If the Player wants to jump...
 	if Input.is_action_just_pressed("input_jump"):
+		
+		## Check if there's a wall - will make Player walljump if there is
 		if player.WallDetection.is_colliding():
 			return walljump_state
 			
+		
+		## Prepare the jump input buffer - will make the Player jump once they reach the ground
+		## (if they didn't walljump already)
+		## NOTE: just_pressed makes this Input require timing, but _pressed allows for hopping
+		player.JumpBufferT.start()
 		
 	
 	return null
@@ -90,12 +97,6 @@ func input(event: InputEvent) -> BasePlayerState:
 
 ## Velocity equasions for this specific state and physics. Unrealated to player Inputs
 func physics_process(delta: float) -> BasePlayerState:
-	
-	## Prepare the jump input buffer
-	## just_pressed makes this Input require timing, but _pressed allows for hopping
-	if Input.is_action_just_pressed("input_jump"):
-		player.JumpBufferT.start()
-	
 	
 	## The direction the Player's movement based on Input
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
@@ -112,7 +113,7 @@ func physics_process(delta: float) -> BasePlayerState:
 		temp_accel = deceleration
 		
 	
-	## When the horizontal Input keys are pressed, make the Player move in that direction
+	## If a horizontal Input key is pressed, make the Player move in that direction
 	## Otherwise, keep the momentum
 	if !input_dir.is_zero_approx():
 		player.velocity.x = lerp(player.velocity.x, \
