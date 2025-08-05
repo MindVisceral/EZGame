@@ -137,15 +137,6 @@ walljump_state = NodePath("../WallJump")
 jump_sound = ExtResource("7_na2xp")
 landing_sound = ExtResource("4_lkchw")
 
-[node name="GroundTimer" type="Timer" parent="Scripts/StateManager/Jump"]
-editor_description = "The FloorCast is used to check for a floor beneath the Player,
-but when the Player jumps, there's a tiny window of time for the FloorCast to detect a floor,
-which immediately disables the jump.
-This Timer is used as a workaround to that problem - we wait until this Timer is finished to check if there's a floor beneath the Player."
-process_callback = 0
-wait_time = 0.05
-one_shot = true
-
 [node name="Fall" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "slide_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
 script = ExtResource("8_xbf4w")
 idle_state = NodePath("../Idle")

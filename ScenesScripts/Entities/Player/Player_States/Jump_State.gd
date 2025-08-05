@@ -27,11 +27,6 @@ extends BasePlayerState
 @export var landing_sound: AudioStream
 
 
-## Timer, so that the ground isn't detected immediately after a jump
-## Check Editor description for an explanation
-@onready var ground_timer: Timer = $GroundTimer
-
-
 ## Stomp-boosted jump flag;
 ## If the jump is performed within StompJumpTimer time, the jump makes the Player go
 ## up by the distance between the stomp's start and end positions.
@@ -48,9 +43,6 @@ func enter() -> void:
 	player.in_air = true
 	## The Player may want to do wall-related movement while in the air
 	player.WallDetection.enabled = true
-	
-	## Start the timer
-	ground_timer.start()
 	
 	## Apply jump impulse; Either the Player jumps up by jump_height,
 	## or they go up by stomp_vertical_distance - IF this jump happens within a time after a Stomp
@@ -77,9 +69,6 @@ func exit() -> void:
 	player.in_air = false
 	#
 	player.WallDetection.enabled = false
-	
-	## Reset ground timer
-	ground_timer.stop()
 	
 
 ## When a movement button is pressed, change to a corresponding State node
@@ -181,40 +170,38 @@ func physics_process(delta: float) -> BasePlayerState:
 		player.velocity.y = maxf(player.velocity.y, player.falling_speed_limit)
 		
 	
-	## A short time after the Raycast leaves the ground...
-	if ground_timer.is_stopped():
-		## Check if the Player is on floor...
-		if player.is_player_on_floor():
-			
-			## If the jump button has been pressed within the buffer time, jump immediately
-			if !player.JumpBufferT.is_stopped():
-				return jump_state
-			
-			## Otherwise (if the Player doesn't take the opportunity to jump)...
-			#
-			## If the Player stops moving around, return to Idle state. The Y axis is ignored
-			elif Vector3(player.velocity.x, 0, player.velocity.z).is_zero_approx():
-				player.play_landing_sound(landing_sound)
-				return idle_state
-			## Otherwise, keep on walking
-			else:
-				player.play_landing_sound(landing_sound)
-				return walk_state
+	## Check if the Player is on floor...
+	if player.is_player_on_floor():
+		
+		## If the jump button has been pressed within the buffer time, jump immediately
+		if !player.JumpBufferT.is_stopped():
+			return jump_state
+		
+		## Otherwise (if the Player doesn't take the opportunity to jump)...
+		#
+		## If the Player stops moving around, return to Idle state. The Y axis is ignored
+		elif Vector3(player.velocity.x, 0, player.velocity.z).is_zero_approx():
+			player.play_landing_sound(landing_sound)
+			return idle_state
+		## Otherwise, keep on walking
+		else:
+			player.play_landing_sound(landing_sound)
+			return walk_state
+		
+	
+	
+	## The Player isn't on the floor, so we check if they're near a wall maybe...
+	elif player.WallDetection.is_colliding():
+		## We check if the Player is moving up against the wall
+		if player.is_moving_at_wall(true):
+			## The Player is near a wall, but are they falling?
+			if player.velocity.y <= 0:
+				## Since the Player is near a wall and is falling, we can make them run along it.
+				## NOTE: WallJumping is detected on Input instead! This is only for WallRunning.
+				return wallrun_state
 			
 		
-		
-		## The Player isn't on the floor, so we check if they're near a wall maybe...
-		elif player.WallDetection.is_colliding():
-			## We check if the Player is moving up against the wall
-			if player.is_moving_at_wall(true):
-				## The Player is near a wall, but are they falling?
-				if player.velocity.y <= 0:
-					## Since the Player is near a wall and is falling, we can make them run along it.
-					## NOTE: WallJumping is detected on Input instead! This is only for WallRunning.
-					return wallrun_state
-				
-			
-		
+	
 	
 	return null
 

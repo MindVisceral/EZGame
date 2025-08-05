@@ -84,7 +84,7 @@ extends CharacterBody3D
 @export_group("Jump")
 
 ## Jump impulse height in units. Applied once on enter()
-@export_range(1.0, 24.0, 0.1) var jump_height: float = 14.0
+@export_range(1.0, 24.0, 0.1) var jump_height: float = 7.0
 
 ## The maximum speed the Player may reach when jumping
 ## Used in stomp-boosted jumping code
