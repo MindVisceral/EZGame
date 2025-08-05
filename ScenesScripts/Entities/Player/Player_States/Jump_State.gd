@@ -68,9 +68,7 @@ func exit() -> void:
 	super.exit()
 	
 	
-	
 	boost_distance = 0.0
-	
 	
 	## Reset!
 	stomp_boosted = false
@@ -114,9 +112,7 @@ func physics_process(delta: float) -> BasePlayerState:
 	var input_dir: Vector2 = Input.get_vector("input_left", "input_right", \
 		"input_forwards", "input_backwards")
 	## We ignore the Y axis, and place input_dir on the XZ axis
-	player.direction = (player.transform.basis * \
-		Vector3(input_dir.x, 0.0, input_dir.y).normalized())
-		
+	player.direction = (player.transform.basis * Vector3(input_dir.x, 0.0, input_dir.y).normalized())
 	
 	## Decide if the Player going to accelerate or decelerate.
 	var temp_accel: float
@@ -129,7 +125,7 @@ func physics_process(delta: float) -> BasePlayerState:
 	
 	## When the horizontal Input keys are pressed, make the Player move in that direction
 	## Otherwise, keep the momentum
-	if player.direction.x != 0 and player.direction.z != 0:
+	if !input_dir.is_zero_approx():
 		player.velocity.x = lerp(player.velocity.x, \
 			(player.direction.x * player.speed * speed_multiplier), temp_accel * delta)
 		player.velocity.z = lerp(player.velocity.z, \

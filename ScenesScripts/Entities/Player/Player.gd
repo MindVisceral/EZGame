@@ -250,6 +250,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	States.input(event)
 	Weapons.input(event)
 	
+	if Input.is_action_just_pressed("input_test_button"):
+		self.rotation.y = PI
+	
 
 ###
 func _physics_process(delta: float) -> void:
