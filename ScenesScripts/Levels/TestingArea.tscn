@@ -1,19 +1,19 @@
 [gd_scene load_steps=238 format=4 uid="uid://bg2u2fljqhcdk"]
 
-[ext_resource type="PackedScene" uid="uid://dps31ep48fejk" path="res://ScenesScripts/Levels/base_level.tscn" id="1_o0fs5"]
-[ext_resource type="Environment" uid="uid://cyvyet4krcbj3" path="res://default_env.tres" id="2_osqti"]
-[ext_resource type="Material" uid="uid://c7ju81cuyl0ql" path="res://ScenesScripts/Textures/Concrete/concrete_11.tres" id="2_uf5wj"]
-[ext_resource type="Material" uid="uid://bmyg1y4w1lyop" path="res://ScenesScripts/Textures/Concrete/conrete_painted_blue_dirty_01.tres" id="3_5m0nl"]
-[ext_resource type="PackedScene" uid="uid://nf1bgcn3f8w0" path="res://ScenesScripts/Entities/Entity Elements/Interactable.tscn" id="3_acpno"]
-[ext_resource type="Material" uid="uid://7pogbq4au1yp" path="res://ScenesScripts/Textures/Bricks/brick_rough_blue.tres" id="4_7wr2a"]
-[ext_resource type="PackedScene" uid="uid://dfg5rcmoasv08" path="res://lamp_test.tscn" id="4_nrllp"]
-[ext_resource type="Shader" uid="uid://cxpj5edsm3gpx" path="res://outline.gdshader" id="5_6a50f"]
-[ext_resource type="Material" uid="uid://cdl3ekfukh816" path="res://ScenesScripts/Textures/Bricks/brick_small_red_2.tres" id="5_xo370"]
-[ext_resource type="Material" uid="uid://be8byn1ev1xvm" path="res://ScenesScripts/Textures/Ground/ice_06.tres" id="6_apiow"]
-[ext_resource type="PackedScene" uid="uid://c58jul0j3dxoj" path="res://ScenesScripts/Entities/InteractableObjects/Teleporter.tscn" id="10_jdp74"]
-[ext_resource type="PackedScene" uid="uid://bcs2syi8emeol" path="res://ScenesScripts/Entities/InteractableObjects/Tremor.tscn" id="11_2x63x"]
-[ext_resource type="PackedScene" uid="uid://caam3efgmquml" path="res://ScenesScripts/Entities/Debug/FloatingMeshText.tscn" id="14_epn6c"]
-[ext_resource type="PackedScene" uid="uid://bgpejmnpxwhel" path="res://ScenesScripts/Entities/Enemies/Test_enemy/TestEnemy.tscn" id="15_ylohc"]
+[ext_resource type="PackedScene" uid="uid://dps31ep48fejk" path="res://ScenesScripts/Levels/BaseLevel.tscn" id="1_061ta"]
+[ext_resource type="Environment" uid="uid://cyvyet4krcbj3" path="res://default_env.tres" id="2_j8bjr"]
+[ext_resource type="Material" uid="uid://c7ju81cuyl0ql" path="res://ScenesScripts/Textures/Concrete/concrete_11.tres" id="3_qikil"]
+[ext_resource type="Material" uid="uid://bmyg1y4w1lyop" path="res://ScenesScripts/Textures/Concrete/conrete_painted_blue_dirty_01.tres" id="4_hcxsp"]
+[ext_resource type="Material" uid="uid://7pogbq4au1yp" path="res://ScenesScripts/Textures/Bricks/brick_rough_blue.tres" id="5_yeu2q"]
+[ext_resource type="Material" uid="uid://cdl3ekfukh816" path="res://ScenesScripts/Textures/Bricks/brick_small_red_2.tres" id="6_1od8g"]
+[ext_resource type="Material" uid="uid://be8byn1ev1xvm" path="res://ScenesScripts/Textures/Ground/ice_06.tres" id="7_5jbmq"]
+[ext_resource type="PackedScene" uid="uid://nf1bgcn3f8w0" path="res://ScenesScripts/Entities/Entity Elements/Interactable.tscn" id="8_mxu4l"]
+[ext_resource type="PackedScene" uid="uid://dfg5rcmoasv08" path="res://lamp_test.tscn" id="9_lblg5"]
+[ext_resource type="Shader" uid="uid://cxpj5edsm3gpx" path="res://outline.gdshader" id="10_ry1fl"]
+[ext_resource type="PackedScene" uid="uid://c58jul0j3dxoj" path="res://ScenesScripts/Entities/InteractableObjects/Teleporter.tscn" id="11_0oltu"]
+[ext_resource type="PackedScene" uid="uid://bcs2syi8emeol" path="res://ScenesScripts/Entities/InteractableObjects/Tremor.tscn" id="12_ccwyx"]
+[ext_resource type="PackedScene" uid="uid://caam3efgmquml" path="res://ScenesScripts/Entities/Debug/FloatingMeshText.tscn" id="13_vbbhc"]
+[ext_resource type="PackedScene" uid="uid://bgpejmnpxwhel" path="res://ScenesScripts/Entities/Enemies/Test_enemy/TestEnemy.tscn" id="14_klts4"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_a0faf"]
 vertices = PackedVector3Array(-95.75, 64.5, -35.5, -94, 64.5, -35.75, -93.75, 64.5, -94, -95.75, 64.5, -95.75, -16, 64.5, -94, -16, 64.5, -95.75, 4.75, 0.5, -14.75, 4.25, 0.5, -14.5, 5.75, 0.5, -13.25, 6.5, 0.5, -14.25, 23.75, 0.5, -95.75, -15.5, 0.5, -95.75, -15.5, 0.5, -94, 4.5, 0.5, -15.25, 7.5, 0.5, -14.25, 23.25, 0.5, -28, -1.25, 0.5, -15.25, -29.25, 0.5, -93.5, -29.25, 0.5, -89.75, -28.5, 0.5, -89.25, -16, 0.5, -93.5, -25.75, 0.5, -78, 24, 1, -92, 22.4857, 0.5, -91.5097, 8.25, 0.5, -13.25, 24.25, 20.5, -95.75, 24.25, 20.5, -94, 30.25, 20.5, -93.75, 42, 20.5, -93.75, 42, 20.5, -95.75, 30.25, 20.5, -82.25, 42, 20.5, -82.25, 102, 20.5, -94, 102.25, 20.5, -91.75, 103.75, 20.5, -91.75, 103.75, 20.5, -95.75, -95.5, 0.5, -95.5, -95.5, 0.5, -94.25, -16.25, 0.5, -94.25, -16.25, 0.5, -95.5, 24.5, 0.5, -95.5, 24.5, 0.5, -94.25, 103.75, 0.5, -94.25, 103.75, 0.5, -95.5, -95.5, 0.5, -93.5, -95.5, 0.5, -16.25, -94.25, 0.5, -16.25, -94.25, 0.5, -93.5, -93.5, 0.5, -72.5, -80.25, 0.5, -72.5, -80.25, 0.5, -74, -79.75, 0.5, -74.25, -79.75, 0.5, -93.5, -93.5, 0.5, -93.5, -70.75, 0.5, -68.75, -70, 0.5, -68.75, -64.5, 0.5, -82.5, -64.5, 0.5, -93.5, -63.5, 0.5, -81.75, -59, 0.5, -74.5, -58.25, 0.5, -74.75, -53.75, 0.5, -82, -53, 0.5, -82.5, -53, 0.5, -93.5, -47.5, 0.5, -77, -47, 0.5, -77, 26.25, 0.5, -91.5, 25.75, 0.75, -91.75, 25.75, 1, -93.5, 24.25, 1, -93.5, 26.25, 1.5, -93.5, 26.25, 1.5, -92.25, 27.75, 1.5, -92.25, 27.75, 1.5, -93.5, 28.25, 2, -93.5, 28.25, 2, -92.25, 29.75, 2, -92.25, 29.75, 2, -93.5, 82.75, 0.5, -14.25, 82.75, 0.5, -21.5, 81.75, 0.5, -21.75, 81.75, 0.5, -29.5, 76, 0.5, -29.5, 75.75, 0.5, -32, 84, 0.5, -32.25, 89.75, 0.5, -34, 89.75, 0.5, -46, 64, 0.5, -14.25, 28.5, 0.5, -92, 28, 0.5, -91.5, 101.75, 0.5, -93.5, 101.75, 0.5, -46.25, 8.25, 0.5, -13, 63.75, 0.5, -13, 28.5, 0.5, -93.5, 30.25, 2.5, -93.5, 30.25, 2.5, -92.25, 31.75, 2.5, -92.25, 31.75, 2.5, -93.5, 32.25, 3, -93.5, 32.25, 3, -92.25, 33.75, 3, -92.25, 33.75, 3, -93.5, 34.25, 3.5, -93.5, 34.25, 3.5, -92.25, 35.75, 3.5, -92.25, 35.75, 3.5, -93.5, 36.25, 4, -93.5, 36.25, 4, -92.25, 37.75, 4, -92.25, 37.75, 4, -93.5, 38.25, 4.5, -93.5, 38.25, 4.5, -92.25, 39.75, 4.5, -92.25, 39.75, 4.5, -93.5, 40.25, 5, -93.5, 40.25, 5, -92.25, 41.75, 5, -92.25, 41.75, 5, -93.5, 42.25, 5.5, -93.5, 42.25, 5.5, -92.25, 43.75, 5.5, -92.25, 43.75, 5.5, -93.5, 42.5, 18.5, -93.5, 42.5, 18.5, -82.25, 54, 18.5, -82.25, 54, 18.5, -93.5, 54.5, 16.5, -93.5, 54.5, 16.5, -82.25, 66, 16.5, -82.25, 66, 16.5, -93.5, 66.5, 14.5, -93.5, 66.5, 14.5, -82.25, 78, 14.5, -82.25, 78, 14.5, -93.5, 78.5, 12.5, -93.5, 78.5, 12.5, -82.25, 90, 12.5, -82.25, 90, 12.5, -93.5, 90.5, 10.5, -93.5, 90.5, 10.5, -82, 101.75, 10.5, -82, 101.75, 10.5, -93.5, 102.5, 0.5, -93.5, 102.5, 0.5, -28.25, 103.75, 0.5, -28.25, 103.75, 0.5, -93.5, 102.25, 20.5, -28, 103.75, 20.5, -28, -46.75, 64.5, -77, -45, 64.5, -76.75, -38.25, 64.5, -78, -29.5, 64.5, -89.25, -26.25, 64.5, -78, -29, 64.5, -89.25, -26.75, 0.5, -78.25, -29, 0.5, -88, -30, 0.5, -87.5, -36.75, 0.5, -78.5, -37.5, 0.5, -78.25, -31.25, 0.5, -87, -31.75, 0.5, -87.25, -45.75, 0.5, -77.25, -69.75, 64.5, -68.75, -69.75, 64.5, -68.25, -69.25, 64.5, -68.25, -58.75, 64.5, -73.5, -64.5, 64.5, -82, -47.5, 64.5, -76.5, -52.75, 64.5, -82, -53.25, 64.5, -82, -58.5, 64.5, -74, -58, 64.5, -73.75, -48.25, 0.5, -76.5, -48.25, 0.5, -77, -53, 0.5, -81.5, -57.75, 0.5, -74.5, -57.25, 0.5, -74.25, 90.25, 8.5, -81.5, 90.25, 8.5, -70, 101.75, 8.5, -70, 101.75, 8.5, -81.5, -59.25, 0.5, -73.75, -63.75, 0.5, -80.75, -64.5, 0.5, -81, -69.25, 0.5, -69.25, -69, 0.5, -68.75, -26.25, 0.5, -77.5, -1.75, 0.5, -14.75, -0.25, 0.5, -12.5, 1.5, 0.5, -12.5, 1.5, 0.5, -14.5, -38.25, 0.5, -77.5, -48, 0.5, -76, -58.75, 0.5, -73.25, -69.25, 0.5, -67.75, -0.5, 0.5, -12, -15.75, 0.5, -6.25, -8, 0.5, -6.25, -83.75, 0.5, -52, -93.5, 0.5, -16.25, -70, 0.5, -67.75, -77.75, 0.5, -60, -90, 0.5, -41.25, -93.5, 0.5, -30.75, -78, 64.5, -60.25, -70.25, 64.5, -67.75, -71, 64.5, -68.75, -79.75, 64.5, -73.75, -77.75, 0.5, -61, -70.75, 0.5, -67.75, -71.25, 0.5, -68.5, -79.5, 0.5, -73.25, -78.5, 0.5, -60, -92.5, 0.5, -52, -93.5, 0.5, -41.25, 90.25, 6.5, -69.5, 90.25, 6.5, -58, 101.75, 6.5, -58, 101.75, 6.5, -69.5, -93, 64.5, -40.25, -90.75, 64.5, -40, -90.25, 64.5, -42, -84.25, 64.5, -52, -78.5, 64.5, -59.5, -92, 64.5, -52, -80, 0.5, -57.75, -80, 0.5, -58.25, -81, 0.5, -58, -90, 0.5, -52.75, -84, 0.5, -52.5, 90.25, 4.5, -57.5, 90.25, 4.5, -46, 101.75, 4.5, -46, 101.75, 4.5, -57.5, -91.5, 0.5, -51.5, -90, 0.5, -43.5, -89.25, 0.5, -43.75, -84.75, 0.5, -51.25, -93.25, 0.5, -35.5, -93, 0.5, -34, -90.5, 0.5, -41.5, -90.5, 0.5, -43.25, -92, 0.5, -49.25, 90.25, 2.5, -45.5, 90.25, 2.5, -34, 101.75, 2.5, -34, 101.75, 2.5, -45.5, 90.5, 0.5, -45.5, 90.5, 0.5, -34.25, 101.75, 0.5, -34.25, 101.75, 0.5, -45.5, -93.25, 64.5, -35.75, -94, 64.5, -30.75, -95.75, 64.5, -16, -94, 64.5, -16, 103.75, 0.5, -23.25, 103.75, 0.5, -27.5, 101.75, 0.5, -27.75, 84.5, 0.5, -32, 90, 0.5, -33.5, 101.75, 0.5, -33.5, 84.5, 0.5, -23.5, 12.25, 15.5, -31.75, 12.25, 15.5, -30.25, 35.75, 15.5, -30.25, 35.75, 15.5, -31.75, 44.25, 25.5, -30.25, 67.75, 25.5, -30, 67.75, 25.5, -31.75, 44.25, 25.5, -31.75, 82, 32.5, -30, 82.25, 32.5, -22, 84, 32.5, -22, 84, 32.5, -31.75, 68.25, 32.5, -31.75, 68.25, 32.5, -30, 64.25, 14.5, -31.5, 64.25, 14.5, -30.25, 67.75, 14.5, -30.25, 67.75, 14.5, -31.5, 68.5, 14.5, -31.5, 68.5, 14.5, -30.25, 83.75, 14.5, -30.25, 83.75, 14.5, -31.5, 76.25, 10.5, -31.5, 76.25, 10.5, -30, 82.25, 10.5, -29.75, 83.75, 10.5, -31.5, 82.25, 10.5, -22, 83.75, 10.5, -22, 76.5, 0.5, -31.5, 76.5, 0.5, -30.25, 83.75, 0.5, -30.25, 83.75, 0.5, -31.5, 83.75, 14.5, -14, 83.75, 14.5, -21.5, 81.75, 14.5, -21.75, 76.25, 14.5, -14, 81.75, 14.5, -29.5, 64.25, 14.5, -29.5, 64.25, 14.5, -14.5, 82.5, 0.5, -29.5, 82.5, 0.5, -22.25, 83.75, 0.5, -22.25, 83.75, 0.5, -29.5, 82.5, 14.5, -29.5, 82.5, 14.5, -22.25, 83.75, 14.5, -22.25, 83.75, 14.5, -29.5, 84, 0.5, -21.5, 84.25, 0.5, -14.25, 84.5, 0.5, -22, 84.5, 0.5, -12.5, 103.75, 0.5, -12.75, -94, 0.5, -15.5, -95.75, 0.5, -15.5, -95.75, 0.5, -3.75, -16.25, 0.5, -3.75, -16.25, 0.5, -6, 28.25, 21.5, -15.75, 28.25, 21.5, -14.25, 51.75, 21.5, -14.25, 51.75, 21.5, -15.75, 5.75, 0.5, -12.5, 3.25, 0.5, -12.5, 3.5, 0.5, -11.75, 7.5, 0.5, -11.75, -7.5, 0.5, -2, -8.25, 0.5, -1.5, 52.25, 0.5, 55.75, 64, 0.5, 55.75, 64, 1, 12.75, 62.9944, 0.5, 16.501, 62.9981, 0.5, 11.9754, 6.5, 0.5, -11.75, -0.25, 0.5, -11.5, -7.5, 0.5, -6, 84, 2.5, 6.5, 80.5, 2.5, 6.5, 80.5, 2.5, 8, 84, 4.5, 2.5, 80.5, 4.5, 2.5, 80.5, 4.5, 4, 84, 6.5, -1.5, 80.5, 6.5, -1.5, 80.5, 6.5, 0, 84, 8.5, -5.5, 80.5, 8.5, -5.5, 80.5, 8.5, -4, 84, 10.5, -9.5, 80.5, 10.5, -9.5, 80.5, 10.5, -8, 84, 12.5, -13.5, 80.5, 12.5, -13.5, 80.5, 12.5, -12, 84, 2.5, 10, 80, 2.5, 8.5, 84, 4.5, 6, 80, 4.5, 4.5, 84, 6.5, 2, 80, 6.5, 0.5, 84, 8.5, -2, 80, 8.5, -3.5, 84, 10.5, -6, 80, 10.5, -7.5, 84, 12.5, -10, 80, 12.5, -11.5, 76, 1.5, 12, 80, 1.5, 12, 80, 1.5, 10.5, 76, 2, 10.5, 64.25, 1, 12.75, 76, 7.5, 0, 76, 8, -1.5, 64.25, 9, -3.02631, 69.1458, 3.75, 7.4375, 69.1458, 12, -9.08334, 76, 11, -7.5, 76, 11.5, -8, 74.825, 11.5, -8.2, 76, 2.5, 10, 76, 3, 8.5, 76, 8.5, -2, 76, 3.5, 8, 80, 3.5, 8, 80, 3.5, 6.5, 76, 4, 6.5, 76, 7, 0.5, 76, 4.5, 6, 73.3889, 3.5, 7.88889, 76, 5, 4.5, 76, 9, -3.5, 76, 5.5, 4, 80, 5.5, 4, 80, 5.5, 2.5, 76, 6, 2.5, 76, 6.5, 2, 76, 12, -9.5, 74.6944, 12.5, -10.0556, 76, 9.5, -4, 80, 7.5, 0, 80, 7.5, -1.5, 71.7273, 4.25, 6.22727, 76, 10, -5.5, 71.3, 12, -9.1, 80, 9.5, -4, 80, 9.5, -5.5, 76, 12.5, -10, 76, 10.5, -6, 80, 11.5, -8, 80, 11.5, -9.5, 72.475, 4, 6.975, 74.6944, 3, 8.97222, 76, 13, -11.5, 76, 13.5, -12, 80, 13.5, -12, 80, 13.5, -13.5, 76, 14, -13.5, 76.25, 0.75, 12.5, 68.6563, 1.25, 12.4688, 74.9167, 1, 12.5278, 68.6563, 14.5, -14.125, 74.5313, 2, 10.7813, 68.6563, 1.5, 11.9063, 73.3889, 13.5, -12.1667, -6.25, 5.5, -14, -6.25, 5.5, -13.25, -2.5, 5.5, -13.25, -2.5, 5.5, -14, 2.25, 3.5, -12, 4, 3.5, -12, 3.75, 3.5, -13.75, 2.25, 3.5, -13.75, 6.5, 2.75, -13.5, 6.5, 2.75, -12.5, 7.5, 2.75, -12.5, 7.5, 2.75, -13.5, 64.5, 0.5, -13.5, 64.5, 0.5, 11.25, 67.75, 0.5, 11.25, 67.75, 0.5, -13.5, 76.5, 0.5, -13.5, 76.5, 0.5, -12.25, 79.75, 0.5, -12.25, 79.75, 0.5, -13.5, 80.5, 0.5, -13.5, 80.5, 0.5, -10.25, 83.75, 0.5, -10.25, 83.75, 0.5, -13.5, 0.25, 2.5, -12, 1, 2.5, -12, 0.75, 2.5, -12.75, 0.25, 2.5, -12.75, 96.25, 0.5, 15.75, 96.5, 0.5, 17.5, 103.75, 0.5, 17.25, 84.5, 0.5, 10, 83.75, 0.5, 10.5, 91.5, 0.5, 16.5, 92, 0.5, 15.75, 76.5, 0.5, -11.5, 76.5, 0.5, -10.25, 79.75, 0.5, -10.25, 79.75, 0.5, -11.5, 76.5, 0.5, -9.5, 76.5, 0.5, -8.25, 79.75, 0.5, -8.25, 79.75, 0.5, -9.5, 80.5, 0.5, -9.5, 80.5, 0.5, -6.25, 83.75, 0.5, -6.25, 83.75, 0.5, -9.5, 76.5, 0.5, -7.5, 76.5, 0.5, -6.25, 79.75, 0.5, -6.25, 79.75, 0.5, -7.5, -15.75, 4, -5.75, -15.75, 4, -2.25, -8.25, 4, -2.25, -8.25, 4, -5.75, -15.5, 0.5, -5.5, -15.5, 0.5, -2.25, -8.25, 0.5, -2.25, -8.25, 0.5, -5.5, 76.5, 0.5, -5.5, 76.5, 0.5, -4.25, 79.75, 0.5, -4.25, 79.75, 0.5, -5.5, 80.5, 0.5, -5.5, 80.5, 0.5, -2.25, 83.75, 0.5, -2.25, 83.75, 0.5, -5.5, -72.5, 0.5, 93, -74, 0.5, 93, -73.75, 0.5, 103.75, -72, 0.5, 92.5, -13.75, 0.5, 103.75, -13.5, 0.5, 83, -15.25, 0.5, 82.75, -95.75, 0.5, 89.5, -77.75, 0.5, 89.5, -77.5, 0.5, 87.25, -72.25, 0.5, 87.25, -15.25, 0.5, 77.5, -13.5, 0.5, 77.25, -13.75, 0.5, -1.5, -16, 0.5, -1.5, 76.5, 0.5, -3.5, 76.5, 0.5, -2.25, 79.75, 0.5, -2.25, 79.75, 0.5, -3.5, -17, 2.75, -3.25, -17, 2.75, -2.5, -16.25, 2.75, -2.5, -16.25, 2.75, -3.25, -9.25, 0.5, 77.25, -9.5, 0.5, -1.5, 15, 0.5, 77.25, 51.75, 0.5, 64, 51.75, 0.5, 56, 76.5, 0.5, -1.5, 76.5, 0.5, -0.25, 79.75, 0.5, -0.25, 79.75, 0.5, -1.5, 80.5, 0.5, -1.5, 80.5, 0.5, 1.75, 83.75, 0.5, 1.75, 83.75, 0.5, -1.5, 76.5, 0.5, 0.5, 76.5, 0.5, 1.75, 79.75, 0.5, 1.75, 79.75, 0.5, 0.5, 76.5, 0.5, 2.5, 76.5, 0.5, 3.75, 79.75, 0.5, 3.75, 79.75, 0.5, 2.5, 80.5, 0.5, 2.5, 80.5, 0.5, 5.75, 83.75, 0.5, 5.75, 83.75, 0.5, 2.5, 76.5, 0.5, 4.5, 76.5, 0.5, 5.75, 79.75, 0.5, 5.75, 79.75, 0.5, 4.5, 76.5, 0.5, 6.5, 76.5, 0.5, 7.75, 79.75, 0.5, 7.75, 79.75, 0.5, 6.5, 80.5, 0.5, 6.5, 80.5, 0.5, 9.75, 83.75, 0.5, 9.75, 83.75, 0.5, 6.5, 76.5, 0.5, 8.5, 76.5, 0.5, 9.75, 79.75, 0.5, 9.75, 79.75, 0.5, 8.5, 76.5, 0.5, 10.5, 76.5, 0.5, 11.75, 79.75, 0.5, 11.75, 79.75, 0.5, 10.5, 80.5, 0.5, 10.5, 80.5, 0.5, 12, 92.25, 0.5, 54.75, 92.5, 0.5, 55.75, 95.75, 0.5, 55.75, 95.5, 0.5, 44.75, 91.75, 0.5, 24, 94, 0.5, 23.75, 94, 0.5, 20.5, 91.75, 0.5, 20.25, 91.75, 0.5, 28.25, 80, 0.5, 12.5, 70.5201, 0.5, 15.0019, 70.475, 0.5, 13.475, 96, 0.5, 37.75, 95.75, 0.5, 28.5, 91, 0.5, 54.75, 90.75, 0.5, 55.75, 65.975, 0.5, 14.975, 92.25, 50.5, 16.25, 92.25, 50.5, 20, 96, 50.5, 20, 96, 50.5, 16.25, 92.5, 0.5, 16.5, 92.5, 0.5, 19.75, 95.75, 0.5, 19.75, 95.75, 0.5, 16.5, 96, 0.5, 20.5, 96.5, 0.5, 24, 96.5, 0.5, 20, 103.75, 0.5, 26.75, 96.5, 0.5, 26.5, 92.25, 115.5, 24.25, 92.25, 115.5, 28, 96, 115.5, 28, 96, 115.5, 24.25, 92.5, 0.5, 24.5, 92.5, 0.5, 27.75, 95.75, 0.5, 27.75, 95.75, 0.5, 24.5, 97.5, 0.5, 38, 97.5, 0.5, 39.5, 103.75, 0.5, 39.25, 96.5, 0.5, 28, 97, 1.5, 45.75, 97, 1.5, 38.25, 96.25, 1.5, 38.25, 96, 1.5, 44.75, 96.5, 1.5, 46, 96.25, 1.5, 55.75, 96.5, 1.5, 47.75, 97, 1.5, 55.75, 97, 1.75, 48, 98.25, 0.5, 46.25, 98.5, 0.5, 47, 103.75, 0.5, 47, 97.5, 0.5, 46.25, 97.25, 10.5, 46.75, 97.25, 10.5, 47.5, 98, 10.5, 47.5, 98, 10.5, 46.75, 99.25, 0.5, 55.75, 99.5, 0.5, 57, 103.75, 0.5, 57, 98, 0.5, 48, 97.5, 0.5, 48, 97.5, 0.5, 55.75, 88.25, 16.5, 55.25, 88.25, 16.5, 55.75, 89, 16.5, 55.75, 89, 16.5, 55.25, 89.5, 13.5, 55.25, 89.5, 13.5, 55.75, 90, 13.5, 55.75, 90, 13.5, 55.25, 90.5, 10.5, 55.25, 90.5, 10.5, 55.75, 91, 10.5, 55.75, 91, 10.5, 55.25, 91.5, 7.5, 55.25, 91.5, 7.5, 55.75, 92, 7.5, 55.75, 92, 7.5, 55.25, 52.25, 256.5, 56.25, 52.25, 256.5, 64, 88, 256.5, 64, 88, 256.5, 56.25, 88.5, 31.5, 56.25, 88.5, 31.5, 58, 99, 31.5, 58, 99, 31.5, 56.25, 52.5, 0.5, 56.5, 52.5, 0.5, 63.75, 87.75, 0.5, 63.75, 87.75, 0.5, 56.5, 88.5, 0.5, 56.5, 88.5, 0.5, 57.75, 98.75, 0.5, 57.75, 98.75, 0.5, 56.5, 88, 0.5, 64.5, 86.5, 0.5, 64.5, 86.5, 0.5, 68, 88.5, 0.5, 64, 99, 0.5, 58.5, 85, 0.5, 68.5, 85, 0.5, 79.75, 88.25, 0.5, 79.75, 88.5, 0.5, 58.5, 103.75, 0.5, 81.25, 88.5, 0.5, 81.5, 15, 0.5, 83, 13.75, 0.5, 83, 14, 0.5, 86.75, 15.5, 0.5, 87, 39.75, 0.5, 87, 15.5, 0.5, 82.5, 53.75, 0.5, 68.25, 53.75, 0.5, 64.5, 52, 0.5, 64.5, 51.75, 0.5, 80, 15.5, 0.5, 77.5, 42.25, 0.5, 86.75, 42.5, 0.5, 87.75, 51.75, 0.5, 87.5, 55, 0.5, 79.75, 55, 0.5, 68.5, 15.5, 0.5, 90.75, 39.75, 0.5, 90.75, 54.25, 6.5, 64.5, 54.25, 6.5, 68, 56, 6.5, 68, 56, 6.5, 64.5, 54.5, 0.5, 64.5, 54.5, 0.5, 67.75, 55.75, 0.5, 67.75, 55.75, 0.5, 64.5, 59.75, 0.5, 64.5, 56.5, 0.5, 64.5, 56.5, 0.5, 68, 59.75, 0.5, 68.25, 61, 0.5, 79.75, 61, 0.5, 68.5, 60.25, 8.5, 64.5, 60.25, 8.5, 68, 62, 8.5, 68, 62, 8.5, 64.5, 60.5, 0.5, 64.5, 60.5, 0.5, 67.75, 61.75, 0.5, 67.75, 61.75, 0.5, 64.5, 65.75, 0.5, 64.5, 62.5, 0.5, 64.5, 62.5, 0.5, 68, 65.75, 0.5, 68.25, 67, 0.5, 79.75, 67, 0.5, 68.5, 66.25, 10.5, 64.5, 66.25, 10.5, 68, 68, 10.5, 68, 68, 10.5, 64.5, 66.5, 0.5, 64.5, 66.5, 0.5, 67.75, 67.75, 0.5, 67.75, 67.75, 0.5, 64.5, 71.75, 0.5, 64.5, 68.5, 0.5, 64.5, 68.5, 0.5, 68, 71.75, 0.5, 68.25, 73, 0.5, 79.75, 73, 0.5, 68.5, 72.25, 12.5, 64.5, 72.25, 12.5, 68, 74, 12.5, 68, 74, 12.5, 64.5, 72.5, 0.5, 64.5, 72.5, 0.5, 67.75, 73.75, 0.5, 67.75, 73.75, 0.5, 64.5, 77.75, 0.5, 64.5, 74.5, 0.5, 64.5, 74.5, 0.5, 68, 77.75, 0.5, 68.25, 79, 0.5, 79.75, 79, 0.5, 68.5, 78.25, 14.5, 64.5, 78.25, 14.5, 68, 80, 14.5, 68, 80, 14.5, 64.5, 78.5, 0.5, 64.5, 78.5, 0.5, 67.75, 79.75, 0.5, 67.75, 79.75, 0.5, 64.5, 83.75, 0.5, 64.5, 80.5, 0.5, 64.5, 80.5, 0.5, 68, 83.75, 0.5, 68.25, 84.25, 16.5, 64.5, 84.25, 16.5, 68, 86, 16.5, 68, 86, 16.5, 64.5, 84.5, 0.5, 64.5, 84.5, 0.5, 67.75, 85.75, 0.5, 67.75, 85.75, 0.5, 64.5, -14.75, 500.5, 77.75, -14.75, 500.5, 82.25, 14.75, 500.5, 82.25, 14.75, 500.5, 77.75, -14.5, 0.5, 78, -14.5, 0.5, 82.25, 14.75, 0.5, 82.25, 14.75, 0.5, 78, 52.25, 256.5, 80.25, 52.25, 256.5, 88, 88, 256.5, 88, 88, 256.5, 80.25, 52.5, 0.5, 80.5, 52.5, 0.5, 87.75, 87.75, 0.5, 87.75, 87.75, 0.5, 80.5, 88.5, 0.5, 86.5, 103.75, 0.5, 86.75, 12.75, 0.5, 87, 14.25, 0.5, 103.75, 14.5, 0.5, 92.5, 12.75, 0.5, 92.25, 88.5, 0.5, 88, 88, 0.5, 88.5, 86.5, 0.5, 88.5, 86.75, 0.5, 103.75, 103.75, 0.5, 103.75, 13.25, 4.5, 87.25, 13.25, 4.5, 92, 15, 4.5, 92, 15, 4.5, 87.25, 40.25, 5.5, 87.25, 40.25, 5.5, 92, 42, 5.5, 92, 42, 5.5, 87.25, 13.5, 0.5, 87.5, 13.5, 0.5, 91.75, 14.75, 0.5, 91.75, 14.75, 0.5, 87.5, 40.5, 0.5, 87.5, 40.5, 0.5, 91.75, 41.75, 0.5, 91.75, 41.75, 0.5, 87.5, 52, 0.5, 88.5, 42.5, 0.5, 92, 42, 0.5, 92.5, 40.5, 0.5, 92.5, 40.75, 0.5, 103.75, 53.25, 0.5, 103.75, 53.5, 0.5, 88.5, -77.25, 2046, 87.75, -77.25, 2046, 92.25, -72.75, 2046, 92.25, -72.75, 2046, 87.75, -77, 0.5, 88, -77, 0.5, 92.25, -72.75, 0.5, 92.25, -72.75, 0.5, 88, -77.5, 0.5, 93, -95.75, 0.5, 103.75, 15.5, 1.5, 91.25, 15.5, 1.5, 92, 39.75, 1.5, 92, 39.75, 1.5, 91.25)
@@ -28,7 +28,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 36,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcA"),
-"material": ExtResource("2_uf5wj"),
+"material": ExtResource("3_qikil"),
 "name": "Concrete/concrete_11",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -40,7 +40,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 4884,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8AMAAxADIAMAAyADMANAA1ADYANAA2ADcAOAA5ADoAOAA6ADsAPAA9AD4APAA+AD8AQABBAEIAQABCAEMARABFAEYARABGAEcASABJAEoASABKAEsATABNAE4ATABOAE8AUABRAFIAUABSAFMAVABVAFYAVABWAFcAWABZAFoAWABaAFsAXABdAF4AXABeAF8AYABhAGIAYABiAGMAZABlAGYAZABmAGcAaABpAGoAaABqAGsAbABtAG4AbABuAG8AcABxAHIAcAByAHMAdAB1AHYAdAB2AHcAeAB5AHoAeAB6AHsAfAB9AH4AfAB+AH8AgACBAIIAgACCAIMAhACFAIYAhACGAIcAiACJAIoAiACKAIsAjACNAI4AjACOAI8AkACRAJIAkACSAJMAlACVAJYAlACWAJcAmACZAJoAmACaAJsAnACdAJ4AnACeAJ8AoAChAKIAoACiAKMApAClAKYApACmAKcAqACpAKoAqACqAKsArACtAK4ArACuAK8AsACxALIAsACyALMAtAC1ALYAtAC2ALcAuAC5ALoAuAC6ALsAvAC9AL4AvAC+AL8AwADBAMIAwADCAMMAxADFAMYAxADGAMcAyADJAMoAyADKAMsAzADNAM4AzADOAM8A0ADRANIA0ADSANMA1ADVANYA1ADWANcA2ADZANoA2ADaANsA3ADdAN4A3ADeAN8A4ADhAOIA4ADiAOMA5ADlAOYA5ADmAOcA6ADpAOoA6ADqAOsA7ADtAO4A7ADuAO8A8ADxAPIA8ADyAPMA9AD1APYA9AD2APcA+AD5APoA+AD6APsA/AD9AP4A/AD+AP8AAAEBAQIBAAECAQMBBAEFAQYBBAEGAQcBCAEJAQoBCAEKAQsBDAENAQ4BDAEOAQ8BEAERARIBEAESARMBFAEVARYBFAEWARcBGAEZARoBGAEaARsBHAEdAR4BHAEeAR8BIAEhASIBIAEiASMBJAElASYBJAEmAScBKAEpASoBKAEqASsBLAEtAS4BLAEuAS8BMAExATIBMAEyATMBNAE1ATYBNAE2ATcBOAE5AToBOAE6ATsBPAE9AT4BPAE+AT8BQAFBAUIBQAFCAUMBRAFFAUYBRAFGAUcBSAFJAUoBSAFKAUsBTAFNAU4BTAFOAU8BUAFRAVIBUAFSAVMBVAFVAVYBVAFWAVcBWAFZAVoBWAFaAVsBXAFdAV4BXAFeAV8BYAFhAWIBYAFiAWMBZAFlAWYBZAFmAWcBaAFpAWoBaAFqAWsBbAFtAW4BbAFuAW8BcAFxAXIBcAFyAXMBdAF1AXYBdAF2AXcBeAF5AXoBeAF6AXsBfAF9AX4BfAF+AX8BgAGBAYIBgAGCAYMBhAGFAYYBhAGGAYcBiAGJAYoBiAGKAYsBjAGNAY4BjAGOAY8BkAGRAZIBkAGSAZMBlAGVAZYBlAGWAZcBmAGZAZoBmAGaAZsBnAGdAZ4BnAGeAZ8BoAGhAaIBoAGiAaMBpAGlAaYBpAGmAacBqAGpAaoBqAGqAasBrAGtAa4BrAGuAa8BsAGxAbIBsAGyAbMBtAG1AbYBtAG2AbcBuAG5AboBuAG6AbsBvAG9Ab4BvAG+Ab8BwAHBAcIBwAHCAcMBxAHFAcYBxAHGAccByAHJAcoByAHKAcsBzAHNAc4BzAHOAc8B0AHRAdIB0AHSAdMB1AHVAdYB1AHWAdcB2AHZAdoB2AHaAdsB3AHdAd4B3AHeAd8B4AHhAeIB4AHiAeMB5AHlAeYB5AHmAecB6AHpAeoB6AHqAesB7AHtAe4B7AHuAe8B8AHxAfIB8AHyAfMB9AH1AfYB9AH2AfcB+AH5AfoB+AH6AfsB/AH9Af4B/AH+Af8BAAIBAgICAAICAgMCBAIFAgYCBAIGAgcCCAIJAgoCCAIKAgsCDAINAg4CDAIOAg8CEAIRAhICEAISAhMCFAIVAhYCFAIWAhcCGAIZAhoCGAIaAhsCHAIdAh4CHAIeAh8CIAIhAiICIAIiAiMCJAIlAiYCJAImAicCKAIpAioCKAIqAisCLAItAi4CLAIuAi8CMAIxAjICMAIyAjMCNAI1AjYCNAI2AjcCOAI5AjoCOAI6AjsCPAI9Aj4CPAI+Aj8CQAJBAkICQAJCAkMCRAJFAkYCRAJGAkcCSAJJAkoCSAJKAksCTAJNAk4CTAJOAk8CUAJRAlICUAJSAlMCVAJVAlYCVAJWAlcCWAJZAloCWAJaAlsCXAJdAl4CXAJeAl8CYAJhAmICYAJiAmMCZAJlAmYCZAJmAmcCaAJpAmoCaAJqAmsCbAJtAm4CbAJuAm8CcAJxAnICcAJyAnMCdAJ1AnYCdAJ2AncCeAJ5AnoCeAJ6AnsCfAJ9An4CfAJ+An8CgAKBAoICgAKCAoMChAKFAoYChAKGAocCiAKJAooCiAKKAosCjAKNAo4CjAKOAo8CkAKRApICkAKSApMClAKVApYClAKWApcCmAKZApoCmAKaApsCnAKdAp4CnAKeAp8CoAKhAqICoAKiAqMCpAKlAqYCpAKmAqcCqAKpAqoCqAKqAqsCrAKtAq4CrAKuAq8CsAKxArICsAKyArMCtAK1ArYCtAK2ArcCuAK5AroCuAK6ArsCvAK9Ar4CvAK+Ar8CwALBAsICwALCAsMCxALFAsYCxALGAscCyALJAsoCyALKAssCzALNAs4CzALOAs8C0ALRAtIC0ALSAtMC1ALVAtYC1ALWAtcC2ALZAtoC2ALaAtsC3ALdAt4C3ALeAt8C4ALhAuIC4ALiAuMC5ALlAuYC5ALmAucC6ALpAuoC6ALqAusC7ALtAu4C7ALuAu8C8ALxAvIC8ALyAvMC9AL1AvYC9AL2AvcC+AL5AvoC+AL6AvsC/AL9Av4C/AL+Av8CAAMBAwIDAAMCAwMDBAMFAwYDBAMGAwcDCAMJAwoDCAMKAwsDDAMNAw4DDAMOAw8DEAMRAxIDEAMSAxMDFAMVAxYDFAMWAxcDGAMZAxoDGAMaAxsDHAMdAx4DHAMeAx8DIAMhAyIDIAMiAyMDJAMlAyYDJAMmAycDKAMpAyoDKAMqAysDLAMtAy4DLAMuAy8DMAMxAzIDMAMyAzMDNAM1AzYDNAM2AzcDOAM5AzoDOAM6AzsDPAM9Az4DPAM+Az8DQANBA0IDQANCA0MDRANFA0YDRANGA0cDSANJA0oDSANKA0sDTANNA04DTANOA08DUANRA1IDUANSA1MDVANVA1YDVANWA1cDWANZA1oDWANaA1sDXANdA14DXANeA18DYANhA2IDYANiA2MDZANlA2YDZANmA2cDaANpA2oDaANqA2sDbANtA24DbANuA28DcANxA3IDcANyA3MDdAN1A3YDdAN2A3cDeAN5A3oDeAN6A3sDfAN9A34DfAN+A38DgAOBA4IDgAOCA4MDhAOFA4YDhAOGA4cDiAOJA4oDiAOKA4sDjAONA44DjAOOA48DkAORA5IDkAOSA5MDlAOVA5YDlAOWA5cDmAOZA5oDmAOaA5sDnAOdA54DnAOeA58DoAOhA6IDoAOiA6MDpAOlA6YDpAOmA6cDqAOpA6oDqAOqA6sDrAOtA64DrAOuA68DsAOxA7IDsAOyA7MDtAO1A7YDtAO2A7cDuAO5A7oDuAO6A7sDvAO9A74DvAO+A78DwAPBA8IDwAPCA8MDxAPFA8YDxAPGA8cDyAPJA8oDyAPKA8sDzAPNA84DzAPOA88D0APRA9ID0APSA9MD1APVA9YD1APWA9cD2APZA9oD2APaA9sD3APdA94D3APeA98D4APhA+ID4APiA+MD5APlA+YD5APmA+cD6APpA+oD6APqA+sD7APtA+4D7APuA+8D8APxA/ID8APyA/MD9AP1A/YD9AP2A/cD+AP5A/oD+AP6A/sD/AP9A/4D/AP+A/8DAAQBBAIEAAQCBAMEBAQFBAYEBAQGBAcECAQJBAoECAQKBAsEDAQNBA4EDAQOBA8EEAQRBBIEEAQSBBMEFAQVBBYEFAQWBBcEGAQZBBoEGAQaBBsEHAQdBB4EHAQeBB8EIAQhBCIEIAQiBCMEJAQlBCYEJAQmBCcEKAQpBCoEKAQqBCsELAQtBC4ELAQuBC8EMAQxBDIEMAQyBDMENAQ1BDYENAQ2BDcEOAQ5BDoEOAQ6BDsEPAQ9BD4EPAQ+BD8EQARBBEIEQARCBEMERARFBEYERARGBEcESARJBEoESARKBEsETARNBE4ETAROBE8EUARRBFIEUARSBFMEVARVBFYEVARWBFcEWARZBFoEWARaBFsEXARdBF4EXAReBF8EYARhBGIEYARiBGMEZARlBGYEZARmBGcEaARpBGoEaARqBGsEbARtBG4EbARuBG8EcARxBHIEcARyBHMEdAR1BHYEdAR2BHcEeAR5BHoEeAR6BHsEfAR9BH4EfAR+BH8EgASBBIIEgASCBIMEhASFBIYEhASGBIcEiASJBIoEiASKBIsEjASNBI4EjASOBI8EkASRBJIEkASSBJMElASVBJYElASWBJcEmASZBJoEmASaBJsEnASdBJ4EnASeBJ8EoAShBKIEoASiBKMEpASlBKYEpASmBKcEqASpBKoEqASqBKsErAStBK4ErASuBK8EsASxBLIEsASyBLMEtAS1BLYEtAS2BLcEuAS5BLoEuAS6BLsEvAS9BL4EvAS+BL8EwATBBMIEwATCBMMExATFBMYExATGBMcEyATJBMoEyATKBMsEzATNBM4EzATOBM8E0ATRBNIE0ATSBNME1ATVBNYE1ATWBNcE2ATZBNoE2ATaBNsE3ATdBN4E3ATeBN8E4AThBOIE4ATiBOME5ATlBOYE5ATmBOcE6ATpBOoE6ATqBOsE7ATtBO4E7ATuBO8E8ATxBPIE8ATyBPME9AT1BPYE9AT2BPcE+AT5BPoE+AT6BPsE/AT9BP4E/AT+BP8EAAUBBQIFAAUCBQMFBAUFBQYFBAUGBQcFCAUJBQoFCAUKBQsFDAUNBQ4FDAUOBQ8FEAURBRIFEAUSBRMFFAUVBRYFFAUWBRcFGAUZBRoFGAUaBRsFHAUdBR4FHAUeBR8FIAUhBSIFIAUiBSMFJAUlBSYFJAUmBScFKAUpBSoFKAUqBSsFLAUtBS4FLAUuBS8FMAUxBTIFMAUyBTMFNAU1BTYFNAU2BTcFOAU5BToFOAU6BTsFPAU9BT4FPAU+BT8FQAVBBUIFQAVCBUMFRAVFBUYFRAVGBUcFSAVJBUoFSAVKBUsFTAVNBU4FTAVOBU8FUAVRBVIFUAVSBVMFVAVVBVYFVAVWBVcFWAVZBVoFWAVaBVsFXAVdBV4FXAVeBV8FYAVhBWIFYAViBWMFZAVlBWYFZAVmBWcFaAVpBWoFaAVqBWsFbAVtBW4FbAVuBW8FcAVxBXIFcAVyBXMFdAV1BXYFdAV2BXcFeAV5BXoFeAV6BXsFfAV9BX4FfAV+BX8FgAWBBYIFgAWCBYMFhAWFBYYFhAWGBYcFiAWJBYoFiAWKBYsFjAWNBY4FjAWOBY8FkAWRBZIFkAWSBZMFlAWVBZYFlAWWBZcFmAWZBZoFmAWaBZsFnAWdBZ4FnAWeBZ8FoAWhBaIFoAWiBaMFpAWlBaYFpAWmBacFqAWpBaoFqAWqBasFrAWtBa4FrAWuBa8FsAWxBbIFsAWyBbMFtAW1BbYFtAW2BbcFuAW5BboFuAW6BbsFvAW9Bb4FvAW+Bb8FwAXBBcIFwAXCBcMFxAXFBcYFxAXGBccFyAXJBcoFyAXKBcsFzAXNBc4FzAXOBc8F0AXRBdIF0AXSBdMF1AXVBdYF1AXWBdcF2AXZBdoF2AXaBdsF3AXdBd4F3AXeBd8F4AXhBeIF4AXiBeMF5AXlBeYF5AXmBecF6AXpBeoF6AXqBesF7AXtBe4F7AXuBe8F8AXxBfIF8AXyBfMF9AX1BfYF9AX2BfcF+AX5BfoF+AX6BfsF/AX9Bf4F/AX+Bf8FAAYBBgIGAAYCBgMGBAYFBgYGBAYGBgcGCAYJBgoGCAYKBgsGDAYNBg4GDAYOBg8GEAYRBhIGEAYSBhMGFAYVBhYGFAYWBhcGGAYZBhoGGAYaBhsGHAYdBh4GHAYeBh8GIAYhBiIGIAYiBiMGJAYlBiYGJAYmBicGKAYpBioGKAYqBisGLAYtBi4GLAYuBi8GMAYxBjIGMAYyBjMGNAY1BjYGNAY2BjcGOAY5BjoGOAY6BjsGPAY9Bj4GPAY+Bj8GQAZBBkIGQAZCBkMGRAZFBkYGRAZGBkcGSAZJBkoGSAZKBksGTAZNBk4GTAZOBk8GUAZRBlIGUAZSBlMGVAZVBlYGVAZWBlcGWAZZBloGWAZaBlsGXAZdBl4GXAZeBl8GYAZhBmIGYAZiBmMGZAZlBmYGZAZmBmcGaAZpBmoGaAZqBmsGbAZtBm4GbAZuBm8GcAZxBnIGcAZyBnMGdAZ1BnYGdAZ2BncGeAZ5BnoGeAZ6BnsGfAZ9Bn4GfAZ+Bn8GgAaBBoIGgAaCBoMGhAaFBoYGhAaGBocGiAaJBooGiAaKBosGjAaNBo4GjAaOBo8GkAaRBpIGkAaSBpMGlAaVBpYGlAaWBpcGmAaZBpoGmAaaBpsGnAadBp4GnAaeBp8GoAahBqIGoAaiBqMGpAalBqYGpAamBqcGqAapBqoGqAaqBqsGrAatBq4GrAauBq8GsAaxBrIGsAayBrMGtAa1BrYGtAa2BrcGuAa5BroGuAa6BrsGvAa9Br4GvAa+Br8GwAbBBsIGwAbCBsMGxAbFBsYGxAbGBscGyAbJBsoGyAbKBssGzAbNBs4GzAbOBs8G0AbRBtIG0AbSBtMG1AbVBtYG1AbWBtcG2AbZBtoG2AbaBtsG3AbdBt4G3AbeBt8G4AbhBuIG4AbiBuMG5AblBuYG5AbmBucG6AbpBuoG6AbqBusG7AbtBu4G7AbuBu8G8AbxBvIG8AbyBvMG9Ab1BvYG9Ab2BvcG+Ab5BvoG+Ab6BvsG/Ab9Bv4G/Ab+Bv8GAAcBBwIHAAcCBwMHBAcFBwYHBAcGBwcHCAcJBwoHCAcKBwsHDAcNBw4HDAcOBw8HEAcRBxIHEAcSBxMHFAcVBxYHFAcWBxcHGAcZBxoHGAcaBxsHHAcdBx4HHAceBx8HIAchByIHIAciByMHJAclByYHJAcmBycHKAcpByoHKAcqBysHLActBy4HLAcuBy8HMAcxBzIHMAcyBzMHNAc1BzYHNAc2BzcHOAc5BzoHOAc6BzsHPAc9Bz4HPAc+Bz8HQAdBB0IHQAdCB0MHRAdFB0YHRAdGB0cHSAdJB0oHSAdKB0sHTAdNB04HTAdOB08HUAdRB1IHUAdSB1MHVAdVB1YHVAdWB1cHWAdZB1oHWAdaB1sHXAddB14HXAdeB18HYAdhB2IHYAdiB2MHZAdlB2YHZAdmB2cHaAdpB2oHaAdqB2sHbAdtB24HbAduB28HcAdxB3IHcAdyB3MHdAd1B3YHdAd2B3cHeAd5B3oHeAd6B3sHfAd9B34HfAd+B38HgAeBB4IHgAeCB4MHhAeFB4YHhAeGB4cHiAeJB4oHiAeKB4sHjAeNB44HjAeOB48HkAeRB5IHkAeSB5MHlAeVB5YHlAeWB5cHmAeZB5oHmAeaB5sHnAedB54HnAeeB58HoAehB6IHoAeiB6MHpAelB6YHpAemB6cHqAepB6oHqAeqB6sHrAetB64HrAeuB68HsAexB7IHsAeyB7MHtAe1B7YHtAe2B7cHuAe5B7oHuAe6B7sHvAe9B74HvAe+B78HwAfBB8IHwAfCB8MHxAfFB8YHxAfGB8cHyAfJB8oHyAfKB8sHzAfNB84HzAfOB88H0AfRB9IH0AfSB9MH1AfVB9YH1AfWB9cH2AfZB9oH2AfaB9sH3AfdB94H3AfeB98H4AfhB+IH4AfiB+MH5AflB+YH5AfmB+cH6AfpB+oH6AfqB+sH7AftB+4H7AfuB+8H8AfxB/IH8AfyB/MH9Af1B/YH9Af2B/cH+Af5B/oH+Af6B/sH/Af9B/4H/Af+B/8HAAgBCAIIAAgCCAMIBAgFCAYIBAgGCAcICAgJCAoICAgKCAsIDAgNCA4IDAgOCA8IEAgRCBIIEAgSCBMIFAgVCBYIFAgWCBcIGAgZCBoIGAgaCBsIHAgdCB4IHAgeCB8IIAghCCIIIAgiCCMIJAglCCYIJAgmCCcIKAgpCCoIKAgqCCsILAgtCC4ILAguCC8IMAgxCDIIMAgyCDMINAg1CDYINAg2CDcIOAg5CDoIOAg6CDsIPAg9CD4IPAg+CD8IQAhBCEIIQAhCCEMIRAhFCEYIRAhGCEcISAhJCEoISAhKCEsITAhNCE4ITAhOCE8IUAhRCFIIUAhSCFMIVAhVCFYIVAhWCFcIWAhZCFoIWAhaCFsIXAhdCF4IXAheCF8IYAhhCGIIYAhiCGMIZAhlCGYIZAhmCGcIaAhpCGoIaAhqCGsIbAhtCG4IbAhuCG8IcAhxCHIIcAhyCHMIdAh1CHYIdAh2CHcIeAh5CHoIeAh6CHsIfAh9CH4IfAh+CH8IgAiBCIIIgAiCCIMIhAiFCIYIhAiGCIcIiAiJCIoIiAiKCIsIjAiNCI4IjAiOCI8IkAiRCJIIkAiSCJMIlAiVCJYIlAiWCJcImAiZCJoImAiaCJsInAidCJ4InAieCJ8IoAihCKIIoAiiCKMIpAilCKYIpAimCKcIqAipCKoIqAiqCKsIrAitCK4IrAiuCK8IsAixCLIIsAiyCLMItAi1CLYItAi2CLcIuAi5CLoIuAi6CLsIvAi9CL4IvAi+CL8IwAjBCMIIwAjCCMMIxAjFCMYIxAjGCMcIyAjJCMoIyAjKCMsIzAjNCM4IzAjOCM8I0AjRCNII0AjSCNMI1AjVCNYI1AjWCNcI2AjZCNoI2AjaCNsI3AjdCN4I3AjeCN8I4AjhCOII4AjiCOMI5AjlCOYI5AjmCOcI6AjpCOoI6AjqCOsI7AjtCO4I7AjuCO8I8AjxCPII8AjyCPMI9Aj1CPYI9Aj2CPcI+Aj5CPoI+Aj6CPsI/Aj9CP4I/Aj+CP8IAAkBCQIJAAkCCQMJBAkFCQYJBAkGCQcJCAkJCQoJCAkKCQsJDAkNCQ4JDAkOCQ8JEAkRCRIJEAkSCRMJFAkVCRYJFAkWCRcJGAkZCRoJGAkaCRsJHAkdCR4JHAkeCR8JIAkhCSIJIAkiCSMJJAklCSYJJAkmCScJKAkpCSoJKAkqCSsJLAktCS4JLAkuCS8JMAkxCTIJMAkyCTMJNAk1CTYJNAk2CTcJOAk5CToJOAk6CTsJPAk9CT4JPAk+CT8JQAlBCUIJQAlCCUMJRAlFCUYJRAlGCUcJSAlJCUoJSAlKCUsJTAlNCU4JTAlOCU8JUAlRCVIJUAlSCVMJVAlVCVYJVAlWCVcJWAlZCVoJWAlaCVsJXAldCV4JXAleCV8JYAlhCWIJYAliCWMJZAllCWYJZAlmCWcJaAlpCWoJaAlqCWsJbAltCW4JbAluCW8JcAlxCXIJcAlyCXMJdAl1CXYJdAl2CXcJeAl5CXoJeAl6CXsJfAl9CX4JfAl+CX8JgAmBCYIJgAmCCYMJhAmFCYYJhAmGCYcJiAmJCYoJiAmKCYsJjAmNCY4JjAmOCY8JkAmRCZIJkAmSCZMJlAmVCZYJlAmWCZcJmAmZCZoJmAmaCZsJnAmdCZ4JnAmeCZ8JoAmhCaIJoAmiCaMJpAmlCaYJpAmmCacJqAmpCaoJqAmqCasJrAmtCa4JrAmuCa8JsAmxCbIJsAmyCbMJtAm1CbYJtAm2CbcJuAm5CboJuAm6CbsJvAm9Cb4JvAm+Cb8JwAnBCcIJwAnCCcMJxAnFCcYJxAnGCccJyAnJCcoJyAnKCcsJzAnNCc4JzAnOCc8J0AnRCdIJ0AnSCdMJ1AnVCdYJ1AnWCdcJ2AnZCdoJ2AnaCdsJ3AndCd4J3AneCd8J4AnhCeIJ4AniCeMJ5AnlCeYJ5AnmCecJ6AnpCeoJ6AnqCesJ7AntCe4J7AnuCe8J8AnxCfIJ8AnyCfMJ9An1CfYJ9An2CfcJ+An5CfoJ+An6CfsJ/An9Cf4J/An+Cf8JAAoBCgIKAAoCCgMKBAoFCgYKBAoGCgcKCAoJCgoKCAoKCgsKDAoNCg4KDAoOCg8KEAoRChIKEAoSChMKFAoVChYKFAoWChcKGAoZChoKGAoaChsKHAodCh4KHAoeCh8KIAohCiIKIAoiCiMKJAolCiYKJAomCicKKAopCioKKAoqCisKLAotCi4KLAouCi8KMAoxCjIKMAoyCjMKNAo1CjYKNAo2CjcKOAo5CjoKOAo6CjsKPAo9Cj4KPAo+Cj8KQApBCkIKQApCCkMKRApFCkYKRApGCkcKSApJCkoKSApKCksKTApNCk4KTApOCk8KUApRClIKUApSClMKVApVClYKVApWClcKWApZCloKWApaClsKXApdCl4KXApeCl8KYAphCmIKYApiCmMKZAplCmYKZApmCmcKaAppCmoKaApqCmsKbAptCm4KbApuCm8KcApxCnIKcApyCnMKdAp1CnYKdAp2CncKeAp5CnoKeAp6CnsKfAp9Cn4KfAp+Cn8KgAqBCoIKgAqCCoMKhAqFCoYKhAqGCocKiAqJCooKiAqKCosKjAqNCo4KjAqOCo8KkAqRCpIKkAqSCpMKlAqVCpYKlAqWCpcKmAqZCpoKmAqaCpsKnAqdCp4KnAqeCp8KoAqhCqIKoAqiCqMKpAqlCqYKpAqmCqcKqAqpCqoKqAqqCqsKrAqtCq4KrAquCq8KsAqxCrIKsAqyCrMKtAq1CrYKtAq2CrcKuAq5CroKuAq6CrsKvAq9Cr4KvAq+Cr8KwArBCsIKwArCCsMKxArFCsYKxArGCscKyArJCsoKyArKCssKzArNCs4KzArOCs8K0ArRCtIK0ArSCtMK1ArVCtYK1ArWCtcK2ArZCtoK2AraCtsK3ArdCt4K3AreCt8K4ArhCuIK4AriCuMK5ArlCuYK5ArmCucK6ArpCuoK6ArqCusK7ArtCu4K7AruCu8K8ArxCvIK8AryCvMK9Ar1CvYK9Ar2CvcK+Ar5CvoK+Ar6CvsK/Ar9Cv4K/Ar+Cv8KAAsBCwILAAsCCwMLBAsFCwYLBAsGCwcLCAsJCwoLCAsKCwsLDAsNCw4LDAsOCw8LEAsRCxILEAsSCxMLFAsVCxYLFAsWCxcLGAsZCxoLGAsaCxsLHAsdCx4LHAseCx8LIAshCyILIAsiCyMLJAslCyYLJAsmCycLKAspCyoLKAsqCysLLAstCy4LLAsuCy8LMAsxCzILMAsyCzMLNAs1CzYLNAs2CzcLOAs5CzoLOAs6CzsLPAs9Cz4LPAs+Cz8LQAtBC0ILQAtCC0MLRAtFC0YLRAtGC0cLSAtJC0oLSAtKC0sLTAtNC04LTAtOC08LUAtRC1ILUAtSC1MLVAtVC1YLVAtWC1cLWAtZC1oLWAtaC1sLXAtdC14LXAteC18LYAthC2ILYAtiC2MLZAtlC2YLZAtmC2cLaAtpC2oLaAtqC2sLbAttC24LbAtuC28LcAtxC3ILcAtyC3MLdAt1C3YLdAt2C3cLeAt5C3oLeAt6C3sLfAt9C34LfAt+C38LgAuBC4ILgAuCC4MLhAuFC4YLhAuGC4cLiAuJC4oLiAuKC4sLjAuNC44LjAuOC48LkAuRC5ILkAuSC5MLlAuVC5YLlAuWC5cLmAuZC5oLmAuaC5sLnAudC54LnAueC58LoAuhC6ILoAuiC6MLpAulC6YLpAumC6cLqAupC6oLqAuqC6sLrAutC64LrAuuC68LsAuxC7ILsAuyC7MLtAu1C7YLtAu2C7cLuAu5C7oLuAu6C7sLvAu9C74LvAu+C78LwAvBC8ILwAvCC8MLxAvFC8YLxAvGC8cLyAvJC8oLyAvKC8sLzAvNC84LzAvOC88L0AvRC9IL0AvSC9ML1AvVC9YL1AvWC9cL2AvZC9oL2AvaC9sL3AvdC94L3AveC98L4AvhC+IL4AviC+ML5AvlC+YL5AvmC+cL6AvpC+oL6AvqC+sL7AvtC+4L7AvuC+8L8AvxC/IL8AvyC/ML9Av1C/YL9Av2C/cL+Av5C/oL+Av6C/sL/Av9C/4L/Av+C/8LAAwBDAIMAAwCDAMMBAwFDAYMBAwGDAcMCAwJDAoMCAwKDAsMDAwNDA4MDAwODA8MEAwRDBIMEAwSDBMMFAwVDBYMFAwWDBcMGAwZDBoMGAwaDBsMHAwdDB4MHAweDB8MIAwhDCIMIAwiDCMMJAwlDCYMJAwmDCcMKAwpDCoMKAwqDCsMLAwtDC4MLAwuDC8MMAwxDDIMMAwyDDMMNAw1DDYMNAw2DDcMOAw5DDoMOAw6DDsMPAw9DD4MPAw+DD8MQAxBDEIMQAxCDEMMRAxFDEYMRAxGDEcMSAxJDEoMSAxKDEsMTAxNDE4MTAxODE8MUAxRDFIMUAxSDFMMVAxVDFYMVAxWDFcMWAxZDFoMWAxaDFsMXAxdDF4MXAxeDF8MYAxhDGIMYAxiDGMMZAxlDGYMZAxmDGcMaAxpDGoMaAxqDGsMbAxtDG4MbAxuDG8McAxxDHIMcAxyDHMMdAx1DHYMdAx2DHcMeAx5DHoMeAx6DHsMfAx9DH4MfAx+DH8MgAyBDIIMgAyCDIMMhAyFDIYMhAyGDIcMiAyJDIoMiAyKDIsMjAyNDI4MjAyODI8MkAyRDJIMkAySDJMMlAyVDJYMlAyWDJcMmAyZDJoMmAyaDJsMnAydDJ4MnAyeDJ8MoAyhDKIMoAyiDKMMpAylDKYMpAymDKcMqAypDKoMqwysDK0MqwytDK4MrwywDLEMsgyzDLQMsgy0DLUMtgy3DLgMtgy4DLkM"),
-"material": ExtResource("3_5m0nl"),
+"material": ExtResource("4_hcxsp"),
 "name": "Concrete/conrete_painted_blue_dirty_01",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -52,7 +52,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 648,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8AMAAxADIAMAAyADMANAA1ADYANAA2ADcAOAA5ADoAOAA6ADsAPAA9AD4APAA+AD8AQABBAEIAQABCAEMARABFAEYARABGAEcASABJAEoASABKAEsATABNAE4ATABOAE8AUABRAFIAUABSAFMAVABVAFYAVABWAFcAWABZAFoAWABaAFsAXABdAF4AXABeAF8AYABhAGIAYABiAGMAZABlAGYAZABmAGcAaABpAGoAaABqAGsAbABtAG4AbABuAG8AcABxAHIAcAByAHMAdAB1AHYAdAB2AHcAeAB5AHoAeAB6AHsAfAB9AH4AfAB+AH8AgACBAIIAgACCAIMAhACFAIYAhACGAIcAiACJAIoAiACKAIsAjACNAI4AjACOAI8AkACRAJIAkACSAJMAlACVAJYAlACWAJcAmACZAJoAmACaAJsAnACdAJ4AnACeAJ8AoAChAKIAoACiAKMApAClAKYApACmAKcAqACpAKoAqACqAKsArACtAK4ArACuAK8AsACxALIAsACyALMAtAC1ALYAtAC2ALcAuAC5ALoAuAC6ALsAvAC9AL4AvAC+AL8AwADBAMIAwADCAMMAxADFAMYAxADGAMcAyADJAMoAyADKAMsAzADNAM4AzADOAM8A0ADRANIA0ADSANMA1ADVANYA1ADWANcA2ADZANoA2ADaANsA3ADdAN4A3ADeAN8A4ADhAOIA4ADiAOMA5ADlAOYA5ADmAOcA6ADpAOoA6ADqAOsA7ADtAO4A7ADuAO8A8ADxAPIA8ADyAPMA9AD1APYA9AD2APcA+AD5APoA+AD6APsA/AD9AP4A/AD+AP8AAAEBAQIBAAECAQMBBAEFAQYBBAEGAQcBCAEJAQoBCAEKAQsBDAENAQ4BDAEOAQ8BEAERARIBEAESARMBFAEVARYBFAEWARcBGAEZARoBGAEaARsBHAEdAR4BHAEeAR8BIAEhASIBIAEiASMBJAElASYBJAEmAScBKAEpASoBKAEqASsBLAEtAS4BLAEuAS8BMAExATIBMAEyATMBNAE1ATYBNAE2ATcBOAE5AToBOAE6ATsBPAE9AT4BPAE+AT8BQAFBAUIBQAFCAUMBRAFFAUYBRAFGAUcBSAFJAUoBSAFKAUsBTAFNAU4BTAFOAU8BUAFRAVIBUAFSAVMBVAFVAVYBVAFWAVcBWAFZAVoBWAFaAVsBXAFdAV4BXAFeAV8BYAFhAWIBYAFiAWMBZAFlAWYBZAFmAWcBaAFpAWoBaAFqAWsBbAFtAW4BbAFuAW8BcAFxAXIBcAFyAXMBdAF1AXYBdAF2AXcBeAF5AXoBeAF6AXsBfAF9AX4BfAF+AX8BgAGBAYIBgAGCAYMBhAGFAYYBhAGGAYcBiAGJAYoBiAGKAYsBjAGNAY4BjAGOAY8BkAGRAZIBkAGSAZMBlAGVAZYBlAGWAZcBmAGZAZoBmAGaAZsBnAGdAZ4BnAGeAZ8BoAGhAaIBoAGiAaMBpAGlAaYBpAGmAacBqAGpAaoBqAGqAasBrAGtAa4BrAGuAa8B"),
-"material": ExtResource("4_7wr2a"),
+"material": ExtResource("5_yeu2q"),
 "name": "Bricks/brick_rough_blue",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -64,7 +64,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 192,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACwAMAA0ADgAPABAADgAQABEAEgATABQAEgAUABUAFgAXABgAGQAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKwAsAC0ALgAvADAALgAwADEAMgAzADQAMgA0ADUANgA3ADgANgA4ADkAOgA7ADwAPQA+AD8AQABBAEIAQABCAEMARABFAEYARABGAEcASABJAEoASABKAEsATABNAE4ATABOAE8AUABRAFIAUwBUAFUAVgBXAFgAVgBYAFkAWgBbAFwAWgBcAF0AXgBfAGAAXgBgAGEAYgBjAGQAZQBmAGcAaABpAGoAaABqAGsAbABtAG4AbABuAG8AcABxAHIAcwB0AHUAdgB3AHgAdgB4AHkAegB7AHwAegB8AH0AfgB/AIAAfgCAAIEAggCDAIQAggCEAIUAhgCHAIgAiQCKAIsAjACNAI4AjACOAI8A"),
-"material": ExtResource("5_xo370"),
+"material": ExtResource("6_1od8g"),
 "name": "Bricks/brick_small_red_2",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -76,7 +76,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 72,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8A"),
-"material": ExtResource("6_apiow"),
+"material": ExtResource("7_5jbmq"),
 "name": "Ground/ice_06",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -660,7 +660,7 @@ size = Vector3(4, 4, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k72vd"]
 resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("5_6a50f")
+shader = ExtResource("10_ry1fl")
 shader_parameter/border_width = 0.0
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/pattern = false
@@ -680,7 +680,7 @@ albedo_color = Color(0.513726, 0, 0, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xgqos"]
 resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("5_6a50f")
+shader = ExtResource("10_ry1fl")
 shader_parameter/border_width = 0.0
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/pattern = false
@@ -700,7 +700,7 @@ albedo_color = Color(0.513726, 0, 0, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h5aoq"]
 resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("5_6a50f")
+shader = ExtResource("10_ry1fl")
 shader_parameter/border_width = 0.0
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/pattern = false
@@ -908,10 +908,10 @@ text = "This thing is 5000 meters tall. It takes 100 seconds to fall from the ve
 vertical_alignment = 2
 autowrap_mode = 3
 
-[node name="testing_area" instance=ExtResource("1_o0fs5")]
+[node name="testing_area" instance=ExtResource("1_061ta")]
 
 [node name="WorldEnvironment" parent="." index="0"]
-environment = ExtResource("2_osqti")
+environment = ExtResource("2_j8bjr")
 
 [node name="WorldReflectionProbe" type="ReflectionProbe" parent="." index="1"]
 size = Vector3(500, 500, 500)
@@ -1488,26 +1488,26 @@ shape = SubResource("BoxShape3D_6b2x7")
 [node name="Mesh" type="MeshInstance3D" parent="NavigationRegion/Map_elements/Fog" index="1"]
 mesh = SubResource("BoxMesh_k0o34")
 
-[node name="Interactable" parent="NavigationRegion/Map_elements/Fog" index="2" instance=ExtResource("3_acpno")]
+[node name="Interactable" parent="NavigationRegion/Map_elements/Fog" index="2" instance=ExtResource("8_mxu4l")]
 
 [node name="CollisionShape3D" parent="NavigationRegion/Map_elements/Fog/Interactable" index="0"]
 shape = SubResource("BoxShape3D_40xew")
 
-[node name="lamp_test1" parent="NavigationRegion/Map_elements" index="4" instance=ExtResource("4_nrllp")]
+[node name="lamp_test1" parent="NavigationRegion/Map_elements" index="4" instance=ExtResource("9_lblg5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.6227, 1.81132, -2.77137)
 material = SubResource("StandardMaterial3D_sfrcc")
 
-[node name="lamp_test2" parent="NavigationRegion/Map_elements" index="5" instance=ExtResource("4_nrllp")]
+[node name="lamp_test2" parent="NavigationRegion/Map_elements" index="5" instance=ExtResource("9_lblg5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3097, 1.81132, -1.61595)
 material = SubResource("StandardMaterial3D_rr5t3")
 
-[node name="lamp_test3" parent="NavigationRegion/Map_elements" index="6" instance=ExtResource("4_nrllp")]
+[node name="lamp_test3" parent="NavigationRegion/Map_elements" index="6" instance=ExtResource("9_lblg5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9658, 1.81132, -1.61595)
 material = SubResource("StandardMaterial3D_vq5j1")
 
 [node name="Teleporters" type="Node3D" parent="NavigationRegion/Map_elements" index="7"]
 
-[node name="Teleporter5000m" parent="NavigationRegion/Map_elements/Teleporters" index="0" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="Teleporter5000m" parent="NavigationRegion/Map_elements/Teleporters" index="0" node_paths=PackedStringArray("teleport_target") instance=ExtResource("11_0oltu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70, 0, 90)
 teleport_target = NodePath("../5000mMarker")
 effects_colour = Color(0, 0, 0, 1)
@@ -1515,41 +1515,41 @@ effects_colour = Color(0, 0, 0, 1)
 [node name="5000mMarker" type="Marker3D" parent="NavigationRegion/Map_elements/Teleporters" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75, 5000, 90)
 
-[node name="TeleporterBottom" parent="NavigationRegion/Map_elements/Teleporters" index="2" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="TeleporterBottom" parent="NavigationRegion/Map_elements/Teleporters" index="2" node_paths=PackedStringArray("teleport_target") instance=ExtResource("11_0oltu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 30)
 teleport_target = NodePath("../TeleporterTop")
 
-[node name="TeleporterTop" parent="NavigationRegion/Map_elements/Teleporters" index="3" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="TeleporterTop" parent="NavigationRegion/Map_elements/Teleporters" index="3" node_paths=PackedStringArray("teleport_target") instance=ExtResource("11_0oltu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 256, 60)
 teleport_target = NodePath("../TeleporterBottom")
 effects_colour = Color(0.447059, 0.00392157, 0.85098, 1)
 
-[node name="Teleporter1Loop" parent="NavigationRegion/Map_elements/Teleporters" index="4" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="Teleporter1Loop" parent="NavigationRegion/Map_elements/Teleporters" index="4" node_paths=PackedStringArray("teleport_target") instance=ExtResource("11_0oltu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 77.928, 0, 32.1079)
 teleport_target = NodePath("../Teleporter2Loop")
 effects_colour = Color(0.831373, 0.0941176, 0.235294, 1)
 
-[node name="Teleporter2Loop" parent="NavigationRegion/Map_elements/Teleporters" index="5" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="Teleporter2Loop" parent="NavigationRegion/Map_elements/Teleporters" index="5" node_paths=PackedStringArray("teleport_target") instance=ExtResource("11_0oltu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.4062, 0, 32.1079)
 teleport_target = NodePath("../Teleporter1Loop")
 effects_colour = Color(0.988235, 0.368627, 0.411765, 1)
 
-[node name="TeleporterSelfLoop" parent="NavigationRegion/Map_elements/Teleporters" index="6" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="TeleporterSelfLoop" parent="NavigationRegion/Map_elements/Teleporters" index="6" node_paths=PackedStringArray("teleport_target") instance=ExtResource("11_0oltu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.4307, 0, 44.6259)
 teleport_target = NodePath(".")
 effects_colour = Color(0.486275, 0.745098, 0.231373, 1)
 
-[node name="TeleporterStairs" parent="NavigationRegion/Map_elements/Teleporters" index="7" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="TeleporterStairs" parent="NavigationRegion/Map_elements/Teleporters" index="7" node_paths=PackedStringArray("teleport_target") instance=ExtResource("11_0oltu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.9486, 0, 31.9903)
 teleport_target = NodePath("../TeleporterWalls")
 effects_colour = Color(0.027451, 0.772549, 0.956863, 1)
 
-[node name="TeleporterWalls" parent="NavigationRegion/Map_elements/Teleporters" index="8" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="TeleporterWalls" parent="NavigationRegion/Map_elements/Teleporters" index="8" node_paths=PackedStringArray("teleport_target") instance=ExtResource("11_0oltu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.877, 14.0149, -19.5246)
 teleport_target = NodePath("../TeleporterStairs")
 effects_colour = Color(0, 0.305882, 0.611765, 1)
 
-[node name="TeleporterBouncePillar" parent="NavigationRegion/Map_elements/Teleporters" index="9" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="TeleporterBouncePillar" parent="NavigationRegion/Map_elements/Teleporters" index="9" node_paths=PackedStringArray("teleport_target") instance=ExtResource("11_0oltu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 94, 0, 30)
 teleport_target = NodePath("../BouncePillarMarker")
 effects_colour = Color(0.745098, 0.329412, 0, 1)
@@ -1557,11 +1557,11 @@ effects_colour = Color(0.745098, 0.329412, 0, 1)
 [node name="BouncePillarMarker" type="Marker3D" parent="NavigationRegion/Map_elements/Teleporters" index="10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 94, 115, 26)
 
-[node name="TeleporterBigWall" parent="NavigationRegion/Map_elements/Teleporters" index="11" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="TeleporterBigWall" parent="NavigationRegion/Map_elements/Teleporters" index="11" node_paths=PackedStringArray("teleport_target") instance=ExtResource("11_0oltu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 65)
 teleport_target = NodePath("../../BigWall/BigWallMarker")
 
-[node name="TeleporterCurvedWall" parent="NavigationRegion/Map_elements/Teleporters" index="12" node_paths=PackedStringArray("teleport_target") instance=ExtResource("10_jdp74")]
+[node name="TeleporterCurvedWall" parent="NavigationRegion/Map_elements/Teleporters" index="12" node_paths=PackedStringArray("teleport_target") instance=ExtResource("11_0oltu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, 0, 31)
 teleport_target = NodePath("../CurvedWall")
 effects_colour = Color(0.670588, 0.0431373, 0, 1)
@@ -1569,34 +1569,34 @@ effects_colour = Color(0.670588, 0.0431373, 0, 1)
 [node name="CurvedWall" type="Marker3D" parent="NavigationRegion/Map_elements/Teleporters" index="13"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0, -69)
 
-[node name="Tremor" parent="NavigationRegion/Map_elements" index="8" instance=ExtResource("11_2x63x")]
+[node name="Tremor" parent="NavigationRegion/Map_elements" index="8" instance=ExtResource("12_ccwyx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.2367, 0, 30.1397)
 
 [node name="IdealCubes" type="Node3D" parent="NavigationRegion/Map_elements" index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -12)
 
-[node name="OneMeterCube" parent="NavigationRegion/Map_elements/IdealCubes" index="0" instance=ExtResource("14_epn6c")]
+[node name="OneMeterCube" parent="NavigationRegion/Map_elements/IdealCubes" index="0" instance=ExtResource("13_vbbhc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.5, 0)
 mesh = SubResource("TextMesh_1vhvr")
 skeleton = NodePath("../../TEXT")
 text = "I am The One Meter Cube"
 text_albedo = Color(0.831373, 0.831373, 0.831373, 1)
 
-[node name="TwoMeterCube" parent="NavigationRegion/Map_elements/IdealCubes" index="1" instance=ExtResource("14_epn6c")]
+[node name="TwoMeterCube" parent="NavigationRegion/Map_elements/IdealCubes" index="1" instance=ExtResource("13_vbbhc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2, 0)
 mesh = SubResource("TextMesh_22h5u")
 skeleton = NodePath("../../TEXT")
 text = "... and I am The Two Meter Cube."
 text_albedo = Color(0.517647, 0.517647, 0.517647, 1)
 
-[node name="The Cube Brothers" parent="NavigationRegion/Map_elements/IdealCubes" index="2" instance=ExtResource("14_epn6c")]
+[node name="The Cube Brothers" parent="NavigationRegion/Map_elements/IdealCubes" index="2" instance=ExtResource("13_vbbhc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 mesh = SubResource("TextMesh_4uuvo")
 skeleton = NodePath("../../TEXT")
 text = "The Cube Brothers"
 text_albedo = Color(0.301961, 0.301961, 0.301961, 1)
 
-[node name="TrenchbroomInfo" parent="NavigationRegion/Map_elements/IdealCubes" index="3" instance=ExtResource("14_epn6c")]
+[node name="TrenchbroomInfo" parent="NavigationRegion/Map_elements/IdealCubes" index="3" instance=ExtResource("13_vbbhc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 mesh = SubResource("TextMesh_0cqtt")
 skeleton = NodePath("../The Cube Brothers")
@@ -1619,62 +1619,62 @@ mesh = SubResource("SphereMesh_1xkvl")
 
 [node name="TEXT" type="Node3D" parent="NavigationRegion/Map_elements" index="11"]
 
-[node name="50MeterTower" parent="NavigationRegion/Map_elements/TEXT" index="0" instance=ExtResource("14_epn6c")]
+[node name="50MeterTower" parent="NavigationRegion/Map_elements/TEXT" index="0" instance=ExtResource("13_vbbhc")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 91.9, 1.5, 18)
 mesh = SubResource("TextMesh_8byw3")
 text = "This tower is 50 meters"
 
-[node name="StompVelocity" parent="NavigationRegion/Map_elements/TEXT" index="1" instance=ExtResource("14_epn6c")]
+[node name="StompVelocity" parent="NavigationRegion/Map_elements/TEXT" index="1" instance=ExtResource("13_vbbhc")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 91.9, 1, 18)
 mesh = SubResource("TextMesh_248sh")
 text = "It takes 2 seconds to stomp from the top of this tower to the ground at Gravity set to 17"
 
-[node name="FallVelocity" parent="NavigationRegion/Map_elements/TEXT" index="2" instance=ExtResource("14_epn6c")]
+[node name="FallVelocity" parent="NavigationRegion/Map_elements/TEXT" index="2" instance=ExtResource("13_vbbhc")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 91.9, 0.355307, 18)
 mesh = SubResource("TextMesh_ek1am")
 text = "Or 2.22 seconds to fall from the top to the ground"
 
-[node name="StompBoostLimitTower" parent="NavigationRegion/Map_elements/TEXT" index="3" instance=ExtResource("14_epn6c")]
+[node name="StompBoostLimitTower" parent="NavigationRegion/Map_elements/TEXT" index="3" instance=ExtResource("13_vbbhc")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 91.9, 0.5, 26)
 mesh = SubResource("TextMesh_lq6ng")
 text = "This tower represents the Stomp Boost height limit - 115 meters"
 
-[node name="WalljumpCombinedHeight" parent="NavigationRegion/Map_elements/TEXT" index="4" instance=ExtResource("14_epn6c")]
+[node name="WalljumpCombinedHeight" parent="NavigationRegion/Map_elements/TEXT" index="4" instance=ExtResource("13_vbbhc")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 96.9, 2, 47)
 mesh = SubResource("TextMesh_p3cre")
 text = "This monolith represents maximum height gained, when Walljumped from the peak of a regular jump - 10 meters"
 
-[node name="WalljumpActualHeight" parent="NavigationRegion/Map_elements/TEXT" index="5" instance=ExtResource("14_epn6c")]
+[node name="WalljumpActualHeight" parent="NavigationRegion/Map_elements/TEXT" index="5" instance=ExtResource("13_vbbhc")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 96.9, 1.25, 47)
 mesh = SubResource("TextMesh_lwy12")
 text = "This means that the Walljump adds 3.75 meters to current height"
 
-[node name="WalljumpDistance" parent="NavigationRegion/Map_elements/TEXT" index="6" instance=ExtResource("14_epn6c")]
+[node name="WalljumpDistance" parent="NavigationRegion/Map_elements/TEXT" index="6" instance=ExtResource("13_vbbhc")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 96, 0.45, 47)
 mesh = SubResource("TextMesh_w1g68")
 text = "This monolith represents horizontal Walljump distance - 18 meters"
 
-[node name="JumpHeight" parent="NavigationRegion/Map_elements/TEXT" index="7" instance=ExtResource("14_epn6c")]
+[node name="JumpHeight" parent="NavigationRegion/Map_elements/TEXT" index="7" instance=ExtResource("13_vbbhc")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 91.5, 1.5, 54.9)
 mesh = SubResource("TextMesh_1o2ik")
 text = "This monolith represents maximum jump height - 7 meters. It takes 0.75 seconds to jump to the top, and 0.65 second to fall down."
 
-[node name="WalljumpHeight" parent="NavigationRegion/Map_elements/TEXT" index="8" instance=ExtResource("14_epn6c")]
+[node name="WalljumpHeight" parent="NavigationRegion/Map_elements/TEXT" index="8" instance=ExtResource("13_vbbhc")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 90.5, 7.5, 54.9)
 mesh = SubResource("TextMesh_wt0yu")
 text = "This represents Walljump height - 3 meters"
 
-[node name="WalkingSpeed" parent="NavigationRegion/Map_elements/TEXT" index="9" instance=ExtResource("14_epn6c")]
+[node name="WalkingSpeed" parent="NavigationRegion/Map_elements/TEXT" index="9" instance=ExtResource("13_vbbhc")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 41, 1.7, 87)
 mesh = SubResource("TextMesh_lin5o")
 text = "The distance between these two walls is 25 meters. It takes 3 second to cover this distance by walking."
 
-[node name="SlidingSpeed" parent="NavigationRegion/Map_elements/TEXT" index="10" instance=ExtResource("14_epn6c")]
+[node name="SlidingSpeed" parent="NavigationRegion/Map_elements/TEXT" index="10" instance=ExtResource("13_vbbhc")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 41, 1, 87)
 mesh = SubResource("TextMesh_wp651")
 text = "But it takes 2 seconds to travel between these two walls while sliding"
 
-[node name="5000MetersFall" parent="NavigationRegion/Map_elements/TEXT" index="11" instance=ExtResource("14_epn6c")]
+[node name="5000MetersFall" parent="NavigationRegion/Map_elements/TEXT" index="11" instance=ExtResource("13_vbbhc")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -75, 1.3, 87.5)
 mesh = SubResource("TextMesh_6mcty")
 text = "This thing is 5000 meters tall. It takes 100 seconds to fall from the very top to the bottom. It also showcases that the Player's falling speed limit is 50 meters per second."
@@ -1683,7 +1683,7 @@ text_albedo = Color(0.329412, 0.329412, 0.329412, 1)
 [node name="Player" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 0.0592439, 36)
 
-[node name="TestEnemy1" parent="." index="5" instance=ExtResource("15_ylohc")]
+[node name="TestEnemy1" parent="." index="5" instance=ExtResource("14_klts4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.7519, 0, 37.3984)
 
 [connection signal="focused" from="NavigationRegion/Map_elements/Fog/Interactable" to="NavigationRegion/Map_elements/Fog" method="_on_interactable_focused"]

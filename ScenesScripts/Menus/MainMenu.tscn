@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dp6k3cjuv8g5e"]
 
-[ext_resource type="Script" uid="uid://byie0qx8e5vvc" path="res://ScenesScripts/Menus/Main_Menu.gd" id="6"]
+[ext_resource type="Script" uid="uid://byie0qx8e5vvc" path="res://ScenesScripts/Menus/MainMenu.gd" id="6"]
 
 [sub_resource type="Sky" id="1"]
 radiance_size = 0

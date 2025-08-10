@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2fet7sg7ta7s"]
 
-[ext_resource type="PackedScene" uid="uid://bn7y4wu56lcq0" path="res://ScenesScripts/Entities/Weapons/Firearms/Firearm_Hitscan.tscn" id="1_k8jy2"]
+[ext_resource type="PackedScene" uid="uid://bn7y4wu56lcq0" path="res://ScenesScripts/Entities/Weapons/Firearms/FirearmHitscan.tscn" id="1_k8jy2"]
 [ext_resource type="Script" uid="uid://ddvu0312o52hc" path="res://ScenesScripts/Entities/Weapons/Firearms/Pistol.gd" id="2_ejjpi"]
 [ext_resource type="PackedScene" uid="uid://bvoqgew4r1sdh" path="res://Blender/Heft24Solid/Heft24Solid.gltf" id="3_ayanl"]
 

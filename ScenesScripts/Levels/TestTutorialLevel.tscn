@@ -1,6 +1,6 @@
 [gd_scene load_steps=278 format=4 uid="uid://b6hwnn84uocm6"]
 
-[ext_resource type="PackedScene" uid="uid://dps31ep48fejk" path="res://ScenesScripts/Levels/base_level.tscn" id="1_6dipd"]
+[ext_resource type="PackedScene" uid="uid://dps31ep48fejk" path="res://ScenesScripts/Levels/BaseLevel.tscn" id="1_6dipd"]
 [ext_resource type="Material" uid="uid://bvv5njcahls6e" path="res://ScenesScripts/Textures/Bricks/brick_small_rustic_brown_2.tres" id="2_okace"]
 [ext_resource type="Material" uid="uid://bmyg1y4w1lyop" path="res://ScenesScripts/Textures/Concrete/conrete_painted_blue_dirty_01.tres" id="3_kukr7"]
 [ext_resource type="Material" uid="uid://dosgmyuvc4e7f" path="res://ScenesScripts/Textures/Bricks/brick_small_old.tres" id="4_sx1ke"]

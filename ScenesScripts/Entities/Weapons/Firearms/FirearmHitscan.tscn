@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bn7y4wu56lcq0"]
 
-[ext_resource type="PackedScene" uid="uid://dv5fcfhevw1fe" path="res://ScenesScripts/Entities/Weapons/Firearms/Firearm_Base.tscn" id="1_m78hj"]
-[ext_resource type="Script" uid="uid://b04eofqx1h62b" path="res://ScenesScripts/Entities/Weapons/Firearms/Firearm_Hitscan.gd" id="1_t1rr7"]
+[ext_resource type="PackedScene" uid="uid://dv5fcfhevw1fe" path="res://ScenesScripts/Entities/Weapons/Firearms/FirearmBase.tscn" id="1_m78hj"]
+[ext_resource type="Script" uid="uid://b04eofqx1h62b" path="res://ScenesScripts/Entities/Weapons/Firearms/FirearmHitscan.gd" id="1_t1rr7"]
 [ext_resource type="PackedScene" uid="uid://bfset8kv0qt4r" path="res://ScenesScripts/Entities/Weapons/Effects/Base_Bullet_Trail_Emitter.tscn" id="3_17kd2"]
 [ext_resource type="PackedScene" uid="uid://drcgshfh4ln3v" path="res://ScenesScripts/Entities/Weapons/Effects/Base_Shot_Effect_Emitter.tscn" id="3_kukuf"]
 [ext_resource type="PackedScene" uid="uid://cta8h3tmvb3b0" path="res://ScenesScripts/Entities/Weapons/Effects/Base_Shot_Fire_Effect.tscn" id="4_p3p7n"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c8rq5wbjpbcux"]
 
-[ext_resource type="PackedScene" uid="uid://bfl36ykvecfd4" path="res://ScenesScripts/Entities/Enemies/Enemy_base/EnemyBase.tscn" id="1_tm6i6"]
+[ext_resource type="PackedScene" uid="uid://bfl36ykvecfd4" path="res://ScenesScripts/Entities/Enemies/EnemyBase/EnemyBase.tscn" id="1_tm6i6"]
 [ext_resource type="Script" uid="uid://bt1ryv3647dq" path="res://ScenesScripts/Entities/Enemies/Yellow Puppet/YellowPuppet.gd" id="1_wx6pj"]
 [ext_resource type="PackedScene" uid="uid://crhliit2dj4dg" path="res://Blender/yellow_puppet.gltf" id="3_pu5e3"]
 [ext_resource type="Script" uid="uid://dpt07ctw2gmbc" path="res://ScenesScripts/Entities/Enemies/States/Idle.gd" id="4_7qq6o"]

@@ -6,8 +6,11 @@ extends Node
 ##### Exported variables
 ###-------------------------------------------------------------------------###
 
+@export var model_animation_player: AnimationPlayer
+
 @export_group("Exported Animations")
 
+@export var animation_names: Array[String]
 
 ###-------------------------------------------------------------------------###
 ##### Regular variables

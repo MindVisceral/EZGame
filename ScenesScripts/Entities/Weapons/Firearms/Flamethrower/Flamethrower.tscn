@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dn7v48k265lpr"]
 
-[ext_resource type="PackedScene" uid="uid://dv5fcfhevw1fe" path="res://ScenesScripts/Entities/Weapons/Firearms/Firearm_Base.tscn" id="1_iy5rc"]
+[ext_resource type="PackedScene" uid="uid://dv5fcfhevw1fe" path="res://ScenesScripts/Entities/Weapons/Firearms/FirearmBase.tscn" id="1_iy5rc"]
 [ext_resource type="Script" uid="uid://bm86s8wnx46q2" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/Flamethrower.gd" id="2_slqel"]
 [ext_resource type="PackedScene" uid="uid://dcd67a7ua7bka" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/Flame.tscn" id="3_085k1"]
 [ext_resource type="PackedScene" uid="uid://dtwdyx71pw3un" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/NozzleFlame.tscn" id="4_onjsc"]

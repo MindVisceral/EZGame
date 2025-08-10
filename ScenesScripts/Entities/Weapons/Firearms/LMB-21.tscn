@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dfekoydtlmwum"]
 
-[ext_resource type="PackedScene" uid="uid://bn7y4wu56lcq0" path="res://ScenesScripts/Entities/Weapons/Firearms/Firearm_Hitscan.tscn" id="1_fq3sh"]
+[ext_resource type="PackedScene" uid="uid://bn7y4wu56lcq0" path="res://ScenesScripts/Entities/Weapons/Firearms/FirearmHitscan.tscn" id="1_fq3sh"]
 [ext_resource type="PackedScene" uid="uid://biubyhfx27djp" path="res://Blender/LMB-21/LMB-21.gltf" id="2_a7a8p"]
 
 [node name="LMB-21" node_paths=PackedStringArray("bullet_start_point") instance=ExtResource("1_fq3sh")]
