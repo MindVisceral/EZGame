@@ -9,6 +9,9 @@ extends BaseEnemyState
 ## How fast this Enemy rotates to face its movement direction (in radians - use PI)
 @export_range(0.0, 2*PI, PI/90) var rotation_speed: float = PI
 
+@export_group("States")
+#
+@export var idle_state: BaseEnemyState
 
 func enter() -> void:
 	super.enter()
@@ -17,40 +20,33 @@ func enter() -> void:
 
 func exit() -> void:
 	super.exit()
-
+	
 
 func physics_process(delta: float) -> BaseEnemyState:
 	
-	## Set next destination's position on the Path to the final Target
-	var destination: Vector3 = enemy.Navigation.get_next_path_position()
-	## Get the destination's position in local space?????
-	var local_destination: Vector3 = destination - enemy.global_position
-	#print(local_destination, " - manual")
-	#local_destination = enemy.to_local(destination)
-	#print(local_destination, " - functional")
+	## Don't do pathing if Navigation isn't ready
+	if NavigationServer3D.map_get_iteration_id(enemy.Navigation.get_navigation_map()) == 0:
+		return null
+		
+	## Return to idle state if destination is reached
+	if enemy.Navigation.is_navigation_finished():
+		return idle_state
+		
 	
-	## Get direction. You get what it is already.
-	enemy.direction = local_destination.normalized()
-	#print("direction normalized: ", enemy.direction)
+	## Get next position on the path to the Target
+	var destination: Vector3 = enemy.Navigation.get_next_path_position()
+	
+	## Get movement direction from destination
+	enemy.direction = enemy.global_position.direction_to(destination).normalized()
+	
+	## Apply movement direction to velocity
+	#enemy.velocity = enemy.direction * enemy.speed
 	
 	## Apply velocity, take speed_multiplier and acceleration into account
-	## NOTE: Lerping enemy.velocity itself would also impact vertical (y) velocity,
-	## NOTE: so we lerp X and Z separately instead.
-	enemy.velocity.x = lerpf(enemy.velocity.x, \
-		(enemy.direction.x * enemy.speed), 8.0 * delta)
-	enemy.velocity.z = lerpf(enemy.velocity.z, \
-		(enemy.direction.z * enemy.speed), 8.0 * delta)
-	
-	#print("global pos: ", enemy.global_position, "    destination: ", destination)
-	
-	#if enemy.global_position.is_equal_approx(destination):
-		#print("REACHED IT")
-		#
-	
-	#print("enemy velocity: ", enemy.velocity)
+	enemy.velocity = lerp(enemy.velocity, enemy.direction * enemy.speed, delta)
 	
 	## Apply gravity (which is the Globals' gravity * multiplier)
-	#enemy.velocity.y -= enemy.gravity * BulletTime.time_scale * delta
+	enemy.velocity.y -= enemy.gravity * BulletTime.time_scale * delta
 	
 	
 	return null

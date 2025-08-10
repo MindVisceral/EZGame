@@ -28,7 +28,7 @@ radius = 0.05
 height = 0.25
 
 [node name="TestEnemy" instance=ExtResource("1_wkc01")]
-speed = 4.0
+speed = 10.0
 
 [node name="StateManager" parent="Scripts" index="0" node_paths=PackedStringArray("starting_state", "states")]
 starting_state = NodePath("Idle")
@@ -37,17 +37,15 @@ states = [NodePath("Idle"), NodePath("Navigate"), NodePath("Attack")]
 [node name="Idle" type="Node" parent="Scripts/StateManager" index="0"]
 script = ExtResource("2_vqty0")
 
-[node name="Navigate" type="Node" parent="Scripts/StateManager" index="1"]
+[node name="Navigate" type="Node" parent="Scripts/StateManager" index="1" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("3_rn7c7")
 rotation_speed = 6.28319
+idle_state = NodePath("../Idle")
 
 [node name="Attack" type="Node" parent="Scripts/StateManager" index="2"]
 script = ExtResource("2_vqty0")
 
-[node name="Stats" parent="Scripts" index="1"]
-default_health = 50.0
-
-[node name="AIHandler" parent="Scripts" index="4" node_paths=PackedStringArray("enemy_AI")]
+[node name="AIHandler" parent="Scripts" index="1" node_paths=PackedStringArray("enemy_AI")]
 enemy_AI = NodePath("TestEnemyAI")
 
 [node name="TestEnemyAI" type="Node" parent="Scripts/AIHandler" index="0" node_paths=PackedStringArray("navigate_state", "attack_state")]
@@ -57,6 +55,9 @@ attack_state = NodePath("../../StateManager/Attack")
 
 [node name="temp" type="Node" parent="Scripts/AIHandler" index="1"]
 script = ExtResource("4_nk623")
+
+[node name="Stats" parent="Scripts" index="2"]
+default_health = 50.0
 
 [node name="Collider" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
@@ -79,7 +80,8 @@ mesh = SubResource("CapsuleMesh_tbgyv")
 skeleton = NodePath("../..")
 
 [node name="NavigationAgent" parent="." index="4"]
-path_desired_distance = 0.25
+target_desired_distance = 0.5
+path_height_offset = 0.25
 
 [node name="DebugDirection" type="MeshInstance3D" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, -0.00195472, -0.999998, 0, 0.999998, -0.00195472, 0, 0.57365, 0.212131)

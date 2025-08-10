@@ -168,7 +168,7 @@ func physics_process(delta: float) -> BasePlayerState:
 			#print("MOVED AT WALL AT >0.7")
 			
 			if (slid_into_wall_previous_frame and wall_frames_remaining <= 0):
-				print("RETURNED TO IDLE STATE")
+				#print("RETURNED TO IDLE STATE")
 				slid_into_wall_previous_frame = false
 				wall_frames_remaining = default_wall_frames
 				return idle_state
@@ -182,7 +182,6 @@ func physics_process(delta: float) -> BasePlayerState:
 			
 		
 	
-	print("WALL FRAMES REMAINING: ", wall_frames_remaining)
 	
 	return null
 

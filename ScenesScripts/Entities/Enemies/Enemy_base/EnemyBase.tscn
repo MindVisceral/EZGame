@@ -33,6 +33,9 @@ Stores all the States, in case the current_state has to be changed by a Node/scr
 Can change the current_state on behest of an individual State"
 script = ExtResource("2_ofog0")
 
+[node name="AIHandler" type="Node" parent="Scripts"]
+script = ExtResource("6_i20a6")
+
 [node name="Stats" type="Node" parent="Scripts"]
 editor_description = "Manages Enemy stats (including health);"
 script = ExtResource("3_0kcgh")
@@ -42,9 +45,6 @@ script = ExtResource("7_npa2a")
 
 [node name="AnimationHandler" type="Node" parent="Scripts"]
 script = ExtResource("5_t7vsf")
-
-[node name="AIHandler" type="Node" parent="Scripts"]
-script = ExtResource("6_i20a6")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 

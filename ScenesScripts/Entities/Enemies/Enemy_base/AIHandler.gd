@@ -35,7 +35,6 @@ var enemy: EnemyBase
 func init(enemy: EnemyBase) -> void:
 	self.enemy = enemy
 	
-	
 	## The Enemy AI itself also needs a reference to the Enemy, and a reference to this AI Handler
 	enemy_AI.init(enemy, self)
 	## And call the AI's unique setup function.
