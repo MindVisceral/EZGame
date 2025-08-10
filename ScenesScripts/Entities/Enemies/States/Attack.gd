@@ -1,14 +1,23 @@
 extends BaseEnemyState
 
+###-------------------------------------------------------------------------###
+##### Exported variables
+###-------------------------------------------------------------------------###
+
+@export_group("States")
+#
+@export var idle_state: BaseEnemyState
+
+
+
 func enter() -> void:
 	super.enter()
 	
 	## Reset the Navigation's path.
 	enemy.Navigation.get_next_path_position()
 	
-	## Unique to this State. Determine the rotation between this Enemy and their Target.
-	get_rotation_to_target()
-	
+	## Prepare attack
+	prepare_attack()
 
 func exit() -> void:
 	super.exit()
@@ -28,5 +37,17 @@ func physics_process(delta: float) -> BaseEnemyState:
 	
 	return null
 
-func get_rotation_to_target() -> void:
-	pass
+
+## Prepare for attack
+func prepare_attack() -> void:
+	
+	
+	## Attack is fully prepared...
+	release_attack()
+
+## Release the attack, get out of attack state
+func release_attack() -> void:
+	
+	
+	## Attack is done, return to idle state
+	enemy.States.change_state(idle_state)

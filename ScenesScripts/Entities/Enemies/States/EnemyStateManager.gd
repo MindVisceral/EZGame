@@ -23,7 +23,7 @@ func init(enemy: EnemyBase) -> void:
 
 ## State-changing function. Self-explainatory.
 func change_state(new_state: BaseEnemyState) -> void:
-	#print("NEW ENEMY STATE: ", new_state)
+	print("NEW ENEMY STATE: ", new_state)
 	if current_state:
 		current_state.exit()
 	

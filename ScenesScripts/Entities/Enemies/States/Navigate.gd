@@ -15,8 +15,8 @@ extends BaseEnemyState
 
 func enter() -> void:
 	super.enter()
-	#enemy.AnimPlayer.play("Idle ") ## Fucked up HERE, should be no space
 	
+	enemy.Animation_Handler.play_animation()
 
 func exit() -> void:
 	super.exit()
@@ -38,9 +38,6 @@ func physics_process(delta: float) -> BaseEnemyState:
 	
 	## Get movement direction from destination
 	enemy.direction = enemy.global_position.direction_to(destination).normalized()
-	
-	## Apply movement direction to velocity
-	#enemy.velocity = enemy.direction * enemy.speed
 	
 	## Apply velocity, take speed_multiplier and acceleration into account
 	enemy.velocity = lerp(enemy.velocity, enemy.direction * enemy.speed, delta)

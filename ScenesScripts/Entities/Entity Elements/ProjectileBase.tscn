@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://botb4usves8pb"]
+
+[ext_resource type="Script" uid="uid://dp43a5quloby3" path="res://ScenesScripts/Entities/Entity Elements/ProjectileBase.gd" id="1_tuten"]
+
+[node name="ProjectileBase" type="RigidBody3D" node_paths=PackedStringArray("collider", "hitbox_collider")]
+script = ExtResource("1_tuten")
+collider = NodePath("Collider")
+hitbox_collider = NodePath("Hitbox/Collider")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+
+[node name="Hitbox" type="Area3D" parent="."]
+
+[node name="Collider" type="CollisionShape3D" parent="Hitbox"]
+
+[connection signal="body_entered" from="." to="." method="_on_collision"]

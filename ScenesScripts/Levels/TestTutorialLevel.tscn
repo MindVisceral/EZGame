@@ -1,16 +1,16 @@
 [gd_scene load_steps=278 format=4 uid="uid://b6hwnn84uocm6"]
 
-[ext_resource type="PackedScene" uid="uid://dps31ep48fejk" path="res://ScenesScripts/Levels/BaseLevel.tscn" id="1_6dipd"]
-[ext_resource type="Material" uid="uid://bvv5njcahls6e" path="res://ScenesScripts/Textures/Bricks/brick_small_rustic_brown_2.tres" id="2_okace"]
-[ext_resource type="Material" uid="uid://bmyg1y4w1lyop" path="res://ScenesScripts/Textures/Concrete/conrete_painted_blue_dirty_01.tres" id="3_kukr7"]
-[ext_resource type="Material" uid="uid://dosgmyuvc4e7f" path="res://ScenesScripts/Textures/Bricks/brick_small_old.tres" id="4_sx1ke"]
-[ext_resource type="Material" uid="uid://2st0ulypvydl" path="res://ScenesScripts/Textures/Ground/gravel_02.tres" id="5_cwdyl"]
-[ext_resource type="Material" uid="uid://s3pttyfuoxoc" path="res://ScenesScripts/Textures/Metal/metal_threads_02.tres" id="6_qs2vg"]
-[ext_resource type="Material" uid="uid://btwnyqnbl3w5r" path="res://ScenesScripts/Textures/Buildings/textures/gutter_brown_01.tres" id="7_e0rg1"]
-[ext_resource type="Material" uid="uid://bjh1g4egna4xk" path="res://ScenesScripts/Textures/fluids/water.tres" id="7_yylgl"]
-[ext_resource type="Material" uid="uid://dcq1dorjh2bv" path="res://ScenesScripts/Textures/Buildings/textures/wood_planks_2.tres" id="8_5fjp3"]
-[ext_resource type="PackedScene" uid="uid://dkqgap3nt7cow" path="res://ScenesScripts/Levels/Trenchbroom/customFGDs/Props/Lights/test_light.tscn" id="8_m0yee"]
-[ext_resource type="Script" uid="uid://dt7recqjqy0ap" path="res://ScenesScripts/Levels/Trenchbroom/customFGDs/Water/Water.gd" id="9_0mq6n"]
+[ext_resource type="PackedScene" uid="uid://dps31ep48fejk" path="res://ScenesScripts/Levels/BaseLevel.tscn" id="1_pgyud"]
+[ext_resource type="Material" uid="uid://bvv5njcahls6e" path="res://ScenesScripts/Textures/Bricks/brick_small_rustic_brown_2.tres" id="2_pjgl4"]
+[ext_resource type="Material" uid="uid://bmyg1y4w1lyop" path="res://ScenesScripts/Textures/Concrete/conrete_painted_blue_dirty_01.tres" id="3_fftw1"]
+[ext_resource type="Material" uid="uid://dosgmyuvc4e7f" path="res://ScenesScripts/Textures/Bricks/brick_small_old.tres" id="4_dbv6d"]
+[ext_resource type="Material" uid="uid://2st0ulypvydl" path="res://ScenesScripts/Textures/Ground/gravel_02.tres" id="5_qcial"]
+[ext_resource type="Material" uid="uid://s3pttyfuoxoc" path="res://ScenesScripts/Textures/Metal/metal_threads_02.tres" id="6_nlyy4"]
+[ext_resource type="Material" uid="uid://dcq1dorjh2bv" path="res://ScenesScripts/Textures/Buildings/textures/wood_planks_2.tres" id="7_6c0u8"]
+[ext_resource type="Material" uid="uid://btwnyqnbl3w5r" path="res://ScenesScripts/Textures/Buildings/textures/gutter_brown_01.tres" id="8_qhsup"]
+[ext_resource type="Script" uid="uid://dt7recqjqy0ap" path="res://ScenesScripts/Levels/Trenchbroom/customFGDs/Water/Water.gd" id="9_2vesp"]
+[ext_resource type="Material" uid="uid://bjh1g4egna4xk" path="res://ScenesScripts/Textures/fluids/water.tres" id="10_gv5fh"]
+[ext_resource type="PackedScene" uid="uid://dkqgap3nt7cow" path="res://ScenesScripts/Levels/Trenchbroom/customFGDs/Props/Lights/test_light.tscn" id="11_8wlxe"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kwbq0"]
 sky_top_color = Color(1, 1, 1, 1)
@@ -49,7 +49,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 78,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8AMAAxADIAMAAyADMA"),
-"material": ExtResource("2_okace"),
+"material": ExtResource("2_pjgl4"),
 "name": "Bricks/brick_small_rustic_brown_2",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -61,7 +61,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 558,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8AMAAxADIAMAAyADMANAA1ADYANAA2ADcAOAA5ADoAOAA6ADsAPAA9AD4APAA+AD8AQABBAEIAQABCAEMARABFAEYARABGAEcASABJAEoASABKAEsATABNAE4ATABOAE8AUABRAFIAUABSAFMAVABVAFYAVABWAFcAWABZAFoAWABaAFsAXABdAF4AXABeAF8AYABhAGIAYABiAGMAZABlAGYAZABmAGcAaABpAGoAaABqAGsAbABtAG4AbABuAG8AcABxAHIAcAByAHMAdAB1AHYAdAB2AHcAeAB5AHoAeAB6AHsAfAB9AH4AfAB+AH8AgACBAIIAgACCAIMAhACFAIYAhACGAIcAiACJAIoAiACKAIsAjACNAI4AjACOAI8AkACRAJIAkACSAJMAlACVAJYAlACWAJcAmACZAJoAmACaAJsAnACdAJ4AnACeAJ8AoAChAKIAoACiAKMApAClAKYApACmAKcAqACpAKoAqACqAKsArACtAK4ArACuAK8AsACxALIAsACyALMAtAC1ALYAtAC2ALcAuAC5ALoAuAC6ALsAvAC9AL4AvAC+AL8AwADBAMIAwADCAMMAxADFAMYAxADGAMcAyADJAMoAyADKAMsAyADLAMwAzQDOAM8AzQDPANAAzQDQANEA0gDTANQA0gDUANUA1gDXANgA1gDYANkA2gDbANwA2gDcAN0A3gDfAOAA3gDgAOEA4gDjAOQA4gDkAOUA5gDnAOgA5gDoAOkA6gDrAOwA6gDsAO0A7gDvAPAA7gDwAPEA8gDzAPQA8gD0APUA9gD3APgA9gD4APkA+gD7APwA+gD8AP0A/gD/AAAB/gAAAQEBAgEDAQQBAgEEAQUBBgEHAQgBBgEIAQkBCgELAQwBCgEMAQ0BDgEPARABDgEQAREBEgETARQBEgEUARUBFgEXARgBFgEYARkBGgEbARwBGgEcAR0BHgEfASABHgEgASEBIgEjASQBIgEkASUBJgEnASgBJgEoASkBKgErASwBKgEsAS0BLgEvATABLgEwATEBMgEzATQBMgE0ATUBNgE3ATgBNgE4ATkBOgE7ATwBOgE8AT0BPgE/AUABPgFAAUEBQgFDAUQBQgFEAUUBRgFHAUgBRgFIAUkBSgFLAUwBSgFMAU0BTgFPAVABTgFQAVEBUgFTAVQBUgFUAVUBVgFXAVgBVgFYAVkBWgFbAVwBWgFcAV0BXgFfAWABXgFgAWEBYgFjAWQBYgFkAWUBZgFnAWgBZgFoAWkBagFrAWwBagFsAW0BbgFvAXABbgFwAXEB"),
-"material": ExtResource("3_kukr7"),
+"material": ExtResource("3_fftw1"),
 "name": "Concrete/conrete_painted_blue_dirty_01",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -73,7 +73,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 384,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8AMAAxADIAMAAyADMANAA1ADYANAA2ADcAOAA5ADoAOAA6ADsAPAA9AD4APAA+AD8AQABBAEIAQABCAEMARABFAEYARABGAEcASABJAEoASABKAEsATABNAE4ATABOAE8AUABRAFIAUABSAFMAVABVAFYAVABWAFcAWABZAFoAWABaAFsAXABdAF4AXABeAF8AYABhAGIAYABiAGMAZABlAGYAZABmAGcAaABpAGoAaABqAGsAbABtAG4AbABuAG8AcABxAHIAcAByAHMAdAB1AHYAdAB2AHcAeAB5AHoAeAB6AHsAfAB9AH4AfAB+AH8AgACBAIIAgACCAIMAhACFAIYAhACGAIcAiACJAIoAiACKAIsAjACNAI4AjACOAI8AkACRAJIAkACSAJMAlACVAJYAlACWAJcAmACZAJoAmACaAJsAnACdAJ4AnACeAJ8AoAChAKIAoACiAKMApAClAKYApACmAKcAqACpAKoAqACqAKsArACtAK4ArACuAK8AsACxALIAsACyALMAtAC1ALYAtAC2ALcAuAC5ALoAuAC6ALsAvAC9AL4AvAC+AL8AwADBAMIAwADCAMMAxADFAMYAxADGAMcAyADJAMoAyADKAMsAzADNAM4AzADOAM8A0ADRANIA0ADSANMA1ADVANYA1ADWANcA2ADZANoA2ADaANsA3ADdAN4A3ADeAN8A4ADhAOIA4ADiAOMA5ADlAOYA5ADmAOcA6ADpAOoA6ADqAOsA7ADtAO4A7ADuAO8A8ADxAPIA8ADyAPMA9AD1APYA9AD2APcA+AD5APoA+AD6APsA/AD9AP4A/AD+AP8A"),
-"material": ExtResource("4_sx1ke"),
+"material": ExtResource("4_dbv6d"),
 "name": "Bricks/brick_small_old",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -85,7 +85,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 300,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8AMAAxADIAMAAyADMANAA1ADYANAA2ADcAOAA5ADoAOAA6ADsAPAA9AD4APAA+AD8AQABBAEIAQABCAEMARABFAEYARABGAEcASABJAEoASABKAEsATABNAE4ATABOAE8AUABRAFIAUABSAFMAVABVAFYAVABWAFcAWABZAFoAWABaAFsAXABdAF4AXABeAF8AYABhAGIAYABiAGMAZABlAGYAZABmAGcAaABpAGoAaABqAGsAbABtAG4AbABuAG8AcABxAHIAcAByAHMAdAB1AHYAdAB2AHcAeAB5AHoAeAB6AHsAfAB9AH4AfAB+AH8AgACBAIIAgACCAIMAhACFAIYAhACGAIcAiACJAIoAiACKAIsAjACNAI4AjACOAI8AkACRAJIAkACSAJMAlACVAJYAlACWAJcAmACZAJoAmACaAJsAmACbAJwAmACcAJ0AmACdAJ4AmACeAJ8AmACfAKAAmACgAKEAmAChAKIAmACiAKMApAClAKYApACmAKcAqACpAKoAqACqAKsArACtAK4ArACuAK8AsACxALIAsACyALMAtAC1ALYAtAC2ALcAuAC5ALoAuAC6ALsAvAC9AL4AvAC+AL8A"),
-"material": ExtResource("5_cwdyl"),
+"material": ExtResource("5_qcial"),
 "name": "Ground/gravel_02",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -97,7 +97,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 2820,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8AMAAxADIAMAAyADMANAA1ADYANAA2ADcAOAA5ADoAOAA6ADsAPAA9AD4APAA+AD8AQABBAEIAQABCAEMARABFAEYARABGAEcASABJAEoASABKAEsATABNAE4ATABOAE8AUABRAFIAUABSAFMAVABVAFYAVABWAFcAWABZAFoAWABaAFsAXABdAF4AXABeAF8AYABhAGIAYABiAGMAZABlAGYAZABmAGcAaABpAGoAaABqAGsAbABtAG4AbABuAG8AcABxAHIAcAByAHMAdAB1AHYAdAB2AHcAeAB5AHoAeAB6AHsAfAB9AH4AfAB+AH8AgACBAIIAgACCAIMAhACFAIYAhACGAIcAiACJAIoAiACKAIsAjACNAI4AjACOAI8AkACRAJIAkACSAJMAlACVAJYAlACWAJcAmACZAJoAmACaAJsAnACdAJ4AnACeAJ8AoAChAKIAoACiAKMApAClAKYApACmAKcAqACpAKoAqACqAKsArACtAK4ArACuAK8AsACxALIAsACyALMAtAC1ALYAtAC2ALcAuAC5ALoAuAC6ALsAvAC9AL4AvAC+AL8AwADBAMIAwADCAMMAxADFAMYAxADGAMcAyADJAMoAyADKAMsAzADNAM4AzADOAM8A0ADRANIA0ADSANMA1ADVANYA1ADWANcA2ADZANoA2ADaANsA3ADdAN4A3ADeAN8A4ADhAOIA4ADiAOMA5ADlAOYA5ADmAOcA6ADpAOoA6ADqAOsA7ADtAO4A7ADuAO8A8ADxAPIA8ADyAPMA9AD1APYA9AD2APcA+AD5APoA+AD6APsA/AD9AP4A/AD+AP8AAAEBAQIBAAECAQMBBAEFAQYBBAEGAQcBCAEJAQoBCAEKAQsBDAENAQ4BDAEOAQ8BEAERARIBEAESARMBFAEVARYBFAEWARcBGAEZARoBGAEaARsBHAEdAR4BHAEeAR8BIAEhASIBIAEiASMBJAElASYBJAEmAScBKAEpASoBKAEqASsBLAEtAS4BLAEuAS8BMAExATIBMAEyATMBNAE1ATYBNAE2ATcBOAE5AToBOAE6ATsBPAE9AT4BPAE+AT8BQAFBAUIBQAFCAUMBRAFFAUYBRAFGAUcBSAFJAUoBSAFKAUsBTAFNAU4BTAFOAU8BUAFRAVIBUAFSAVMBVAFVAVYBVAFWAVcBWAFZAVoBWAFaAVsBXAFdAV4BXAFeAV8BYAFhAWIBYAFiAWMBZAFlAWYBZAFmAWcBaAFpAWoBaAFqAWsBbAFtAW4BbAFuAW8BcAFxAXIBcAFyAXMBdAF1AXYBdAF2AXcBeAF5AXoBeAF6AXsBfAF9AX4BfAF+AX8BgAGBAYIBgAGCAYMBhAGFAYYBhAGGAYcBiAGJAYoBiAGKAYsBjAGNAY4BjAGOAY8BkAGRAZIBkAGSAZMBlAGVAZYBlAGWAZcBmAGZAZoBmAGaAZsBnAGdAZ4BnAGeAZ8BoAGhAaIBoAGiAaMBpAGlAaYBpAGmAacBqAGpAaoBqAGqAasBrAGtAa4BrAGuAa8BsAGxAbIBsAGyAbMBtAG1AbYBtAG2AbcBuAG5AboBuAG6AbsBvAG9Ab4BvAG+Ab8BwAHBAcIBwAHCAcMBxAHFAcYBxAHGAccByAHJAcoByAHKAcsBzAHNAc4BzAHOAc8B0AHRAdIB0AHSAdMB1AHVAdYB1AHWAdcB2AHZAdoB2AHaAdsB3AHdAd4B3AHeAd8B4AHhAeIB4AHiAeMB5AHlAeYB5AHmAecB6AHpAeoB6AHqAesB7AHtAe4B7AHuAe8B8AHxAfIB8AHyAfMB9AH1AfYB9AH2AfcB+AH5AfoB+AH6AfsB/AH9Af4B/AH+Af8BAAIBAgICAAICAgMCBAIFAgYCBAIGAgcCCAIJAgoCCAIKAgsCDAINAg4CDAIOAg8CEAIRAhICEAISAhMCFAIVAhYCFAIWAhcCGAIZAhoCGAIaAhsCHAIdAh4CHAIeAh8CIAIhAiICIAIiAiMCJAIlAiYCJAImAicCKAIpAioCKAIqAisCLAItAi4CLAIuAi8CMAIxAjICMAIyAjMCNAI1AjYCNAI2AjcCOAI5AjoCOAI6AjsCPAI9Aj4CPAI+Aj8CQAJBAkICQAJCAkMCRAJFAkYCRAJGAkcCSAJJAkoCSAJKAksCTAJNAk4CTAJOAk8CUAJRAlICUAJSAlMCVAJVAlYCVAJWAlcCWAJZAloCWAJaAlsCXAJdAl4CXAJeAl8CYAJhAmICYAJiAmMCZAJlAmYCZAJmAmcCaAJpAmoCaAJqAmsCbAJtAm4CbAJuAm8CcAJxAnICcAJyAnMCdAJ1AnYCdAJ2AncCeAJ5AnoCeAJ6AnsCfAJ9An4CfAJ+An8CgAKBAoICgAKCAoMChAKFAoYChAKGAocCiAKJAooCiAKKAosCjAKNAo4CjAKOAo8CkAKRApICkAKSApMClAKVApYClAKWApcCmAKZApoCmAKaApsCnAKdAp4CnAKeAp8CoAKhAqICoAKiAqMCpAKlAqYCpAKmAqcCqAKpAqoCqAKqAqsCrAKtAq4CrAKuAq8CsAKxArICsAKyArMCtAK1ArYCtAK2ArcCuAK5AroCuAK6ArsCvAK9Ar4CvAK+Ar8CwALBAsICwALCAsMCxALFAsYCxALGAscCyALJAsoCyALKAssCzALNAs4CzALOAs8C0ALRAtIC0ALSAtMC1ALVAtYC1ALWAtcC2ALZAtoC2ALaAtsC3ALdAt4C3ALeAt8C4ALhAuIC4ALiAuMC5ALlAuYC5ALmAucC6ALpAuoC6ALqAusC7ALtAu4C7ALuAu8C8ALxAvIC8ALyAvMC9AL1AvYC9AL2AvcC+AL5AvoC+AL6AvsC/AL9Av4C/AL+Av8CAAMBAwIDAAMCAwMDBAMFAwYDBAMGAwcDCAMJAwoDCAMKAwsDDAMNAw4DDAMOAw8DEAMRAxIDEAMSAxMDFAMVAxYDFAMWAxcDGAMZAxoDGAMaAxsDHAMdAx4DHAMeAx8DIAMhAyIDIAMiAyMDJAMlAyYDJAMmAycDKAMpAyoDKAMqAysDLAMtAy4DLAMuAy8DMAMxAzIDMAMyAzMDNAM1AzYDNAM2AzcDOAM5AzoDOAM6AzsDPAM9Az4DPAM+Az8DQANBA0IDQANCA0MDRANFA0YDRANGA0cDSANJA0oDSANKA0sDTANNA04DTANOA08DUANRA1IDUANSA1MDVANVA1YDVANWA1cDWANZA1oDWANaA1sDXANdA14DXANeA18DYANhA2IDYANiA2MDZANlA2YDZANmA2cDaANpA2oDaANqA2sDbANtA24DbANuA28DcANxA3IDcANyA3MDdAN1A3YDdAN2A3cDeAN5A3oDeAN6A3sDfAN9A34DfAN+A38DgAOBA4IDgAOCA4MDhAOFA4YDhAOGA4cDiAOJA4oDiAOKA4sDjAONA44DjAOOA48DkAORA5IDkAOSA5MDlAOVA5YDlAOWA5cDmAOZA5oDmAOaA5sDnAOdA54DnAOeA58DoAOhA6IDoAOiA6MDpAOlA6YDpAOmA6cDqAOpA6oDqAOqA6sDrAOtA64DrAOuA68DsAOxA7IDsAOyA7MDtAO1A7YDtAO2A7cDuAO5A7oDuAO6A7sDvAO9A74DvAO+A78DwAPBA8IDwAPCA8MDxAPFA8YDxAPGA8cDyAPJA8oDyAPKA8sDzAPNA84DzAPOA88D0APRA9ID0APSA9MD1APVA9YD1APWA9cD2APZA9oD2APaA9sD3APdA94D3APeA98D4APhA+ID4APiA+MD5APlA+YD5APmA+cD6APpA+oD6APqA+sD7APtA+4D7APuA+8D8APxA/ID8APyA/MD9AP1A/YD9AP2A/cD+AP5A/oD+AP6A/sD/AP9A/4D/AP+A/8DAAQBBAIEAAQCBAMEBAQFBAYEBAQGBAcECAQJBAoECAQKBAsEDAQNBA4EDAQOBA8EEAQRBBIEEAQSBBMEFAQVBBYEFAQWBBcEGAQZBBoEGAQaBBsEHAQdBB4EHAQeBB8EIAQhBCIEIAQiBCMEJAQlBCYEJAQmBCcEKAQpBCoEKAQqBCsELAQtBC4ELAQuBC8EMAQxBDIEMAQyBDMENAQ1BDYENAQ2BDcEOAQ5BDoEOAQ6BDsEPAQ9BD4EPAQ+BD8EQARBBEIEQARCBEMERARFBEYERARGBEcESARJBEoESARKBEsETARNBE4ETAROBE8EUARRBFIEUARSBFMEVARVBFYEVARWBFcEWARZBFoEWARaBFsEXARdBF4EXAReBF8EYARhBGIEYARiBGMEZARlBGYEZARmBGcEaARpBGoEaARqBGsEbARtBG4EbARuBG8EcARxBHIEcARyBHMEdAR1BHYEdAR2BHcEeAR5BHoEeAR6BHsEfAR9BH4EfAR+BH8EgASBBIIEgASCBIMEhASFBIYEhASGBIcEiASJBIoEiASKBIsEjASNBI4EjASOBI8EkASRBJIEkASSBJMElASVBJYElASWBJcEmASZBJoEmASaBJsEnASdBJ4EnASeBJ8EoAShBKIEoASiBKMEpASlBKYEpASmBKcEqASpBKoEqASqBKsErAStBK4ErASuBK8EsASxBLIEsASyBLMEtAS1BLYEtAS2BLcEuAS5BLoEuAS6BLsEvAS9BL4EvAS+BL8EwATBBMIEwATCBMMExATFBMYExATGBMcEyATJBMoEyATKBMsEzATNBM4EzATOBM8E0ATRBNIE0ATSBNME1ATVBNYE1ATWBNcE2ATZBNoE2ATaBNsE3ATdBN4E3ATeBN8E4AThBOIE4ATiBOME5ATlBOYE5ATmBOcE6ATpBOoE6ATqBOsE7ATtBO4E7ATuBO8E8ATxBPIE8ATyBPME9AT1BPYE9AT2BPcE+AT5BPoE+AT6BPsE/AT9BP4E/AT+BP8EAAUBBQIFAAUCBQMFBAUFBQYFBAUGBQcFCAUJBQoFCAUKBQsFDAUNBQ4FDAUOBQ8FEAURBRIFEAUSBRMFFAUVBRYFFAUWBRcFGAUZBRoFGAUaBRsFHAUdBR4FHAUeBR8FIAUhBSIFIAUiBSMFJAUlBSYFJAUmBScFKAUpBSoFKAUqBSsFLAUtBS4FLAUuBS8FMAUxBTIFMAUyBTMFNAU1BTYFNAU2BTcFOAU5BToFOAU6BTsFPAU9BT4FPAU+BT8FQAVBBUIFQAVCBUMFRAVFBUYFRAVGBUcFSAVJBUoFSAVKBUsFTAVNBU4FTAVOBU8FUAVRBVIFUAVSBVMFVAVVBVYFVAVWBVcFWAVZBVoFWAVaBVsFXAVdBV4FXAVeBV8FYAVhBWIFYAViBWMFZAVlBWYFZAVmBWcFaAVpBWoFaAVqBWsFbAVtBW4FbAVuBW8FcAVxBXIFcAVyBXMFdAV1BXYFdAV2BXcFeAV5BXoFeAV6BXsFfAV9BX4FfAV+BX8FgAWBBYIFgAWCBYMFhAWFBYYFhAWGBYcFiAWJBYoFiAWKBYsFjAWNBY4FjAWOBY8FkAWRBZIFkAWSBZMFlAWVBZYFlAWWBZcFmAWZBZoFmAWaBZsFnAWdBZ4FnAWeBZ8FoAWhBaIFoAWiBaMFpAWlBaYFpAWmBacFqAWpBaoFqAWqBasFrAWtBa4FrAWuBa8FsAWxBbIFsAWyBbMFtAW1BbYFtAW2BbcFuAW5BboFuAW6BbsFvAW9Bb4FvAW+Bb8FwAXBBcIFwAXCBcMFxAXFBcYFxAXGBccFyAXJBcoFyAXKBcsFzAXNBc4FzAXOBc8F0AXRBdIF0AXSBdMF1AXVBdYF1AXWBdcF2AXZBdoF2AXaBdsF3AXdBd4F3AXeBd8F4AXhBeIF4AXiBeMF5AXlBeYF5AXmBecF6AXpBeoF6AXqBesF7AXtBe4F7AXuBe8F8AXxBfIF8AXyBfMF9AX1BfYF9AX2BfcF+AX5BfoF+AX6BfsF/AX9Bf4F/AX+Bf8FAAYBBgIGAAYCBgMGBAYFBgYGBAYGBgcGCAYJBgoGCAYKBgsGDAYNBg4GDAYOBg8GEAYRBhIGEAYSBhMGFAYVBhYGFAYWBhcGGAYZBhoGGAYaBhsGHAYdBh4GHAYeBh8GIAYhBiIGIAYiBiMGJAYlBiYGJAYmBicGKAYpBioGKAYqBisGLAYtBi4GLAYuBi8GMAYxBjIGMAYyBjMGNAY1BjYGNAY2BjcGOAY5BjoGOAY6BjsGPAY9Bj4GPAY+Bj8GQAZBBkIGQAZCBkMGRAZFBkYGRAZGBkcGSAZJBkoGSAZKBksGTAZNBk4GTAZOBk8GUAZRBlIGUAZSBlMGVAZVBlYGVAZWBlcGWAZZBloGWAZaBlsGXAZdBl4GXAZeBl8GYAZhBmIGYAZiBmMGZAZlBmYGZAZmBmcGaAZpBmoGaAZqBmsGbAZtBm4GbAZuBm8GcAZxBnIGcAZyBnMGdAZ1BnYGdAZ2BncGeAZ5BnoGeAZ6BnsGfAZ9Bn4GfAZ+Bn8GgAaBBoIGgAaCBoMGhAaFBoYGhAaGBocGiAaJBooGiAaKBosGjAaNBo4GjAaOBo8GkAaRBpIGkAaSBpMGlAaVBpYGlAaWBpcGmAaZBpoGmAaaBpsGnAadBp4GnAaeBp8GoAahBqIGoAaiBqMGpAalBqYGpAamBqcGqAapBqoGqAaqBqsGrAatBq4GrAauBq8GsAaxBrIGsAayBrMGtAa1BrYGtAa2BrcGuAa5BroGuAa6BrsGvAa9Br4GvAa+Br8GwAbBBsIGwAbCBsMGxAbFBsYGxAbGBscGyAbJBsoGyAbKBssGzAbNBs4GzAbOBs8G0AbRBtIG0AbSBtMG1AbVBtYG1AbWBtcG2AbZBtoG2AbaBtsG3AbdBt4G3AbeBt8G4AbhBuIG4AbiBuMG5AblBuYG5AbmBucG6AbpBuoG6AbqBusG7AbtBu4G7AbuBu8G8AbxBvIG8AbyBvMG9Ab1BvYG9Ab2BvcG+Ab5BvoG+Ab6BvsG/Ab9Bv4G/Ab+Bv8GAAcBBwIHAAcCBwMHBAcFBwYHBAcGBwcHCAcJBwoHCAcKBwsHDAcNBw4HDAcOBw8HEAcRBxIHEAcSBxMHFAcVBxYHFAcWBxcHGAcZBxoHGAcaBxsHHAcdBx4HHAceBx8HIAchByIHIAciByMHJAclByYHJAcmBycHKAcpByoHKAcqBysHLActBy4HLAcuBy8HMAcxBzIHMAcyBzMHNAc1BzYHNAc2BzcHOAc5BzoHOAc6BzsHPAc9Bz4HPAc+Bz8HQAdBB0IHQAdCB0MHRAdFB0YHRAdGB0cHSAdJB0oHSAdKB0sHTAdNB04HTAdOB08HUAdRB1IHUAdSB1MHVAdVB1YHVAdWB1cH"),
-"material": ExtResource("6_qs2vg"),
+"material": ExtResource("6_nlyy4"),
 "name": "Metal/metal_threads_02",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -109,7 +109,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 432,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8AMAAxADIAMAAyADMANAA1ADYANAA2ADcAOAA5ADoAOAA6ADsAPAA9AD4APAA+AD8AQABBAEIAQABCAEMARABFAEYARABGAEcASABJAEoASABKAEsATABNAE4ATABOAE8AUABRAFIAUABSAFMAVABVAFYAVABWAFcAWABZAFoAWABaAFsAXABdAF4AXABeAF8AYABhAGIAYABiAGMAZABlAGYAZABmAGcAaABpAGoAaABqAGsAbABtAG4AbABuAG8AcABxAHIAcAByAHMAdAB1AHYAdAB2AHcAeAB5AHoAeAB6AHsAfAB9AH4AfAB+AH8AgACBAIIAgACCAIMAhACFAIYAhACGAIcAiACJAIoAiACKAIsAjACNAI4AjACOAI8AkACRAJIAkACSAJMAlACVAJYAlACWAJcAmACZAJoAmACaAJsAnACdAJ4AnACeAJ8AoAChAKIAoACiAKMApAClAKYApACmAKcAqACpAKoAqACqAKsArACtAK4ArACuAK8AsACxALIAsACyALMAtAC1ALYAtAC2ALcAuAC5ALoAuAC6ALsAvAC9AL4AvAC+AL8AwADBAMIAwADCAMMAxADFAMYAxADGAMcAyADJAMoAyADKAMsAzADNAM4AzADOAM8A0ADRANIA0ADSANMA1ADVANYA1ADWANcA2ADZANoA2ADaANsA3ADdAN4A3ADeAN8A4ADhAOIA4ADiAOMA5ADlAOYA5ADmAOcA6ADpAOoA6ADqAOsA7ADtAO4A7ADuAO8A8ADxAPIA8ADyAPMA9AD1APYA9AD2APcA+AD5APoA+AD6APsA/AD9AP4A/AD+AP8AAAEBAQIBAAECAQMBBAEFAQYBBAEGAQcBCAEJAQoBCAEKAQsBDAENAQ4BDAEOAQ8BEAERARIBEAESARMBFAEVARYBFAEWARcBGAEZARoBGAEaARsBHAEdAR4BHAEeAR8B"),
-"material": ExtResource("8_5fjp3"),
+"material": ExtResource("7_6c0u8"),
 "name": "Buildings/textures/wood_planks_2",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -121,7 +121,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 708,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8AMAAxADIAMAAyADMANAA1ADYANAA2ADcAOAA5ADoAOAA6ADsAPAA9AD4APAA+AD8AQABBAEIAQABCAEMARABFAEYARABGAEcASABJAEoASABKAEsATABNAE4ATABOAE8AUABRAFIAUABSAFMAVABVAFYAVABWAFcAWABZAFoAWABaAFsAXABdAF4AXABeAF8AYABhAGIAYABiAGMAZABlAGYAZABmAGcAaABpAGoAaABqAGsAbABtAG4AbABuAG8AcABxAHIAcAByAHMAdAB1AHYAdAB2AHcAeAB5AHoAeAB6AHsAeAB7AHwAeAB8AH0AeAB9AH4AeAB+AH8AgACBAIIAgACCAIMAgACDAIQAhQCGAIcAhQCHAIgAhQCIAIkAigCLAIwAjQCOAI8AjQCPAJAAkQCSAJMAlACVAJYAlACWAJcAmACZAJoAmACaAJsAnACdAJ4AnACeAJ8AoAChAKIAoACiAKMApAClAKYApACmAKcAqACpAKoAqACqAKsArACtAK4ArACuAK8AsACxALIAsACyALMAtAC1ALYAtAC2ALcAuAC5ALoAuAC6ALsAvAC9AL4AvAC+AL8AwADBAMIAwADCAMMAxADFAMYAxADGAMcAyADJAMoAyADKAMsAzADNAM4AzADOAM8A0ADRANIA0ADSANMA1ADVANYA1ADWANcA2ADZANoA2ADaANsA3ADdAN4A3ADeAN8A4ADhAOIA4ADiAOMA5ADlAOYA5ADmAOcA6ADpAOoA6ADqAOsA7ADtAO4A7ADuAO8A8ADxAPIA8ADyAPMA9AD1APYA9AD2APcA+AD5APoA+AD6APsA/AD9AP4A/AD+AP8AAAEBAQIBAAECAQMBBAEFAQYBBAEGAQcBCAEJAQoBCAEKAQsBDAENAQ4BDAEOAQ8BEAERARIBEAESARMBFAEVARYBFAEWARcBGAEZARoBGAEaARsBHAEdAR4BHAEeAR8BIAEhASIBIAEiASMBJAElASYBJAEmAScBKAEpASoBKAEqASsBLAEtAS4BLAEuAS8BMAExATIBMAEyATMBNAE1ATYBNAE2ATcBOAE5AToBOAE6ATsBPAE9AT4BPAE+AT8BQAFBAUIBQAFCAUMBRAFFAUYBRAFGAUcBSAFJAUoBSAFKAUsBTAFNAU4BTAFOAU8BUAFRAVIBUAFSAVMBVAFVAVYBVAFWAVcBWAFZAVoBWAFaAVsBXAFdAV4BXAFeAV8BYAFhAWIBYAFiAWMBZAFlAWYBZAFmAWcBaAFpAWoBaAFqAWsBbAFtAW4BbAFuAW8BcAFxAXIBcAFyAXMBdAF1AXYBdAF2AXcBeAF5AXoBeAF6AXsBfAF9AX4BfAF+AX8BgAGBAYIBgAGCAYMBhAGFAYYBhAGGAYcBiAGJAYoBiAGKAYsBjAGNAY4BjAGOAY8BkAGRAZIBkAGSAZMBlAGVAZYBlAGWAZcBmAGZAZoBmAGaAZsBnAGdAZ4BnAGeAZ8BoAGhAaIBoAGiAaMBpAGlAaYBpAGmAacBqAGpAaoBqAGqAasBrAGtAa4BrAGuAa8BsAGxAbIBsAGyAbMBtAG1AbYBtAG2AbcBuAG5AboBuAG6AbsBvAG9Ab4BvAG+Ab8BwAHBAcIBwAHCAcMBxAHFAcYBxAHGAccByAHJAcoByAHKAcsBzAHNAc4BzAHOAc8B0AHRAdIB0AHSAdMB"),
-"material": ExtResource("7_e0rg1"),
+"material": ExtResource("8_qhsup"),
 "name": "Buildings/textures/gutter_brown_01",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -881,7 +881,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 6,
 "index_data": PackedByteArray("AAABAAIAAAACAAMA"),
-"material": ExtResource("7_yylgl"),
+"material": ExtResource("10_gv5fh"),
 "name": "fluids/water",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -899,7 +899,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 12,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcA"),
-"material": ExtResource("7_yylgl"),
+"material": ExtResource("10_gv5fh"),
 "name": "fluids/water",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -917,7 +917,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 6,
 "index_data": PackedByteArray("AAABAAIAAAACAAMA"),
-"material": ExtResource("7_yylgl"),
+"material": ExtResource("10_gv5fh"),
 "name": "fluids/water",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -935,7 +935,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 6,
 "index_data": PackedByteArray("AAABAAIAAAACAAMA"),
-"material": ExtResource("7_yylgl"),
+"material": ExtResource("10_gv5fh"),
 "name": "fluids/water",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -953,7 +953,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 6,
 "index_data": PackedByteArray("AAABAAIAAAACAAMA"),
-"material": ExtResource("7_yylgl"),
+"material": ExtResource("10_gv5fh"),
 "name": "fluids/water",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -971,7 +971,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 6,
 "index_data": PackedByteArray("AAABAAIAAAACAAMA"),
-"material": ExtResource("7_yylgl"),
+"material": ExtResource("10_gv5fh"),
 "name": "fluids/water",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -989,7 +989,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 30,
 "index_data": PackedByteArray("AAABAAIAAAACAAMAAAADAAQAAAAEAAUAAAAFAAYAAAAGAAcAAAAHAAgAAAAIAAkAAAAJAAoAAAAKAAsA"),
-"material": ExtResource("7_yylgl"),
+"material": ExtResource("10_gv5fh"),
 "name": "fluids/water",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -1000,7 +1000,7 @@ _surfaces = [{
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_noy1y"]
 points = PackedVector3Array(-8.49999, 7.75, -34, -8.49999, -7.75, -34, 8.49999, -7.75, -34, 8.49999, 7.75, -34, -25.5, 7.75, -25.5, -25.5, -7.75, -25.5, 25.5, -7.75, -25.5, 25.5, 7.75, -25.5, -34, 7.75, -8.49999, -34, -7.75, -8.49999, 34, -7.75, -8.49998, 34, 7.75, -8.49998, -34, 7.75, 8.49999, -34, -7.75, 8.49999, -25.5, -7.75, 25.5, -8.49999, -7.75, 34, 8.49998, -7.75, 34, 25.5, -7.75, 25.5, 34, -7.75, 8.49999, 34, 7.75, 8.49999, 25.5, 7.75, 25.5, 8.49998, 7.75, 34, -8.49999, 7.75, 34, -25.5, 7.75, 25.5)
 
-[node name="TestTutorialLevel" instance=ExtResource("1_6dipd")]
+[node name="TestTutorialLevel" instance=ExtResource("1_pgyud")]
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.2347, 36.2253, 70.3459)
@@ -1769,7 +1769,7 @@ shape = SubResource("ConvexPolygonShape3D_n8p7u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -4.875, -24)
 collision_layer = 512
 collision_mask = 6
-script = ExtResource("9_0mq6n")
+script = ExtResource("9_2vesp")
 
 [node name="entity_2_mesh_instance" type="MeshInstance3D" parent="NavigationRegion/FuncGodotMap/layer_0_Fluids/entity_2_fluids_water" index="0"]
 mesh = SubResource("ArrayMesh_fj3eb")
@@ -1781,7 +1781,7 @@ shape = SubResource("ConvexPolygonShape3D_4qnrc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.75, -4.875, -35)
 collision_layer = 512
 collision_mask = 6
-script = ExtResource("9_0mq6n")
+script = ExtResource("9_2vesp")
 
 [node name="entity_3_mesh_instance" type="MeshInstance3D" parent="NavigationRegion/FuncGodotMap/layer_0_Fluids/entity_3_fluids_water" index="0"]
 mesh = SubResource("ArrayMesh_tiqqi")
@@ -1793,7 +1793,7 @@ shape = SubResource("ConvexPolygonShape3D_dknax")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.5, -4.25, 0.5)
 collision_layer = 512
 collision_mask = 6
-script = ExtResource("9_0mq6n")
+script = ExtResource("9_2vesp")
 
 [node name="entity_4_mesh_instance" type="MeshInstance3D" parent="NavigationRegion/FuncGodotMap/layer_0_Fluids/entity_4_fluids_water" index="0"]
 mesh = SubResource("ArrayMesh_610b0")
@@ -1805,7 +1805,7 @@ shape = SubResource("ConvexPolygonShape3D_mhhog")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, -5.99609, 15.5)
 collision_layer = 512
 collision_mask = 6
-script = ExtResource("9_0mq6n")
+script = ExtResource("9_2vesp")
 
 [node name="entity_5_mesh_instance" type="MeshInstance3D" parent="NavigationRegion/FuncGodotMap/layer_0_Fluids/entity_5_fluids_water" index="0"]
 mesh = SubResource("ArrayMesh_65non")
@@ -1817,7 +1817,7 @@ shape = SubResource("ConvexPolygonShape3D_p1764")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, -8.99703, 49)
 collision_layer = 512
 collision_mask = 6
-script = ExtResource("9_0mq6n")
+script = ExtResource("9_2vesp")
 
 [node name="entity_6_mesh_instance" type="MeshInstance3D" parent="NavigationRegion/FuncGodotMap/layer_0_Fluids/entity_6_fluids_water" index="0"]
 mesh = SubResource("ArrayMesh_nqmd8")
@@ -1829,7 +1829,7 @@ shape = SubResource("ConvexPolygonShape3D_tq2mc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, -7.49406, 32.5)
 collision_layer = 512
 collision_mask = 6
-script = ExtResource("9_0mq6n")
+script = ExtResource("9_2vesp")
 
 [node name="entity_7_mesh_instance" type="MeshInstance3D" parent="NavigationRegion/FuncGodotMap/layer_0_Fluids/entity_7_fluids_water" index="0"]
 mesh = SubResource("ArrayMesh_5o3ok")
@@ -1841,7 +1841,7 @@ shape = SubResource("ConvexPolygonShape3D_fhxjf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.5, -15.75, 118)
 collision_layer = 512
 collision_mask = 6
-script = ExtResource("9_0mq6n")
+script = ExtResource("9_2vesp")
 
 [node name="entity_8_mesh_instance" type="MeshInstance3D" parent="NavigationRegion/FuncGodotMap/layer_0_Fluids/entity_8_fluids_water" index="0"]
 mesh = SubResource("ArrayMesh_n8xrc")
@@ -1851,49 +1851,49 @@ shape = SubResource("ConvexPolygonShape3D_noy1y")
 
 [node name="layer_1_Lights" type="Node3D" parent="NavigationRegion/FuncGodotMap" index="2"]
 
-[node name="entity_10_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="0" instance=ExtResource("8_m0yee")]
+[node name="entity_10_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="0" instance=ExtResource("11_8wlxe")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1, -0.5, -9.5)
 
-[node name="entity_11_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="1" instance=ExtResource("8_m0yee")]
+[node name="entity_11_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="1" instance=ExtResource("11_8wlxe")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1, 3, 0.5)
 
-[node name="entity_12_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="2" instance=ExtResource("8_m0yee")]
+[node name="entity_12_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="2" instance=ExtResource("11_8wlxe")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 44, 3, 0.25)
 
-[node name="entity_13_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="3" instance=ExtResource("8_m0yee")]
+[node name="entity_13_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="3" instance=ExtResource("11_8wlxe")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 30.5, 3, 12.5)
 
-[node name="entity_14_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="4" instance=ExtResource("8_m0yee")]
+[node name="entity_14_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="4" instance=ExtResource("11_8wlxe")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 47.5, 3, 12.5)
 
-[node name="entity_15_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="5" instance=ExtResource("8_m0yee")]
+[node name="entity_15_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="5" instance=ExtResource("11_8wlxe")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 38.5, 3, 12.5)
 
-[node name="entity_16_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="6" instance=ExtResource("8_m0yee")]
+[node name="entity_16_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="6" instance=ExtResource("11_8wlxe")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 30.5, 3, 24.5)
 
-[node name="entity_17_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="7" instance=ExtResource("8_m0yee")]
+[node name="entity_17_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="7" instance=ExtResource("11_8wlxe")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 38.5, 3, 24.5)
 
-[node name="entity_18_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="8" instance=ExtResource("8_m0yee")]
+[node name="entity_18_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="8" instance=ExtResource("11_8wlxe")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 47.5, 3, 24.5)
 
-[node name="entity_19_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="9" instance=ExtResource("8_m0yee")]
+[node name="entity_19_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="9" instance=ExtResource("11_8wlxe")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 30.5, 3, 36.5)
 
-[node name="entity_20_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="10" instance=ExtResource("8_m0yee")]
+[node name="entity_20_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="10" instance=ExtResource("11_8wlxe")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 38.5, 3, 36.5)
 
-[node name="entity_21_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="11" instance=ExtResource("8_m0yee")]
+[node name="entity_21_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="11" instance=ExtResource("11_8wlxe")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 47.5, 3, 36.5)
 
-[node name="entity_22_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="12" instance=ExtResource("8_m0yee")]
+[node name="entity_22_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="12" instance=ExtResource("11_8wlxe")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 30.5, 3, 48.5)
 
-[node name="entity_23_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="13" instance=ExtResource("8_m0yee")]
+[node name="entity_23_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="13" instance=ExtResource("11_8wlxe")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 38.5, 3, 48.5)
 
-[node name="entity_24_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="14" instance=ExtResource("8_m0yee")]
+[node name="entity_24_test_light" parent="NavigationRegion/FuncGodotMap/layer_1_Lights" index="14" instance=ExtResource("11_8wlxe")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 47.5, 3, 48.5)
 
 [node name="layer_2_Placeholder_for_models" type="Node3D" parent="NavigationRegion/FuncGodotMap" index="3"]

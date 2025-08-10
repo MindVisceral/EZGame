@@ -24,8 +24,8 @@ extends EnemyAIBase
 
 @export_group("Exported variables")
 
-## How close this Enemy can get to the Player before they stop to attack (in meters).
-@export_range(0.01, 100.0, 0.1) var ideal_distance_to_enemy: float = 1.0
+## How close this Enemy can get to their target before they stop to attack (in meters)
+@export_range(0.01, 100.0, 0.1) var ideal_distance_to_target: float = 3
 
 
 ###-------------------------------------------------------------------------###
@@ -77,19 +77,19 @@ func update_AI() -> void:
 			
 			enemy.States.change_state(navigate_state)
 			
-		## NOTE: ^THe path is updated on every AI update^
+		## NOTE: ^The path is updated on every AI update^
 		
 		## This part checks when the Enemy is within range to attack the target
 		#
 		## Calculate distance.
-		#var distance_to_enemy: float = enemy.global_position.distance_to(enemy.target.global_position)
-		### Check if the distance is right...
-		#if distance_to_enemy <= ideal_distance_to_enemy:
-			#
-			### Reset pathfinding, it's not needed right now.
-			#AI_handler.reset_path()
-			#
-			### Now, attack!
-			#enemy.States.change_state(attack_state)
+		var distance_to_target: float = enemy.global_position.distance_to(enemy.target.global_position)
+		## Check if the distance is right...
+		if distance_to_target <= ideal_distance_to_target:
+			
+			## Reset pathfinding, it's not needed right now.
+			AI_handler.reset_path()
+			
+			## Now, attack!
+			enemy.States.change_state(attack_state)
 		
 	

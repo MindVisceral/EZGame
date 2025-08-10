@@ -28,3 +28,7 @@ var enemy: EnemyBase
 ## This Node needs a reference to the enemy to access its functions and variables
 func init(enemy: EnemyBase) -> void:
 	self.enemy = enemy
+
+## Plays the passed animation
+func play_animation(anim: String = "Dance") -> void:
+	model_animation_player.play(anim)

@@ -1,40 +1,41 @@
-[gd_scene load_steps=21 format=3 uid="uid://dcd67a7ua7bka"]
+[gd_scene load_steps=22 format=3 uid="uid://dpvwvyrom4kud"]
 
 [ext_resource type="Script" uid="uid://c2rqhme44ktmt" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/Flame.gd" id="1_2m2ur"]
+[ext_resource type="PackedScene" uid="uid://botb4usves8pb" path="res://ScenesScripts/Entities/Entity Elements/ProjectileBase.tscn" id="1_sy1jy"]
 [ext_resource type="PackedScene" uid="uid://dllg2ily2gjqf" path="res://ScenesScripts/Entities/Weapons/Firearms/Flamethrower/EnvironmentFire.tscn" id="2_eq72y"]
 [ext_resource type="Texture2D" uid="uid://jcsdrmrk5ihy" path="res://fire_placeholder.png" id="3_ygpkv"]
 [ext_resource type="Texture2D" uid="uid://b4ssi3riwa5c0" path="res://fire_frame_placeholder.png" id="4_e4wli"]
 
-[sub_resource type="Curve" id="Curve_tfq60"]
+[sub_resource type="Curve" id="Curve_thcvj"]
 _data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_syngx"]
-curve = SubResource("Curve_tfq60")
+curve = SubResource("Curve_thcvj")
 
-[sub_resource type="Curve" id="Curve_tiog6"]
+[sub_resource type="Curve" id="Curve_ng7r8"]
 _limits = [-1.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_358ul"]
-curve = SubResource("Curve_tiog6")
+curve = SubResource("Curve_ng7r8")
 
-[sub_resource type="Curve" id="Curve_eo2v6"]
+[sub_resource type="Curve" id="Curve_n0iul"]
 _data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_wvwhh"]
-curve = SubResource("Curve_eo2v6")
+curve = SubResource("Curve_n0iul")
 
-[sub_resource type="Curve" id="Curve_wn6yw"]
+[sub_resource type="Curve" id="Curve_6hg4j"]
 _data = [Vector2(0, 0), 0.0, 3.31148, 0, 1, Vector2(0.30198, 1), 3.31148, 0.0, 1, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_p8gb4"]
-curve = SubResource("Curve_wn6yw")
+curve = SubResource("Curve_6hg4j")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lwl5e"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6xqou"]
 resource_local_to_scene = true
 direction = Vector3(0, 0, 1)
 spread = 20.0
@@ -55,7 +56,7 @@ turbulence_influence_over_life = SubResource("CurveTexture_p8gb4")
 transparency = 1
 shading_mode = 0
 disable_ambient_light = true
-albedo_color = Color(0.672466, 0.169506, 0, 1)
+albedo_color = Color(1, 0.270588, 0, 1)
 albedo_texture = ExtResource("4_e4wli")
 texture_filter = 0
 texture_repeat = false
@@ -63,16 +64,14 @@ disable_receive_shadows = true
 billboard_mode = 1
 billboard_keep_scale = true
 
-[sub_resource type="QuadMesh" id="QuadMesh_pi0qu"]
+[sub_resource type="QuadMesh" id="QuadMesh_i1gv0"]
 material = SubResource("StandardMaterial3D_fbkhl")
 size = Vector2(0.1, 0.1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_chvhb"]
-resource_local_to_scene = true
+[sub_resource type="SphereShape3D" id="SphereShape3D_41y4m"]
 radius = 0.2
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_13cqw"]
-resource_local_to_scene = true
+[sub_resource type="SphereShape3D" id="SphereShape3D_utqry"]
 radius = 0.2
 
 [sub_resource type="Animation" id="Animation_tfoqq"]
@@ -113,11 +112,9 @@ _data = {
 &"RESET": SubResource("Animation_xyppl")
 }
 
-[node name="Flame" type="RigidBody3D" node_paths=PackedStringArray("flame_sprite", "flame_particles", "flame_light", "collider", "hitbox_collider")]
+[node name="Flame" node_paths=PackedStringArray("flame_sprite", "flame_particles", "flame_light") instance=ExtResource("1_sy1jy")]
 collision_layer = 1024
 collision_mask = 519
-input_ray_pickable = false
-mass = 0.01
 sleeping = true
 continuous_cd = true
 contact_monitor = true
@@ -129,11 +126,15 @@ environment_fire = ExtResource("2_eq72y")
 flame_sprite = NodePath("FireSprite")
 flame_particles = NodePath("FlameParticles")
 flame_light = NodePath("FlameOmniLight")
-collider = NodePath("Collider")
-hitbox_collider = NodePath("Hitbox/Collider")
-flame_color = Color(0.672466, 0.169506, 0, 1)
+flame_color = Color(1, 0.270588, 0, 1)
+max_sprite_size = 0.03
+time_until_max_sprite_size = 1.5
+max_collider_size = 0.4
+time_until_max_collider_size = 2.5
+max_hitbox_size = 0.8
+time_until_max_hitbox_size = 3.5
 
-[node name="FireSprite" type="Sprite3D" parent="."]
+[node name="FireSprite" type="Sprite3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.045)
 cast_shadow = 0
 offset = Vector2(0, 40)
@@ -147,14 +148,14 @@ hframes = 12
 vframes = 11
 region_rect = Rect2(0.31, 0, 0, 0)
 
-[node name="FlameParticles" type="GPUParticles3D" parent="."]
+[node name="FlameParticles" type="GPUParticles3D" parent="." index="1"]
 cast_shadow = 0
 lifetime = 2.0
-process_material = SubResource("ParticleProcessMaterial_lwl5e")
-draw_pass_1 = SubResource("QuadMesh_pi0qu")
+process_material = SubResource("ParticleProcessMaterial_6xqou")
+draw_pass_1 = SubResource("QuadMesh_i1gv0")
 
-[node name="FlameOmniLight" type="OmniLight3D" parent="."]
-light_color = Color(0.672466, 0.169506, 0, 1)
+[node name="FlameOmniLight" type="OmniLight3D" parent="." index="2"]
+light_color = Color(1, 0.270588, 0, 1)
 light_energy = 2.0
 light_indirect_energy = 2.0
 light_volumetric_fog_energy = 0.5
@@ -165,20 +166,18 @@ omni_range = 2.5
 omni_attenuation = 1.9
 omni_shadow_mode = 0
 
-[node name="Collider" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_chvhb")
+[node name="Collider" parent="." index="3"]
+shape = SubResource("SphereShape3D_41y4m")
 
-[node name="Hitbox" type="Area3D" parent="."]
+[node name="Hitbox" parent="." index="4"]
 collision_layer = 8
 collision_mask = 16
 
-[node name="Collider" type="CollisionShape3D" parent="Hitbox"]
-shape = SubResource("SphereShape3D_13cqw")
+[node name="Collider" parent="Hitbox" index="0"]
+shape = SubResource("SphereShape3D_utqry")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 libraries = {
-"": SubResource("AnimationLibrary_jf68o")
+&"": SubResource("AnimationLibrary_jf68o")
 }
 autoplay = "Fire_sprite_animation"
-
-[connection signal="body_entered" from="." to="." method="_on_collision"]

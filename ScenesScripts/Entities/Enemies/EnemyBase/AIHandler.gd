@@ -46,7 +46,6 @@ func find_path_to(end_point: Vector3) -> void:
 	enemy.Navigation.set_target_position(end_point)
 	
 
-## Reset pathfinding, it's not needed right now.
+## Reset pathfinding.
 func reset_path() -> void:
 	enemy.Navigation.set_target_position(enemy.global_position)
-	print(enemy.Navigation)

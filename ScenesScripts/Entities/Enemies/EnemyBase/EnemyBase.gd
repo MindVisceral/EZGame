@@ -145,7 +145,6 @@ func apply_exported() -> void:
 	## so it lines up with its children. This is because Colliders must be always be
 	## direct children of a Body.
 	Collider.position = NodeHolder.position
-	
 
 func check_for_floor() -> bool:
 	FloorCast.force_raycast_update()

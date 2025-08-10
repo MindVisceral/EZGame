@@ -1,15 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://bgpejmnpxwhel"]
+[gd_scene load_steps=11 format=3 uid="uid://bgpejmnpxwhel"]
 
 [ext_resource type="PackedScene" uid="uid://bfl36ykvecfd4" path="res://ScenesScripts/Entities/Enemies/EnemyBase/EnemyBase.tscn" id="1_wkc01"]
 [ext_resource type="Script" uid="uid://dpt07ctw2gmbc" path="res://ScenesScripts/Entities/Enemies/States/Idle.gd" id="2_vqty0"]
 [ext_resource type="Script" uid="uid://brj1qjwulwlcw" path="res://ScenesScripts/Entities/Enemies/States/Navigate.gd" id="3_rn7c7"]
+[ext_resource type="Script" uid="uid://2v6kjb8qlr1o" path="res://ScenesScripts/Entities/Enemies/States/Attack.gd" id="4_h33ye"]
 [ext_resource type="Script" uid="uid://4w5gqhur4aa1" path="res://ScenesScripts/Entities/Enemies/EnemyBase/AIBase.gd" id="4_nk623"]
 [ext_resource type="Script" uid="uid://dmjmywawcxdrs" path="res://ScenesScripts/Entities/Enemies/Test_enemy/TestEnemyAI.gd" id="5_c3abr"]
 [ext_resource type="PackedScene" uid="uid://dj1mnp4bsm70a" path="res://Placeholders/MINOS_mixamo.gltf" id="6_koesh"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_43eno"]
 radius = 0.17
-height = 0.75
+height = 1.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fheyr"]
 radius = 0.17
@@ -18,18 +19,11 @@ height = 0.75
 [sub_resource type="SphereShape3D" id="SphereShape3D_rk1u8"]
 radius = 15.0
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_tbgyv"]
-radius = 0.17
-height = 0.75
-radial_segments = 8
-rings = 4
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_b8v87"]
-radius = 0.05
-height = 0.25
-
 [node name="TestEnemy" instance=ExtResource("1_wkc01")]
+gravity_multiplier = 1.0
 speed = 10.0
+acceleration = 2.0
+deceleration = 1.0
 
 [node name="StateManager" parent="Scripts" index="0" node_paths=PackedStringArray("starting_state", "states")]
 starting_state = NodePath("Idle")
@@ -43,8 +37,9 @@ script = ExtResource("3_rn7c7")
 rotation_speed = 6.28319
 idle_state = NodePath("../Idle")
 
-[node name="Attack" type="Node" parent="Scripts/StateManager" index="2"]
-script = ExtResource("2_vqty0")
+[node name="Attack" type="Node" parent="Scripts/StateManager" index="2" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("4_h33ye")
+idle_state = NodePath("../Idle")
 
 [node name="AIHandler" parent="Scripts" index="1" node_paths=PackedStringArray("enemy_AI")]
 enemy_AI = NodePath("TestEnemyAI")
@@ -53,6 +48,7 @@ enemy_AI = NodePath("TestEnemyAI")
 script = ExtResource("5_c3abr")
 navigate_state = NodePath("../../StateManager/Navigate")
 attack_state = NodePath("../../StateManager/Attack")
+ideal_distance_to_target = 5.01
 
 [node name="temp" type="Node" parent="Scripts/AIHandler" index="1"]
 script = ExtResource("4_nk623")
@@ -64,11 +60,11 @@ default_health = 50.0
 model_animation_player = NodePath("../../NodeHolder/MINOS_mixamo/AnimationPlayer")
 
 [node name="Collider" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 shape = SubResource("CapsuleShape3D_43eno")
 
 [node name="NodeHolder" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 
 [node name="Collider" parent="NodeHolder/Hurtbox" index="0"]
 shape = SubResource("CapsuleShape3D_fheyr")
@@ -79,55 +75,43 @@ input_ray_pickable = false
 [node name="Collider" parent="NodeHolder/EntityDetectionArea" index="0"]
 shape = SubResource("SphereShape3D_rk1u8")
 
-[node name="DebugMesh" type="MeshInstance3D" parent="NodeHolder" index="2"]
-visible = false
-mesh = SubResource("CapsuleMesh_tbgyv")
-skeleton = NodePath("../..")
-
-[node name="MINOS_mixamo" parent="NodeHolder" index="3" instance=ExtResource("6_koesh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+[node name="MINOS_mixamo" parent="NodeHolder" index="2" instance=ExtResource("6_koesh")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.6, 0)
 
 [node name="Skeleton3D" parent="NodeHolder/MINOS_mixamo/Armature" index="0"]
-bones/0/position = Vector3(0.00927582, -0.00279941, -1.26343)
-bones/0/rotation = Quaternion(0.729945, 0.12296, -0.248908, -0.624585)
-bones/1/rotation = Quaternion(0.0323366, 0.0708399, -0.0442525, 0.995981)
-bones/2/rotation = Quaternion(0.121153, 0.00987316, -0.0308566, 0.992105)
-bones/3/rotation = Quaternion(0.121526, 0.0111383, -0.0292993, 0.992093)
-bones/4/rotation = Quaternion(-0.0456311, -0.00133684, 0.00549042, 0.998942)
-bones/5/rotation = Quaternion(-0.163106, -0.00326458, 0.020494, 0.98639)
-bones/7/rotation = Quaternion(-0.57691, -0.437073, 0.413493, -0.552418)
-bones/8/rotation = Quaternion(0.19258, 0.0850158, 0.195667, 0.95781)
-bones/9/rotation = Quaternion(0.0001643, -0.00370291, 0.161844, 0.986809)
-bones/10/rotation = Quaternion(-0.00583064, 0.235797, 0.0519002, 0.970398)
-bones/11/rotation = Quaternion(0.206641, 0.215327, 0.0180273, 0.954258)
-bones/12/rotation = Quaternion(0.542885, 0.0362584, -0.00155218, 0.839023)
-bones/13/rotation = Quaternion(0.303552, 0.156096, 0.146749, 0.928415)
-bones/15/rotation = Quaternion(0.612153, -0.401318, 0.476025, 0.487455)
-bones/16/rotation = Quaternion(0.273119, -0.114179, -0.555811, 0.776817)
-bones/17/rotation = Quaternion(0.00363782, 0.00275133, -0.142018, 0.989854)
-bones/18/rotation = Quaternion(-0.124754, 0.436357, -0.0482628, 0.889775)
-bones/19/rotation = Quaternion(0.0348567, -0.20989, -0.00159647, 0.977102)
-bones/20/rotation = Quaternion(0.404487, -0.00666156, -0.00790226, 0.914485)
-bones/21/rotation = Quaternion(0.196525, -0.0893091, -0.113186, 0.969841)
-bones/23/rotation = Quaternion(0.175008, 0.123144, 0.976801, 0.00827336)
-bones/24/rotation = Quaternion(-0.481506, -0.0788373, 0.0225889, 0.872598)
-bones/25/rotation = Quaternion(0.705132, -0.145892, -0.0550038, 0.691721)
-bones/26/rotation = Quaternion(0.2786, 0.0695902, -0.0190925, 0.957692)
-bones/28/rotation = Quaternion(-0.109532, 0.328045, 0.930064, 0.123978)
-bones/29/rotation = Quaternion(-0.570196, -0.0231831, -0.0257242, 0.820779)
-bones/30/rotation = Quaternion(0.649274, 0.104696, -0.0111547, 0.753231)
-bones/31/rotation = Quaternion(0.293586, -0.0849076, 0.0149945, 0.952036)
-
-[node name="AnimationPlayer" parent="NodeHolder/MINOS_mixamo" index="1"]
-autoplay = "Dance"
+bones/0/position = Vector3(-0.0814917, -0.129784, -1.23652)
+bones/0/rotation = Quaternion(0.752978, -0.161612, 0.0922695, -0.631183)
+bones/1/rotation = Quaternion(0.0842977, 0.0577635, -0.0410006, 0.99392)
+bones/2/rotation = Quaternion(0.1374, 0.0055075, -0.00430411, 0.990491)
+bones/3/rotation = Quaternion(0.137383, 0.006873, -0.00312471, 0.990489)
+bones/4/rotation = Quaternion(-0.0679411, -0.0541668, 0.0274892, 0.995838)
+bones/5/rotation = Quaternion(-0.311548, -0.244204, 0.0723951, 0.915457)
+bones/7/rotation = Quaternion(-0.576287, -0.433594, 0.471327, -0.507681)
+bones/8/rotation = Quaternion(0.160364, 0.242539, 0.541064, 0.789119)
+bones/9/rotation = Quaternion(0.000403378, -0.00344327, 0.397502, 0.917595)
+bones/10/rotation = Quaternion(-0.268762, -0.631651, -0.0197711, 0.726906)
+bones/11/rotation = Quaternion(-0.0841332, 0.219329, -0.00734423, 0.971989)
+bones/12/rotation = Quaternion(0.430407, 0.0132247, -0.0410087, 0.901606)
+bones/13/rotation = Quaternion(0.264858, 0.146709, 0.137187, 0.943137)
+bones/15/rotation = Quaternion(0.640539, -0.370846, 0.487022, 0.463673)
+bones/16/rotation = Quaternion(0.277977, -0.0418969, -0.249421, 0.926695)
+bones/17/rotation = Quaternion(0.00444547, 0.00273722, -0.173544, 0.984812)
+bones/18/rotation = Quaternion(-0.192883, 0.240773, -0.0559351, 0.949577)
+bones/19/rotation = Quaternion(-0.024877, -0.209953, 0.00113476, 0.977394)
+bones/20/rotation = Quaternion(0.409731, -0.00722813, -0.00932452, 0.91213)
+bones/21/rotation = Quaternion(0.230531, -0.0929553, -0.121625, 0.960949)
+bones/23/rotation = Quaternion(0.067412, 0.197505, 0.977499, -0.0307008)
+bones/24/rotation = Quaternion(-0.533521, -0.0115972, 0.0680055, 0.842968)
+bones/25/rotation = Quaternion(0.698633, -0.0124509, -0.106329, 0.707425)
+bones/26/rotation = Quaternion(0.272894, 0.0689698, -0.0195999, 0.959368)
+bones/28/rotation = Quaternion(-0.0101569, 0.109708, 0.993073, 0.0408321)
+bones/29/rotation = Quaternion(-0.577935, 0.0467896, -0.118689, 0.806049)
+bones/30/rotation = Quaternion(0.696021, 0.209432, -0.0160873, 0.68661)
+bones/31/rotation = Quaternion(0.369444, -0.0809861, 0.0110759, 0.925651)
 
 [node name="NavigationAgent" parent="." index="4"]
 target_desired_distance = 0.5
 path_height_offset = 0.25
-
-[node name="DebugDirection" type="MeshInstance3D" parent="." index="5"]
-transform = Transform3D(1, 0, 0, 0, -0.00195472, -0.999998, 0, 0.999998, -0.00195472, 0, 0.57365, 0.212131)
-mesh = SubResource("CapsuleMesh_b8v87")
 
 [editable path="NodeHolder/Hurtbox"]
 [editable path="NodeHolder/MINOS_mixamo"]
