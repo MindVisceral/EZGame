@@ -115,10 +115,9 @@ _data = {
 [node name="Flame" node_paths=PackedStringArray("flame_sprite", "flame_particles", "flame_light") instance=ExtResource("1_sy1jy")]
 collision_layer = 1024
 collision_mask = 519
+gravity_scale = 0.4
 sleeping = true
 continuous_cd = true
-contact_monitor = true
-max_contacts_reported = 1
 linear_damp = 1.0
 angular_damp = 100.0
 script = ExtResource("1_2m2ur")

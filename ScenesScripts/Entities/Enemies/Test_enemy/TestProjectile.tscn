@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnworqu8qg5x1"]
+
+[ext_resource type="PackedScene" uid="uid://botb4usves8pb" path="res://ScenesScripts/Entities/Entity Elements/ProjectileBase.tscn" id="1_qinif"]
+[ext_resource type="Script" uid="uid://b6ohgo626cs0u" path="res://ScenesScripts/Entities/Enemies/Test_enemy/TestProjectile.gd" id="2_wj6dw"]
+[ext_resource type="PackedScene" uid="uid://8hg34a7a5w07" path="res://Blender/TestProjectile/TestProjectile.gltf" id="3_82wag"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qinif"]
+radius = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wj6dw"]
+radius = 0.2
+
+[node name="TestProjectile" instance=ExtResource("1_qinif")]
+script = ExtResource("2_wj6dw")
+speed = 0.5
+
+[node name="TestProjectile" parent="." index="0" instance=ExtResource("3_82wag")]
+
+[node name="Collider" parent="." index="1"]
+shape = SubResource("SphereShape3D_qinif")
+
+[node name="Collider" parent="Hitbox" index="0"]
+shape = SubResource("SphereShape3D_wj6dw")
+
+[node name="InstancerDetectionTimer" parent="." index="3"]
+wait_time = 1.0

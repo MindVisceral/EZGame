@@ -128,7 +128,7 @@ func _ready() -> void:
 ## Depending on what it hits, it will behave differently;
 ## it hits the Environment - spawns a Fire, Entity - sets it on fire
 func _on_collision(body: Node) -> void:
-	## HERE: Only if the Environment was hit!
+	## HERE: Only if the Environment was hit! - Entity collision not implemented
 	## Instantiate Environmental Fire.
 	var fire_instance: EnvironmentFire = environment_fire.instantiate()
 	## We use this Flame's global_position as the Fire's global_position;

@@ -60,6 +60,10 @@ debug_shape_thickness = 5
 
 [node name="NodeHolder" type="Node3D" parent="."]
 
+[node name="ProjectileMarker" type="Marker3D" parent="NodeHolder"]
+unique_name_in_owner = true
+editor_description = "Projectiles used by this enemy are spawned here"
+
 [node name="Hurtbox" parent="NodeHolder" node_paths=PackedStringArray("Entity") instance=ExtResource("3_bl2ki")]
 Entity = NodePath("../..")
 

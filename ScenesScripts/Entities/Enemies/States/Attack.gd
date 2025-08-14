@@ -9,6 +9,10 @@ extends BaseEnemyState
 @export var idle_state: BaseEnemyState
 
 
+@export_group("Projectile")
+
+@export var projectile: PackedScene
+
 
 func enter() -> void:
 	super.enter()
@@ -17,7 +21,7 @@ func enter() -> void:
 	enemy.Navigation.get_next_path_position()
 	
 	## Prepare attack
-	prepare_attack()
+	attack()
 
 func exit() -> void:
 	super.exit()
@@ -39,15 +43,20 @@ func physics_process(delta: float) -> BaseEnemyState:
 
 
 ## Prepare for attack
-func prepare_attack() -> void:
+func attack() -> void:
+	## Create new instance of the projectile
+	var projectile_instance: ProjectileBase = projectile.instantiate()
 	
+	## Set global position, movement direction, etc.
+	projectile_instance.global_position = %ProjectileMarker.global_position
+	projectile_instance.firing_agent = enemy
 	
-	## Attack is fully prepared...
-	release_attack()
-
-## Release the attack, get out of attack state
-func release_attack() -> void:
+	var projectile_target_position = enemy.target.global_position + Vector3(0, 0.5, 0)
+	projectile_instance.direction = \
+		(%ProjectileMarker.global_position.direction_to(projectile_target_position))
 	
+	## Finish instantiating the projectile
+	get_tree().get_root().add_child(projectile_instance)
 	
 	## Attack is done, return to idle state
 	enemy.States.change_state(idle_state)
