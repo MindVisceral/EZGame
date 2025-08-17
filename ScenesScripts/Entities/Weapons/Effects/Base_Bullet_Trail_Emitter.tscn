@@ -74,6 +74,6 @@ mesh = SubResource("CylinderMesh_g0hfg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_2otdo")
+&"": SubResource("AnimationLibrary_2otdo")
 }
 autoplay = "animation"

@@ -1,5 +1,6 @@
 @tool
 extends Node3D
+class_name ShotEffectEmitter
 ## NOTE: This Node is queue_free()-d when the Particles Node is finished
 
 

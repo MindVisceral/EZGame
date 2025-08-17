@@ -1,4 +1,5 @@
 extends Node3D
+class_name BulletTrailEmitter
 ## NOTE: This Node is queue_free()-d by the AnimationPlayer when the Trail animation is finished
 
 ## This Mesh is the heart of the Trail;

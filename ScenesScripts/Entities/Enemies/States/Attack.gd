@@ -51,7 +51,7 @@ func attack() -> void:
 	projectile_instance.global_position = %ProjectileMarker.global_position
 	projectile_instance.firing_agent = enemy
 	
-	var projectile_target_position = enemy.target.global_position + Vector3(0, 0.5, 0)
+	var projectile_target_position = enemy.target.global_position + Vector3(0, 0.8, 0)
 	projectile_instance.direction = \
 		(%ProjectileMarker.global_position.direction_to(projectile_target_position))
 	

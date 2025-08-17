@@ -1,4 +1,5 @@
 extends Decal
+class_name BulletHoleDecal
 ## NOTE: This Node is queue_free()-d by the AnimationPlayer when the fade_out animation is finished
 
 

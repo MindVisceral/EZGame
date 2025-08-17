@@ -12,7 +12,6 @@ radius = 0.2
 
 [node name="TestProjectile" instance=ExtResource("1_qinif")]
 script = ExtResource("2_wj6dw")
-speed = 0.5
 
 [node name="TestProjectile" parent="." index="0" instance=ExtResource("3_82wag")]
 
@@ -21,6 +20,3 @@ shape = SubResource("SphereShape3D_qinif")
 
 [node name="Collider" parent="Hitbox" index="0"]
 shape = SubResource("SphereShape3D_wj6dw")
-
-[node name="InstancerDetectionTimer" parent="." index="3"]
-wait_time = 1.0

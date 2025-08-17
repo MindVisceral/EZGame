@@ -1,6 +1,7 @@
 ## We want the particles_colour variable to work in-Editor
 @tool
 extends Node3D
+class_name HitEffectEmitter
 ## NOTE: This Node is queue_free()-d by the AnimationPlayer when
 ## the Hit Effect animation is finished
 

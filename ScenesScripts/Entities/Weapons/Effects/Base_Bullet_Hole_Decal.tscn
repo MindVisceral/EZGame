@@ -62,6 +62,6 @@ script = ExtResource("2_px2c3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_w1yx2")
+&"": SubResource("AnimationLibrary_w1yx2")
 }
 autoplay = "fade_out"

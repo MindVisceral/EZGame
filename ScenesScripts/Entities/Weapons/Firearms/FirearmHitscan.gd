@@ -8,6 +8,8 @@ class_name FirearmHitscan
 ##### Hitscan-specific onready variables
 ###-------------------------------------------------------------------------###
 
+@export_group("References")
+
 ## The Player's Camera3D Node - the 'Bullets' 'come out' of it.
 ## NOTE: Since we use a Camera, the Player doesn't have to
 ## NOTE: take the weapon's position into consideration for the weapons to not hit nearby obstacles.
@@ -18,6 +20,9 @@ class_name FirearmHitscan
 #
 ## The point from which a bullet Trail will start
 @export var bullet_start_point: Marker3D
+
+
+@export_group("PackedScenes References")
 
 ## This Node creates a Trail effect, we will instantiate one to create the effect.
 @export var bullet_trail_emitter: PackedScene = \
@@ -78,7 +83,7 @@ func cast_bullet_ray() -> void:
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
 	
 	## We will use the Viewport's size to get the start and end points of the RayCast with a Camera
-	var vp_size = get_viewport().size
+	var vp_size: Vector2 = get_viewport().size
 	
 	
 	## Everything that follows must be calculated separately for every Bullet.
@@ -90,13 +95,13 @@ func cast_bullet_ray() -> void:
 		var start_pos: Vector3 = player_camera.project_ray_origin(vp_size * 0.5)
 		#
 		## We will use this Vector2 to add some bullet spread to the RayCast Bullet
-		var final_spread = Vector2(randi_range(-bullet_spread.x, bullet_spread.x), \
+		var final_spread: Vector2 = Vector2(randi_range(-bullet_spread.x, bullet_spread.x), \
 			randi_range(-bullet_spread.y, bullet_spread.y))
 		#
 		## Again, we use the Camera3D's built-in function to determine the end point of the Ray
 		## And we add final_spread to add vertical and horizontal bullet_spread
 		## NOTE: 'vp_size * 0.5' because we cast from the middle of the screen
-		var end_pos = player_camera.project_position((vp_size * 0.5) + final_spread, max_distance)
+		var end_pos: Vector3 = player_camera.project_position((vp_size * 0.5) + final_spread, max_distance)
 		
 		
 		## NOTE: bullet_collision_mask is @exported from the FirearmBase class; check in the Editor
@@ -115,21 +120,21 @@ func cast_bullet_ray() -> void:
 		
 		## Instantiate a Shot Effect coming out of the gun's barrel.
 		## This is completely independent from the Bullet stuff.
-		var shot_effect = shot_effect_emitter.instantiate()
+		var shot_effect: ShotEffectEmitter = shot_effect_emitter.instantiate()
 		get_tree().get_root().add_child(shot_effect)
 		## Set the shot_effect's transform to be the same as the bullet_start_point's
 		shot_effect.draw_effect(bullet_start_point.global_transform, Color.LIGHT_GRAY)
 		
 		## Instantiate a Fire Shot Effect coming out of the gun's barrel,
 		## This is completely independent from the bullet stuff.
-		var fire_shot_effect = shot_fire_effect.instantiate()
+		var fire_shot_effect: ShotFireEffect = shot_fire_effect.instantiate()
 		## NOTE: No need to set any Transforms since this effect will not be a child of root
 		bullet_start_point.add_child(fire_shot_effect)
 		
 		
 		## Instantiate a Trail, no matter if the bullet (RayCast) hit anything or not;
 		## but we will check if it did soon.
-		var trail = bullet_trail_emitter.instantiate()
+		var trail: BulletTrailEmitter = bullet_trail_emitter.instantiate()
 		get_tree().get_root().add_child(trail)
 		
 		print(bullet, "   ", trail)
@@ -160,7 +165,7 @@ func cast_bullet_ray() -> void:
 			elif result.collider:
 			
 				## Instantiate a decal...
-				var decal = bullet_hole_decal.instantiate()
+				var decal: BulletHoleDecal = bullet_hole_decal.instantiate()
 				get_tree().get_root().add_child(decal)
 				## The first parameter is the point at which the Decal is drawn,
 				## the second one is the result's normal;
@@ -168,7 +173,7 @@ func cast_bullet_ray() -> void:
 				decal.draw_decal(result.position, result.normal)
 				
 				## Instantiate a regular Hit Effect
-				var hit_effect = hit_effect_emitter.instantiate()
+				var hit_effect: HitEffectEmitter = hit_effect_emitter.instantiate()
 				get_tree().get_root().add_child(hit_effect)
 				## The first parameter is the point at which the Hit Effect is emitted,
 				## the second one is the result's normal;
@@ -189,3 +194,6 @@ func cast_bullet_ray() -> void:
 			## a Vector3 somewhere way off in the distance.
 			## This creates an illusion that the bullet went on beyond the Player's sight
 			trail.draw_mesh(bullet_start_point.global_position, end_pos)
+			
+		
+	
