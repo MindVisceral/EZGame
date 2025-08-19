@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://lhlklylca50m"]
+[gd_scene load_steps=39 format=3 uid="uid://lhlklylca50m"]
 
 [ext_resource type="Script" uid="uid://cn57dnnpkobr3" path="res://ScenesScripts/Entities/Player/Player.gd" id="1_kmike"]
 [ext_resource type="Script" uid="uid://dt8fo176shxom" path="res://ScenesScripts/Entities/Player/PlayerStates/State_Manager.gd" id="2_c5aqi"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://b0he2tscnk82b" path="res://ScenesScripts/Entities/Player/PlayerStates/Walk_State.gd" id="4_fu07a"]
 [ext_resource type="AudioStream" uid="uid://uwe5gj4gp3ot" path="res://ScenesScripts/Audio/Sounds/landed_sound.wav" id="4_lkchw"]
 [ext_resource type="Script" uid="uid://batk3s6011y1b" path="res://ScenesScripts/Entities/Player/PlayerStates/Slide_State.gd" id="5_pecq6"]
+[ext_resource type="Script" uid="uid://dquequ4vudyra" path="res://ScenesScripts/Entities/Player/PlayerStates/Dash_State.gd" id="6_cgv50"]
 [ext_resource type="Script" uid="uid://j5havl12rpfx" path="res://ScenesScripts/Entities/Player/PlayerStates/Crouch_State.gd" id="6_ib15b"]
 [ext_resource type="Script" uid="uid://c8bl5n1tuhuvf" path="res://ScenesScripts/Entities/Player/PlayerStates/Jump_State.gd" id="7_b1yw5"]
 [ext_resource type="AudioStream" uid="uid://cnpcbiobbqaqs" path="res://ScenesScripts/Audio/Sounds/jump_sound.wav" id="7_na2xp"]
@@ -94,28 +95,39 @@ Stores all the States, in case the current_state has to be changed by a Node/scr
 Can change the current_state on behest of an individual State"
 script = ExtResource("2_c5aqi")
 starting_state = NodePath("Idle")
-states = [NodePath("Idle"), NodePath("Walk"), NodePath("Slide"), NodePath("Crouch"), NodePath("Jump"), NodePath("Fall"), NodePath("Stomp"), NodePath("WallRun"), NodePath("WallJump")]
+states = [NodePath("Idle"), NodePath("Walk"), NodePath("Slide"), NodePath("Dash"), NodePath("Crouch"), NodePath("Jump"), NodePath("Fall"), NodePath("Stomp"), NodePath("WallRun"), NodePath("WallJump")]
 
-[node name="Idle" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("walk_state", "slide_state", "crouch_state", "jump_state", "fall_state")]
+[node name="Idle" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("walk_state", "slide_state", "dash_state", "crouch_state", "jump_state", "fall_state")]
 script = ExtResource("3_f5lbm")
 walk_state = NodePath("../Walk")
 slide_state = NodePath("../Slide")
+dash_state = NodePath("../Dash")
 crouch_state = NodePath("../Crouch")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 
-[node name="Walk" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "slide_state", "crouch_state", "jump_state", "fall_state")]
+[node name="Walk" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "slide_state", "dash_state", "crouch_state", "jump_state", "fall_state")]
 script = ExtResource("4_fu07a")
 idle_state = NodePath("../Idle")
 slide_state = NodePath("../Slide")
+dash_state = NodePath("../Dash")
 crouch_state = NodePath("../Crouch")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 
-[node name="Slide" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "fall_state")]
+[node name="Slide" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "dash_state", "jump_state", "fall_state")]
 script = ExtResource("5_pecq6")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
+dash_state = NodePath("../Dash")
+jump_state = NodePath("../Jump")
+fall_state = NodePath("../Fall")
+
+[node name="Dash" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "dash_state", "jump_state", "fall_state")]
+script = ExtResource("6_cgv50")
+idle_state = NodePath("../Idle")
+walk_state = NodePath("../Walk")
+dash_state = NodePath(".")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 
@@ -126,11 +138,12 @@ walk_state = NodePath("../Walk")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 
-[node name="Jump" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "slide_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
+[node name="Jump" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "slide_state", "dash_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
 script = ExtResource("7_b1yw5")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 slide_state = NodePath("../Slide")
+dash_state = NodePath("../Dash")
 jump_state = NodePath(".")
 stomp_state = NodePath("../Stomp")
 wallrun_state = NodePath("../WallRun")
@@ -138,40 +151,44 @@ walljump_state = NodePath("../WallJump")
 jump_sound = ExtResource("7_na2xp")
 landing_sound = ExtResource("4_lkchw")
 
-[node name="Fall" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "slide_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
+[node name="Fall" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "slide_state", "dash_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
 script = ExtResource("8_xbf4w")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 slide_state = NodePath("../Slide")
+dash_state = NodePath("../Dash")
 jump_state = NodePath("../Jump")
 stomp_state = NodePath("../Stomp")
 wallrun_state = NodePath("../WallRun")
 walljump_state = NodePath("../WallJump")
 landing_sound = ExtResource("4_lkchw")
 
-[node name="Stomp" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "slide_state", "jump_state", "walljump_state")]
+[node name="Stomp" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "dash_state", "slide_state", "jump_state", "walljump_state")]
 script = ExtResource("8_fl03g")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
+dash_state = NodePath("../Dash")
 slide_state = NodePath("../Slide")
 jump_state = NodePath("../Jump")
 walljump_state = NodePath("../WallJump")
 stomp_sound = ExtResource("11_txwo3")
 
-[node name="WallRun" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "fall_state", "stomp_state", "walljump_state")]
+[node name="WallRun" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "dash_state", "jump_state", "fall_state", "stomp_state", "walljump_state")]
 script = ExtResource("9_encgj")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
+dash_state = NodePath("../Dash")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 stomp_state = NodePath("../Stomp")
 walljump_state = NodePath("../WallJump")
 
-[node name="WallJump" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "slide_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
+[node name="WallJump" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "slide_state", "dash_state", "jump_state", "stomp_state", "wallrun_state", "walljump_state")]
 script = ExtResource("10_gc6l4")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 slide_state = NodePath("../Slide")
+dash_state = NodePath("../Dash")
 jump_state = NodePath("../Jump")
 stomp_state = NodePath("../Stomp")
 wallrun_state = NodePath("../WallRun")

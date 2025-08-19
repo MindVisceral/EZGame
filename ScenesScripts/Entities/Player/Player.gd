@@ -256,7 +256,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 ###
 func _physics_process(delta: float) -> void:
-	
 	if !is_dead:
 #		process_input(delta)
 		process_view_input(delta)

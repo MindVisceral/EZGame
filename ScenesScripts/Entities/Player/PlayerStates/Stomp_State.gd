@@ -8,6 +8,7 @@ extends BasePlayerState
 #
 @export var idle_state: BasePlayerState
 @export var walk_state: BasePlayerState
+@export var dash_state: BasePlayerState
 @export var slide_state: BasePlayerState
 @export var jump_state: BasePlayerState
 @export var walljump_state: BasePlayerState
@@ -63,8 +64,11 @@ func exit() -> void:
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:
-	## If the Player wants ot jump off the wall...
-	if Input.is_action_just_pressed("input_jump"):
+	## Dashing mid-stomp
+	if Input.is_action_just_pressed("input_dash"):
+		return dash_state
+	## If the Player wants ot jump off a wall...
+	elif Input.is_action_just_pressed("input_jump"):
 		if player.WallDetection.is_colliding():
 			return walljump_state
 	

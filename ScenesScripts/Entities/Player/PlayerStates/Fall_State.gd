@@ -15,6 +15,7 @@ extends BasePlayerState
 @export var idle_state: BasePlayerState
 @export var walk_state: BasePlayerState
 @export var slide_state: BasePlayerState
+@export var dash_state: BasePlayerState
 @export var jump_state: BasePlayerState
 @export var stomp_state: BasePlayerState
 @export var wallrun_state: BasePlayerState
@@ -50,10 +51,13 @@ func exit() -> void:
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:
-	if Input.is_action_just_pressed("input_slide"):
+	## Dashing mid-fall
+	if Input.is_action_just_pressed("input_dash"):
+		return dash_state
+	elif Input.is_action_just_pressed("input_slide"):
 		return stomp_state
 	## If the Player wants to jump...
-	if Input.is_action_just_pressed("input_jump"):
+	elif Input.is_action_just_pressed("input_jump"):
 		## CoyoteTime takes priority; the Player will perform a regular jump
 		if !player.CoyoteTimeT.is_stopped():
 			return jump_state

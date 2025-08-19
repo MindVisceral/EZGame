@@ -11,6 +11,7 @@ extends BasePlayerState
 #
 @export var walk_state: BasePlayerState
 @export var slide_state: BasePlayerState
+@export var dash_state: BasePlayerState
 @export var crouch_state: BasePlayerState
 @export var jump_state: BasePlayerState
 @export var fall_state: BasePlayerState
@@ -19,6 +20,7 @@ extends BasePlayerState
 func enter() -> void:
 	super.enter()
 	
+	## Standing on solid groud resets the amount of walljumps
 	player.consecutive_walljumps = 0
 
 func exit() -> void:
@@ -26,10 +28,13 @@ func exit() -> void:
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:
+	## Dashing
+	if Input.is_action_just_pressed("input_dash"):
+		return dash_state
 	## Detect movement on X and Z axes
-	if Input.get_vector("input_left", "input_right", "input_forwards", "input_backwards"):
+	elif Input.get_vector("input_left", "input_right", "input_forwards", "input_backwards"):
 		return walk_state
-	## Crouch
+	## Slide
 	elif Input.is_action_just_pressed("input_slide"):
 		return slide_state
 	## Jumping
@@ -43,11 +48,8 @@ func physics_process(delta: float) -> BasePlayerState:
 	## If the Player is still moving, make them decelerate down to zero
 	## NOTE: Lerping player.velocity itself would also impact vertical (y) velocity,
 	## NOTE: so we lerp X and Z separately instead.
-	player.velocity.x = lerpf(player.velocity.x, \
-		(player.direction.x * player.speed), deceleration * delta)
-	player.velocity.z = lerpf(player.velocity.z, \
-		(player.direction.z * player.speed), deceleration * delta)
-	
+	player.velocity.x = lerpf(player.velocity.x, 0, deceleration * delta)
+	player.velocity.z = lerpf(player.velocity.z, 0, deceleration * delta)
 	
 	## Apply gravity (which is the Globals' gravity * multiplier)
 	player.velocity.y -= player.gravity * BulletTime.time_scale * delta

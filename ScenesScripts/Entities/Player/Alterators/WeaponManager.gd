@@ -47,23 +47,20 @@ func init(player, firearms_node) -> void:
 	for weapon in weapons:
 		if weapon != null:
 			weapon.set_process(false)
+			
+		
+	
 
 
 ###-------------------------------------------------------------------------###
 ##### Executing functions
 ###-------------------------------------------------------------------------###
 
-## The Player calls these following functions every frame
-#
-##
-func physics_process(delta: float) -> void:
-	pass
-
-## This code is ran only when a corresponding Event is found
 func input(event: InputEvent) -> void:
 	
 	if current_weapon:
 		current_weapon.input(event)
+		
 	
 	#if Input.is_action_just_pressed("primary_action"):
 		#call_weapon_primary_action()
@@ -77,6 +74,8 @@ func input(event: InputEvent) -> void:
 		change_weapon(2)
 	if Input.is_action_just_pressed("Spot3"):
 		change_weapon(3)
+	if Input.is_action_just_pressed("Spot4"):
+		change_weapon(4)
 
 func process(delta: float) -> void:
 	pass
@@ -116,6 +115,8 @@ func change_weapon(new_weapon):
 		current_weapon_slot = new_weapon
 		## Third, enable the new current_weapon
 		enable_weapon(current_weapon_slot)
+		
+	
 
 
 ## Enables and reveals the weapon in the weapon_to_be_enabled slot

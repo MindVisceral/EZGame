@@ -17,6 +17,7 @@ extends BasePlayerState
 #
 @export var idle_state: BasePlayerState
 @export var walk_state: BasePlayerState
+@export var dash_state: BasePlayerState
 @export var jump_state: BasePlayerState
 @export var fall_state: BasePlayerState
 
@@ -55,11 +56,8 @@ func enter() -> void:
 func exit() -> void:
 	super.exit()
 	
-	
-	##
+	## Disable wall detection, it isn't required now
 	player.WallDetection.enabled = false
-	
-	
 	
 	## Alter the height to standing height
 	player.HeightAlternator.alter_collider_height(player.standing_height)
@@ -71,8 +69,11 @@ func exit() -> void:
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:
+	## Dashing
+	if Input.is_action_just_pressed("input_dash"):
+		return dash_state
 	## Jump from the Slide
-	if Input.is_action_just_pressed("input_jump"):
+	elif Input.is_action_just_pressed("input_jump"):
 		return jump_state
 	## HERE: not necessary?
 	## When the Slide button isn't pressed anymore, we return to the idle_state

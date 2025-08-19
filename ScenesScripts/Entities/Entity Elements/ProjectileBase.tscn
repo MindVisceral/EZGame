@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dp43a5quloby3" path="res://ScenesScripts/Entities/Entity Elements/ProjectileBase.gd" id="1_tuten"]
 
-[node name="ProjectileBase" type="RigidBody3D" node_paths=PackedStringArray("collider", "hitbox_collider", "firing_agent_detection_timer")]
+[node name="ProjectileBase" type="RigidBody3D" node_paths=PackedStringArray("collider", "hitbox_collider")]
 collision_layer = 2048
 collision_mask = 7
 gravity_scale = 0.0
@@ -11,7 +11,6 @@ max_contacts_reported = 1
 script = ExtResource("1_tuten")
 collider = NodePath("Collider")
 hitbox_collider = NodePath("Hitbox/Collider")
-firing_agent_detection_timer = NodePath("")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 
