@@ -30,7 +30,8 @@ func exit() -> void:
 func input(event: InputEvent) -> BasePlayerState:
 	## Dashing
 	if Input.is_action_just_pressed("input_dash"):
-		return dash_state
+		if player.DashCooldownT.is_stopped():
+			return dash_state
 	## Detect movement on X and Z axes
 	elif Input.get_vector("input_left", "input_right", "input_forwards", "input_backwards"):
 		return walk_state

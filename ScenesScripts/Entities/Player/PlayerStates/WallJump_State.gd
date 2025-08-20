@@ -73,7 +73,8 @@ func exit() -> void:
 func input(event: InputEvent) -> BasePlayerState:
 	## Dashing mid-walljump
 	if Input.is_action_just_pressed("input_dash"):
-		return dash_state
+		if player.DashCooldownT.is_stopped():
+			return dash_state
 	## If the Player wants to stomp back to the ground...
 	elif Input.is_action_just_pressed("input_slide"):
 		return stomp_state
@@ -90,6 +91,7 @@ func physics_process(delta: float) -> BasePlayerState:
 	## just_pressed makes this Input require timing, but _pressed allows for hopping
 	if Input.is_action_just_pressed("input_jump"):
 		player.JumpBufferT.start()
+		
 	
 	
 	## The direction the Player's movement based on Input

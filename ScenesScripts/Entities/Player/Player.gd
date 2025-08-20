@@ -140,6 +140,7 @@ extends CharacterBody3D
 @onready var WeaponBob: PlayerWeaponbobHandler = $Scripts/WeaponBob
 @onready var InteractionManager: PlayerInteractionManager = $Scripts/InteractionManager
 @onready var UImanager: UIManager = $Scripts/UIManager
+@onready var DashCooldownT: Timer = $Timers/DashCooldownTimer
 @onready var JumpBufferT: Timer = $Timers/JumpBufferTimer
 @onready var CoyoteTimeT: Timer = $Timers/CoyoteTimeTimer
 @onready var StompJumpT: Timer = $Timers/StompJumpTimer

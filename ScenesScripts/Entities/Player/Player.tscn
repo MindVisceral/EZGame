@@ -123,13 +123,14 @@ dash_state = NodePath("../Dash")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 
-[node name="Dash" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "dash_state", "jump_state", "fall_state")]
+[node name="Dash" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "dash_state", "jump_state", "fall_state", "stomp_state")]
 script = ExtResource("6_cgv50")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 dash_state = NodePath(".")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
+stomp_state = NodePath("../Stomp")
 
 [node name="Crouch" type="Node" parent="Scripts/StateManager" node_paths=PackedStringArray("idle_state", "walk_state", "jump_state", "fall_state")]
 script = ExtResource("6_ib15b")
@@ -245,12 +246,18 @@ StatusEffect_overlay = NodePath("../../PlayerUI/UI/StatusEffectOverlay")
 
 [node name="Timers" type="Node" parent="."]
 
+[node name="DashCooldownTimer" type="Timer" parent="Timers"]
+process_callback = 0
+wait_time = 0.4
+one_shot = true
+
 [node name="JumpBufferTimer" type="Timer" parent="Timers"]
 editor_description = "Timer that allows to jump immediately after hitting the ground, if the jump button is pressed within wait_time before hitting that ground.
 Keep this Timer's around 0.2s for a nice, lean and forgivable jump.
 
 This Timer should be universal, as in, it should be independent from any states.
 Never reset this Timer, at least not on state exit(). Causes a bug when jump_state is re-enter()-ed, thus not allowing for another jump - implementation issue with how the Jump_state check for the ground; not planning on fixing it."
+process_callback = 0
 wait_time = 0.2
 one_shot = true
 
@@ -260,6 +267,7 @@ Keep this Timer's around 0.15s for a nice, but not jarring, coyote time jump.
 
 ## NOTE: I don't know if this is an issue, this wasn't tested with this specific feature.
 Never reset this Timer, at least not on state exit(). Causes a bug when jump_state is re-enter()-ed, thus not allowing for another jump - implementation issue with how the Jump_state check for the ground, not planning on fixing it."
+process_callback = 0
 wait_time = 0.5
 one_shot = true
 
@@ -271,6 +279,7 @@ This Timer should be universal, as in, it should be independent from any states.
 
 ## NOTE: This is untested, no idea.
 Never reset this Timer, at least not on state exit(). Causes a bug when jump_state is re-enter()-ed, thus not allowing for another jump - implementation issue with how the Jump_state check for the ground; not planning on fixing it."
+process_callback = 0
 wait_time = 0.2
 one_shot = true
 

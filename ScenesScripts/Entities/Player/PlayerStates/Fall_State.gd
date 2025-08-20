@@ -53,7 +53,8 @@ func exit() -> void:
 func input(event: InputEvent) -> BasePlayerState:
 	## Dashing mid-fall
 	if Input.is_action_just_pressed("input_dash"):
-		return dash_state
+		if player.DashCooldownT.is_stopped():
+			return dash_state
 	elif Input.is_action_just_pressed("input_slide"):
 		return stomp_state
 	## If the Player wants to jump...

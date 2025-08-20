@@ -11,14 +11,17 @@ var current_state: BasePlayerState
 
 ## The States need a reference to the Player to access its functions and variables
 func init(player: Player) -> void:
-	#Get each state and give it a reference to the Player and the StateManager, so that their
-	#functions and variables can be accesses directly.
+	## Get each state and give it a reference to the Player and the StateManager, so that their
+	## functions and variables can be accesses directly, and call its initialize() method.
 	for state in states:
 		state.player = player
 		state.state_manager = self
+		state.initialize()
+		
 	
 	#The state is set to the default state
 	change_state(starting_state)
+	
 
 
 ## State-changing function. Self-explainatory.

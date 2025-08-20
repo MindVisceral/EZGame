@@ -4,8 +4,10 @@ extends BasePlayerState
 
 ## Dash length in seconds
 @export_range(0.05, 4.0, 0.05) var dash_length: float = 0.1
-## Dash ldistance in meters
+## Dash distance in meters
 @export_range(0.05, 50.0, 0.05) var dash_distance: float = 5.0
+## Dash cooldown in seconds
+@export_range(0.05, 10.0, 0.05) var dash_cooldown: float = 0.25
 
 
 @export_group("States")
@@ -15,12 +17,18 @@ extends BasePlayerState
 @export var dash_state: BasePlayerState
 @export var jump_state: BasePlayerState
 @export var fall_state: BasePlayerState
+@export var stomp_state: BasePlayerState
 
 
 ## This holds the direction in which the Player will dash
 ## Set by calculate_dash_direction()
 var dash_direction: Vector3 = Vector3.ZERO
 
+## Rare _init() in a player state. Used to set the DashCooldownTimer's wait time
+func initialize() -> void:
+	super.initialize()
+	player.DashCooldownT.wait_time = dash_cooldown
+	
 
 func enter() -> void:
 	super.enter()
@@ -42,13 +50,15 @@ func enter() -> void:
 func exit() -> void:
 	super.exit()
 	
+	## Start the dash cooldown so it cannot be spammed
+	player.DashCooldownT.start()
+	
 
 ## When a movement button is pressed, change to a corresponding State node
 func input(event: InputEvent) -> BasePlayerState:
-	## Another dash
-	if Input.is_action_just_pressed("input_dash"):
-		return dash_state
-		
+	## A Dash can be "stomped" out of
+	if Input.is_action_just_pressed("input_slide"):
+		return stomp_state
 	
 	return null
 
@@ -109,3 +119,4 @@ func calculate_dash_direction() -> Vector3:
 ## Used when the Dash should be stopped - dash length is over, hit a wall, etc.
 func cancel_dash() -> void:
 	state_manager.change_state(idle_state)
+	

@@ -76,7 +76,8 @@ func exit() -> void:
 func input(event: InputEvent) -> BasePlayerState:
 	## Dashing mid-air
 	if Input.is_action_just_pressed("input_dash"):
-		return dash_state
+		if player.DashCooldownT.is_stopped():
+			return dash_state
 	## If the Player wants to stomp back to the ground...
 	elif Input.is_action_just_pressed("input_slide"):
 		return stomp_state

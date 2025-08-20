@@ -7,13 +7,20 @@ var player: Player
 var state_manager: Node
 var previous_state: BasePlayerState = self
 
+## In case something
+func initialize() -> void:
+	pass
+
+## Called on State start
 func enter() -> void:
 	pass
 
+## Called on state exit
 func exit() -> void:
 	pass
 
 
+## Reading Player input
 func input(event: InputEvent) -> BasePlayerState:
 	return null
 

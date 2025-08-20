@@ -54,7 +54,8 @@ func exit() -> void:
 func input(event: InputEvent) -> BasePlayerState:
 	## Dashing mid-wallrun
 	if Input.is_action_just_pressed("input_dash"):
-		return dash_state
+		if player.DashCooldownT.is_stopped():
+			return dash_state
 	## If the Player wants ot jump off the wall...
 	elif Input.is_action_just_pressed("input_jump"):
 		return walljump_state
