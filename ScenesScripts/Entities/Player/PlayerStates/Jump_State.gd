@@ -34,7 +34,7 @@ extends BasePlayerState
 var stomp_boosted: bool = false
 ## The distance remaining for the Player to travel before the boost is over and gravity kicks in
 var remaining_boost_distance: float = 0.0
-
+## 
 var boost_distance: float = 0.0
 
 
@@ -56,6 +56,7 @@ func enter() -> void:
 		jump_sound)
 		
 	
+	%LeftGroundTimer.start()
 
 func exit() -> void:
 	super.exit()
@@ -158,10 +159,8 @@ func physics_process(delta: float) -> BasePlayerState:
 		else:
 			player.velocity.y -= player.gravity * BulletTime.time_scale * delta
 			player.velocity.y = maxf(player.velocity.y, player.falling_speed_limit)
-	
-	
-	
-	
+			
+		
 	
 	## The Player has either gone the distance or this never was a stomp-boosted jump to begin with
 	## Either way, we apply gravity once again.
@@ -175,8 +174,10 @@ func physics_process(delta: float) -> BasePlayerState:
 		player.velocity.y = maxf(player.velocity.y, player.falling_speed_limit)
 		
 	
-	## Check if the Player is on floor...
-	if player.is_player_on_floor():
+	
+	## Check if the Player is on floor
+	## and if some time has passed to make sure they can't 
+	if player.is_player_on_floor() and %LeftGroundTimer.is_stopped():
 		
 		## If the jump button has been pressed within the buffer time, jump immediately
 		if !player.JumpBufferT.is_stopped():
@@ -188,12 +189,12 @@ func physics_process(delta: float) -> BasePlayerState:
 		elif Vector3(player.velocity.x, 0, player.velocity.z).is_zero_approx():
 			player.play_landing_sound(landing_sound)
 			return idle_state
+		
 		## Otherwise, keep on walking
 		else:
 			player.play_landing_sound(landing_sound)
 			return walk_state
 		
-	
 	
 	## The Player isn't on the floor, so we check if they're near a wall maybe...
 	elif player.WallDetection.is_colliding():
